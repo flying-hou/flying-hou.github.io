@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>图像目标检测简单综述 - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-03-29 10:00">
+      2021年3月29日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      98
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年7月11日 下午
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h1 id="目标检测器的构成（YOLOv4）："><a href="#目标检测器的构成（YOLOv4）：" class="headerlink" title="目标检测器的构成（YOLOv4）："></a>目标检测器的构成（YOLOv4）：</h1><p><a href="https://tva1.sinaimg.cn/large/007S8ZIlly1gh0wtzqztoj30hp08kjrv.jpg" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh0wtzqztoj30hp08kjrv.jpg" srcset="/img/loading.gif" alt="img"></a></p>
+<ul>
+<li>Backbone:进行预训练。</li>
+<li><p>Neck:从不同的步骤中收集特征图</p>
+<ul>
+<li>Feature Pyramid Network（FPN）,Path Aggregation Network（PAN），BiFPN和NAS-FPN。</li>
+<li>一个neck由多个bottom-up路径和多个top-down路径组成</li>
+</ul>
+</li>
+<li><p>Head:预测类别信息和目标物体的边界框。</p>
+<ul>
+<li>One-stage:<ul>
+<li>YOLO, SSD和RetinaNet</li>
+<li>Anchor-free:CenterNet, CornerNet, FCOS</li>
+</ul>
+</li>
+<li>Two-stage:<ul>
+<li>R-CNN系列（fast R-CNN, faster R-CNN,R-FCN和Libra R-CNN）</li>
+<li>Anchor-free:RepPoints</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>检测器通常由两部分组成：</strong>backbone<strong>和</strong>head。前者在ImageNet上进行预训练，后者用来预测类别信息和目标物体的边界框。在GPU平台上运行的检测器，它们的backbone可能是VGG, ResNet, ResNetXt,或者是DenseNet。在CPU平台上运行的检测器，它们的backbone可能是SqueezeNet，MobileNet或者是ShuffleNet。对于head部分，通常分为两类：one-stage和two-stage的目标检测器。Two-stage的目标检测器的代表是R-CNN系列，包括：fast R-CNN, faster R-CNN,R-FCN和Libra R-CNN. 还有基于anchor-free的Two-stage的目标检测器，比如RepPoints。One-stage目标检测器的代表模型是YOLO, SSD和RetinaNet。在最近几年，出现了基于anchor-free的one-stage的算法，比如CenterNet, CornerNet, FCOS等等。在最近几年，目标检测器在backbone和head之间会插入一些网络层，这些网络层通常用来从不同的步骤中收集特征图。我们将其称之为目标检测器的neck。通常，一个neck由多个bottom-up路径和多个top-down路径组成。使用这种机制的网络包括Feature Pyramid Network（FPN）,Path Aggregation Network（PAN），BiFPN和NAS-FPN。</p>
+<p>一个普通的目标检测器由下面四个部分组成：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh0wwndik4j30qq0wqtem.jpg" srcset="/img/loading.gif" style="zoom: 33%;" /></p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gknafkbowbj31jp0u0tq2.jpg" srcset="/img/loading.gif" alt="image-20201113092812981"></p>
+<h1 id="1-two-stage-（基于候选窗口）"><a href="#1-two-stage-（基于候选窗口）" class="headerlink" title="1.two-stage:（基于候选窗口）"></a>1.two-stage:（基于候选窗口）</h1><p>提取候选区域、CNN训练 两步</p>
+<h2 id="1-1-Selective-Search"><a href="#1-1-Selective-Search" class="headerlink" title="1.1 Selective Search:"></a>1.1 Selective Search:</h2><p>R-CNN和Fast R-CNN使用该方法提取候选窗口。</p>
+<ul>
+<li>传统目标检测算法使用穷举法或滑动窗口法来产生候选窗口，产生的冗余候选区域较多。</li>
+<li>Selective Search方法框架：<ul>
+<li>输入：彩色图片。</li>
+<li>输出：物体可能的位置，实际上是很多的矩形坐标。</li>
+<li>首先，将图片初始化为很多小区域R。初始化一个相似集合为空集：S</li>
+<li>计算所有相邻区域之间的相似度（考虑了颜色、纹理、尺寸和空间交叠4个参数），放入集合 S 中，集合 S 保存的是一个区域对以及它们之间的相似度。</li>
+<li>找出 S 中相似度最高的区域对，将它们合并，并从 S 中删除与它们相关的所有相似度和区域对。重新计算这个新区域与周围区域的相似度，放入集合 S 中，并将这个新合并的区域放入集合 R 中。重复这个步骤直到 S 为空。</li>
+<li>从 R 中找出所有区域的 bounding box（即包围该区域的最小矩形框），这些 box 就是物体可能的区域。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-2-R-CNN"><a href="#1-2-R-CNN" class="headerlink" title="1.2 R-CNN"></a>1.2 R-CNN</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghi3bpccrmj30v20ba0vf.jpg" srcset="/img/loading.gif" alt="img"></p>
+<ul>
+<li>R-CNN系列算法由3个独立的步骤组成：产生候选窗口、特征提取、SVM分类及窗口回归。</li>
+<li><strong>R-CNN总体思路：</strong> <strong>通过Selective Search检测出约2000个Region proposals ——&gt; 使用CNN提取Region特征——&gt;使用SVM对提取到的特征进行分类 ——&gt;执行非极大值抑制得到Bbox及其类别</strong></li>
+<li>细节：<ul>
+<li>R-CNN采用Selective Search生成候选区域</li>
+<li>R-CNN采用AlexNet网络</li>
+<li>先在ImageNet上对AlexNet进行预训练，然后利用成熟的权重参数在PASCAL VOC上进行fine-tune.</li>
+<li>R-CNN在Pascal VOC 2012 的数据集上，能够将目标检测的验证指标 mAP 提升到 53.3%,这相对于之前最好的结果提升了 30%。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>训练时间长：分阶段多次训练，而且对每个候选区域都要单独计算一次Feature map。</li>
+<li>占用空间大：每个候选区域的Feature map都要写入磁盘保存。</li>
+<li>步骤繁多：整个模型包括多个模块，且每个模块是相互独立的。</li>
+<li>由于全连接层限制，输入图像为固定尺寸。</li>
+<li>每个图像块输入CNN单独处理，无特征提取共享。</li>
+<li>重复计算：多数候选区域是互相重叠的，重叠部分会被多次提取Feature。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Fast R-CNN提出了一个ROI池化层，其实质上是SPP-Net的一个特殊情况（故在介绍Fast R-CNN之前，先介绍SPP-Net）</p>
+</blockquote>
+<h2 id="1-3-SPP-Net"><a href="#1-3-SPP-Net" class="headerlink" title="1.3 SPP Net"></a>1.3 SPP Net</h2><h3 id="动机："><a href="#动机：" class="headerlink" title="动机："></a>动机：</h3><ul>
+<li>CNN一般都含有卷积层和全连接层，卷积层无需固定尺寸的图像，而<strong>全连接层则需要固定大小的输入</strong>。</li>
+<li>在此之前，普通的CNN若想实现输出一个固定维度的向量到全连接层，必须<strong>固定输入图像的尺寸</strong>。在希望检测各种大小的图片的时候，需要经过crop，或者warp等一系列操作，这都在一定程度上导致图片信息的丢失和变形，限制了识别精确度。而SPP-Net在普通的CNN中加入了SPP层，使得输入图像可以是<strong>任意尺寸</strong>的，输出为<strong>固定维度的向量</strong>。</li>
+<li><img src="C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20201116142426267.png" srcset="/img/loading.gif" alt="image-20201116142426267"></li>
+</ul>
+<h3 id="网络结构："><a href="#网络结构：" class="headerlink" title="网络结构："></a>网络结构：</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghi3boaucnj30g70dftat.jpg" srcset="/img/loading.gif" alt="img"></p>
+<ul>
+<li>输入：任意尺度的待测图像</li>
+<li>输出：固定长度的特征向量。</li>
+<li>黑色图片代表卷积后的特征图，将4x4、2x2、1x1的网格放在特征图上，可以得到16+4+1=21个小方格。对每个小方格执行Max-Pooling下采样，提取出1个特征值。将每个小方格提取到的特征值组合在一起，就得到一个长度为21维的特征向量。（特别的，如最后的卷积层Conv5有256个通道，所以输出（16+4+1）*256的特征）</li>
+</ul>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><ul>
+<li>SPP-Net使得任意大小的特征图都能够转换成固定大小的特征向量。</li>
+<li>只对原图做一次卷积，复用卷积层的特征图，提高速度。<ul>
+<li>由于原图与经过卷积层后得到的特征图在空间位置上存在一定的对应关系，所以只需对整张图像进行一次卷积特征提取，然后将候选区域在原图的位置映射到卷积层的特征图上得到该候选区域的特征</li>
+<li>（R-CNN要对每个区域计算卷积，而SPPNet只需要计算一次卷积，从而节省了大量的计算时间，比R-CNN有一百倍左右的提速。）</li>
+<li><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsd30vvgirj30gz08w760.jpg" srcset="/img/loading.gif" alt="img"></li>
+</ul>
+</li>
+<li>SPP-Net解决了R-CNN重复提取候选区域特征的问题，同时允许各种尺寸图像作为输入，解决了图像畸变的问题，但R-CNN的其它问题，如训练步骤繁琐、磁盘空间开销大等依然有待解决。</li>
+</ul>
+<h3 id="意义："><a href="#意义：" class="headerlink" title="意义："></a>意义：</h3><p>​    当网络输入为任意大小图片时，首先可以进行若干卷积、池化步骤，直至网络最后几层时，在全连接层之前加入SPP层，使得任意大小的特征图转换为固定大小的特征向量，以满足全连接层的输入要求。</p>
+<h2 id="1-4-Fast-R-CNN"><a href="#1-4-Fast-R-CNN" class="headerlink" title="1.4 Fast R-CNN"></a>1.4 Fast R-CNN</h2><h3 id="网络结构：-1"><a href="#网络结构：-1" class="headerlink" title="网络结构："></a>网络结构：</h3><p>输入：由两部分构成：1.待处理的图像  2.候选区域(Region Proposal)</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghi3bn2cavj30zm0ea4gc.jpg" srcset="/img/loading.gif" alt="img"></p>
+<ul>
+<li>使用ROI池化层代替SPP，原图经过卷积后产生特征相应图，然后从每个ROI池化层提取定长特征向量，每个特征向量输入到全连接层，分支为两个输出层，一个是Softmax分类器用来预测类别，另一个用于回归bbox的位置。</li>
+<li>ROI池化层实际上是SPP-NET的一个精简版，可以看成是SPP层的一个特殊情况。SPP-Net对每个候选区域使用了不同大小的金字塔映射，而ROI池化层只需要下采样到一个7x7的特征图。</li>
+<li>ROI池化层与SPP-Net的效果一样，可以将不同大小的输入映射到一个固定尺度的特征向量。</li>
+<li><img src="https://img-blog.csdnimg.cn/img_convert/d28646afb04a88d425b367018209f399.png" srcset="/img/loading.gif" alt="这里写图片描述"></li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gsd2zeixlnj608c0a3wep02.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://pic4.zhimg.com/v2-60fb950c3f733daf92342221207ab0bb_b.webp" srcset="/img/loading.gif" alt="img"></p>
+<ul>
+<li>创新点：<ul>
+<li>用ROI层代替SPP层，可以使用BP算法更高效的训练更新整个网络。</li>
+<li>借助多任务损失函数，将物体识别和位置修正合并到一个网络中，不再进行分步训练。</li>
+<li>共享卷积层，不再像R-CNN一样每个候选框都使用CNN提取特征，而是输入一张完整的图片，在第五个卷积层得到每个候选框的特征。</li>
+<li>端到端、基于多任务损失函数的一阶段训练过程，节省了存储空间，减少训练，提升检测精度。</li>
+<li>对全连接层提出了SVD奇异值分解的优化方法，降低了全连接层需要学习的参数数目，节省计算时间。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>候选区域提取仍采用区域选择性搜索算法，耗费时间</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-5-Faster-R-CNN"><a href="#1-5-Faster-R-CNN" class="headerlink" title="1.5 Faster R-CNN"></a>1.5 Faster R-CNN</h2><ul>
+<li>摒弃区域选择性搜索算法，使用Region Proposal Network（RPN）产生候选框，即将搜索候选框的工作也交由神经网络，大大减少了计算量，提高了检测速度。</li>
+<li>引入anchor box以应对目标形状变化问题。（Anchor box就是位置和大小固定的box，可理解为实现设定好的固定的proposal）</li>
+<li>Faster R-CNN将RPN放在最后一个卷积层后面，RPN直接训练得到候选区域。Faster RCNN抛弃了传统的滑动窗口和SS方法，直接使用RPN生成检测框，这也是Faster R-CNN的巨大优势，能极大提升检测框的生成速度。</li>
+<li>所有窗口经过ROI池化后都会送入后续子网络进行分类和窗口回归。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghi3bmijefj30cj0cm0tf.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h3 id="RPN"><a href="#RPN" class="headerlink" title="RPN"></a>RPN</h3><ul>
+<li>图中RPN网络分为两条线，上面的分支通过Softmax分类anchors获得前景和背景。下面的分支用于计算对于anchors的边界框回归的偏移量，以获得较精确的目标候选区。（注：这里的较精确是相对于后面全连接层的再一次box regression而言）。</li>
+<li>RPN网络将每个样本映射为一个概率值和四个坐标值，概率值反应这个anchor box有物体的概率，四个坐标值用于回归定义物体的位置。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghi3bnwi0qj31820lkthq.jpg" srcset="/img/loading.gif" alt="img"></p>
+<ul>
+<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghi3bpp09gj30w00l40vq.jpg" srcset="/img/loading.gif" alt="img"></li>
+</ul>
+<p>(1) RPN网络的作用就是将候选区域的提取也整合到了神经网络中，而且RPN网络和Fast R-CNN共用卷积网络，几乎没有增加计算量。</p>
+<p>(2) RPN提取候选框的方法是对conv feature map上的每个点为中心取9种不同比例大小的anchors（3种尺度，3种比例），再按照比例映射到原图中即为提取的region proposals。具体的实现方法如上图，先用一个256维的3x3卷积核以步长为1进行特征提取，这样就可以得到一个256x1的特征向量，将这个256长度的特征向量分别输入两个分支，其中一个输出长度为2x9=18表示9个anchors是物体和不是物体的概率，另一个输出长度为4x9=36表示每个proposals的四个坐标。</p>
+<p>(3) 在得到了概率和bbox的坐标之后映射到原图中得到region proposals，再进行一次非极大值抑制(NMS)得到最终输入ROI池化层的proposals。</p>
+<ul>
+<li>优点：<ul>
+<li>设计了RPN网络，利用CNN卷积后的特征图生成候选区域，取代了SS和EB等方法，极大地提升了生成候选区域的速度。</li>
+<li>将候选区域的提取也整合到了神经网络中。引入anchor box以应对目标形状变化问题。</li>
+<li>训练RPN与Fast R-CNN共享部分卷积层，极大地提升了检测速度。</li>
+<li>第一个基于深度学习的端到端目标检测算法，具有一定实时性。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>RPN网络的训练较为耗时。</li>
+<li>RPN不善于处理一些极端尺度及形状的目标物体检测。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-6-R-FCN"><a href="#1-6-R-FCN" class="headerlink" title="1.6 R-FCN"></a>1.6 R-FCN</h2><ul>
+<li>使用位置敏感的ROI池化层，使池化结果不需再经过子网络，直接进行分类和窗口回归。</li>
+</ul>
+<h2 id="1-7-FPN"><a href="#1-7-FPN" class="headerlink" title="1.7 FPN"></a>1.7 FPN</h2><h2 id="1-8-Mask-R-CNN"><a href="#1-8-Mask-R-CNN" class="headerlink" title="1.8 Mask R-CNN"></a>1.8 Mask R-CNN</h2><h1 id="2-one-stage-（基于全局回归分类）"><a href="#2-one-stage-（基于全局回归分类）" class="headerlink" title="2.one-stage:（基于全局回归分类）"></a>2.one-stage:（基于全局回归分类）</h1><h2 id="2-1-SSD"><a href="#2-1-SSD" class="headerlink" title="2.1 SSD"></a>2.1 SSD</h2><p>本文提出了第一个基于深层网络的目标检测器，它不会对假设边框中的像素或特征进行重新取样，有效避免了Faster-R-CNN中的重复采样。</p>
+<p>YOLO只做了一次边框回归和打分，速度较快，能达到实时效果。但由于只做了一次边框回归和打分，导致对小目标训练不充分，对目标尺度敏感，对尺度变化较大的物体泛化能力较差。</p>
+<p>R-CNN系列算法是基于“Proposal+Classification”的Two Stage目标检测算法，这一类算法先预先回归一次边框，然后进行骨干网络训练，精度较高但速度较慢。</p>
+<p>针对YOLO和Faster R-CNN各自的优缺点，SSD算法采用了One Stage的理念，提高检测速度。同时<strong>融入Faster R-CNN中的Anchors思想</strong>，进行特征分层提取并依次计算边框回归和分类操作，可适应多种尺度的目标训练和检测任务，同时精度高，实时性好。</p>
+<p>SSD网络的设计思想是：分层特征提取，依次进行边框回归和分类。因为不同层次的特征图代表不同层次的语义信息：低层次的特征图代表低层语义信息（含有更多细节），适合小尺度目标学习，能提高语义分割质量；高层次的特征图代表高层语义信息，适合对大尺度目标进行深入学习，能平滑分割结果。</p>
+<p>SSD网络的结构被分为6个stage，每个stage学到一幅特征图，然后进行边框回归和分类，每个Stage包含多个卷积层操作。SSD采用<strong>VGG16</strong>的前五层卷积网络作为第一个stage，将VGG16中<strong>fc6和fc7</strong>两个全连接层转换为两个卷积层conv6和conv7作为第2个stage。接着增加了Conv8、Conv9、Conv10、Conv11四层网络，用来提取高层次语义信息。</p>
+<p>SSD算法的基本步骤是：输入图片经过卷积神经网络提取特征，生成特征图；抽取其中六层特征图，并在其每个点上生成default box；将生成的所有default box执行非极大值抑制，输出筛选后的结果。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghwg9pb9pkj310q0eiqdp.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>这里用到的default box和Faster RCNN中的anchor很像，在Faster RCNN中anchor只用在最后一个卷积层，但是在本文中，default box是应用在多个不同层的feature map上。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghwzus25dwj30zo0j6tc4.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p> 总的框数：38x38x4、19x19x6、10x10x6、5x5x6、3x3x4、1x1x4，也就是 5773、2166、600、150、36、4，加起来一共有 8732 个box，然后我们将这些box送入NMS模块中，获得最终的检测结果。<strong>default box在不同的feature层有不同的scale，在同一个feature层又有不同的aspect ratio，因此基本上可以覆盖输入图像中的各种形状和大小的object</strong></p>
+<p>对于具有p个通道（num_output）的大小为m×n的特征层，使用3×3×p卷积核卷积操作，其中Padding和stride都为1，保证卷积后的特征图大小不变。但通道数增加，增加为（4*Classes+4)。</p>
+<p>在conv4_3层，有一层Classifier层，使用一层（3,3,(4*（Classes+4）)）卷积进行卷积（Classes是识别的物体的种类数，代表的是每一个物体的得分，4为x，y，w，h坐标，乘号前边的4为default box的数量），这一层的卷积则是提取出feature map，</p>
+<p><strong>Hard negative mining（硬负挖掘）</strong> ：在匹配步骤之后，大多数默认框都是负样本，特别是当可能的默认框数量很大时。这导致了训练期间正负样本的严重不平衡（正负样本的不均衡会导致发散或者精度经常保持为1）。我们不是使用所有负样本，而是使用每个默认框的最高置信度来使负样本排序，然后挑选较高置信度的负样本，以便负样本和正样本之间的比率至多为3：1。我们发现，这导致更快的优化和更稳定的训练。</p>
+<p><strong>SSD算法总结：</strong></p>
+<p>创新点：</p>
+<ul>
+<li>采用不同尺度的特征图进行检测，大尺度的特征图可用来检测小物体，小尺度的特征图检测大物体。</li>
+<li>采用不同尺度和长宽比的先验框。</li>
+<li>实现高精度的端到端训练，即使输入相对低分辨率的图像依然可以在速度和精度上得到权衡。</li>
+</ul>
+<p>优点：运行速度快，可与YOLO媲美；检测精度高，可与Faster R-CNN媲美。</p>
+<p>缺点：需人工设置prior box的基础参数，prior box的基础大小和形状不能直接通过学习获得。</p>
+<p><strong>算法的结果：对于300*300的输入，SSD可以在VOC2007 test上有74.3%的mAP，速度是59 FPS(Nvidia Titan X)，对于512*512的输入, SSD可以有76.9%的mAP</strong>。相比之下Faster RCNN是73.2%的mAP和7FPS，YOLO是63.4%的mAP和45FPS。即便对于分辨率较低的输入也能取得较高的准确率</p>
+<h2 id="预备知识："><a href="#预备知识：" class="headerlink" title="预备知识："></a><strong>预备知识：</strong></h2><p>在继续学习RetinaNet之前，首先要搞清楚何为Hard/Easy Positive/Negative Example。从字面意思上理解，Hard为困难样本、较难分类的样本，Easy为容易分类的样本、Positive为正样本，Negative为负样本。正负样本比较好区分：bbox与ground-truth的IoU大于某一阈值（一般为0.5）即为正样本，IoU小于该阈值即为负样本。</p>
+<p>Hard和Easy的区分主要看是否在前景和背景的过渡区域上。如果不在前景和背景的过渡区域上，分类较为明确，称为Easy。若在过渡区域上，则较难分类，称为Hard。</p>
+<p><a href="https://tva1.sinaimg.cn/large/007S8ZIlly1gjmnb4us3dj30ld0bwq44.jpg" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjmnb4us3dj30ld0bwq44.jpg" srcset="/img/loading.gif" alt="img"></a></p>
+<h2 id="2-2-RetinaNet"><a href="#2-2-RetinaNet" class="headerlink" title="2.2 RetinaNet"></a>2.2 RetinaNet</h2><p>本文提出了一个可与最先进two-stage检测器的精度匹配的One-Stage检测器。为了实现该结果，作者将训练过程中的类不平衡问题看作主要障碍，并提出了一个新的损失函数来消除该障碍。</p>
+<p>类不平衡问题是指如SSD中产生了很多很多default box，这些default box中大多数都是负样本，特别是当可能的默认框数量很大时。这导致了训练期间正负样本的严重不平衡，训练步骤容易被已分类的背景样本所主导。这一问题在SSD中使用 <strong>Hard negative mining</strong>解决。</p>
+<p>在一张输入图片中，检测器对每张图片评估104-105个候选位置，但只有少数位置包含物体，故负样本多于正样本，出现类不平衡问题。</p>
+<p>类不平衡将引发两个问题：</p>
+<ol>
+<li>训练效率低，大多数位置是easy negative ，没有贡献有用的学习信号。（大多数负样本不在过渡区域，分类明确，称为easy negative。）</li>
+<li>负样本过多造成loss太大，以至于淹没掉正样本的loss，不利于目标收敛，导致模型退化。</li>
+</ol>
+<p>上述问题2将导致无法得出一个能对模型训练提供正确指导的loss，训练步骤容易被已分类的背景样本所主导（而Two Stage方法得到proposal后，其候选区域要远远小于One Stage产生的候选区域，因此不会产生严重的类别失衡问题）。常用的解决此问题的方法就是负样本挖掘，或其它更复杂的用于过滤负样本从而使正负样本数维持一定比率的样本取样方法。本文提出了一个新的损失函数Focal Loss，更高效的替代之前处理类不平衡问题的方法。</p>
+<h3 id="Focal-loss"><a href="#Focal-loss" class="headerlink" title="Focal loss"></a>Focal loss</h3><p>Focal Loss被用来解决one-stage检测方案中训练时前景和背景极端不平衡的问题。从<strong>二分类的交叉熵(CE)</strong>损失来介绍Focal Loss，</p>
+<p><a href="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1wva3ph1j30dr02a74a.jpg" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1wva3ph1j30dr02a74a.jpg" srcset="/img/loading.gif" alt="image-20200924182142381"></a></p>
+<p>y=±1指定ground-truth类，p∈[0,1]是模型对于类标签y=1的概率。</p>
+<p><a href="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1xd6svy0j30cw0390ss.jpg" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1xd6svy0j30cw0390ss.jpg" srcset="/img/loading.gif" alt="image-20200924183857022"></a></p>
+<p>CE损失在图1中用蓝线画出，一个值得注意的性质是：即使样本已经被很容易的分类(p&gt;&gt;0.5)，CE损失依然很大。当把大量easy样本加和起来，这些小的损失能淹没稀有的类别。</p>
+<p><a href="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1xen7zh1j30gb0aj75c.jpg" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1xen7zh1j30gb0aj75c.jpg" srcset="/img/loading.gif" alt="image-20200924184020821"></a></p>
+<h4 id="平衡的交叉熵"><a href="#平衡的交叉熵" class="headerlink" title="平衡的交叉熵"></a>平衡的交叉熵</h4><p>解决类不平衡的一种常用方法是对类1引入权重因子α。在实际应用中，α可采用逆类频率设置，也可作为交叉验证设置的超参数。</p>
+<p><a href="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1xsqbgn0j30bg01aq2s.jpg" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1xsqbgn0j30bg01aq2s.jpg" srcset="/img/loading.gif" alt="image-20200924185352955"></a></p>
+<p>这种损失是CE的简单扩展，我们将其作为我们提出的Focal损失的实验基线。</p>
+<h4 id="Focal-Loss-定义"><a href="#Focal-Loss-定义" class="headerlink" title="Focal Loss 定义"></a>Focal Loss 定义</h4><p>训练过程中的类不平衡问题淹没了交叉熵损失。容易被分类的负样本构成了大部分损失，并支配着梯度。尽管α平衡了正负样本的重要性，但他没有区分easy/hard样本。<strong>作者重构了loss function来降低easy样本的权重，关注hard negative的训练。</strong></p>
+<p><a href="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1ymj45y2j30ci01mmx1.jpg" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1ymj45y2j30ci01mmx1.jpg" srcset="/img/loading.gif" alt="image-20200924192231368"></a></p>
+<p>从图中也可看出：当γ逐渐增大时，较容易分类的loss几乎为0，减少了easy样本的损失贡献。而Pt较小的部分（hard example）的loss依然较大，可以保证在累加后让hard examples贡献更多的loss，在训练时给予hard examples更多的优化。</p>
+<p>性质1：当一个样本被误分类并且概率很低，调制因子趋近于1，损失不受影响。当概率趋近于1，因子趋近于0，这样就降低了已经被良好分类的样本的损失占比。</p>
+<p>性质2：聚焦参数γ平滑的调整easy样本的权重降低率。当γ=0时 FL=CE，随着γ的增加调制因子的影响也最值增加。（我们发现γ=2在实验中效果最佳）。</p>
+<p>直观的说，调制因子减少了easy样本的损失贡献，并且扩展了损失较低样本的范围。例如当γ=2，一个样本被分类的概率为0.9，FL损失比CE损失低100倍，当概率增加到0.968，损失低了1000倍。这反过来增加了校正误分类样本的重要性。（它的损失降低了4倍，当概率&lt;0.5,γ=2）</p>
+<h3 id="RetinaNet："><a href="#RetinaNet：" class="headerlink" title="RetinaNet："></a><strong>RetinaNet</strong>：</h3><p><a href="https://tva1.sinaimg.cn/large/007S8ZIlly1gjmnb5c1omj30n306aq4r.jpg" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjmnb5c1omj30n306aq4r.jpg" srcset="/img/loading.gif" alt="img"></a></p>
+<p>RetinaNet由一个基石网络(ResNet+FPN)和两个特定任务的子网络组成。基石网络负责在整个输入图像上计算卷积特征图，并且它不是一个自卷积神经网络。第一个子网络在基石网络的输出上做卷积目标分类，第二个子网络执行卷积边框回归。</p>
+<p>输入图像经过Backbone后，可以得到P3-P7特征图金字塔（下标表示特征金字塔的层数，Pl的特征图分辨率比原始图像小2l），每层有C=256个通道。得到特征金字塔后，对特征金字塔的每一层分别使用两个子网络（分类子网络+检测框位置回归子网络）。</p>
+<h3 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a><strong>总结：</strong></h3><ul>
+<li>作者将极端类不平衡问题看作阻止one-stage方法超过two-stage方法的主要障碍。</li>
+<li>为解决该问题，提出了一个新的损失函数Focal Loss，更高效的替代之前处理类不平衡问题的方法。</li>
+<li>提出RetinaNet：ResNet+FPN+2个FCN子网络，精度超过Faster R-CNN。</li>
+</ul>
+<h2 id="2-3-CornerNet-Anchor-free"><a href="#2-3-CornerNet-Anchor-free" class="headerlink" title="2.3 CornerNet(Anchor free)"></a>2.3 CornerNet(Anchor free)</h2><h3 id="目前被经常使用的anchor-box有两个缺点："><a href="#目前被经常使用的anchor-box有两个缺点：" class="headerlink" title="目前被经常使用的anchor box有两个缺点："></a><strong>目前被经常使用的anchor box有两个缺点：</strong></h3><ul>
+<li>需要一个非常大的anchor boxes集合。检测器需要判断每个anchor box是否与ground truth box 足够重叠。通常仅仅一小部分anchors与ground truth重叠，这就造成阳性anchors box和阴性anchors box 之间的巨大不平衡，并且减慢训练。</li>
+<li>使用anchor box引入大量超参数和设计选择。包括：框的数量、框的尺寸、框的长宽比。</li>
+</ul>
+<h3 id="CornerNet："><a href="#CornerNet：" class="headerlink" title="CornerNet："></a><strong>CornerNet：</strong></h3><p>一种去掉anchor boxes的one-stage目标检测方法。CornerNet通过一对关键点（边界框左上角和右下角）来检测目标。使用一个卷积网络预测两个热图集合（相同目标类别的所有实例的），来表示不同目标类别的边角点位置，一个是左上角边角点的热图集合，一个是右下角边角点的热图集合。此外，网络为每一个被检测到的边角点预测一个嵌入式向量，这样同一目标的两个边角点的嵌入式向量之间的距离很小，就能基于这个距离将其分为一组。</p>
+<p><a href="https://tva1.sinaimg.cn/large/007S8ZIlly1gjmnb9g912j30nr06aacs.jpg" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjmnb9g912j30nr06aacs.jpg" srcset="/img/loading.gif" alt="img"></a></p>
+<p>使用沙漏网络作为CornerNet的Back-bone网络。沙漏网络后面跟着两个预测模块，一个模块预测左上角点，另一个预测右下角点。每个模块有他们自己的Corner Pooling模块来池化来自沙漏网络的特征，之后预测热图、嵌入式向量和偏移。</p>
+<h3 id="Corner-pooling"><a href="#Corner-pooling" class="headerlink" title="Corner pooling:"></a><strong>Corner pooling:</strong></h3><p>一种新的池化层，通过编码明确的先验知识，可帮助卷积神经网络更好地定位边界框的角落。Corner Pooling在两个特征图上执行，从第一个特征图上（在每个像素位置）最大池化所有的特征向量，第二个特征图直接池化所有特征向量，然后将两个池化结果相加。</p>
+<h3 id="总结：-2"><a href="#总结：-2" class="headerlink" title="总结："></a><strong>总结：</strong></h3><h4 id="创新点："><a href="#创新点：" class="headerlink" title="创新点："></a><strong>创新点：</strong></h4><ul>
+<li>提出CornerNet:一种新的目标检测方法，使用单个卷积神经网络，将目标边界框当做一组关键点（左上角、右下角）进行检测，消除了Anchor Boxes。</li>
+<li>提出Corner Pooling，一种新的池化层，帮助网络更好的定位关键点。</li>
+</ul>
+<h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a><strong>缺点：</strong></h4><ul>
+<li>CornerNet需要学习一个额外的距离向量，进行复杂的后处理来对属于相同实例的边角点分组。</li>
+</ul>
+<h2 id="2-4-CenterNet"><a href="#2-4-CenterNet" class="headerlink" title="2.4 CenterNet"></a>2.4 CenterNet</h2><h2 id="2-5-FCOS-Anchor-free"><a href="#2-5-FCOS-Anchor-free" class="headerlink" title="2.5 FCOS(Anchor free)"></a>2.5 FCOS(Anchor free)</h2><p>当前所有主流检测器（例如Faster R-CNN、SSD、YOLO）都依赖于一个预定义的anchor boxes集合，一直以来人们相信使用anchor box是检测器成功的关键。尽管他们很成功，但了解基于anchor的检测器的缺点也很重要：</p>
+<p>(1) 检测性能对anchor boxes的尺寸、长宽比、数量敏感。基于anchor的检测器的超参数需要被仔细调整。</p>
+<p>(2) anchor boxes的尺寸和长宽比保持固定，检测器在候选目标形状出现大变化，特别是小目标时会遭遇困难。预定义的anchor boxes也会妨碍检测器的泛化能力，在不同的目标尺寸或长宽比的新检测任务上，anchor需要被重新设计。</p>
+<p>(3) 为了实现高召回率，基于anchor的检测器需要在输入图像上密集的放置anchor box。（例如FPN上一张短边为800的图片有超过180K个anchor boxes）。这些anchor box在训练时绝大多数被标注为负样本。过多的负样本加重了训练期间的正负样本不平衡。</p>
+<p>(4) Anchor box包含复杂的计算，例如计算和ground-truth bbox之间的IoU。</p>
+<p><a href="https://tva1.sinaimg.cn/large/007S8ZIlly1gjmnb7bb87j30dh07qtgs.jpg" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjmnb7bb87j30dh07qtgs.jpg" srcset="/img/loading.gif" alt="img"></a></p>
+<h3 id="全卷积One-stage检测器："><a href="#全卷积One-stage检测器：" class="headerlink" title="全卷积One-stage检测器："></a><strong>全卷积One-stage检测器：</strong></h3><p>检测器直接回归bbox，并将这些位置看作训练样本（而不是anchors)。如果某个位置(x,y)在任一ground-truth box中，那么将其看为正样本，c<em>为其类别标签，c</em>=0表示其为负样本（背景）。4维的实向量t <em>= {l</em>,t<em>,r</em>,b*}是位置回归目标，里面的元素是从该位置到bbox四条边的距离（如图左所示）。如果某个位置有多个边界框，将其看为模棱两可的样本（如图右所示），FCOS简单的选择最小区域的边界框作为回归目标。FCOS利用尽可能多的前景样本来训练回归器。这与基于anchor的检测器不同，它们仅将与GT的IoU足够高的样本看为正样本。这也是FCOS比基于anchor的检测器出色的原因之一。</p>
+<h3 id="用FPN为FCOS进行多等级预测："><a href="#用FPN为FCOS进行多等级预测：" class="headerlink" title="用FPN为FCOS进行多等级预测："></a><strong>用FPN为FCOS进行多等级预测：</strong></h3><p><strong><a href="https://tva1.sinaimg.cn/large/007S8ZIlly1gjmnb66lp9j30ms09j76f.jpg" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjmnb66lp9j30ms09j76f.jpg" srcset="/img/loading.gif" alt="img"></a></strong></p>
+<p>FCOS采用FPN在不同等级的特征图上检测不同尺寸的目标。P3-P7是用于最终预测的特征等级，P3-P5由backboneCNN的特征图产生。P6/P7分别通过在P5/P6上应用一个步长为2的卷积层产生。</p>
+<p>与基于Anchor的检测器不同（它们为不同的特征层级分配不同尺寸的anchor），FCOS直接限制了每个层级上bbox回归的范围。FCOS首先为所有特征层级上每个位置计算l<em>,t</em>,r<em>,b</em>。如果某个位置满足max(l<em>,t</em>,r<em>,b</em>)&gt;mi 或 max(l<em>,t</em>,r<em>,b</em>)&lt;mi-1,就将其设为一个负样本，不再需要回归边界框。这里mi是该特征层级上需要去回归的最大距离。m2,m3,m4,m5,m6,m7分别为0,64,128,256,512,∞。(例如P3的范围是[0,64],P4的范围是[64,128])</p>
+<h3 id="Center-ness："><a href="#Center-ness：" class="headerlink" title="Center-ness："></a><strong>Center-ness：</strong></h3><p>在FCOS上使用多层级的预测之后，FCOS的性能依然与基于Anchor的检测器有很大代沟。作者观察到这是因为许多位置预测的低质量的边界框远离目标的中心点。FCOS引入了“Center-ness”分支来预测某个像素与其对应bbox中心点的偏移。这个评分被被用于降低检测到的低质量的边界框的权重，并且在NMS中合并检测结果。Center-ness使得基于FCN的检测器比基于anchor的检测器效果更好。</p>
+<p>作者提出了一个简单高效的策略来压制检测到的低质量边界框，没有引入任何超参数。具体来说，FCOS增加了一个与分类分支并行的单层分支来预测一个位置的”Center-ness”。Center-ness描述了该位置到目标中心点位置的正规化距离。</p>
+<p><a href="https://tva1.sinaimg.cn/large/007S8ZIlly1gjmnb8kwmbj30av02eaaa.jpg" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjmnb8kwmbj30av02eaaa.jpg" srcset="/img/loading.gif" alt="img"></a></p>
+<p>在测试时最终评分（用于排列检测到的边界框）通过将预测到的Center-ness与相对应的类别评分相乘得到。Center-ness可以减少远离目标中心点的边界框的权重分数。因此，在最终的非极大值抑制过程中，这些低质量的边界框有很大概率被过滤掉，从而显著提高检测器的性能。</p>
+<h3 id="总结：-3"><a href="#总结：-3" class="headerlink" title="总结："></a><strong>总结：</strong></h3><h4 id="优点："><a href="#优点：" class="headerlink" title="优点："></a><strong>优点：</strong></h4><ul>
+<li>FCOS使检测与许多其他FCN可解决的任务(如语义分割)统一起来，使重用这些任务中的思想变得更加容易。</li>
+<li>将检测变为Proposal free和Anchor free，显著降低了设计参数的数量，使训练变的简单。</li>
+<li>通过消除Anchor boxes，FCOS完全避免了Anchor boxes相关的复杂计算和超参数（例如在训练期间计算Anchor box和Ground truth box的IoU），并且以逐像素预测的方式进行目标检测，得以更快的训练和测试，同时减少训练期间内存用量。</li>
+<li>FCOS可以作为Two-Stage检测器的区域建议网络(RPNs)，并显著优于基于Anchor的RPN。</li>
+<li>FCOS检测器通过很小的修改就能立即扩展到解决其他视觉任务，包括实例分割和关键点检测。</li>
+</ul>
+<h2 id="2-6-YOLO"><a href="#2-6-YOLO" class="headerlink" title="2.6 YOLO"></a>2.6 YOLO</h2><p>图像经过一个神经网络即可完成目标位置及所属类别的预测，检测速度达到45fps，但检测精度不高。</p>
+<ul>
+<li>优点：<ul>
+<li>速度快。将检测看为回归问题，可以在整幅图像上进行推理，测试时只需在图像上运行神经网络即可预测检测结果。</li>
+<li>检测速度快。每秒可以实时处理45帧图像。较小的网络Fast YOLO，其处理能力达到155帧/秒，精度实现了两倍于当时其他实时检测网络的mAP。</li>
+<li>背景误检率低。YOLOv1在预测时关注整张图像，联系上下文信息，将背景检测为目标的可能性更小。与Fast-R-CNN相比，YOLOv1产生的背景误检率少于一半。</li>
+<li>可以学习物体的泛化表示。在自然图像上训练的模型应用在艺术图像上效果也较好。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>检测精度较低，虽然可快速识别图像中的物体，但难以精确定位某些物体，尤其是成群的小物体。</li>
+<li>YOLOv1直接从数据中学习预测bounding box，因此很难在新的或不寻常的宽高比的对象中进行泛化。</li>
+<li>定位误差大。yolov1的损失函数没有处理好小的bounding box和大的bounding box之间的区别。因为大的bounding box的小误差通常是良性的，但小的bounding box的小误差对IOU的影响要大得多。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-7-YOLOv2"><a href="#2-7-YOLOv2" class="headerlink" title="2.7 YOLOv2"></a>2.7 YOLOv2</h2><ul>
+<li>加入了<strong>Batch Normalization</strong>批归一化层，去掉全连接层，进行多尺度训练、使用维度聚类、细粒度特征、多尺度训练等改进方法。</li>
+<li>针对检测数据集数据量较少、分类数据集数据量较多的问题，提出一种新的方法，将不同的数据集组合在一起。具体方法是：一方面采用WordTree融合数据集，另一方面联合训练分类数据集和检测数据集。分类信息学习自ImageNet分类数据集，而物体位置检测则学习自 COCO 检测数据集。</li>
+<li>对于组合数据集构建了一个视觉概念的分层模型：WordTree</li>
+<li>引入Anchor boxes，通过预测Anchor Box的偏移值与置信度，而不是直接预测坐标值。</li>
+<li>提出DarkNet-19，有19个卷积层和5个最大池化层</li>
+</ul>
+<h2 id="2-8-YOLOv3"><a href="#2-8-YOLOv3" class="headerlink" title="2.8 YOLOv3"></a>2.8 YOLOv3</h2><ul>
+<li>使用新的网络架构DarkNet-53，有53个卷积层，使用了连续的3×3和1×1卷积层。<ul>
+<li>借鉴了ResNet网络中的残差结构，使得网络能够达到很深程度的同时避免了梯度消失问题。去除了池化层，改用步长为2的卷积层进行特征图的降维。</li>
+<li>测试发现Darknet-53比ResNet-101更好，且速度提高了1.5倍。Darknet-53具有与ResNet-152相似的性能，并且快2倍。</li>
+</ul>
+</li>
+<li>利用多尺度进行目标检测，大大提升了对小目标的检测效果。<ul>
+<li>YOLOv3在3种不同尺度上预测边界框，并使用类似特征金字塔网络的概念进行多尺度级联。</li>
+<li>网络中进行上采样、下采样、特征拼接等操作，输出三张大小分别为13x13、26x26、52x52的特征图，13x13的特征图由于下采样倍数大，单元网格的感受野比较大，适合检测尺寸比较大的目标物；26x26的特征图中单元网格感受野适中，适合检测尺寸中等的目标物；52x52的特征图中单元网格感受野相对较小，适合检测尺寸较小的目标物。</li>
+<li>YOLOv3延续了YOLOv2使用的k-means聚类方法来确定Anchor box的尺寸。为每张特征图确定3个Anchor box的尺寸，最终聚类得到9种尺寸的Anchor box。分配的方式见下表所示，遵循的原则是特征图的尺寸越小，则分配的anchor box的尺寸越大。<a href="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3monpkm2j30k502fjsb.jpg" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3monpkm2j30k502fjsb.jpg" srcset="/img/loading.gif" alt="preview"></a></li>
+</ul>
+</li>
+<li>改进损失函数，使用逻辑回归代替softmax分类器。<ul>
+<li>YOLOv3不再采用softmax分类器，而采用独立的logistic classifiers。并且在训练过程中，使用二元交叉熵损失来进行类别预测。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-9-YOLOv4"><a href="#2-9-YOLOv4" class="headerlink" title="2.9 YOLOv4"></a>2.9 YOLOv4</h2><ul>
+<li><p>加入SPP bolck来改善感受野大小，用PANet代替FPN进行多通道特征融合</p>
+</li>
+<li><p>选用CSP-DarkNet53作为主干网络，使得检测精度与速度进一步提升。</p>
+</li>
+<li><p><strong>YOLOv4的最终架构：</strong>Backbone:CSPDarknet53  Neck:SPP,PANet  Head:YOLOv3 </p>
+</li>
+<li><p>YOLOv4其实并没有特别大的创新点，文章可以概括为三个部分：目标检测算法综述+最新算法的大量实验+最优的算法组合。也就是将当前目标检测的方法进行了对比实验研究，最终找到了一个最优的组合，这个组合所带来的整体增益最高。</p>
+</li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/YOLO/">YOLO</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Faster-R-CNN/">Faster R-CNN</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/29/qmjs/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">厦门大学信息学院计算机科学系硕士生2020级1班党支部开展清明祭扫活动</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/26/3-26/">
+                        <span class="hidden-mobile">阅读笔记（3.26)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "图像目标检测简单综述&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

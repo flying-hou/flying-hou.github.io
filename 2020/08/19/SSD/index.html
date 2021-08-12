@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>文献翻译——SSD:Single Shot MultiBox Detector - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-08-19 16:13">
+      2020年8月19日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      10.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      115
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年8月28日 晚上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>我们提出了一种使用单个深层神经网络检测图像中的目标的方法。我们的方法，名为SSD。将边界框的输出空间离散化为一组默认框，该默认框在每个特征图位置有不同的宽高比和尺寸。在预测期间，网络针对每个默认框中的每个存在对象类别生成分数（即给其打分），并且对框进行调整以更好地匹配对象形状。另外，网络结合不同分辨率的多个特征图的预测来自然处理各种尺寸的对象。SSD相对于需要region proposal的方法是简单的，因为它完全消除了生成候选框及之后的像素或特征的重采样阶段，并将所有计算封装在单网络中。这使得SSD容易训练和直接集成到需要检测组件的系统。PASCALVOC，MS COCO和ILSVRC数据集的实验结果证实，SSD与使用额外的region proposal（区域候选框，具体可参看R-CNN系列论文，表示在图像中目标可能的区域提取n个候选框然后分类训练）的方法具有可比较的准确性，并且速度更快，同时为训练和推理提供统一的框架。对VOC2007，在300×300输入，SSD在Nvidia Titan X上59FPS时达到74.3％的mAP，512×512输入SSD达到76.9％的mAP，优于可与之相比的最新的Faster R-CNN模型。代码链接：<a href="https://github.com/weiliu89/caffe/tree/ssd" target="_blank" rel="noopener">https://github.com/weiliu89/caffe/tree/ssd</a></p>
+<p>关键词：试试目标检测；卷积神经网络</p>
+<h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h1><p>当前，现有对象检测系统是以下方法的变体：假设边框，对每个框的像素或特征重新取样，再应用高质量分类器（边框选择——边框归一化——CNN训练提取特征——分类器分类）。自从选择性搜索[1]提出以来，特别是基于Faster R-CNN[2]和[3]等这类更深特征的方法在PASCAL VOC，MSCOCO和ILSVRC检测取得领先结果后，这种检测流程成为检测领域的基准。尽管准确，但这些方法对于嵌入式系统来说计算量过大，即使对于高端硬件，对于实时或接近实时的应用来说也太慢。 这些方法的检测速度通常以每秒帧数为单位进行测量，即使最快的高精度检测器( Faster R-CNN）仅以每秒7帧（FPS）运行。目前，已经有许多尝试通过研究检测流程的每个阶段来建立更快的检测器（参见第4节中的相关工作），但是迄今为止，显着增加的速度仅仅是以显着降低的检测精度为代价。</p>
+<p> 本文提出了第一个基于深层网络的目标检测器，它不会对假设边框中的像素或特征进行重新取样，但和那种做法一样准确（即有效避免了Faster-R-CNN中的重复采样）。这使高精度检测的速度有了显着提高（在VOC2007测试中, 58 FPS下 72.1％mAP，对Faster R-CNN 7 FPS 下mAP 73.2％，YOLO 45 FPS 下mAP 63.4％）。速度的根本改进来自消除候选边框（bounding box proposals）和随后的像素或特征重采样阶段。我们不是首次这么做（cf [4,5]），但是通过增加一系列改进，我们设法提高了以前尝试的准确性。我们的改进包括使用小型卷积滤波器来预测对象类别和边界框位置中的偏移量，使用单独的预测器（滤波器）来检测不同宽高比，并将这些滤波器应用于网络后期的多个特征映射中，以便在多个尺度上执行检测。通过这些修改，我们可以使用相对低分辨率的输入实现高精度检测，进一步提高处理速度。 虽然这些贡献独立看可能觉得贡献很小，但我们注意到，所得的系统提高了PASCAL VOC的实时高速检测的准确性，从YOLO的63.4％mAP到我们提出的网络的72.1％mAP。相比于最近在残差网络[3]方面的工作，这是相对于目标检测精度的相对提高。  此外，显着提高高质量检测的速度可以拓宽计算机视觉有效使用范围。</p>
+<p>总结我们的贡献如下：</p>
+<ul>
+<li><p>我们介绍了SSD，一个单次检测器，用于多个类别，比先前最先进的单次检测器（YOLO）速度更快，并且更准确很多，实际上和明确使用区域候选region proposal、pooling的更慢的技术一样准确（包括Faster RCNN）</p>
+</li>
+<li><p>SSD的核心是使用应用于特征映射的小卷积滤波器来预测固定的一组默认边界框的类别分数和框偏移量。</p>
+</li>
+<li>为了实现高检测精度，我们从不同尺度的特征图产生不同尺度的预测，并且通过宽高比来明确地分离预测。</li>
+<li>这些设计特性得到了简单的端到端训练和高精度，进一步提高速度和精度的权衡，即使输入相对低分辨率图像。</li>
+<li>实验包括在PASCAL VOC，MS COCO和ILSVRC上评估不同输入大小下模型耗时和精度分析，并与一系列最新的先进方法进行比较。</li>
+</ul>
+<h1 id="2-单次检测器（SSD）"><a href="#2-单次检测器（SSD）" class="headerlink" title="2.单次检测器（SSD）"></a>2.单次检测器（SSD）</h1><p>本节介绍我们提出的SSD检测架构（第2.1节）和相关的训练方法（第2.2节）。之后， 第3节呈现特定数据集的模型细节和实验结果。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghwg9pb9pkj310q0eiqdp.jpg" srcset="/img/loading.gif" alt="image-20200819213913182"></p>
+<p><strong>图1：SSD架构。</strong> （a）SSD在仅需要一张输入图像和训练期间每个目标的真实标签框。以卷积的方式，我们评估在具有不同尺度（例如图（b）和（c）中的8×8和4×4）的若干特征地图中的每个位置处的不同长宽比的默认框的小集合（例如4个）。 对于每个默认框，我们预测对所有对象类别（（c 1，c2，…，cp））的形状偏移和置信度。在训练时，我们首先将这些默认框匹配到真实标签框。 例如，两个默认框匹配到猫和狗，这些框为正，其余视为负。 模型损失是定位损失（例如Smooth L1 [6]）和置信损失（例如Softmax）之间的加权和。</p>
+<h2 id="2-1-模型"><a href="#2-1-模型" class="headerlink" title="2.1 模型"></a>2.1 模型</h2><p>SSD方法基于前馈卷积网络，该网络会生成固定大小的边界框集合，并对这些框中存在的对象类别实例进行评分，然后执行非最大抑制步骤以进行最终检测。早期的网络层基于用于高质量图像分类的标准体系结构（在任何分类层之前均被截断），我们将其称为基础网络。然后，我们向网络添加辅助结构，产生了具有以下主要特征的检测：</p>
+<p><strong>多尺度特征图检测：</strong>我们将卷积特征层添加到截断的基础网络（CNN）的末尾。这些层尺寸（基础网络层的卷积核导致尺寸越来越小的特征图）逐渐减小，得到多个尺度检测的预测值。预测检测的卷积模型对于每个特征层是不同的（参见在单个尺度特征图上操作的Overfeat [4]和YOLO[5]（两者皆是以一种固定大小的边框去移动截取特征框））。</p>
+<p><strong>检测的卷积预测器：</strong>每个添加的特征层（或可选的基础网络中已存在的特征层）可以使用一组卷积滤波器产生固定的预测集合。这些在图2中SSD网络架构顶部已指出。对于具有p个通道（num_output）的大小为m×n的特征层，使用3×3×p卷积核卷积操作，这导致每一个类别产生一个分数，或者产生相对于默认框的坐标偏移。在每个应用卷积核运算的m×n位置处，产生一个输出值。边界框偏移输出值是相对于与每个特征图位置相对的默认框位置测量的（参见YOLO [5]的架构，中间使用全连接层而不是用于该步骤的卷积滤波器）。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghwzus25dwj30zo0j6tc4.jpg" srcset="/img/loading.gif" alt="image-20200820085653680"></p>
+<p><strong>图2：两个单次检测模型之间的比较：SSD和YOLO [5]。</strong> 我们的SSD模型在基础网络的末尾添加了几个特征层，这些层预测了不同尺度和宽高比对默认框的偏移及其相关置信度。 300×300输入尺寸的SSD在VOC2007测试中的精度显着优于448×448输入的YOLO的精度，同时还提高了运行速度，尽管YOLO网络比VGG16快。</p>
+<p><strong>默认框与宽高比：</strong>我们将一组默认边界框与每个特征映射单元相关联，以用于网络顶部的多个特征图（以提取到的边框做CNN训练的输入数据）。默认框以卷积的方式平铺特征映射，以便每个框相对于其对应单元的位置是固定的。在每个特征映射单元中，我们预测相对于单元格中的默认框形状的偏移，以及指出这些框中每个框存在的详细类别的每类评分。具体来说，对于在给定位置的k个框中每个框，我们计算c类分数和相对于原始默认框的4个偏移量。这使得在特征图中的每个位置需要总共（c+4）k个滤波器，对于m×n特征图产生（c+4）kmn个输出。有关默认框的说明，请参见图1。我们的默认框类似于Faster R-CNN [2]中使用的anchor boxes（固定框），但我们将其应用于不同分辨率的特征图中。在多个特征图中使用不同的默认框形状，可以有效地离散可能的输出框形状空间。</p>
+<h2 id="2-2训练"><a href="#2-2训练" class="headerlink" title="2.2训练"></a>2.2训练</h2><p>训练SSD和训练使用region proposal的典型分类器的关键区别在于，真实标签信息需要被指定到固定的检测器输出集合中的某一特定输出。Faster R-CNN [2]和MultiBox [7]的regionproposal阶段、YOLO [5]的训练阶段也需要类似这样的标签。一旦确定了该指定，则端对端地应用损失函数和反向传播。训练还涉及选择默认框和检测尺度的集合，以及hard negative mining（硬负挖掘）和数据增强策略。</p>
+<p><strong>匹配策略：</strong>在训练时，我们需要在训练期间，我们需要确定哪些默认框对应于真实标签检测并相应地训练网络（建立真实标签和默认框之间的对应关系）。请注意，对于每个真实标签框，我们从默认框中进行选择，这些默认框随位置、纵横比和尺度而变化。起始时，我们匹配每个真实标签框与默认框最好的jaccard重叠（这是原始MultiBox [7]使用的匹配方法，它确保每个真实标签框有一个匹配的默认框）。与MultiBox不同，我们将默认框与jaccard重叠高于阈值（0.5）的任何真实标签框相匹配。这简化了学习问题：它使得有多个重叠默认框时网络预测获得高置信度，而不是要求它选择具有最大重叠的那个。</p>
+<p><strong>训练</strong>：SSD训练来自MultiBox[7,8]，但扩展到处理多个对象类别。 以<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx070qawij306i01qjrb.jpg" srcset="/img/loading.gif" alt="image-20200820090839899" style="zoom:33%;" />表示第<em>i</em>个默认框与类别<em>p</em>的第<em>j</em>个真实标签框相匹配（匹配正确与否用1或0表示）。根据上述匹配策略，我们有<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx0890w2pj306401mdfr.jpg" srcset="/img/loading.gif" alt="image-20200820090950851" style="zoom:33%;" />（意味着可以有多于一个与第<em>j</em>个真实标签框相匹配的默认框。）总体目标损失函数是位置损失（loc）和置信损失（conf）的加权和：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx0bcy741j30nk02st8x.jpg" srcset="/img/loading.gif" alt="image-20200820091249686" style="zoom:50%;" /></center>
+
+<p>其中N是匹配的默认框的数量，如果N = 0，则将损失设置为0。位置损失是预测框（l）和真实标签值框（g）参数之间的平滑L1损失（L1范数）[6]。 类似于Faster R-CNN [2]，我们回归到默认边框（d）的中心（cx,cy）和其宽度（w）高度（h）的偏移。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx0dq9b7hj30zq0acabo.jpg" srcset="/img/loading.gif" alt="image-20200820091506243" style="zoom:50%;" /></center>
+
+<p>置信损失是softmax损失对多类别置信（c）和权重项α设置为1的交叉验证。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx0f3f2tkj314u044aaw.jpg" srcset="/img/loading.gif" alt="image-20200820091625086"></p>
+<p><strong>选择默认框的尺度和横宽比</strong>：【大多数卷积网络通过加深层数减小特征图的大小。这不仅减少计算和存储消耗（小卷积核减少了参数所以节省了空间），而且还提供一定程度的平移和尺寸不变性。】为了处理不同的目标尺寸，一些方法[4,9]建议将图像转换为不同的尺寸，然后单独处理每个尺寸，然后组合结果。然而，通过用单个网络中的若干不同层的特征图来进行预测，我们可以得到相同的效果，同时还在所有目标尺度上共享参数。之前的研究[10,11]已经表明使用来自较低层的特征图可以提高语义分割质量，因为较低层捕获到输入对象的更精细的细节。类似地，[12]表明，添加从特征图下采样的全局背景可以帮助平滑分割结果。受这些方法的启发，我们使用低层和高层的特征图进行检测预测。图1示出了在框架中使用的两个示例特征图（8×8和4×4），当然在实践中，在实践中，我们可以使用更多的小计算量的特征图（即较小的卷积核）。</p>
+<p>已知网络中不同层次的特征图具有不同的（经验的）感受野大小[13]。幸运的是，在SSD框架内，默认框不需要对应每层的实际感受野。我们可以设计默认框平铺，以便特定的特征图学习响应目标的特定尺度。假设我们要使用m个特征图做预测。每个特征图的默认框的比例计算如下：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx0olj2n3j30my02mgls.jpg" srcset="/img/loading.gif" alt="image-20200820092533563" style="zoom:67%;" /></center>
+
+<p>其中smin是0.2，smax是0.95，意味着最低层具有0.2的尺度，最高层具有0.95的尺度（scale类似与BN层配合的scale），并且其间的所有层是规则间隔的。我们对默认框施以不同的宽高比，表示为ar∈{1,2,3,1/2,1/3}。我们可以计算每个默认框的宽度<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx0pgewkfj306m01iwef.jpg" srcset="/img/loading.gif" alt="image-20200820092622978" style="zoom:50%;" />和高度<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx0r1z4ivj307u01gweg.jpg" srcset="/img/loading.gif" alt="image-20200820092755308" style="zoom: 50%;" />对于宽高比为1，我们还添加了一个缩放为<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx0rqtf4tj307c01kglj.jpg" srcset="/img/loading.gif" alt="image-20200820092835125" style="zoom: 50%;" />的默认框，结果使每个特征图位置有6个默认框。设定每个默认框中心为<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx0skwu04j306w024weg.jpg" srcset="/img/loading.gif" alt="image-20200820092922922" style="zoom:50%;" />，其中<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx0t2p91tj302401ot8k.jpg" srcset="/img/loading.gif" alt="image-20200820092951594" style="zoom:50%;" />是第k个正方形特征图的大小，<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx0u560lej306y01gt8n.jpg" srcset="/img/loading.gif" alt="image-20200820093052846" style="zoom: 50%;" />，随后截取默认框坐标使其始终在[0，1]内。在实践中，也可以用最合适的特定数据集设计默认框的分布。如何设计默认框的最佳平铺也是一个悬而未决的问题。</p>
+<p>通过组合许多特征图在所有位置的不同尺寸和宽高比的所有默认框的预测，我们具有多样化的预测集合，覆盖各种输入对象尺寸和形状。例如图 1中，狗被匹配到4×4特征图中的默认框，但不匹配到8×8特征图中的任何默认框。这是因为那些框具有不同的尺度且不匹配狗的真实框，因此在训练期间被认为是负样本。</p>
+<p><strong>Hard negative mining（硬负挖掘）</strong> ：在匹配步骤之后，大多数默认框都是负样本，特别是当可能的默认框数量很大时。这导致了训练期间正负样本的严重不平衡（正负样本的不均衡会导致发散或者精度经常保持为1）。我们不是使用所有负样本，而是使用每个默认框的最高置信度来使负样本排序，然后挑选较高置信度的负样本，以便负样本和正样本之间的比率至多为3：1。我们发现，这导致更快的优化和更稳定的训练。</p>
+<p><strong>数据增强</strong>：为了使模型对于各种输入对象大小和形状更加鲁棒，每个训练图像通过以下选项之一随机采样：</p>
+<p>-  使用整个原始输入图像</p>
+<p>-  采样一个片段，使对象最小的jaccard重叠为0.1,0.3,0.5,0.7或0.9。</p>
+<p>-  随机采样一个片段</p>
+<p>每个采样片段的大小为原始图像大小的[0.1，1]，横宽比在1/2和2之间。如果真实标签框中心在采样片段内，则保留重叠部分。在上述采样步骤之后，除了应用类似于[14]中所述的一些光度失真之外，将每个采样片段调整为固定大小并以0.5的概率水平翻转。</p>
+<h1 id="3-实验结果"><a href="#3-实验结果" class="headerlink" title="3.实验结果"></a>3.实验结果</h1><p><strong>基础网络</strong>：我们的实验基于VGG16 [14]网络，在ILSVRC CLS-LOC数据集[15]预训练。类似于DeepLab-LargeFOV [16]，我们将fc6和fc7转换为卷积层，以从fc6和fc7采样参数，将pool5从2×2-s2更改为3×3-s1，并使用atrous算法填“洞”（指权重初始化方法）。我们删除了所有的dropout层和fc8层，使用SGD对这个模型进行fine-tune，初始学习率 0.001，0.9 momentum, 0.0005 weight decay, batch大小32。每个数据集的学习速率衰减策略略有不同，稍后我们将描述详细信息。所有训练和测试代码在caffe框架编写，开源地址：<a href="https://github.com/weiliu89/caffe/tree/ssd。" target="_blank" rel="noopener">https://github.com/weiliu89/caffe/tree/ssd。</a></p>
+<h2 id="3-1-PASCAL-VOC2007"><a href="#3-1-PASCAL-VOC2007" class="headerlink" title="3.1 PASCAL VOC2007"></a>3.1 PASCAL VOC2007</h2><p>在这个数据集上，我们比较了Fast R-CNN [6]和Faster R-CNN [2]。所有方法使用相同的训练数据和预训练的VGG16网络。特别地，我们在VOC2007train val和VOC2012 train val（16551images）上训练，在VOC2007（4952图像）测试。</p>
+<p> 图2显示了SSD300模型的架构细节。我们使用conv4_3，conv7（fc7），conv8_2，conv9_2，conv10_2和pool11来预测位置和置信度（对SSD500模型，额外增加了conv11_2用于预测），我们在conv4_3^3上设置了比例为0.1的默认框。用“xavier”方法初始化所有新添加的卷积层的参数[18]。由于conv4_3的大小较大（38×38），因此我们只在其上放置3个默认框：一个0.1比例的框和另外纵横比为1/2和2的框。（对于conv4_3，conv10_2和conv11_2，我们只在每个特征图位置关联4个默认框， - 省略1/3和3的纵横比。）对于所有其他层，我们设置6个默认框，如第 2.2节。如[12]中所指出的，由于conv4_3与其他层相比具有不同的特征尺度，我们使用[12]中引入的L2（2范数）正则化技术，将特征图中每个位置处的特征范数（特征标准）缩放为20，并在反向传播期间学习这种缩放（尺度）。我们使用学习速率0.001进行40k次迭代，然后将其衰减到0.0001，并继续训练另外20k次迭代（并使用学习率0.0001和0.00001分别继续训练10K次迭代）。当我们在VOC2007训练集上训练时，表1显示，我们的SSD300模型已经比Fast R-CNN更准确。当以更大的500×500输入图像训练SSD，结果更准确，甚至惊人的超过了Faster R-CNN 1.9% mAP（mAP表示平均精度的均值）（当在更大的512x512输入图像上训练SSD时，结果甚至更加准确，惊人的超过了Faster R-CNN有1.7%的mAP）。如果使用更多的数据（例如VOC2007加上VOC2012）训练SSD，我们看到SSD300已经可以优于Faster R-CNN约1.1%，而SSD512更是达到3.6%。如果使用这个模型去训练如3.4节描述的COCO trainval135k和在07+12数据集使用SSD512微调，我们获得了最好的结果：81.6%mAP。</p>
+<p> 为了更详细地了解我们的两个SSD模型的性能，我们使用了来自[19]的检测分析工具。图3显示SSD可以高质量检测（大、白色区域）各种对象类别。它的大部分置信度高的检测是正确的。召回率在85-90％左右，并且比“弱”（0.1 jaccard重叠（jaccard相似度可以看成两个集合A,B的交集占并集的比例：Jaccard Sim = (A∩B) / (A∪B)，其实就是计算A与B产生重叠的程度。））标准高得多。与R-CNN [20]相比，SSD具有较少的定位误差，表明SSD可以更好地定位目标，因为它直接学习回归对象形状并对对象类别进行分类，而不是使用两个分离的步骤。然而，SSD对相似对象类别（尤其是动物）有更多的混淆，部分是因为多个类别共享了位置。 图4显示SSD对边界框尺寸非常敏感。换句话说，它对较小的对象比对较大的对象具有更差的性能。这毫不意外，因为小对象在最顶层可能没有任何信息保留下来。增加输入尺寸（例如从300×300到500×500）可以帮助改善检测小对象，但是仍然有很大改进空间。积极的一面是，我们可以清楚地看到SSD在大对象上表现很好。并且对于不同的对象宽高比非常鲁棒，因为我们对每个特征图位置使用各种长宽比的默认框。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx1a7rpcuj315m0ai431.jpg" srcset="/img/loading.gif" alt="image-20200820094619896"></p>
+<p><strong>表1 ： PASCAL VOC2007测试集检测结果。</strong>Fast和Faster R-CNN输入图像最小尺寸为600，两个SSD模型除了输入图像尺寸（300*300和500*500），其他设置与其相同。很明显，较大的输入尺寸得到更好的结果,并且使用更多的数据是有帮助的。</p>
+<h2 id="3-2-模型分析"><a href="#3-2-模型分析" class="headerlink" title="3.2 模型分析"></a>3.2 模型分析</h2><p>为了更好地理解SSD，我们还进行了几组对照实验，以检查每个组件如何影响最终性能。对于所有实验，我们使用完全相同的设置和输入大小（300×300），除了变动的组件。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx1dy8uquj30qu08i3zq.jpg" srcset="/img/loading.gif" alt="image-20200820094954856" style="zoom:50%;" /></center>
+
+<center>表2： 不同选择和组件对SSD表现的影响</center>
+
+<p><strong>关键的数据增强。</strong>Fast和Faster R-CNN使用原始图像和水平翻转（0.5概率）图像训练。我们使用更广泛的采样策略，类似于YOLO [5]，但它使用了我们没有使用的光度失真。表2显示，我们可以用这个抽样策略提高6.7％（8.8%）的mAP。我们不知道我们的采样策略将对Fast和Faster R-CNN提升多少，但可能效果不大，他们在分类过程中使用了一个特征池化（feature pooling）步骤，这对设计中的对象翻转来说相对鲁棒。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx1hqynf6j31400qetdv.jpg" srcset="/img/loading.gif" alt="image-20200820095334557"></p>
+<p><strong>图3：VOC2007测试集上SSD 500（512）对动物、车辆和家具性能的可视化。</strong> 第一行显示由于定位不佳（Loc）或者与相似类别（Sim）、其他类别（Oth）或背景（BG）混淆的正确（Cor）或假阳性检测的累积分数。 红色实线反映了随着检测次数的增加，“强”标准（0.5 jaccard重叠）的召回率变化。 红色虚线使用“弱”标准（0.1 jaccard重叠）。底行显示排名靠前的假阳性类型的分布。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx1jk3cbaj320u0qk7f5.jpg" srcset="/img/loading.gif" alt="image-20200820095518623"></p>
+<p><strong>图4：不同目标特性对VOC2007测试集的灵敏度和影响[21]。</strong>每个红点显示标准错误栏的标准化的AP（平均准确率）。 黑色虚线表示整体归一化的AP。左边的图显示了BBox（边框bounding box）面积对每个类别的影响，右边的图显示了纵横比的影响。Key: BBox Area: XS=extra-small; S=small; M=medium; L=large; XL =extra-large. Aspect Ratio: XT=extra-tall/narrow; T=tall; M=medium; W=wide; XW =extra-wide.</p>
+<p><strong>更多特征图的提升</strong>  受许多语义分割工作启发[10,11,12]，我们也使用底层特征图来预测边界框输出。我们比较使用conv4_3预测的模型和没有它的模型。从表2，我们可以看出，通过添加conv4_3进行预测，它有明显更好的结果（72.1％ vs 68.1％）。这也符合我们的直觉，conv4_3可以捕获对象更好的细粒度，特别是细小的细节。</p>
+<p><strong>更多的默认框形状效果更好</strong> 如第2.2节所述，默认情况下，每个位置使用6个默认框。如果我们删除具有1/3和3宽高比的框，性能下降0.9％（0.6%）。通过进一步移除1/2和2纵横比的框，性能再下降2％。使用多种默认框形状似乎使网络预测任务更容易。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx1l51yiej316o0e80vd.jpg" srcset="/img/loading.gif" alt="image-20200820095649761" style="zoom: 33%;" /></center>
+
+<p><strong>多个不同分辨率的输出图层更好。SSD的主要贡献是在不同的输出层使用不同尺度的默认框。</strong>为了衡量所获得的优势，我们逐步删除图层并比较结果。为了公平比较，每次我们删除一个图层，我们调整默认框平铺，以保持类似于原始默认框的总数（8732）（删减层后调节每一层的框的个数以保持框的总数不变）。这是通过在剩余层上堆叠更多尺度的框并根据需要调整框的尺度来完成的。我们没有详尽地优化每个设置的平铺。 表3显示随着层数减少精度随之下降，从74.3单调地下降到62.4。当我们在一个图层上堆叠多个尺度的框时，很多框都会在图像边界上，并且需要小心处理。我们尝试了Faster R-CNN [2]中使用的策略，忽略了边界上的方框。 我们观察一些有趣的趋势。例如，如果我们使用非常粗糙的特征映射（如conv11_2(1x1)或者conv10_2(3x3)），会大大地损害性能。原因可能是裁剪后我们没有足够大的框来覆盖大的目标。当我们主要使用更高分辨率的图时，性能开始再次上升，因为即使裁剪之后仍然剩余足够数量的大框。如果我们只使用conv7进行预测，那么性能是最糟糕的，这就强化了在不同层上传播不同尺度的框的至关重要的信息。此外，由于我们的预测不像[6]那样依赖于ROI池化，所以我们在低分辨率特征映射中没有<em>collapsing bins</em>的问题[23]。SSD架构将来自各种分辨率的特征图的预测结合起来，以达到与Faster R-CNN相当的精确度，同时使用较低分辨率的输入图像。</p>
+<h2 id="3-3-PASCAL-VOC2012"><a href="#3-3-PASCAL-VOC2012" class="headerlink" title="3.3 PASCAL VOC2012"></a>3.3 PASCAL VOC2012</h2><p>我们采用和VOC2007实验一样的设置，这次，用VOC2012  trainval、VOC2007 trainval和test（21503张图像）三个数据集做训练，在VOC2012 test（10991张图像）测试。由于有了更多的训练数据，模型训练时以0.001学习率进行60K次迭代，再减小到0.0001继续迭代20K次。表3<strong>（表4）</strong>显示了SSD300和SSD500<strong>（SSD512^4）</strong>模型的结果。我们看到与我们在VOC2007测试中观察到的相同的性能趋势。我们的SSD300已经优于Fast R-CNN，并且非常接近Faster R-CNN（只有0.1％的差异）（我们的SSD300提高了精度比Fast/Faster R-CNN）。通过将训练和测试图像大小增加到500×500<strong>（512x512）</strong>，我们的精度比Faster R-CNN高2.7％<strong>（4.5%）</strong>。与YOLO相比，SSD显著精确，可能是由于使用来自多特征图的卷积默认框和训练期间的匹配策略。当我们在使用COCO模型微调训练时，我们的SSD512实现了80.0%的mAP，这比Faster R-CNN高了4.1%。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx1nx5crnj31ao094jvc.jpg" srcset="/img/loading.gif" alt="image-20200820095929845"></p>
+<p><strong>表4：PASCAL VOC2012 test 检测结果。</strong>Fast R-CNN和Faster R-CNN使用最小尺寸为600的图像，而YOLO的图像尺寸是448x448。数据：“07++12”表示“VOC2007 trainval、VOC2007 test和VOC2012 trainval三个数据集的组合”；“07++12+COCO”表示“首先使用COCO trainval35K训练模型然后利用该模型微调训练07++12”。</p>
+<h2 id="3-4-COCO"><a href="#3-4-COCO" class="headerlink" title="3.4 COCO"></a>3.4 COCO</h2><p>为了进一步验证SSD架构，我们在MS COCO<strong>（COCO）</strong>数据集上训练了我们的SSD300和SSD500<strong>（SSD512）</strong>架构。由于COCO中的对象往往比PASCAL VOC数据集更小，因此我们对所有层使用较小的默认框。我们遵循第2.2节中提到的策略方法，但是现在我们最小的默认框具有0.1而不是0.2的缩放比例，并且conv4_3上默认框的缩放比例是0.07（但现在我们最小的默认框的尺度是0.15而不是0.2，conv4 3的默认框的尺度是0.07）（例如，对应于300×300图像的21个像素）^5。</p>
+<p>​    我们使用trainval35k [21]来训练我们的模型。由于COCO有更多的对象类别，开始时的梯度不稳定。我们首先用8× 的学习率迭代4K次训练模型，接着以 学习率进行140K次迭代，再以 学习率迭代60K次， 学习率迭代40K次。表4显示了test-dev2015上的结果。与我们在PASCAL VOC数据集上观察到的类似，SSD300在mAP@0.5和mAP@[0.5：0.95]中优于Fast R-CNN，在 mAP@[0.5：0.95]<strong>（mAP@0.75）</strong>与<strong>ION[24]和</strong>Faster R-CNN近似然而，但在mAP@0.5上更糟。我们推测，这是因为图像尺寸太小，这阻止了模型精确定位许多小对象。通过将图像大小增加到500×500<strong>（512x512）</strong>，我们的SSD500<strong>（SSD512）</strong>在两个标准中都优于Faster R-CNN。有趣的是，我们观察到SSD512的mAP@0.75高了5.3%，但mAP@0.5仅仅高了1.2%。我们也观察到它的AP（平均准确率）和AR（平均召回率）分别提高了4.8%和4.6%对于大目标，但对于相对应的小目标只有更小的AP（1.3%）和AR（2.0%）。此外，我们的SSD500模型也比ION[21]更好，它是一个多尺寸版本的Fast R-CNN，使用循环网络显式模拟上下文。在图5中，我们展示了使用SSD500<strong>（SSD512）</strong>模型在MSCOCO test-dev的一些检测示例。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx1phllctj31am0f6jw6.jpg" srcset="/img/loading.gif" alt="image-20200820100100798"></p>
+<blockquote>
+<p>这里博主对此表中一些含义做些自己的理解：1、第三列Avg.Precision.IoU可以理解为感兴趣区域，即判断正负样本。默认框与标准框做匹配，0.5表示重合超过50%的判断为正样本，否则为负样本，0.75也可以做此理解。至于0.5:0.95需要联系SSD代码，我的理解有两种，一种可能是每次匹配都会在50%至95%之间产生一个随机数去判断正负；第二种可能是重合度在50%至95%之间的为正样本，超过95%的排除，不足50%为负样本。对此我更倾向于第一种解释方法。2、第四列Avg.Precision，Area为目标图片的区域面积的大小，相关的评判标准论文并没有说明，S即small代表小的、M即middle代表中间的范围、L即large代表大的。3、第五列Avg.Recall,#Dets为平均召回率，1、10及100可能的意义为评判的基数。4、第六列Avg.Recall,Area类似于第四列，只是为平均召回率。</p>
+</blockquote>
+<h2 id="3-5-ILSVRC初步结果"><a href="#3-5-ILSVRC初步结果" class="headerlink" title="3.5 ILSVRC初步结果"></a>3.5 <strong>ILSVRC初步结果</strong></h2><p> 我们将我们用于COCO的相同的网络架构应用于ILSVRC DET数据集[15]<strong>[16]</strong>。我们使用ILSVRC2014 DET train和val1来训练SSD300模型，如[20]<strong>[22]</strong>中所使用。我们首先以8×0.001 的学习率迭代4K次训练模型，再用0.001学习率进行320k次迭代训练该模型，然后用0.0001进行100k次迭代和 0.00001继续训练60k次迭代（我们首先使用0.001的学习率训练迭代320K次，然后用0.0001的学习率继续训练迭代80K次，最后用0.00001的学习率再迭代40K次）。我们可以在val2集上实现41.1mAP[20]<strong>[22]</strong>。再一次的，它验证SSD是高质量实时检测的一般框架。</p>
+<h2 id="3-6-用于小对象精度的数据增强"><a href="#3-6-用于小对象精度的数据增强" class="headerlink" title="3.6 用于小对象精度的数据增强"></a>3.6 用于小对象精度的数据增强</h2><p>没有如Faster R-CNN中的后续的特征重采样步骤，小目标的分类任务对于SSD来说相对困难，正如我们的分析（见图4）所示。第2.2节中描述的数据增强策略有助于显着提高性能，特别是在PASCAL VOC等小数据集上。策略产生的随机产物可以被认为是“放大（zoom in）”操作，并且可以产生许多更大的训练样例。为了实现可以创建更多小型训练示例的“缩小（zoom out）”操作，我们首先将图像随机放置在16x 的铺面上。 在我们做任何随机产物操作之前，原始图像大小的平均值被填充。因为通过引入这个新的“扩展”数据增强策略，我们有更多的训练图像，所以我们必须加倍训练迭代。如表6所示，我们看到多个数据集的mAP持续上升2％-3％。具体来说，图6显示新的增强策略显着提高了小对象的性能。这个结果强调了数据增强策略对最终模型精度的重要性。</p>
+<p>   另一种改进SSD的方法是对默认框设计一个更好的平铺，使得每个位置和比例尺度能够与特征图的每个位置的感受野相匹配对齐。 我们将这个留给未来的工作。 </p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx1rjorcmj30u00xphdx.jpg" srcset="/img/loading.gif" alt="image-20200820100257993"></p>
+<p><strong>图5：使用SSD512模型对COCO test-dev的检测样例。</strong>我们显示了评分高于0.6的检测框，每种颜色对应一种目标类别。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx1s65vvbj319e0b0q5q.jpg" srcset="/img/loading.gif" alt="image-20200820100334498"></p>
+<p><strong>表6：当我们添加图片扩展数据增强策略时在多数据集上的结果。</strong>SSD300*和SSD512*是使用新的增强的数据训练出的模型。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx1sqn9o6j31b00gsq9e.jpg" srcset="/img/loading.gif" alt="image-20200820100408405"></p>
+<p><strong>图6：新的数据增强的目标尺寸对VOC2007 test的敏感和影响。</strong>顶行显示了对于原始SSD300和SSD512的每类的BBOX Area（边框面积）的影响，而底行是对应的使用数据增强策略训练的SSD300<em>和SSD512</em>模型。明显可以观察到新的数据增强策略可以显著帮助检测小目标。</p>
+<h2 id="3-7-推论"><a href="#3-7-推论" class="headerlink" title="3.7 推论"></a>3.7 推论</h2><p>考虑到从我们的方法普遍生成大量的框，有必要在推理期间有效地执行非最大抑制（nms）。通过使用0.01的置信度阈值，我们可以过滤掉大多数框。然后，我们使用Thrust CUDA库进行排序，使用GPU计算所有剩余框之间的重叠，对jaccard重叠为0.45的每个类应用nms，并保留每个图像的前200个检测。对于SSD300和20个VOC类别，每个图像该步骤花费大约2.2<strong>（1.7）</strong>毫秒，这接近在所有新添加的层上花费的总时间<strong>（2.4毫秒）</strong>。我们使用Titan X和cuDNN v4以Intel Xeon E5-2667v3@3.20GHz测量批量大小为8的速度。</p>
+<p>   表显示了SSD、Faster R-CNN[2]和YOLO [5]之间的比较。Faster R-CNN对region proposal（候选区域）使用额外的预测层，并且需要特征下采样。相比之下，我们的SSD500<strong>（SSD300和SSD512）</strong>方法在速度和精度上均优于Faster R-CNN。众所周知的是，SSD300是首创的实时实现70％以上mAP的方法。虽然Fast YOLO[5]可以运行在155帧每秒，但精度只有差不多20％<strong>（22%）</strong>的mAP。请注意，大约80％的前向时间花费在基础网络上（本例中为VGG16）。因此，使用更快的基站网络可以进一步提高速度，这也可能使SSD512模型成为实时的。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx1tx6ngvj31580caq60.jpg" srcset="/img/loading.gif" alt="image-20200820100516136"></p>
+<h1 id="4-相关工作"><a href="#4-相关工作" class="headerlink" title="4. 相关工作"></a>4. 相关工作</h1><p>目前有两种已建立的用于图像中对象检测的方法，一种基于滑动窗口，另一种基于region proposal（候选区域）分类。在卷积神经网络出现之前，用于检测的两种方法DeformablePart Model（DPM）[22]和选择性搜索[1]性能接近（在卷积神经网络出现之前，检测方面最先进的两种方式——DeformablePart Model（DPM）[22]和选择性搜索[1]——有相似的性能）。然而，在R-CNN[20]带来的显着改进之后，其结合了选择性搜索region proposal和基于后分类的卷机网络，region proposal目标检测方法变得普遍。</p>
+<p>原始的R-CNN方法已经以各种方式进行了改进。第一组方法提高了后分类的质量和速度，因为它需要对成千上万的图像作物进行分类，这是昂贵和耗时的。SPPnet[9]对原始的R-CNN方法大大提速。它引入了空间金字塔池化层，其对区域大小和比例尺度更加鲁棒，并且允许分类层重新使用在若干图像分辨率下生成的特征图特征。Fast R-CNN[6]扩展了SPPnet，使得它可以通过最小化置信度和边界框回归的损失来对所有层进行端到端微调，这在MultiBox[7]中首次引入用于学习对象。</p>
+<p>第二组方法使用深层神经网络提高proposal（候选框）生成的质量。在最近的工作中，例如MultiBox[7,8]，基于低水平图像特征的选择性搜索region proposal被直接从单独的深层神经网络生成的proposal所替代。这进一步提高了检测精度，但是导致了一些复杂的设置，需要训练两个相互依赖的神经网络。Faster R-CNN[2]通过从region proposal网络（RPN）中学习的方案替换了选择性搜索proposal，并且引入了通过微调共享两个网络的卷积层和预测层之间来交替集成RPN与Fast R-CNN的方法。用这种region proposa方法池化中等水平的特征图，最终分类步骤更简便。我们的SSD与Faster R-CNN中的region proposal网络（RPN）非常相似，因为我们还使用固定的（默认）框来进行预测，类似于RPN中的achor框。但是，不是使用这些来池化特征和评估另一个分类器，我们同时在每个框中为每个对象类别同时产生一个分数。因此，我们的方法避免了将RPN与Fast R-CNN合并的复杂性，并且更容易训练，更快速，更易于集成到其他任务中。</p>
+<p>另一组方法与我们的方法直接相关，干脆跳过proposal步骤，直接预测多个类别的边界框和置信度。OverFeat[4]是滑动窗口方法的深度版本，在知道基础对象类别的置信度之后直接从最顶层特征图的每个位置预测边界框。YOLO [5]使用整个最高层特征图来预测多个类别和边框（这些类别共享）的置信度。我们的SSD方法属于此类别，因为我们没有proposal步骤，但使用默认框。然而，我们的方法比现有方法更灵活，因为我们可以在不同尺度的多个特征图中的每个特征位置上使用不同宽高比的默认框。如果顶层特征图每个位置只使用一个默认框，我们的SSD将具有与OverFeat[4]类似的架构;如果我们使用整个顶层特征图并且添加一个全连接层用于预测而不是我们的卷积预测器，并且没有明确考虑多个宽高比，我们可以近似地再现YOLO[5]。</p>
+<h1 id="5-结论"><a href="#5-结论" class="headerlink" title="5. 结论"></a>5. 结论</h1><p>本文介绍了SSD，一种用于多个类别的快速单次目标检测器。我们的模型的一个关键特点是使用附属于网络顶部的多特征图的多尺度卷积边框输出。这种表示允许我们有效地模拟可能的框形状空间。我们实验验证，给定适当的训练策略，更大量的仔细选择的默认边框得到了性能的提高。我们建立的SSD模型比现有的方法至少要多一个数量级的框预测采样位置，比例和纵横比[2,5,7]<strong>[5,7]</strong>。我们证明，给定相同的VGG-16基础架构，SSD在精度和速度方面胜过最先进的对象检测器。我们的SSD500<strong>（SSD512）</strong>型号在PASCAL VOC和MS COCO的精度方面明显优于最先进的Faster R-CNN [2]，速度快了3倍。 我们的实时SSD300模型运行在58 FPS，这比当前的实时YOLO[5]更快，同时产生了明显更优越的检测精度。</p>
+<p>除了它的独立的效用，我们相信，我们的完整和相对简单的SSD模型为使用目标检测组件的大型系统提供了一个有用的组成块。一个有希望的未来方向，是探索其作为使用循环神经网络的系统一部分，用以检测和跟踪视频中对象。</p>
+<h1 id="6-致谢"><a href="#6-致谢" class="headerlink" title="6. 致谢"></a>6. 致谢</h1><p>这个项目是在谷歌开始的实习项目，并在UNC继续。 我们要感谢亚历克斯·托舍夫有用的讨论，并感谢谷歌的Image Understanding和DistBelief团队。 我们也感谢菲利普·阿米拉托和帕特里克·波尔森有益的意见。我们感谢NVIDIA提供K40 GPU并感谢NSF 1452851，1446631，1526367，133771的支持。</p>
+<blockquote>
+<p>本文转自：<a href="https://blog.csdn.net/wfei101/article/details/79888594" target="_blank" rel="noopener">https://blog.csdn.net/wfei101/article/details/79888594</a></p>
+<p>原作者：BigCowPeking</p>
+</blockquote>
+<h1 id="附：原文"><a href="#附：原文" class="headerlink" title="附：原文"></a>附：原文</h1>
+
+	<div class="row">
+    <embed src="/pdf/SSD.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/">文献翻译</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/SSD/">SSD</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/21/8-21/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">阅读笔记（8.21)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/13/ImageSegmentationTechniquesOverview/">
+                        <span class="hidden-mobile">文献翻译——Image Segmentation Techniques Overview</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "文献翻译——SSD:Single Shot MultiBox Detector&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

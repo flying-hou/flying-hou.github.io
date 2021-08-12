@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>R-CNN系列总结（8.7 阅读笔记） - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-08-07 11:26">
+      2020年8月7日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      63
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年8月7日 中午
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>上一次的总结主要针对One-Stage的YOLO系列目标检测算法，本次主要学习了Two-Stage的R-CNN系列基于候选窗口的目标检测算法，包括：R-CNN[2]、Fast R-CNN[4]、Faster R-CNN[5]。</p>
+<p>R-CNN系列算法由以下三个独立的步骤组成：产生候选窗口、特征提取、SVM分类及窗口回归。由于R-CNN和Fast R-CNN使用Selective Search方法来提取候选窗口，遂找来Selective Search的论文进行学习[1]。此外，Fast R-CNN提出了一个ROI池化层，其实质上是SPP-Net的一个特殊情况，故扩展阅读了SPP-Net的论文[3]。</p>
+<p>代码方面：下载了YOLO的权重进行了运行测试，开始学习PyTorch。</p>
+<p>阅读文献：</p>
+<p>[1] Uijlings J R R, Van De Sande K E A, Gevers T, et al. Selective search for object recognition[J]. International journal of computer vision, 2013, 104(2): 154-171.</p>
+<p>[2] Girshick R, Donahue J, Darrell T, et al. Rich feature hierarchies for accurate object detection and semantic segmentation[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2014: 580-587.</p>
+<p>[3] He K, Zhang X, Ren S, et al. Spatial pyramid pooling in deep convolutional networks for visual recognition[J]. IEEE transactions on pattern analysis and machine intelligence, 2015, 37(9): 1904-1916.</p>
+<p>[4] Girshick R. Fast r-cnn[C]//Proceedings of the IEEE international conference on computer vision. 2015: 1440-1448.</p>
+<p>[5] Ren S, He K, Girshick R, et al. Faster r-cnn: Towards real-time object detection with region proposal networks[C]//Advances in neural information processing systems. 2015: 91-99.</p>
+<h1 id="1-Selective-Search"><a href="#1-Selective-Search" class="headerlink" title="1.Selective Search"></a>1.Selective Search</h1><p>  传统的目标检测算法大多数以图像识别为基础。在图片上使用穷举法或者滑动窗口选出所有物体可能出现的区域框，对这些区域框提取特征并进行使用图像识别分类方法，得到所有分类成功的区域后，通过非极大值抑制输出结果。</p>
+<p>穷举法或滑动窗口法就是在原始图片上使用不同尺度不同大小的滑窗，获取每个可能的位置。缺点是复杂度太高，产生了很多的冗余候选区域，而且由于不可能每个尺度都兼顾到，因此得到的目标位置也不准。选择性搜索有效地去除冗余候选区域，使得计算量大大的减小。</p>
+<p>selective search首先通过基于图的图像分割方法初始化原始区域，将图像分割成很多的小块。然后使用贪心策略，计算每两个相邻的区域的相似度，然后每次合并最相似的两块，直到最终只剩下一块完整的图片。将其中每次产生的图像块包括合并的图像块都保存下来，这样就得到图像的分层表示了。</p>
+<p><strong>Selective Search算法框架：</strong></p>
+<ul>
+<li>输入：彩色图片。</li>
+<li>输出：物体可能的位置，实际上是很多的矩形坐标。</li>
+<li>首先，将图片初始化为很多小区域R。初始化一个相似集合为空集：S</li>
+<li>计算所有相邻区域之间的相似度（考虑了颜色、纹理、尺寸和空间交叠4个参数），放入集合 S 中，集合 S 保存的是一个区域对以及它们之间的相似度。</li>
+<li>找出 S 中相似度最高的区域对，将它们合并，并从 S 中删除与它们相关的所有相似度和区域对。重新计算这个新区域与周围区域的相似度，放入集合 S 中，并将这个新合并的区域放入集合 R 中。重复这个步骤直到 S 为空。</li>
+<li>从 R 中找出所有区域的 bounding box（即包围该区域的最小矩形框），这些 box 就是物体可能的区域。</li>
+</ul>
+<h1 id="2-R-CNN"><a href="#2-R-CNN" class="headerlink" title="2.R-CNN"></a>2.R-CNN</h1><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghi3bpccrmj30v20ba0vf.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>R-CNN总体思路：</strong>  <strong>通过Selective Search检测出Region proposals ——&gt; 使用CNN提取Region特征——&gt;使用SVM对提取到的特征进行分类 ——&gt;执行非极大值抑制得到Bbox及其类别</strong></p>
+<p>  由于卷积神经网络的输入为227*227大小的正方形图像，而Selective Search算法搜索到的是2000个大小不一的矩形候选框。因此需要对搜索到的矩形选框进行缩放处理，文章试验了两种不同的处理方法：</p>
+<p>(1) <strong>各向异性缩放</strong>：即忽略原始图像的长宽比，直接将其扭曲缩放至227*227</p>
+<p>(2) <strong>各向同性缩放：</strong>由于扭曲的图片会对后续CNN的训练精度产生影响，作者测试了两种各向同性缩放方案。</p>
+<p>a)  直接在原始图片中将Bounding Box的边界延展为正方形，如果已经延伸到原始图片的边界，则使用Bounding Box中的颜色均值填充。</p>
+<p>b)  先将Bounding Box的裁剪出来，使用其颜色均值将背景填充为正方形图片。</p>
+<p>当缺乏大量的标注数据时，作者提出了一个比较好的可行手段，即进行神经网络的迁移学习。先在其他大型数据集预训练神经网络，然后在小规模特定的数据集中进行 fine-tune 微调。在使用Selective Search提取候选区域并进行Resize后，接下来使用CNN为每个候选区域提取特征，本文训练CNN的方法主要包括两步：</p>
+<p>(1) <strong>预训练阶段。</strong>由于物体标签训练数据少，如果要直接采用随机初始化CNN参数的方法是不足以从零开始训练出一个好的CNN模型。基于此，本文采用的是有监督的预训练，使用一个大的数据集（ImageNet ILSVC 2012）来训练AlexNet，得到一个分类的预训练模型（需要预测1000个类别）。注意：在ImageNet上训练的是模型识别物体类型的能力，而不是预测bbox位置的的能力。</p>
+<p>(2) <strong>Fine-tuning阶段</strong>：在PASCAL VOC上对预训练模型进行fine-tuning。将预训练阶段的CNN模型最后一层全连接层的1000个神经元，替换成21个神经元的分类层（20类物体+背景）（这一层采用随机初始化），然后计算每个候选区域和ground truth 的IoU，对于IoU&gt;0.5的候选区域被视为正样本，否则为负样本（即背景）。在每次迭代的过程中，batch size大小选择128，包括32个正样本和96个负样本（正负比：1：3）。使用0.001的学习率和随机梯度下降（SGD）来进行训练。</p>
+<p>本文为每一个类训练一个SVM分类器，故共有21个分类器，每个SVM分类器的输入包括两个部分：</p>
+<p>(1) CNN Feature：CNN网络为每个候选区域提取的特征，大小为2000*4096</p>
+<p>(2) Ground Truth Labels:在训练时为每个候选区域附上一个label。</p>
+<p>在SVM分类过程中，当IoU&lt;0.3时为负样本，其余为正样本。</p>
+<p><strong>总结：</strong></p>
+<ul>
+<li>R-CNN采用AlexNet网络架构</li>
+<li>R-CNN采用Selective Search生成候选区域</li>
+<li>R-CNN先在ImageNet上进行预训练，然后利用成熟的权重参数在PASCAL VOC上进行fine-tune.</li>
+<li>R-CNN使用CNN抽取特征，然后使用一系列的SVM做类别预测</li>
+<li>R-CNN在Pascal VOC 2012 的数据集上，能够将目标检测的验证指标 mAP 提升到 53.3%,这相对于之前最好的结果提升了 30%。</li>
+</ul>
+<p><strong>R-CNN的缺点：</strong></p>
+<ul>
+<li>训练时间长：分阶段多次训练，而且对每个候选区域都要单独计算一次Feature map。</li>
+<li>占用空间大：每个候选区域的Feature map都要写入磁盘保存。</li>
+<li>步骤繁多：整个模型包括多个模块，且每个模块是相互独立的。</li>
+<li>重复计算：多数候选区域是互相重叠的，重叠部分会被多次提取Feature。</li>
+</ul>
+<h1 id="3-SPP-Net"><a href="#3-SPP-Net" class="headerlink" title="3.SPP-Net"></a>3.SPP-Net</h1><p>CNN一般都含有卷积层和全连接层，其中卷积层无需固定尺寸的图像，而全连接层则需要固定大小的输入。</p>
+<p>在R-CNN网络结构模型中，由于卷积神经网络的全连接层对于输入的图像尺寸有限制，所以所有候选区域的图像都必须经过变形转换后才能交由卷积神经网络模型进行特征提取，但是无论采用剪切(crop)还是采用变形(warp)的方式，都无法完整保留原始图像信息，何凯明等人提出的空间金字塔池化层(Spatial Pyramid Pooling Layer)有效地解决了传统卷积神经网络对输入图像的尺寸的限制。</p>
+<p>SPP-Net在最后一个卷积层后，加入了一个空间金字塔池化层，用来保证传到下一层全连接层的输入固定。在普通的CNN机构中，输入图像的尺寸往往是固定的（比如224*224像素），输出则是一个固定维数的向量。SPP Net在普通的CNN结构中加入了ROI池化层（ROI Pooling），使得网络的输入图像可以是任意尺寸的，输出则不变，同样是一个固定维数的向量。ROI池化层一般跟在卷积层后面，此时网络的输入可以是任意尺度的，在SPP layer中每一个pooling的filter会根据输入调整大小，而SPP的输出则是固定维数的向量，然后给到全连接层。</p>
+<p>此外，SPP-net也解决了R-CNN重复计算的问题。SPP-net的思路是由于原图与经过卷积层后得到的特征图在空间位置上存在一定的对应关系，所以<strong>只需对整张图像进行一次卷积层特征提取</strong>，<strong>然后将候选区域在原图的位置映射到卷积层的特征图上得到该候选区域的特征</strong>，最后将得到每个候选区域的卷积层特征输入到全连接层进行后续操作。R-CNN要对每个区域计算卷积，而SPPNet只需要计算一次卷积，从而节省了大量的计算时间，比R-CNN有一百倍左右的提速。</p>
+<p>SPP-net网络结构如下图所示，输入一副任意尺度的待测图像，用CNN可以提取得到<strong>卷积层特征</strong>(例如VGG16最后的卷积层为Conv5_3，得到256幅特征图)。然后<strong>将不同大小候选区域的坐标投影到特征图上得到对应的窗口</strong>(window)，将每个window均匀划分为4<em>4, 2</em>2, 1<em>1的块，然后对每个块使用Max-Pooling下采样，这样无论window大小如何，经过SPP层之后都得到了一个固定长度为(4</em>4+2<em>2+1)</em>256维的特征向量，将这个特征向量作为全连接层的输入进行后续操作。<strong>这样就能保证只对图像提取一次卷积层特征，同时全连接层的输入维度固定。</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghi3boaucnj30g70dftat.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>SPP-Net整体流程：</p>
+<p>(1) 输入一幅待检测图像</p>
+<p>(2) 提取候选区域：利用Selective Search算法从输入图像中提取约2000个候选框。</p>
+<p>(3) 候选区域尺度缩放：以候选区域长宽中的较短边进行统一。</p>
+<p>(4) 特征提取：利用SPP-net网络结构提取特征。</p>
+<p>(5) 分类与回归：根据提取的特征利用SVM进行分类，用边框回归器微调候选框的位置。</p>
+<p><strong>总结：</strong></p>
+<ul>
+<li>SPP-Net使得任意大小的特征图都能够转换成固定大小的特征向量。</li>
+<li>R-CNN要对每个候选区域计算卷积，而SPP-Net只需要对原图计算一次卷积，从而节省了大量的计算时间，比R-CNN有一百倍左右的提速。</li>
+<li>SPP-Net解决了R-CNN重复提取候选区域特征的问题，同时允许各种尺寸图像作为输入，解决了图像畸变的问题，但R-CNN的其它问题，如训练步骤繁琐、磁盘空间开销大等依然有待解决。</li>
+</ul>
+<h1 id="4-Fast-R-CNN"><a href="#4-Fast-R-CNN" class="headerlink" title="4. Fast R-CNN"></a>4. Fast R-CNN</h1><p>针对R-CNN存在的问题，Fast R-CNN逐一进行了解决：</p>
+<p>(1) 训练、测试速度慢：R-CNN中用CNN对候选区域提取特征，而一张图片的2000个候选区域有大量重叠部分，重叠部分会被多次<strong>重复提取特征</strong>，造成大量的计算开销。Fast R-CNN将整个图像归一化后直接送入CNN网络，卷积层不进行候选区域的特征提取，而是在最后一个池化层中加入候选区域坐标信息，进行特征提取的计算。</p>
+<p>(2) 训练所需空间大：R-CNN中目标分类与候选框回归是两个独立的操作，并且需要大量特征作为训练样本。Fast R-CNN将目标分类与候选框回归统一到CNN网络中，不需要将每个候选区域的Feature map写入磁盘保存。</p>
+<p>Fast R-CNN的网络结构如下图所示：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghi3bn2cavj30zm0ea4gc.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>Fast R-CNN的输入由两部分组成：一是待处理的整张图像；二是候选区域(region proposal)。Fast R-CNN处理的第一步是对图像进行多次卷积核池化处理来获取<strong>卷积特征图</strong>。由于存在多个候选区域，系统会有一个甄别，判断出感兴趣区域，也就是Region of Interest, RoI。<strong>RoI池化层是SSP(Spatial Pyramid Pooling)层的特殊情况</strong>，它可以从特征图中提取一个固定长度的特征向量。每个特征向量，都会被输送到全连接层序列中，这个全连接层分支成两个同级输出层。<strong>其中一层的功能是进行分类</strong>，对目标关于K个对象类(包括全部“背景background”类)输出每一个RoI的概率分布，也就是产生softmax概率估计；<strong>另一层是为了输出</strong>K个对象中每一个类的四个实数值(bbox regression)。每4个值编码K个类中的<strong>每个类的精确边界框(bounding-box)位置</strong>。整个结构是使用多任务损失的端到端训练 (除去Region Proposal提取阶段)。</p>
+<p>与R-CNN框架图对比，可以发现主要有两处不同：一是最后一个卷积层后加了一个<strong>ROI池化层</strong>，二是损失函数使用了多任务损失函数(multi-task loss)，将边框回归Bounding Box Regression直接加入到CNN网络中训练</p>
+<p>(1) ROI池化层实际上是SPP-NET的一个精简版，可以看成是SPP层的一个特殊情况。SPP-Net对每个候选区域使用了不同大小的金字塔映射，而ROI池化层只需要下采样到一个7x7的特征图。对于VGG16网络conv5_3有512个特征图，这样所有候选区域对应了一个7<em>7</em>512维度的特征向量作为全连接层的输入。ROI池化层与SPP-Net的效果一样，可以将不同大小的输入映射到一个固定尺度的特征向量。卷积、池化、relu等操作都不要求固定的size，在原始图片上进行这些操作后，因输入图片的size不同，就会导致得到的feature map的尺寸也不相同，不能直接连接到全连接层进行分类。因此加入ROI池化层后，对每个候选区域都提取出一个固定维度的特征表示，再通过softmax进行分类。</p>
+<p>(2) Fast R-CNN使用softmax替代R-CNN的SVM进行分类，同时利用多任务损失函数将边框回归直接加入到CNN网络中训练，这样整个训练过程只包含提取候选区域和CNN训练两个阶段。整个训练过程是端到端的（除去提取候选区域阶段）。此前R-CNN的训练过程分为四步：提取候选区域、使用CNN提取特征、使用SVM分类器、回归Bbox。而在Fast R-CNN中，作者将最后一步回归Bbox放进了CNN内部，与Region分类合并为一个multi-task模型。实验也证明，这两个任务能共享卷积特征，并且可以相互促进。</p>
+<p><strong>主要创新点：</strong></p>
+<ul>
+<li>借助多任务损失函数，将物体识别和位置修正合并到一个网络中，不再进行分步训练。</li>
+<li>共享卷积层，不再像R-CNN一样每个候选框都使用CNN提取特征，而是输入一张完整的图片，在第五个卷积层再得到每个候选框的特征。</li>
+<li>不需要在硬盘中存储训练过程中的特征数据。</li>
+<li>用ROI层代替SPP层，可以使用BP算法更高效的训练更新整个网络。</li>
+<li>相较于R-CNN和SPP-Net，检测结果的精确度更高</li>
+<li>对全连接层提出了SVD奇异值分解的优化方法，降低了全连接层需要学习的参数数目，节省计算时间。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>仍然使用Selective Search方法提取候选框，耗费时间大。</li>
+</ul>
+<h1 id="5-Faster-R-CNN"><a href="#5-Faster-R-CNN" class="headerlink" title="5. Faster R-CNN"></a>5. Faster R-CNN</h1><p>针对Fast R-CNN依然使用选择搜索方法提取候选框耗时较大的问题，Faster R-CNN加入了一个提取边缘的神经网络，即将搜索候选框的工作也交由神经网络。具体来说，Faster R-CNN引入了Region Proposal Network（RPN）替代Selective Search，同时引入anchor box以应对目标形状变化问题。（Anchor box就是位置和大小固定的box，可理解为实现设定好的固定的proposal）Faster R-CNN将RPN放在最后一个卷积层后面，RPN直接训练得到候选区域。Faster RCNN抛弃了传统的滑动窗口和SS方法，直接使用RPN生成检测框，这也是Faster R-CNN的巨大优势，能极大提升检测框的生成速度。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghi3bmijefj30cj0cm0tf.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>各层功能：</p>
+<p>(1) Conv layers卷积层提取特征图：Faster R-CNN首先使用一组基础的conv+relu+pooling层提取输入图像的特征图，该特征图会用于后续的RPN层和全连接层。</p>
+<p>(2) RPN(Region Proposal Networks)层:RPN网络主要用于生成候选区域，首先生成一堆Anchor Box，对其进行裁剪过滤后使用Softmax来判断该Anchor Box是属于前景或者背景（即是物体或不是物体），是一个二分类问题。同时另一分支的边界框回归来修正Anchor Box，形成更精确的proposal.</p>
+<p>(3) ROI池化层：该层利用RPN生成的Proposals和VGG16最后一层得到的Feature map得到固定大小的Proposal Feature map,以供后续利用全连接操作进行目标识别和定位。</p>
+<p>(4) Classifier：将Roi Pooling层形成固定大小的feature map进行全连接操作，利用Softmax进行具体类别的分类，同时，利用L1 Loss完成bounding box regression回归操作获得物体的精确位置。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghi3bnwi0qj31820lkthq.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>上图中RPN网络实际分为2条线，上面的网络分支通过softmax分类anchors获得前景和背景（实际应用过程中，我们将目标默认为前景）；下面的网络分支用于计算对于anchors的边界框回归的偏移量，以获得较精确的目标候选区。（注：这里的较精确是相对于后面全连接层的再一次box regression而言）。之后的Proposal层综合前景锚点和边界框回归偏移量获取目标的候选区，同时剔除太小和超出边界的目标区域。RPN实际就是实现了目标定位功能。</p>
+<p>RPN网络：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghi3bpp09gj30w00l40vq.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>(1) RPN网络的作用就是将候选区域的提取也整合到了神经网络中，而且RPN网络和Fast R-CNN共用卷积网络，几乎没有增加计算量。</p>
+<p>(2) RPN提取候选框的方法是对conv feature map上的每个点为中心取9种不同比例大小的anchors（3种尺度，3种比例），再按照比例映射到原图中即为提取的region proposals。具体的实现方法如上图，先用一个256维的3<em>3卷积核以步长为1进行特征提取，这样就可以得到一个256</em>1的特征向量，将这个256长度的特征向量分别输入两个全连接层，其中一个输出长度为2<em>9=18表示9个anchors是物体和不是物体的概率，另一个输出长度为4</em>9=36表示每个proposals的四个坐标。</p>
+<p>(3) 在得到了概率和bbox的坐标之后映射到原图中得到region proposals，再进行一次非极大值抑制(NMS)得到最终输入ROI池化层的proposals。</p>
+<p>创新点：</p>
+<ul>
+<li>设计了RPN网络，利用CNN卷积后的特征图生成候选区域，取代了SS和EB等方法，极大地提升了生成候选区域的速度。</li>
+<li>训练RPN与Fast R-CNN共享部分卷积层，极大地提升了检测速度。</li>
+</ul>
+<h1 id="6-总结："><a href="#6-总结：" class="headerlink" title="6.总结："></a>6.总结：</h1><ul>
+<li><p><strong>R-CNN（Selective Search + CNN + SVM）</strong></p>
+<ul>
+<li>使用Selective Search提取候选区域。</li>
+<li>使用CNN抽取特征，然后使用一系列的SVM做类别预测。</li>
+<li>创新点：提出了Region Proposal并与CNN、SVM结合，实现目标检测。</li>
+<li>缺点：训练时间长、占用空间大、步骤繁多、重复计算。</li>
+</ul>
+</li>
+<li><p><strong>SPP-net（ROI Pooling）</strong></p>
+<ul>
+<li>使得任意大小的特征图都能够转换成固定大小的特征向量。</li>
+<li>R-CNN要对每个候选区域计算卷积，而SPP-Net只需要对原图计算一次卷积，节省了大量的计算时间。</li>
+<li>SPP-Net解决了R-CNN重复提取候选区域特征的问题，同时允许各种尺寸图像作为输入。</li>
+<li>解决了图像畸变的问题。</li>
+</ul>
+</li>
+<li><p><strong>Fast R-CNN（Selective Search + CNN + ROI）</strong></p>
+<ul>
+<li>借助多任务损失函数，将物体识别和位置修正合并到一个网络中，不再进行分步训练。</li>
+<li>共享卷积层</li>
+<li>无需在硬盘中存储训练过程中的特征数据。</li>
+<li>用ROI层代替SPP层，可以使用BP算法更高效的训练更新整个网络。</li>
+<li>相较于R-CNN和SPP-Net，检测结果的精确度更高</li>
+<li>对全连接层提出了SVD奇异值分解的优化方法，降低了全连接层需要学习的参数数目，节省计算时间。</li>
+<li>缺点：仍然使用Selective Search方法提取候选框，耗费时间大。</li>
+</ul>
+</li>
+<li><p><strong>Faster R-CNN（RPN + CNN + ROI）</strong></p>
+<ul>
+<li>引入RPN替代Selective Search，极大提升了生成候选区域的速度。</li>
+<li>将候选区域的提取也整合到了神经网络中。引入anchor box以应对目标形状变化问题。</li>
+</ul>
+</li>
+</ul>
+<p>基于候选区域的R-CNN系列目标检测方法是当前目标检测领域最主要的一个分支，从R-CNN, SPP-NET, Fast R-CNN, 到Faster R-CNN，算法流程变得越来越精简，精度越来越高，速度也越来越快。</p>
+<p><strong>附：YOLO算法运行结果</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghi3bnd51oj30nl0fqdjh.jpg" srcset="/img/loading.gif" alt="img"><br><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghi3boqp4hj30nk0fpn38.jpg" srcset="/img/loading.gif" alt="img"></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/R-CNN/">R-CNN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Fast-RCNN/">Fast-RCNN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Faster-RCNN/">Faster-RCNN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/SPPnet/">SPPnet</a>
+                    
+                      <a class="hover-with-bg" href="/tags/SelectiveSearch/">SelectiveSearch</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/12/ljs/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">老君山航拍</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/01/pytorch-code/">
+                        <span class="hidden-mobile">Pytorch 学习代码</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "R-CNN系列总结（8.7 阅读笔记）&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

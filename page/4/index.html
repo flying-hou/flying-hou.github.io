@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/09/26/RetinaNet/" target="_self">
+          <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1xen7zh1j30gb0aj75c.jpg" srcset="/img/loading.gif" alt="RetinaNet阅读笔记">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/09/26/RetinaNet/">RetinaNet阅读笔记</a>
+
+      <a href="/2020/09/26/RetinaNet/" class="index-excerpt">
+        
+        
+          
+        
+        <div>AbstractTwo- Stage :sparse
+One-stage:dense(更快，更简单，但精度落后于Two-Stage，极端前景背景类别失衡是主要原因）
+FocalLoss在稀疏的hard examples上训练，避免大量easy negatives在训练时淹没检测器。
+通过reshape标准交叉熵损失，降低已经很好被分类的样本的损失，从而解决类不平衡问题。
+设计和训练了一个简单的稠密</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-09-26
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/RetinaNet/">RetinaNet</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/09/18/9-18/" target="_self">
+          <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1givqlanre6j30vk0ciqc5.jpg" srcset="/img/loading.gif" alt="阅读笔记（9.18)">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/09/18/9-18/">阅读笔记（9.18)</a>
+
+      <a href="/2020/09/18/9-18/" class="index-excerpt">
+        
+        
+          
+        
+        <div>本次主要对GoogLeNet系列的学习进行完善，学习了其Inception V2、V3、V4版本。（注：此处对GoogLeNet版本的划分以v4版论文中的划分为标准。v2版本为Batch Normalization的论文。此前作者把在《Rethinking the Inception Architecture for Computer Vision》提出的网络结构叫做v2，此处将其称为v3。）
+参</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-09-18
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GoogLeNet/">GoogLeNet</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/09/15/GoogLeNet-v2/" target="_self">
+          <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gir2czy07hj30pw0jy0v8.jpg" srcset="/img/loading.gif" alt="文献翻译——Batch Normalization(GoogLeNet-V2)">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/09/15/GoogLeNet-v2/">文献翻译——Batch Normalization(GoogLeNet-V2)</a>
+
+      <a href="/2020/09/15/GoogLeNet-v2/" class="index-excerpt">
+        
+        
+          
+        
+        <div>批量归一化：通过减少内部协变量偏移来加速深度网络训练摘要训练深度神经网络非常复杂，因为在训练过程中，随着先前各层的参数发生变化，各层输入的分布也会发生变化。这通过要求较低的学习率和仔细的参数初始化来减慢训练速度，并且很难训练具有饱和非线性的模型。我们将这种现象称为内部协变量偏移，并通过标准化层输入来解决这个问题。我们的方法力图使标准化成为模型架构的一部分，并为每个训练中的小批量数据执行标准化。批标</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-09-15
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/">文献翻译</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GoogLeNet/">GoogLeNet</a>
+            
+              <a href="/tags/Batch-Normalization/">Batch Normalization</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/09/04/9-4/" target="_self">
+          <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1giex9hltx2j30vf0b1wh8.jpg" srcset="/img/loading.gif" alt="阅读笔记（9.4)">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/09/04/9-4/">阅读笔记（9.4)</a>
+
+      <a href="/2020/09/04/9-4/" class="index-excerpt">
+        
+        
+          
+        
+        <div>  本次阅读首先学习了CVPR2020上的SOTA目标检测方法：EfficientDet[1]。之前在学习SSD算法时，其网络结构采用了VGG16中的一些网络层，之前也在很多地方见过将VGG16作为对比参照。YOLO中也采用了GoogLeNet架构。此前的学习过程中一直对VGG16、GoogLeNet不太熟悉，故本次补充学习了4个基础的CNN经典模型：LeNet[2]、AlexNet[3]、VGG</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-09-04
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GoogLeNet/">GoogLeNet</a>
+            
+              <a href="/tags/EfficientDet/">EfficientDet</a>
+            
+              <a href="/tags/LeNet/">LeNet</a>
+            
+              <a href="/tags/AlexNet/">AlexNet</a>
+            
+              <a href="/tags/VGGNet/">VGGNet</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/09/02/newblog/" target="_self">
+          <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gide98faxpj31de0u0u0z.jpg" srcset="/img/loading.gif" alt="网站新域名htx1998.cn正式启用">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/09/02/newblog/">网站新域名htx1998.cn正式启用</a>
+
+      <a href="/2020/09/02/newblog/" class="index-excerpt">
+        
+        
+          
+        
+        <div>之前的网站部署在国外服务器上，导致在国内访问时速度较慢，而且在微信中访问时会弹出中间页，提示”非微信官方网页”，这导致浏览体验变得极差。
+
+
+
+
+因此，考虑将博客迁移到国内的阿里云，同时进行合法的ICP备案、公安备案，做一个守法的好公民。
+1. 域名和虚拟云主机的购买，新的域名为：htx1998.cn
+2. 网站备案之后需要在工业和信息化部申请实名备案，网站才能正常解析。然而备案的过程并非一帆风顺</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-09-02
+          </div>
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/08/29/AlexNet/" target="_self">
+          <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi94fti718j319a0em77q.jpg" srcset="/img/loading.gif" alt="文献翻译——AlexNet">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/08/29/AlexNet/">文献翻译——AlexNet</a>
+
+      <a href="/2020/08/29/AlexNet/" class="index-excerpt">
+        
+        
+          
+        
+        <div>ImageNet Classification with Deep Convolutional Neural Networks摘要我们训练了一个庞大的深层卷积神经网络，将ImageNet LSVRC-2010比赛中的120万张高分辨率图像分为1000个不同的类别。在测试数据上，我们取得了37.5％和17.0％的top-1和top-5的错误率，这比以前的先进水平要好得多。具有6000万个参数和650</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-08-29
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/">文献翻译</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/AlexNet/">AlexNet</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/08/28/EfficientDet/" target="_self">
+          <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6wpjqe6hj31nm0lmagw.jpg" srcset="/img/loading.gif" alt="文献翻译——EfficientDet：可扩展且高效的目标检测">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/08/28/EfficientDet/">文献翻译——EfficientDet：可扩展且高效的目标检测</a>
+
+      <a href="/2020/08/28/EfficientDet/" class="index-excerpt">
+        
+        
+          
+        
+        <div>摘要在计算机视觉中，模型效率变得越来越重要。在本文中，我们系统地研究了用于目标检测的神经网络体系结构设计选择，并提出了一些关键的优化措施来提高效率。首先，我们提出了一种加权双向特征金字塔网络（BiFPN），该网络可以轻松快速地进行多尺度特征融合。其次，我们提出了一种复合缩放方法，该方法可以同时对所有主干，特征网络和框/类预测网络的分辨率，深度和宽度进行统一缩放。基于这些优化和EfficientNe</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-08-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/">文献翻译</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/EfficientDet/">EfficientDet</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/08/26/win10/" target="_self">
+          <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi4m6i0jitj31360pw18u.jpg" srcset="/img/loading.gif" alt="win10安装指南">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/08/26/win10/">win10安装指南</a>
+
+      <a href="/2020/08/26/win10/" class="index-excerpt">
+        
+        
+          
+        
+        <div>最近总是帮别人装系统，每次都需要到处搜索下载所需资料。在此整理分享一下我安装win10的过程，供大家参考。
+1. 制作win-pe启动U盘我之前用过许多PE工具箱，如：老毛桃、大白菜、U深度等，这些pe系统在安装系统的过程中，会植入许多自带的软件（即使使用原版镜像），导致安装完系统需要逐一卸载，十分繁琐。最近发现了一款纯净的WinPE工具箱：微PE工具箱。 经实际测试，该工具箱确实确实十分纯净，没</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-08-26
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%95%99%E7%A8%8B/">教程</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/win10/">win10</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/08/21/8-21/" target="_self">
+          <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghyfx5jt3qj311o0ry1ky.jpg" srcset="/img/loading.gif" alt="阅读笔记（8.21)">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/08/21/8-21/">阅读笔记（8.21)</a>
+
+      <a href="/2020/08/21/8-21/" class="index-excerpt">
+        
+        
+          
+        
+        <div>计算机视觉领域和目标相关的经典任务有三种：分类、检测和分割。其中分类的目标是获取待检测目标“是什么？”，而检测则需要在图片上用方框出目标，知道目标“在哪里？”，目标分割则需要在像素级别上回答“在哪里？”的问题。目标分割又分为语义分割（Semantic segmentation）和实例分割（Instance segmentation），语义分割需要在像素级别上将同类物体分割出来，对于同类物体的不同实</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-08-21
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/SSD/">SSD</a>
+            
+              <a href="/tags/FCN/">FCN</a>
+            
+              <a href="/tags/MASK-R-CNN/">MASK R-CNN</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/08/19/SSD/" target="_self">
+          <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghx216ekpyj315e0gmqhb.jpg" srcset="/img/loading.gif" alt="文献翻译——SSD:Single Shot MultiBox Detector">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/08/19/SSD/">文献翻译——SSD:Single Shot MultiBox Detector</a>
+
+      <a href="/2020/08/19/SSD/" class="index-excerpt">
+        
+        
+          
+        
+        <div>摘要我们提出了一种使用单个深层神经网络检测图像中的目标的方法。我们的方法，名为SSD。将边界框的输出空间离散化为一组默认框，该默认框在每个特征图位置有不同的宽高比和尺寸。在预测期间，网络针对每个默认框中的每个存在对象类别生成分数（即给其打分），并且对框进行调整以更好地匹配对象形状。另外，网络结合不同分辨率的多个特征图的预测来自然处理各种尺寸的对象。SSD相对于需要region proposal的方</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-08-19
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/">文献翻译</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/SSD/">SSD</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/3/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "猴头菇的随笔&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

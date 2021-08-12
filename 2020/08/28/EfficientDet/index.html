@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>文献翻译——EfficientDet：可扩展且高效的目标检测 - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-08-28 22:45">
+      2020年8月28日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      80
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年8月29日 晚上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>在计算机视觉中，模型效率变得越来越重要。在本文中，我们系统地研究了用于目标检测的神经网络体系结构设计选择，并提出了一些关键的优化措施来提高效率。首先，我们提出了一种加权双向特征金字塔网络（BiFPN），该网络可以轻松快速地进行多尺度特征融合。其次，我们提出了一种复合缩放方法，该方法可以同时对所有主干，特征网络和框/类预测网络的分辨率，深度和宽度进行统一缩放。基于这些优化和EfficientNet主干，我们开发了一种称为EfficientDet的新目标检测器系列，在各种资源限制条件下，其效率始终比现有技术好得多。特别是，通过单一模型和单一尺度，我们的EfficientDet-D7可在COCOtest-dev上实现最先进的52.2 AP，使用52M参数和325B FLOPs，与之前的检测器相比，其FLOP减少了13倍– 42倍，参数缩小了4-9倍。代码在：<a href="https://github.com/google/automl/tree/master/efficientdet" target="_blank" rel="noopener">https://github.com/google/automl/tree/master/efficientdet</a></p>
+<blockquote>
+<p>FLOPS：注意全大写，是floating point operations per second的缩写，意指每秒浮点运算次数，理解为计算速度。是一个衡量硬件性能的指标。</p>
+<p>FLOPs：注意s小写，是floating point operations的缩写（s表复数），意指浮点运算数，理解为计算量。可以用来衡量算法/模型的复杂度。</p>
+</blockquote>
+<h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h1><p>近年来，在更精确的目标检测方面取得了巨大的进步。同时，最新的物体检测器也变得越来越昂贵。例如，最新的基于AmoebaNet的NAS-FPN检测器[42]需要167M参数和3045B的FLOP（比RetinaNet [21]多30倍）才能达到最先进的精度。巨大的模型尺寸和昂贵的计算成本阻碍了它们在许多实际应用中的部署，例如机器人技术和无人驾驶汽车，在这些应用中，模型尺寸和延迟受到很大限制。考虑到这些现实世界中的资源限制，模型效率对于目标检测变得越来越重要。</p>
+<p>以前有许多工作旨在开发更有效的检测器架构，例如one-stage[24,30,31,21]和anchor-free检测器[18,41,37]或者压缩现有模型[25,26]。尽管这些方法往往会达到更高的效率，但它们通常会牺牲准确性。此外，大多数以前的工作仅关注特定的或少量的资源需求，但是从移动设备到数据中心的各种实际应用程序通常需要不同的资源约束。</p>
+<p>一个自然的问题是：是否有可能在广泛的资源约束下构建具有更高准确性和更好效率的可扩展检测架构？（例如，从3B到300B FLOPs）。本文旨在通过系统地研究探测器架构的各种设计选择来解决这个问题。基于one-stage范例，我们检查了骨干，特征融合和类/盒网络的设计选择，并确定了两个主要挑战：</p>
+<p>挑战1：高效的多尺度特征融合——自[20]引入以来，FPN已被广泛用于多尺度的特征融合。最近，PANet [23]，NAS-FPN [8]和其他研究[17,15,39]为跨尺度特征融合开发了更多的网络结构。在融合不同的输入特征时，大多数以前的工作只是简单地将它们加起来而没有区别对待。但是，由于这些不同的输入特征具有不同的分辨率，因此我们观察到它们通常会不均等地影响融合输出特征。为了解决这个问题，我们提出了一个简单而高效的加权双向特征金字塔网络（BiFPN），该网络引入了可学习的权重以了解不同输入特征的重要性，同时反复应用自上而下和自下而上的多尺度特征融合。</p>
+<p>挑战2：模型缩放——虽然先前的工作主要依靠更大的骨干网[21,32,31,8]或更大的输入图像尺寸[11,42]来获得更高的准确性，但我们观察到扩大特征网络和框/类预测网络也很关键同时考虑准确性和效率。受近期工作[36]的启发，我们提出了一种用于目标检测器的复合缩放方法，该方法可联合缩放所有骨干，特征网络，盒子/类预测网络的分辨率/深度/宽度。</p>
+<p>最后，我们还观察到，最近发布的EfficientNets [36]比以前的常用骨干网具有更高的效率。通过将EfficientNet主干网与我们提出的BiFPN和复合缩放相结合，我们开发了一个名为EfficientDet的新目标检测器系列，与以前的对象检测器相比，它始终可以以更少的参数和FLOP获得更高的准确性。图1和图4显示了COCO数据集上的性能比较[22]。在类似的精度约束下，我们的EfficientDet使用的FLOP比YOLOv3 [31]少28倍，比RetinaNet [21]少30倍，比最近的基于ResNet的NAS-FPN [8]少19倍。尤其是，通过单模型和单个测试时标，我们的EfficientDet-D7可以达到具有52M参数和325B FLOP的最新52.2 AP，在1.5 AP的情况下胜过之前的最佳检测器[42]，而其尺寸却缩小了4倍，并且使用FLOP减少13倍。我们的EfficientDet在GPU / CPU上的速度也比以前的检测器快3到8倍。</p>
+<p>通过简单的修改，我们还证明了我们的单模型单尺度EfficientDet在Pascal VOC 2012语义分割上使用18B FLOP达到81.74％mIOU精度，比DeepLabV3 + [4]高出1.7％，FLOP减少了9.8倍。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6e1i7xouj30qq0m042o.jpg" srcset="/img/loading.gif" alt="image-20200828115745842" style="zoom:50%;" /></center>
+
+<blockquote>
+<p>图1：模型FLOP与COCO准确性–所有数字均为单模型单标度。我们的EfficientDet实现了最新的52.2％COCO AP，其参数和FLOP比以前的检测器少得多。表4和表5中提供了有关不同主干以及FPN / NAS-FPN / BiFPN的更多研究。完整的结果在表2中。</p>
+</blockquote>
+<h1 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2.相关工作"></a>2.相关工作</h1><p><strong>One-Stage 检测器：</strong>现有的目标检测器主要根据它们是否具有感兴趣区域（ROI）建议步骤（两阶段[9,32,3,11]）（单阶段[33,24,30,21]）进行分类。尽管two-stage检测器趋向于更灵活，更准确。通常认为one-stage检测器更简单，更高效，通过利用预定义的Anchors[14]。近来，one-stage检测器因其高效和简单而受到了广泛的关注[18,39,41]。在本文中，我们主要遵循one-stage的检测器设计，并且我们证明通过优化的网络架构可以同时实现更高的效率和更高的精度。</p>
+<p><strong>多尺度特征表示：</strong>目标检测的主要困难之一是有效地表示和处理多尺度特征。早期的检测器通常基于从骨干网络中分层提取的金字塔特征来直接执行预测[2,24,33]。作为一项开创性工作，特征金字塔网络（FPN）[20]提出了一种自上而下的途径来组合多种尺度的特征。按照这个想法，PANet [23]在FPN的基础上增加了一个自下而上的路径聚合网络。STDL [40]提出了一个尺度转移模块来利用跨尺度特征。M2det [39]提出了一种U形模块来融合多尺度特征，而G-FRNet [1]提出了用于控制信息跨特征流动的门单元。最近，NAS-FPN [8]利用神经体系结构搜索来自动设计特征网络拓扑。尽管NAS-FPN可以实现更好的性能，但在搜索过程中却需要数千个GPU小时，并且由此产生的功能网络是不规则的，因此难以解释。本文旨在以一种更直观，更原则的方式优化多尺度特征融合。</p>
+<p><strong>模型缩放：</strong>为了获得更好的精度，通常通过采用更大的骨干网络来扩大基准检测器。（例如，从移动尺寸模型[35,13]和ResNet [12]到ResNeXt [38]和AmoebaNet [29]），或增加输入图像的尺寸（例如，从512x512 [21]到1536x1536 [42]）。最近的一些工作[8,42]表明，增加通道大小和重复特征网络也可以提高精度。这些缩放方法主要集中在单个或有限的缩放维度上。最近，[36]通过共同扩大网络宽度，深度和分辨率，证明了图像分类的卓越模型效率。我们提出的用于对象检测的复合缩放方法主要受[36]启发。</p>
+<h1 id="3-BiFPN"><a href="#3-BiFPN" class="headerlink" title="3.BiFPN"></a>3.BiFPN</h1><p>在本节中，我们首先阐述多尺度特征融合问题，然后介绍我们提出的BiFPN的主要思想：高效的双向跨尺度连接和加权特征融合。</p>
+<h2 id="3-1问题表述"><a href="#3-1问题表述" class="headerlink" title="3.1问题表述"></a>3.1问题表述</h2><p>多尺度特征融合旨在聚合不同分辨率的特征。例如，给出一个多尺度特征列表<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6kzia3qej30aa01s0sp.jpg" srcset="/img/loading.gif" alt="image-20200828155802845" style="zoom:33%;" />P<sub>li</sub><sup>in</sup>代表在li级别上的特征，我们的目标是寻找一个转换f，可以高效的聚合不同的特征，并且输出一个新特征的列表：<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6l2bfe5sj309m020q2x.jpg" srcset="/img/loading.gif" alt="image-20200828160047115" style="zoom:33%;" />。作为一个具体的例子，图2（a）显示了传统的自上而下的FPN [20]。它具有3-7级输入特征<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6mjz7azwj309i01ojrc.jpg" srcset="/img/loading.gif" alt="image-20200828165220646" style="zoom:33%;" />,其中P<sub>i</sub><sup>in</sup>表示使用输入图片分辨率的（1/2)<sup>i</sup>的特征等级。例如，如果输入分辨率为640x640，则P<sub>3</sub><sup>in</sup>代表分辨率为80x80的特征级别3（640/2<sup>3</sup> = 80），而P<sub>7</sub><sup>in</sup>代表分辨率为5x5的特征级别7。常规的FPN以自顶向下的方式聚合多尺度特征：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6msr32bsj30iy07cq3o.jpg" srcset="/img/loading.gif" alt="image-20200828170046983" style="zoom: 50%;" /></center>
+
+<p>其中Resize通常是用于分辨率匹配的上采样或下采样操作，而Conv通常是用于特征处理的卷积操作。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6mtwsy2kj31i00iyjzd.jpg" srcset="/img/loading.gif" alt="image-20200828170153509"></p>
+<blockquote>
+<p>图2：特征网络设计——（a）FPN [20]引入了自上而下的途径，以融合从3级到7级（P3-P7）的多尺度特征；（b）PANet [23]在FPN的顶部增加了一条自下而上的途径；（c）NAS-FPN [8]使用神经架构搜索来查找不规则特征网络拓扑，然后重复应用相同的块；（d）是我们的BiFPN，具有更好的准确性和效率的权衡。</p>
+</blockquote>
+<h2 id="3-2跨尺度连接"><a href="#3-2跨尺度连接" class="headerlink" title="3.2跨尺度连接"></a>3.2跨尺度连接</h2><p>常规的自上而下的FPN固有地受到单向信息流的限制。为了解决这个问题，PANet [23]添加了一个额外的自下而上的路径聚合网络，如图2（b）所示。在[17,15,39]中进一步研究了跨尺度连接。最近，NAS-FPN [8]采用神经架构搜索来搜索更好的跨尺度特征网络拓扑，但是在搜索过程中需要数千个GPU小时，并且发现的网络不规则且难以解释或修改，如图2（c）所示。</p>
+<p>通过研究这三个网络的性能和效率（表5），我们发现PANet的精度比FPN和NAS-FPN更好，但需要更多的参数和计算成本。为了提高模型效率，本文针对跨尺度连接提出了几种优化方法：首先，我们删除只有一个输入边的节点。我们的直觉很简单：如果一个节点只有一个输入边且没有特征融合，那么对于致力于融合不同特征的特征网络的贡献将较小。这导致简化的双向网络。其次，如果原始输入与输出节点处于同一级别，则在原始输入和输出节点之间添加一条额外的边，以便在不增加成本的情况下融合更多功能。第三，与PANet [23]仅具有一个自上而下和一个自下而上的路径不同，我们将每个双向（自上而下和自下而上）路径视为一个特征网络层，并重复这一相同层多次以实现更高的水平的特征融合。第4.2节将讨论如何使用复合缩放方法确定不同资源约束的层数。通过这些优化，我们将新特征网络命名为双向特征金字塔型网络（BiFPN），如图2和3所示。</p>
+<h2 id="3-3加权特征融合"><a href="#3-3加权特征融合" class="headerlink" title="3.3加权特征融合"></a>3.3加权特征融合</h2><p>当融合具有不同分辨率的特征时，一种常见的方法是先将它们的大小调整为相同的分辨率，然后对其求和。Pyramid attention network(金字塔注意力网络)[19]引入了全局自注意力上采样以恢复像素局部化，这在[8]中有进一步的研究。所有先前的方法均等地对待所有输入特征，没有区别。但是，我们观察到，由于不同的输入特征的分辨率不同，因此它们通常对输出特征的贡献不同。为了解决这个问题，我们建议为每个输入增加一个额外的权重，并让网络学习每个输入特征的重要性。基于此思想，我们考虑三种加权融合方法：</p>
+<p><strong>无限融合：</strong><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6osp9mwbj308k01qq2v.jpg" srcset="/img/loading.gif" alt="image-20200828180956474" style="zoom:33%;" />其中，wi是一个可学习的权重，可以是标量（每个特征），也可以是向量（每个通道），或者是一个多维的张量（每个像素）。我们发现一个尺度可以达到与其他方法相当的精度与最小的计算成本。但是，由于标量权重是无限的，可能会潜在地造成训练的不稳定性。因此，我们通过权重归一化来限定每个权重的取值范围。</p>
+<p><strong>基于Softmax的融合：</strong><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6ozp2pf5j309o03474b.jpg" srcset="/img/loading.gif" alt="image-20200828181639687" style="zoom:33%;" />直观的想法是将softmax应用于每个权重，以便将所有权重标准化为一个概率范围，值的范围是0到1，代表每个输入的重要性。但是，如我们在第6.3节中的消融研究所示，额外的soft-max会导致GPU硬件显著减慢。为了最小化额外的等待时间成本，我们进一步提出了一种快速融合方法。</p>
+<p><strong>快速归一化融合：</strong><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6p68njl6j30bm02wq2z.jpg" srcset="/img/loading.gif" alt="image-20200828182256481" style="zoom:50%;" />其中wi≥0是通过在每个wi之后应用Relu来确保的，e= 0.0001是一个小数值，以避免数值不稳定。同样，每个归一化权重的值也介于0和1之间，但由于此处没有softmax运算，因此效率更高。我们的消融研究表明，这种快速融合方法具有与基于softmax的融合非常相似的学习行为和准确性，但在GPU上的运行速度最高可提高30％（表6）。</p>
+<p>我们最终的BiFPN集成了双向跨尺度连接和快速归一化融合。作为一个具体的示例，在这里我们描述BiFPN在6级的两个融合特征，如图2（d）所示：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6peeo4tbj30rm07o75d.jpg" srcset="/img/loading.gif" alt="image-20200828183047425" style="zoom:50%;" /></center>
+
+<p>其中P<sub>6</sub><sup>td</sup>是自顶向下路径上第6级的中间特征，P<sub>6</sub><sup>out</sup>是自底向上路径上第6级的输出特征。所有其他特征均以类似方式构造。值得注意的是，为了进一步提高效率，我们使用深度可分离卷积[5,34]进行特征融合，并在每次卷积后添加批处理归一化和激活。</p>
+<h1 id="4-EfficientDet"><a href="#4-EfficientDet" class="headerlink" title="4.EfficientDet"></a>4.EfficientDet</h1><p>基于我们的BiFPN，我们开发了一个名为EfficientDet的新检测模型系列。在本节中，我们将讨论网络架构和EfficientDet的新的复合缩放方法。</p>
+<h2 id="4-1EfficientDet-结构"><a href="#4-1EfficientDet-结构" class="headerlink" title="4.1EfficientDet 结构"></a>4.1EfficientDet 结构</h2><p>图3显示了EfficientDet的总体架构，该架构很大程度上遵循了one-stage检测器范式[24,30,20,21]。我们采用ImageNet预训练的EfficientNets作为骨干网络。我们提出的BiFPN用作特征网络，它从骨干网络中获取3-7级的特征{P3，P4，P5，P6，P7}，并反复应用自上而下和自下而上的双向特征融合。这些融合的特征被馈送到一个类和Box网络，以分别生成目标类别和边界框预测。类似于[21]，类和框网络权重在所有级别的特征之间共享。</p>
+<h2 id="4-2复合缩放"><a href="#4-2复合缩放" class="headerlink" title="4.2复合缩放"></a>4.2复合缩放</h2><p>为了优化准确性和效率，我们想开发一系列可以满足各种资源限制的模型。这里的主要挑战是如何扩展基准EfficientNet模型。</p>
+<p>以前的工作主要是通过使用更大的主干网（例如ResNeXt[38]或AmobaNet[29]），使用更大的输入图像，或堆叠更多的FPN层[8]，来扩大基线检测器的规模。这些方法通常是无效的，因为它们只关注单个或有限的缩放维度。最近的工作[36]通过联合扩大网络宽度，深度和输入分辨率的所有维度，在图像分类上显示了卓越的性能。在[8,36]的启发下，我们提出了一种新的目标检测复合缩放方法，它使用一个简单的复合系数φ来联合放大主干网、BiFPN网络、类/盒网络和分辨率的所有维度。与[36]不同的是，目标检测器比图像分类模型具有更大的缩放维度，因此所有维度的网格搜索成本高得令人望而却步。因此，我们使用了基于启发式的缩放方法，但仍然遵循联合放大所有维度的主要思想。</p>
+<p><strong>骨干网络</strong>——我们重用EfficientNet-B0到B6的相同宽度/深度缩放系数[36]，这样我们就可以很容易地重用他们的ImageNet预训练检查点。</p>
+<p><strong>BiFPN网络</strong>——我们线性增加BiFPN深度D<sub>bifpn</sub>(层），因为深度需要四舍五入为小整数。对于BiFPN 的宽度W<sub>bifpn</sub>（通道）类似于[36]，呈指数增长。具体地说，我们对一个数值列表{1.2、1.25、1.3、1.35、1.4、1.45}执行网格搜索，并选择最佳值1.35作为BiFPN的宽度缩放因子。</p>
+<p>形式上，BiFPN宽度和深度按以下公式缩放：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6tnubba4j30nu022mxc.jpg" srcset="/img/loading.gif" alt="image-20200828205815859" style="zoom: 50%;" /></center>
+
+<p><strong>框/类预测网络</strong>——我们将其宽度固定为与BiFPN相同（即W<sub>pred</sub> = W<sub>bifpn</sub>），但使用以下等式线性增加深度（层数）：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6tqs3og0j30la02omx8.jpg" srcset="/img/loading.gif" alt="image-20200828210105033" style="zoom:50%;" /></center>
+
+<p><strong>输入图像分辨率</strong>——由于在BiFPN中使用了特征级别3-7，输入分辨率能被2<sup>7</sup>=128整除，因此我们使用以下等式线性增加分辨率：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6tuxjkdrj30ji02qaa4.jpg" srcset="/img/loading.gif" alt="image-20200828210504201" style="zoom:50%;" /></center>
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6o06xv55j31is0k4dlz.jpg" srcset="/img/loading.gif" alt="image-20200828174231906"></p>
+<blockquote>
+<p>图3：<strong>EfficientDet 结构</strong>——它采用EfficientNet [36]作为骨干网络，使用BiFPN作为特征网络，以及共享的类/盒预测网络。如表1所示，根据不同的资源约束，BiFPN层和类/框网络层都重复了多次。</p>
+</blockquote>
+<p>根据具有不同φ的方程1,2,3，如表1所示，将EfficientDet-D0（φ= 0）发展为D7（φ= 7），其中D7与D6相同，只是具有更高的分辨率。值得注意的是，我们的缩放是基于启发式的，可能不是最佳的，但是我们将证明，这种简单的缩放方法比图6中的其他一维缩放方法可以显著提高效率。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6o256507j30qi0dgjth.jpg" srcset="/img/loading.gif" alt="image-20200828174424853" style="zoom:50%;" /></center>
+
+<blockquote>
+<p>表1：EfficientDet D0-D6的缩放配置——ø是控制所有其他缩放比例尺寸的复合系数；BiFPN，框/类网络和输入大小分别使用公式1,2,3进行放大。</p>
+</blockquote>
+<h1 id="5-实验"><a href="#5-实验" class="headerlink" title="5.实验"></a>5.实验</h1><h2 id="5-1-EfficientDet用于目标检测"><a href="#5-1-EfficientDet用于目标检测" class="headerlink" title="5.1 EfficientDet用于目标检测"></a>5.1 EfficientDet用于目标检测</h2><p>我们使用118K训练图像在COCO 2017检测数据集[22]上评估EfficientNet。每个模型均使用SGD优化器进行训练，其动量为0.9，权重衰减为4e-5。在第一个训练时期，学习率从0线性增加到0.16，然后使用余弦衰减规则进行退火。每次卷积后添加了同步批处理归一化，批处理范数衰减为0.99，ε为1e-3。与[36]相同，我们使用swish激活[28,6]和衰减为0.9998的指数移动平均值。我们还采用了α= 0.25和γ= 1.5且纵横比{1/2，1，2}的常用焦距[21]。每个模型在32个TPUv3内核上以批量大小128进行训练，每个内核批量大小为4。我们使用RetinaNet [21]进行预处理，并采用训练时间进行多分辨率裁剪/缩放和翻转增强。值得注意的是，我们没有对任何模型使用自动增强[42]。</p>
+<p>表格2将EfficientNet与其他对象检测器进行比较，在没有测试时间增加的单模型单标度设置下。我们报告了test-dev（无真值的20K测试图像）和val（有真值的5K验证图像）的准确性。我们的EfficientDet实现了比以前的探测器更高的效率，在各种精度或资源限制条件下，其缩小了4倍-9倍，并使用了13倍-42倍更少的FLOP。在相对较低的精度范围内，我们的EfficientDet-D0达到了与YOLOv3相似的精度，使用了28x 更少的FLOPs。与RetinaNet [21]和Mask-RCNN [11]相比，我们的EfficientDet-D1达到了相似的精度，参数减少了8倍，FLOP减少了21倍。在高精度体制下，我们的EfficientDet也始终比最近的NAS-FPN好（及其[42]中的增强版本，具有更少的参数和FLOP）。特别是，我们的EfficientDet-D7实现了针对单模型单尺度的最先进的52.2AP（在测试集上）和51.8 AP（在验证集上）。值得注意的是，与需要特殊设置的大型AmoebaNet + NAS-FPN + AutoAugment模型[42]不同，（例如，将锚点从3x3更改为9x9，以模型并行性进行训练，并依靠昂贵的自动增强功能）所有的EfficientDet模型使用相同的3x3 Anchors，并且训练时没有模型并行性。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6ussgbp8j31dl0u0k2o.jpg" srcset="/img/loading.gif" alt="image-20200828213736622"></p>
+<blockquote>
+<p>表2 ：<strong>EfficientDet在COCO上的性能</strong>——结果适用于单模型单尺度。test-dev是COCO测试集，val是验证集。Params和Flops表示参数和相乘的数目。Latency指示批大小为1的推断延迟。AA表示自动增强[42]。如果模型具有相似的准确性，我们将它们分组在一起，并比较每组模型的大小、FLOPs和延迟。</p>
+</blockquote>
+<p>除了参数大小和FLOP，我们还比较了Titan-V GPU和单线程Xeon CPU的实际延迟。我们以批量大小1运行每个模型10次，并报告均值和标准差。图4说明了模型大小，GPU延迟和单线程CPU延迟的比较。为了公平比较，这些数字仅包括在同一台机器上以相同设置测量的结果。与以前的检测器相比，EfficientDet模型在GPU上的运行速度提高了3.2倍，在CPU上的运行速度提高了8.1倍，这表明它们在现实世界的硬件上也非常有效。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6uynhaijj31ko0i2qag.jpg" srcset="/img/loading.gif" alt="image-20200828214315300"></p>
+<p>图4：<strong>模型大小和推理延迟比较</strong>——延迟是在配备Titan V GPU和Xeon CPU的同一台计算机上以批处理大小1进行测量的。AN表示AmoebaNet+NAS-FPN使用自动增强训练[42]。我们的EfficientDet模型比其他检测器小4倍-6.6倍，在GPU上快2.3倍-3.2倍，在CPU上快5.2倍-8.1倍。</p>
+<h2 id="5-2-EfficientDet用于语义分割"><a href="#5-2-EfficientDet用于语义分割" class="headerlink" title="5.2 EfficientDet用于语义分割"></a>5.2 EfficientDet用于语义分割</h2><p>尽管我们的EfficientDet模型主要用于目标检测，但我们也对它们在其他任务（例如语义分割）上的性能感兴趣。继[16]之后，我们修改了EfficientDet模型，以将特征级别{P2，P3，…，P7}保留在BiFPN中，但仅将P2用于最终的每像素分类。为简单起见，这里我们仅评估基于EfficientDet-D4的模型，该模型使用ImageNet预训练的EfficientNet-B4骨干网（大小与ResNet-50相似）。对于BiFPN，我们将通道大小设置为128；对于分类头，我们将通道大小设置为256。BiFPN和分类头均重复3次。</p>
+<p>表3显示了我们的模型和Pascal VOC 2012[7]上的以前的DeepLabV3 + [4] 之间的比较。值得注意的是，我们通过集合，测试时间增加或COCO预训练排除了这些结果。在相同的单模型单标度设置下，我们的模型比DeepLabV3 +的现有技术提高了1.7％的精度，而FLOP减少了9.8倍[4]。这些结果表明，Efficient-Det在语义分割方面也很有前途。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6v51ex2cj30pi078myd.jpg" srcset="/img/loading.gif" alt="image-20200828214923293" style="zoom:50%;" /></center>
+
+<blockquote>
+<p>表3：<strong>在Pascal VOC上的语义分割性能对比</strong></p>
+</blockquote>
+<h1 id="6-消融研究"><a href="#6-消融研究" class="headerlink" title="6.消融研究"></a>6.消融研究</h1><p>在本节中，我们为提议的EfficientDet消除各种设计选择。为简单起见，此处的所有准确性结果均用于COCO验证集。</p>
+<h2 id="6-1分离主干和BiFPN"><a href="#6-1分离主干和BiFPN" class="headerlink" title="6.1分离主干和BiFPN"></a>6.1分离主干和BiFPN</h2><p>由于EfficientDet同时使用了功能强大的主干网和新的BiFPN，因此我们想了解它们各自对准确性和效率提高的贡献。表4比较了骨干网和BiFPN的影响。从使用ResNet-50 [12]骨干和自上而下的FPN [20]的RetinaNet检测器[21]开始，我们首先用EfficientNet-B3取代了骨干，这通过大约更少的参数和FLOPs将精度提高了约3 AP。通过用我们提出的BiFPN进一步替代FPN，可以用更少的参数和FLOP来实现额外的4 AP增益。这些结果表明，EfficientNet骨干和BiFPN对我们最终模型至关重要。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6vmeevq1j30qm07g758.jpg" srcset="/img/loading.gif" alt="image-20200828220604682" style="zoom:50%;" /></center>
+
+<blockquote>
+<p>表4：<strong>分离主干和BiFPN</strong> ——从标准RetinaNet（ResNet50 + FPN）开始，我们首先用EfficientNet-B3替换主干，然后将基线FPN替换为我们提出的BiFPN。</p>
+</blockquote>
+<h2 id="6-2-BiFPN跨尺度连接"><a href="#6-2-BiFPN跨尺度连接" class="headerlink" title="6.2 BiFPN跨尺度连接"></a>6.2 BiFPN跨尺度连接</h2><p>表5显示了图2中列出的具有不同跨尺度连接的功能网络的准确性和模型复杂性。值得注意的是，原始FPN [20]和PANet [23]仅具有一个自上而下或自下而上的流程，但为了公平比较起见，我们在此重复多次，并用深度可分离的conv替换所有conv，这与BiFPN相同。我们使用相同的主干网络和类/框预测网络，所有实验均使用相同的训练设置。可以看到，传统的自上而下的FPN固有地受到单向信息流的限制，因此准确性最低。尽管重复的FPN + PANet的精度比NAS-FPN略好[8]，但它还需要更多的参数和FLOP。我们的BiFPN的精度与重复FPN + PANet相似，但使用的参数和FLOP少得多。通过附加的加权特征融合，我们的BiFPN可以以更少的参数和FLOP进一步达到最佳精度。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6vhus4lyj30qc0cm40n.jpg" srcset="/img/loading.gif" alt="image-20200828220141936" style="zoom:50%;" /></center>
+
+<blockquote>
+<p>表5：<strong>不同特征网络的比较</strong>——我们加权的BiFPN以较少的参数和FLOP达到了最佳精度。</p>
+</blockquote>
+<h2 id="6-3-Softmax-vs-快速归一化融合"><a href="#6-3-Softmax-vs-快速归一化融合" class="headerlink" title="6.3 Softmax vs 快速归一化融合"></a>6.3 Softmax vs 快速归一化融合</h2><p>正如第3.3节所讨论的，我们提出了一种快速的标准化特征融合方法，在保留归一化权重优点的同时，摆脱昂贵的softmax。表6比较了三种不同型号的探测器中的softmax和快速归一化融合方法。结果表明，我们的快速归一化融合方法实现了与基于softmax的融合相似的准确性，但在GPU上的运行速度提高了1.26倍至1.31倍。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6vwqq1vlj30qo094wft.jpg" srcset="/img/loading.gif" alt="image-20200828221601103" style="zoom:50%;" /></center>
+
+<blockquote>
+<p>表6：<strong>不同特征融合的比较</strong>——我们的快速归一化融合实现了与基于softmax的融合相似的准确性，但运行速度提高了28％-31％。</p>
+</blockquote>
+<p>为了进一步了解基于softmax的快速归一化融合的行为，图5展示了从EfficientDet-D3中的BiFPN层中随机选择的三个特征融合节点的学习权重。值得注意的是，所有输入的归一化权重（例如，基于softmax的融合的ewi / ∑jewj和用于快速归一化融合的wi /（e+ ∑jwj））总和为1。有趣的是，标准化权重在训练过程中变化很快，说明不同的特征对特征融合的贡献是不相等的。尽管变化很快，我们的快速归一化融合方法在所有三个节点上的学习行为都与基于softmax的融合方法非常相似。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6w0nlmgqj31ji0b2n1g.jpg" srcset="/img/loading.gif" alt="image-20200828221946190"></p>
+<blockquote>
+<p>图5：<strong>Softmax与快速归一化特征融合</strong>——（a）-（c）显示了训练中三个代表性节点的归一化权重（即重要性）；每个节点都有两个输入（input1和input2），它们的归一化权重总和为1。</p>
+</blockquote>
+<h2 id="6-4复合缩放"><a href="#6-4复合缩放" class="headerlink" title="6.4复合缩放"></a>6.4复合缩放</h2><p>正如第4.2节所讨论的，我们使用一种复合缩放方法来联合放大主干网、BiFPN和盒/类预测网络的深度/宽度/分辨率的所有维度。图6将我们的复合缩放与其他可选方法进行了比较，这些方法可以放大分辨率/深度/宽度的单一维度。虽然从同一个基线检测器开始，我们的复合缩放方法实现了比其他方法更好的效果。通过更好地平衡差异体系结构维度，表明了联合扩展的好处。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi6wgnwsimj30oa0i076q.jpg" srcset="/img/loading.gif" alt="image-20200828223509603" style="zoom:50%;" /></center>
+
+<blockquote>
+<p>图6：不同缩放方法的比较——复合缩放可实现更好的准确性和效率。</p>
+</blockquote>
+<h1 id="7-结论"><a href="#7-结论" class="headerlink" title="7.结论"></a>7.结论</h1><p>在本文中，我们系统地研究了用于有效目标检测的网络体系结构设计选择，并提出了加权双向特征网络和定制的复合缩放方法，以提高准确性和效率。基于这些优化，我们开发了一个名为EfficientDet的新检测器系列，该检测器在广泛的资源限制范围内始终比现有技术具有更高的准确性和效率。尤其是，与以前的目标检测和语义分割模型相比，我们扩展后的EfficientDet以更少的参数和FLOP达到了最高的准确性。</p>
+<h1 id="附：原文"><a href="#附：原文" class="headerlink" title="附：原文"></a>附：原文</h1>
+
+	<div class="row">
+    <embed src="/pdf/EfficientDet.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/">文献翻译</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/EfficientDet/">EfficientDet</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/29/AlexNet/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">文献翻译——AlexNet</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/26/win10/">
+                        <span class="hidden-mobile">win10安装指南</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "文献翻译——EfficientDet：可扩展且高效的目标检测&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

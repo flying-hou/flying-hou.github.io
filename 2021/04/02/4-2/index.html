@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>阅读笔记（4.2) - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-04-02 10:00">
+      2021年4月2日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年4月15日 晚上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h2 id="论文阅读方面："><a href="#论文阅读方面：" class="headerlink" title="论文阅读方面："></a>论文阅读方面：</h2><p>[1] Chefer H, Gur S, Wolf L. Transformer Interpretability Beyond Attention Visualization[J]. arXiv preprint arXiv:2012.09838, 2020.</p>
+<p>[2] Carion N, Massa F, Synnaeve G, et al. End-to-end object detection with transformers[C]//European Conference on Computer Vision. Springer, Cham, 2020: 213-229.</p>
+<p>[3] Wang Y, Xu Z, Wang X, et al. End-to-End Video Instance Segmentation with Transformers[J]. arXiv preprint arXiv:2011.14503, 2020.</p>
+<h2 id="代码执行方面："><a href="#代码执行方面：" class="headerlink" title="代码执行方面："></a>代码执行方面：</h2><p>本周对[1]这篇文章的代码进行了复现，在我们的ImageNet VIDs数据集上进行了测试，效果如下：</p>
+<p><img src="https://i.loli.net/2021/04/02/gwCWGoJfVUXiQvI.png" srcset="/img/loading.gif" alt="image-20210402162802646"></p>
+<p>其中，第一列是原图，第2-6列是模型预测出的得分最高的前5类的Heatmap，最后一列是我加的，是对前5列图像的融合。为什么要做融合呢？是因为该方法对于目标的分类过于详细，光熊就分为了棕熊、美国黑熊、北极熊等等…在我们的数据集中并没有分的这么详细，进行融合就可以保证最终提取出感兴趣区域的效果。</p>
+<h4 id="自己的想法："><a href="#自己的想法：" class="headerlink" title="自己的想法："></a><strong>自己的想法：</strong></h4><ul>
+<li>未来考虑如何将本方法应用于视频目标检测中去，比如对原始特征图用该热图进行增强？这是目前的初步想法，未来计划做实验进行验证。</li>
+</ul>
+<h1 id="1-Transformer-Interpretability-Beyond-Attention-Visualization"><a href="#1-Transformer-Interpretability-Beyond-Attention-Visualization" class="headerlink" title="1.Transformer Interpretability Beyond Attention Visualization"></a>1.Transformer Interpretability Beyond Attention Visualization</h1><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>自注意力机制，特别是Transformer逐渐成为文本处理领域的主流，并且在CV领域流行起来。为了可视化图像中有助于分类的部分，现有方法依赖于所获取到的注意力图，或者沿着注意力图进行启发式传播。本文提出了一种新的方法来为Transformer计算相关性。该方法基于深度泰勒分解规则分配局部相关性，之后传播这些相关性。该传播包含注意力层和跳跃连接。作者的解决方案基于一个特定的公式，该公式显示了跨层保持总体相关性。</p>
+<p>Transformer网络的主要构成是自注意力层，其在两个tokens之间分配一个成对的注意力值。</p>
+<ul>
+<li>代码地址：<a href="https://github.com/hila-chefer/Transformer-Explainability" target="_blank" rel="noopener">https://github.com/hila-chefer/Transformer-Explainability</a></li>
+</ul>
+<h4 id="本文提出的可视化方法："><a href="#本文提出的可视化方法：" class="headerlink" title="本文提出的可视化方法："></a>本文提出的可视化方法：</h4><p><img src="https://i.loli.net/2021/03/26/fg6OuBk9csyiUAh.png" srcset="/img/loading.gif" alt="image-20210326093924093"></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ul>
+<li>本文提出了一种基于Transformer的方法将有助于分类的部分进行可视化。</li>
+<li>其效果相对之前的方法有很大提高，并且是开源的，可以考虑将该方法用于VID</li>
+</ul>
+<h1 id="2-End-to-end-object-detection-with-transformers"><a href="#2-End-to-end-object-detection-with-transformers" class="headerlink" title="2.End-to-end object detection with transformers"></a>2.End-to-end object detection with transformers</h1><h3 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h3><p>作者将目标检测框看为一个直接的集合预测问题，简化了检测的pipeline,有效的移除了需要手动设置的内容，如非极大值抑制、anchor生成，这些内容包含了我们对于任务的先验知识。作者提出的新框架的主要成分是DETR，其是一个基于集合的全局loss，强制通过双向匹配统一的进行预测，并且是一个Transformer Encoder-decoder结构。给出一个固定的所学习到的目标queries的小集合，DETR可以推出目标的关系、全局图像上下文，来直接并行输出最终的预测结果集合。</p>
+<ul>
+<li>代码地址：<a href="https://github.com/facebookresearch/detr" target="_blank" rel="noopener">https://github.com/facebookresearch/detr</a></li>
+</ul>
+<h3 id="DETR模型"><a href="#DETR模型" class="headerlink" title="DETR模型"></a>DETR模型</h3><p>在检测中直接进行集合预测有两个因素必不可少：1.一个集合预测Loss，强制其在预测和GT box之间唯一匹配。2.一个预测一组目标并对其关系建模的结构。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gpkrxugvjxj30tn07tmzu.jpg" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>DETR使用CNN作为backbone来学习输入图像的特征，之后将其压平，与positional encoding合并后送入Transformer的编码器。解码器以object queries以及编码器的输出作为输入。最后将解码器的输出送入一个共享的前向传播网络(FFN)来预测边界框的类别和位置。</p>
+</blockquote>
+<h2 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a>总结：</h2><ul>
+<li>本文最大的创新点是摒弃了原有的CNN网络，使用Transformer做目标检测。</li>
+<li>文中提到该方法可适用于任何深度学习框架，并且核心代码仅有几百行（Pytorch）。</li>
+<li>缺点是对小目标的检测效果不尽如人意，还有继续优化的空间。</li>
+</ul>
+<h1 id="3-End-to-End-Video-Instance-Segmentation-with-Transformers"><a href="#3-End-to-End-Video-Instance-Segmentation-with-Transformers" class="headerlink" title="3. End-to-End Video Instance Segmentation with Transformers"></a>3. End-to-End Video Instance Segmentation with Transformers</h1><h3 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h3><p>视频实例分割（VIS）需要同时对视频中的实例进行进行分类、分割、跟踪。本文在Transformer之上提出了一个新的视频实例分割框架：VisTR，其将VIS任务看作一个直接的端到端并行序列解码/预测问题。其核心是一个高效的实例序列匹配和分割策略，它作为一个整体在序列级别上监督和分段实例。VisTR对实例分割进行帧化处理，并在相同的相似性学习视角进行跟踪，因此简化了pipeline，与现有方法有很大不同。</p>
+<p>本质上，实例分割和实例跟踪都与相似性学习有关：实例分割学习像素级别的相似性，实例跟踪学习多个实例之间的相似性。于是很自然的想法是：在单个框架内解决这两个子任务，其还可以相互促进。</p>
+<ul>
+<li>代码地址：<a href="https://github.com/Epiphqny/VisTR" target="_blank" rel="noopener">https://github.com/Epiphqny/VisTR</a></li>
+</ul>
+<h2 id="VisTR"><a href="#VisTR" class="headerlink" title="VisTR"></a>VisTR</h2><p><img src="https://i.loli.net/2021/03/30/1VpvWgnNC7SawuY.png" srcset="/img/loading.gif" alt="image-20210330180022972"></p>
+<p>整体结构如图所示，首先使用标准的CNN模块独立的提取每一帧的特征，之后按照顺序串联图像特征形成clip-level特征序列。第二步，将clip-level的特征序列输入Transformer，输出一个有序的目标预测序列。</p>
+<p>图中相同的形状表示相同图像的预测结果，相同的颜色代表不同图像的相同实例。预测序列的顺序与输入图像的顺序相同，并且每一帧内的实例预测顺序也相同。因此，视力跟踪在实例分割的框架中被无缝的、自然的实现。</p>
+<p>为了实现上述目标，有两个主要挑战：</p>
+<ol>
+<li>如何维持输出的顺序。</li>
+<li>如何从Transformer网络的输出获得每个实例mask序列。</li>
+</ol>
+<p>作者针对这两个问题，分别提出了instance sequence matching 策略、instance sequence segmentation模块。</p>
+<p>instance sequence matching 策略在输出实例序列 和GT实例序列之间，执行双向的图匹配，从宏观上监督顺序。Instance sequence segmentation通过自注意力为每个实例跨多帧积累mask特征，并且通过3D卷积对每个实例的mask序列进行分割。作者展示了位置信息对于VIS密集预测任务的重要性，并且分析了实例查询嵌入在不同级别的影响。</p>
+<p>原始Transformer是auto-regressive（自回归）的，一个一个的生成token。为了效率，作者采用了一个非自回归的Transformer变体，来实现并行序列生成。</p>
+<h2 id="总结：-2"><a href="#总结：-2" class="headerlink" title="总结："></a>总结：</h2><h4 id="创新点："><a href="#创新点：" class="headerlink" title="创新点："></a>创新点：</h4><ul>
+<li>基于Transformer提出了一个新的视频实例分割框架VisTR，将VIS任务看做一个直接的端到端的平行序列解码/预测问题。</li>
+<li>VisTR从一个全新的相似性学习的视角解决VIS问题。在一个相同的框架内实现了分割和跟踪。</li>
+<li>VisTR提出了两个新的策略：instance sequence matching &amp; segmentation。这两个策略使得可在整个序列级别上监督和分割实例。</li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Transformer-Interpretability/">Transformer Interpretability</a>
+                    
+                      <a class="hover-with-bg" href="/tags/DETR/">DETR</a>
+                    
+                      <a class="hover-with-bg" href="/tags/VisTR/">VisTR</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/12/yjxy/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">纪录片《一级响应》(5集全)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/29/qmjs/">
+                        <span class="hidden-mobile">厦门大学信息学院计算机科学系硕士生2020级1班党支部开展清明祭扫活动</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "阅读笔记（4.2)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>阅读笔记（2.20) - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-02-20 10:00">
+      2021年2月20日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      72
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年3月20日 晚上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>[1]Guo C, Fan B, Gu J, et al. Progressive sparse local attention for video object detection[C]//Proceedings of the IEEE/CVF International Conference on Computer Vision. 2019: 3909-3918.</p>
+<p>[2] Yao C H, Fang C, Shen X, et al. Video Object Detection via Object-Level Temporal Aggregation[C]//European Conference on Computer Vision. Springer, Cham, 2020: 160-177.</p>
+<h1 id="1-PLSA"><a href="#1-PLSA" class="headerlink" title="1.PLSA"></a>1.PLSA</h1><p>提出了PSLA（渐近稀疏局部注意力），在一个局部区域里，用渐近稀疏步长建立跨帧的空间一致性，使用这个一致性来传播特征。基于PSLA提出了RFU（循环特征更新）对时间表观建模、和DenseFT（密集特征变换）来丰富特征表示。</p>
+<p>PSLA不依赖光流传播帧间高级语义特征。特别的，给出两帧特征Ft和Ft+ε，PSLA首先基于这两帧的特征关系计算出一致性权重，然后用一致性权重聚合特征对齐Ft和Ft+ε。</p>
+<p>基于PSLA提出了一个视频目标检测框架，昂贵的高级特征提取在稀疏的关键帧上执行，廉价的低级特征提取在密集的非关键帧上执行。基于提取到的特征，PSLA被用于两个不同和互补的情况：1.为了传播关键帧的高级特征到非关键帧。这使得我们可以分配大多数计算开销到关键帧，在不牺牲精度的情况下提升测试效率。此外，一个小的Quality Net网络被设计出来，用非关键帧特征的低级信息来补充传播过来的高级特征，旨在降低特征传播的混叠效应。作者将这个过程称为密集特征变换（Dense FT）。2.为了维持时间特征Ft（其建模了视频的时间表观），通过在关键帧之间传播高级特征。与此同时，一个更新Update网络也被提出来，来用关键帧的高级特征循环的更新Ft。我们的消融实验表明，利用时间上下文有助于显著提高性能。作者将这一过程称为循环特征更新（RFU）。</p>
+<p>本文贡献：</p>
+<ul>
+<li>提出PSLA渐近稀疏局部注意力，不依赖额外的光流，建立特征图之间的空间一致性。显著减少了模型参数，实现更好的结果。</li>
+<li>基于PSLA提出了两个技术。循环特征更新RFU和密集特征变换DenseFT，分别对时间表观建模、增强非关键帧的特征表示。</li>
+<li>介绍了一个新颖的视频目标检测框架，在ImageNet VID上实现了SOTA效果。</li>
+</ul>
+<p>STMN使用一个类似于相关的模块在一个局部区域中对其特征，与STMN不同，我们的方法关注与稀疏邻域，并且使用softmax正规化来更好地建立空间一致性。我们的方法同时提升速度和精度，而STMN提升了精度但速度很慢。</p>
+<h4 id="自注意力"><a href="#自注意力" class="headerlink" title="自注意力"></a>自注意力</h4><p>自注意力机制首先被用于机器翻译，为了整合足够的序列上下文和长程信息，其用所有位置的加权均值在序列的一个位置计算响应，其中的权重通过反向传播无监督学习。与之前的工作不同，PSLA是自注意力机制的一个更泛化的形式。在本文中，自注意力机制被用在时空域来对齐两张特征图。</p>
+<h4 id="非局部操作"><a href="#非局部操作" class="headerlink" title="非局部操作"></a>非局部操作</h4><p>非局部操作是一个传统的过滤算法，被广泛用于图像去噪声、超分和纹理合成。这些方法用图像中所有像素点的加权平均计算响应，其中的权重基于块的表观相似性获得。与这些方法不同，PSLA用渐近稀疏步长关注局部区域。</p>
+<h2 id="所提出的方法"><a href="#所提出的方法" class="headerlink" title="所提出的方法"></a>所提出的方法</h2><p>给出一个视频，每一帧通过一个CNN来提取特征，之后跟着一个任务网络Nt，本文中是目标检测。为了减少计算开销，视频帧被分为关键帧和非关键帧，其特征提取网络不同。关键帧是Nf，非关键帧是Nl。Nl比Nf更轻量化。此外，为了使用嵌入在视频中的长程时间信息，时间特征Ft在整个视频上维持，其通过所提出的循环特征更新RFU在关键帧上逐渐更新。通过时间特征的辅助，关键真的语义特征也被RFU增强，有利于最终的任务。因此，提出了DenseFT模块通过传播来自时间的特征Ft来丰富其特征。这个设计的关键假设是，非关键帧的内容与相邻的关键帧相似。RFU和DenseFT的核心是将时间特征对齐并传播到当前处理帧的时间特征上，通过PSLA模块实现。</p>
+<h3 id="PSLA"><a href="#PSLA" class="headerlink" title="PSLA"></a>PSLA</h3><p>我们框架的核心是对齐和传播帧之间的特征图。为了这个目的，介绍PSLA一个新奇的模块，旨在建立两个特征图之间的空间一致性，来传播其特征。</p>
+<p>PSLA首先基于一对特征单元之间的特征相似度计算<strong>一致性权重</strong>，源自两张不同特征图，分布在渐近的稀疏步长。</p>
+<p>图3，沿着水平、垂直方向的的光流场边缘分布都集中在0附近。这表明用于计算一致性权重的特征单元，可以通过一个渐进的稀疏步长被限制到一个邻域内。这种设置允许PSLA更多的关注相邻位置（与小运动相关），较少的关注较远的位置（与大运动相关），也符合视网膜视觉感知组织的特点。</p>
+<p>嵌入式函数f和g被用于减小通道的维数（实际通过256个1x1的卷积层实现），减少计算量。PSLA对比每个g(Ft+ε)特征单元和周围局部稀疏位置的f(Ft)单元。产生的特征相似性被正规化，来产生权重，用于对齐Ft。特征单元的相似性越高，表明更高的一致性，权重也会更高，其信息将会被更大的传播到一个新的特征单元。最终，对齐过的特征被传播到第t+ε帧。到此为止，作者并未阐明Ft和Ft+ε来自哪里，第3.3和3.4节将详细阐明。</p>
+<p>PSLA的操作可被形式化为两步：1.基于特征相似性产生稀疏一致性权重。给出两张特征图，通过两个嵌入式函数f和g。2.Ft可被Ft+ε对齐，用一致性的权重聚合一致性的特征单元</p>
+<p>通过引入softmax作为正规化，我们强制权重彼此竞争，因此，PSLA能捕捉最相似和最重要的特征。与注意力机制类似，可以隐含的估计两张特征图之间的一致性。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqp8rhoiaj316c0q4124.jpg" srcset="/img/loading.gif" alt=""></p>
+<blockquote>
+<p>PSLA的目的是用一个注意力方式对齐特征图Ft到Ft+ε，可被形式化为两步：1.在嵌入特征图f（Ft+ε）的每个特征单元对比在特征图g（Ft）的周围单元，从里到外是一个渐进的稀疏步长。g(Ft)中的不同颜色的区域代表不同的步长。所得到的特征相似性被用于计算一致性权重Ct,t+ε,其捕捉特征之间的空间一致性。2.Ft中选择的特征单元被一致性权重聚合，产生F^t+ε的特征单元，其是Ft对齐过的特征图。</p>
+</blockquote>
+<h3 id="循环特征更新RFU"><a href="#循环特征更新RFU" class="headerlink" title="循环特征更新RFU"></a>循环特征更新RFU</h3><p>视频提供了丰富的信息，有助于目标检测。例如临近帧的视觉线索和时间上下文。然而，图像目标检测器忽略了视频序列之前帧的表观和上下文信息。这鼓舞作者提出循环特征更新（RFU）。RFU是一个沿着时间聚合稀疏关键帧的语义特征的过程，旨在利用时间上下文提升检测精度。</p>
+<p>RFU用稀疏关键帧的语义特征，在整个视频上循环的维持和更新时间特征Ft。在这个过程中，直接用新关键帧的特征更新Ft会出问题，因为目标在视频中的移动将产生未对齐的空间特征。因此，利用PSLA来增强Ft和新关键帧的高级特征之间的空间一致性。</p>
+<p>在对齐时间特征之后，一个小的Update神经网络被设计出来，来自适应的融合Fh和F^h。<strong>Update Net的输入是F\^t和Fh。输出是自适应的权重W\^k和Wk,</strong>中间有多个卷积层，其中W\^和W表示两张不同特征图的每一个空间位置的重要性。其被归一化，之和为1。最终Ft基于这个权重更新：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqp8icye2j30iw02ugly.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><strong>（Fh是新关键帧的特征图，Ft是之前维持的时间特征图，F^t是经过PSLA对齐的结果。最后将对齐结果和当前帧的特征图输入UpdateNet进行加权和，生成新的Ft。）</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqp8a013uj313u0muqck.jpg" srcset="/img/loading.gif" alt=""></p>
+<p>最终，更新过的特征Ft被用于代替Fh来产生关键帧Ik的结果，并作为更新过的时间特征。</p>
+<h3 id="密集特征变换DenseFT"><a href="#密集特征变换DenseFT" class="headerlink" title="密集特征变换DenseFT"></a>密集特征变换DenseFT</h3><p>由于使用Nl提取的非关键帧特征效果不好，作者介绍了DenseFT，来通过特征变换和传播来自时间特征Ft的特征，生成<strong>非关键帧</strong>的语义特征。</p>
+<p>特别的，所提取的低级特征Fl被用于PSLA来从最近的关键帧传播来自Ft的语义特征。然而，这些低级特征不包含有助于寻找空间一致性的充足的的语义信息。对齐过的特征可能不包含重要信息。为了解决这一问题，作者提出了一个轻量级的网络<strong>Transform Net</strong>，来进一步的编码所提取到的低级特征，旨在与高级语义特征近似。这是核心的一步，因为其不仅<strong>丰富了低级特征的语义信息</strong>，并且避免了特征传播的梯度直接流向Nl，因此提升了训练的鲁棒性。编码过的特征被喂给PSLA来与Ft对齐。</p>
+<p>在将Ft传播到非关键帧之后，再次使用低级特征Fl进行融合。这是由于特征对齐过程中加权聚合引起的混叠效应，可能会使传播的特征丢失一些对识别很重要的目标外观细节。为了实现这一目标，一个Quality Net网络被嵌入在DenseFT中来补充细节信息。最终，QualityNet的输出被喂给任务网络Nt来产生非关键帧的结果。</p>
+<p><strong>（Fl是非关键帧的特征图，首先使用TransformNet进行编码，丰富低级语义信息。之后与关键帧的Ft一起输入PSLA进行传播对齐。对齐结果再次与低级特征Fl通过QualityNet进行加权融合，输出结果喂给任务网络进行检测。QualityNet的结构和UpdateNet一致）</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqp82oua0j30uk0hiwk1.jpg" srcset="/img/loading.gif" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文提出了一个新颖的视频目标检测框架，核心是PSLA模块，用于有效的传播特征。此外提出了RFU和DenseFt，来对时间表观建模、增强特征表示。在ImageNet VID上达到81.4%的mAP。</p>
+<h1 id="2-Video-Object-Detection-via-Object-Level-Temporal-Aggregation"><a href="#2-Video-Object-Detection-via-Object-Level-Temporal-Aggregation" class="headerlink" title="2.Video Object Detection via Object-Level Temporal Aggregation"></a>2.Video Object Detection via Object-Level Temporal Aggregation</h1><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>本文提出了通过时间聚合提升VID的方法。检测模型被用于稀疏关键帧来处理新目标、遮挡和快速运动。之后使用实时跟踪器来利用时间线索、在剩余帧跟踪检测到的目标，这增强了效率和时间一致性。bbox级别的目标状态通过我们的聚合模块被跨帧传播。此外，提出了一个关键帧选择策略，使用强化学习和简单的启发式，提出一个自适应的策略。</p>
+<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h1><p>作者认为在更高级别的聚合会更有效，并且比特征级别的聚合更通用。作者提出在目标/bbox级别聚合信息。例如检测模型的输出。首先目标状态的维度相比CNN特征图大大减少，其次，它解开了时间聚合与特征提取之间的束缚。</p>
+<p>当采用一个不同的特征提取器或者不同的时间动态，memory-guided特征聚合需要重新训练整个模型。相反，box的预测能被简单的聚合，无需关注特征图的语义。</p>
+<p>为了利用时间线索进行目标级别的聚合，一个直观的选择是跟踪模型。Detect and Track（D&amp;T）方法在一个联合训练的网络执行检测和跟踪，但其巨大的计算量在现实场景中不可接受。为了加速，作者提出了时间聚合模块，在目标级别整合检测和跟踪信息。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpe48xpej31620mae1w.jpg" srcset="/img/loading.gif" alt=""></p>
+<p>如图1所示，该框架在稀疏的关键帧上应用检测，并且通过实施跟踪器传播目标状态。因为检测是在稀疏的关键帧上，因此，关键帧选择策略变得十分重要。<strong>作者对比检测和跟踪模型的正反面，通过强化学习RL和简单的启发式，提出一个自适应的关键帧选择策略，</strong>实验表明，关键帧选择策略可以生成各种检测率，对比固定的间隔性能显著提高。</p>
+<p>通过所提出的聚合模块和关键帧选择策略，作者展示了用目标级别的时间聚合实现有竞争力的速度精度平衡的可能性。本文的主要贡献：</p>
+<ul>
+<li>提出一个时间聚合模块，在目标/bbox级别整合目标检测和跟踪模型</li>
+<li>展示了一个用简单的启发式和不同的视频序列训练的强化学习训练的<strong>关键帧选择策略。</strong></li>
+</ul>
+<h1 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2.Related Work"></a>2.Related Work</h1><p>现有方法主要都是基于单图像目标检测器，作者的框架进一步合并了目标跟踪模型。以下简略介绍了最新的目标检测器和跟踪器，并将视频方法分为三类：基于跟踪的、基于光流的、memory-guided 聚合。</p>
+<h3 id="单图像目标检测"><a href="#单图像目标检测" class="headerlink" title="单图像目标检测"></a>单图像目标检测</h3><p>先提出候选区域，之后进行精炼和分类(Two stage)：RCNN系列。</p>
+<p>基于预训练的Anchor box（One stage）：YOLO、SSD。</p>
+<p>自底向上的方法进一步探索了不用anchor box检测的可能性。：Centernet、CornerNet、Object as points、Bottom-up object detection by grouping extreme and center points.</p>
+<h3 id="目标跟踪"><a href="#目标跟踪" class="headerlink" title="目标跟踪"></a>目标跟踪</h3><p>目标跟踪是一种常见的视觉任务，其目标是在整个视频序列中跟踪目标。给出初始化bbox作为目标模板，跟踪模型可以通过相关或CNN过滤，估计当前目标位置。现有的大多数方法假定相邻帧之间目标表观是时间平滑的。然而，变形、遮挡、巨大的运动都会对这一假设构成威胁，使得执行关联和更新目标状态变得困难。幸运的是，我们的场景不包含长程跟踪和多目标关联。关联问题被自然的避免，疑问我们只考虑目标类别，不考虑其身份。考虑到速度需求，作者选择Kernelized Corelation Fileter(KCF)和Fully-convolutional Siamese Network(SiamFC)作为实验中的跟踪器。</p>
+<h3 id="基于跟踪的聚合"><a href="#基于跟踪的聚合" class="headerlink" title="基于跟踪的聚合"></a>基于跟踪的聚合</h3><p>作为单图像到视频的一个直观的扩展，Seq-NMS方法跨帧连接一个目标的bbox，之后随着跟踪的进行，重新分配最大的或平均的置信度分数给box。TCN方法在重新分配置信度之前，通过光流和跟踪算法联合boxes。以上这两种方法都能提供3-5%的mAP提升，但其都是offline的后处理方法。D&amp;T框架提出同时学习检测和跟踪。受益于多任务训练，其在两个任务上都获得了相当大的精度提升，但其巨大的计算量限制其用于移动设备。</p>
+<h3 id="光流指导的聚合"><a href="#光流指导的聚合" class="headerlink" title="光流指导的聚合"></a>光流指导的聚合</h3><p>另一类方法通过光流在特征图级别聚合时间信息。DFF方法在确定的关键帧上应用昂贵的特征提取，之后传播特征图到剩余帧。尽管努力加速，大多数光流方法实际上都比关注于mobile的模型更慢。此外，挺能决定于光流估计，其需要密集的标注数据用于训练。</p>
+<h3 id="Memory-Guided-聚合"><a href="#Memory-Guided-聚合" class="headerlink" title="Memory-Guided 聚合"></a>Memory-Guided 聚合</h3><p>最近关注于mobile的模型依赖于memory模型。Mobile video object detection with temporally-aware feature map这篇文章将LSTM单元插入到卷积层之间，来传播时间线索、精炼特征图。Looking fast and slow在大小特征提取器之间提出了一个平衡。特征提取器随着memory模型训练，用于特征聚合。尽管有联合优化的优点，当适应具有明显时间属性的未知领域时，这种结合需要强化训练。作者在其网络框架中，采用一个相似的memory模块用于时间聚合，但信息聚合是在<strong>object level</strong>的。</p>
+<h3 id="自适应关键帧选择策略"><a href="#自适应关键帧选择策略" class="headerlink" title="自适应关键帧选择策略"></a>自适应关键帧选择策略</h3><p>大多数现有方法选用固定的关键帧选择策略，以平衡大的和轻量级的计算。许多自适应策略是为了目标跟踪和视频分割提出的。对目标检测来说，Optimizing video object detection via a scale-time lattice这篇文章通过offline度量时间传播的难度来选择关键帧。……本文强调关键帧选择的重要性，并提出两个自适应的策略：一个启发式策略和一个轻量级RL模型。</p>
+<h1 id="3-Proposed-Approach"><a href="#3-Proposed-Approach" class="headerlink" title="3.Proposed Approach"></a>3.Proposed Approach</h1><p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpecg81vj314y0nyqh3.jpg" srcset="/img/loading.gif" alt="image-20210320214402666"></p>
+<p>理想状态，一个检测模型可以捕捉目标的存在与否。每一帧的预测独立生成，因此，对快速运动或场景变化具有很强的鲁棒性。尽管如此，我们总是在检测结果中观察到时间不一致性，特别是当目标轻微变形或部分遮挡。在另一方面，跟踪模型善于在给出初始表观后，利用时间线索来跟踪目标。其可以提供精确稳定的目标位置估计，同时计算量小。</p>
+<p>为了利用检测模型和跟踪模型的优点，作者提出了一个框架，在目标基本将其整合。特别的，检测被用于关键帧，捕捉新目标及初始化跟踪器。跟踪器更新目标位置、在帧间传播边界框特征，促进目标关联，加速检测。作者提出的时间聚合，通过使用之前的预测来帮助稳定置信度分数和分类概率。</p>
+<p>为了确保跟踪失败时也能触发检测，作者提出了自适应调度器来基于目标状态决定关键帧间隔。</p>
+<h2 id="3-1时间聚合"><a href="#3-1时间聚合" class="headerlink" title="3.1时间聚合"></a>3.1时间聚合</h2><p>一个典型的检测模型对每个目标产生：置信度/目标分数c，分类概率p，候选框b。目标跟踪模型产生：候选框估计b~、跟踪 分数s（指示当前box与目标模板的匹配程度）。这些信息与跟踪持续时间一起被作为特征利用。</p>
+<p>object-level的特征选择使我们的聚合与模型无关，可被用于任何产生上述输出的目标检测器和跟踪器。对于(c,p,b,s)中的每个特征x，将跟踪器传播产生的值表示为x~,聚合过的输出表示为x‘。</p>
+<p>在每个关键帧，为每个新目标初始化一个跟踪器，并删除由于被遮挡或者消失的目标。被跟踪的目标与当前检测的IOU阈值相关。作者根据惯例，将IOU阈值设为0.5。一旦发生相关，已经存在目标的特征将与新检测到的聚合。如图2b所示，作者采用一个memory模型，将跟踪的信息和新的检测作为输入，更新内部状态，产生一个聚合过的输出。作者的memory模型与速度优化的Bottleneck-LSTM类似，与之不同的是，作者使用两个全连接层替代卷积操作，因为作者的输入是目标级别的特征，而非卷积特征图。</p>
+<p>与之前的memory-guided方法不同，作者的聚合模块输入的维度很低，仅仅应用于稀疏的关键帧，因此推理时间更短。</p>
+<p>除了基于学习的聚合，作者还提出了一个简单高效的启发式模块来缓和三个预测的不一致性。1.边界框坐标 2.分类概率 3.置信度分数。</p>
+<p>首先，为了产生精确的和时间平滑的候选边界框，作者通过跟踪产生的边界框b~来精炼检测产生的边界框b。坐标基于检测置信度和跟踪分数进行平均。当新的检测结果比跟踪结果的置信度更高，就对检测框分配更高的权重。这个强化过程可被表示为。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpejcvz8j30fu04s3z8.jpg" srcset="/img/loading.gif" alt="image-20210320214414272" style="zoom:50%;" /></p>
+<p>其中c~和s~表示置信度和最小跟踪分数（从之前关键帧到当前时间t）</p>
+<p>第二，我们合并之前关键帧的分类概率，来保证类别预测的一致性。概率通过置信度分数被重新加权，并且被累加求平均：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpep44uwj30me05k75o.jpg" srcset="/img/loading.gif" alt="image-20210320214423031" style="zoom:50%;" /></p>
+<p>其中K是关键帧集合，γ是之前预测的权重下降率。最终，置信度分数通过基于跟踪的重新赋值趋于稳定。作者在关键帧保持跟踪的置信度分数，并通过时间最大化更新当前置信度。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpetu9g4j30e203aglz.jpg" srcset="/img/loading.gif" alt="image-20210320214431017" style="zoom:50%;" /></p>
+<p>这旨在从高置信度的帧之间选择低置信度的检测。第t帧的最终检测结果是</p>
+<h2 id="3-2-自适应关键帧调度器"><a href="#3-2-自适应关键帧调度器" class="headerlink" title="3.2 自适应关键帧调度器"></a>3.2 自适应关键帧调度器</h2><p>固定的关键帧间隔忽略了时间变化，不能适应一些确定的事件（一个模型比其他模型效果好）。如果一个视频相当平滑，我们更喜欢跟踪而不是检测，因为其计算量更小。相反，当目标变化超过跟踪器的能力的时候，就需要频繁的检测。例如运动模糊、变形和遮挡。更重要的是，关键帧的选择决定了用于初始化跟踪器的目标模板，这将显著影响跟踪性能。</p>
+<p>作者在实验中发现，选择目标出现的第一帧并不能产生最优的跟踪结果。相反，在第一次出现之后的一些帧有代表性的包含更可靠的和完整的模板来初始化目标跟踪器。作者也发现，跟踪分数与其他object-level的特征同样有用，并且便于指示跟踪和检测的精度。增加更多image-level的特征对关键帧选择仅提供微不足道的信息。</p>
+<p>受以上观察的启发，作者提出了一个自适应策略，来动态的在线调整关键帧间隔D。这个任务可被形式化为一个RL问题和之后的状态空间、动作空间、奖励函数。状态向量S从相同的object-level特征构建，被用于时间聚合。对每个特征x，在S中编码最小时间xmin，最大时间xmax,平均时间xmean,变化xvar，差异xt-xt-1来促进RL训练。</p>
+<p>给出当前帧的状态，agent(代理)从动作空间学习预测一个动作a：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpf4gkscj313s08aq6h.jpg" srcset="/img/loading.gif" alt="image-20210320214446926"></p>
+<p>其中α是一个固定的乘法因子。当且仅当跟踪时长dt&gt;=Dt时，应用检测模型。</p>
+<p>对于奖励R，作者在预测框b’和ground truth box b^之间计算平均IOU：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpf87e55j30du02kjrt.jpg" srcset="/img/loading.gif" alt="image-20210320214454058" style="zoom:50%;" /></p>
+<p>作者采用标准的A3C训练体系，其在连续域和离散域均有效。考虑到目标是无序的，作者对policy和value网络采用PointNet和3个全连接层。这个模型原始被用于点云数据来保持顺序不变。在本文的工作中，作者将每个目标看作一个点数据，并且根据数据集分布设置一个最大目标数量。极端目标通过置信度分数剔除。</p>
+<p>尽管状态空间和动作空间是低维的，视频序列的差异使得训练RL有挑战。相同的状态中相同的动作可能导致在不同视频中不同的奖励和不同的下一个状态。例如奖励和状态转移在RL agent看来是随机的。在奖励函数中结合实践和准确性约束是另一个重要问题。作者观察到，简单的加权和可能会造成不稳定的训练结果。速度奖励的一个细微不同容易导致局部最优，即策略应用检测的频率要么最高，要么最低。此外，当需要一个新的折衷点时，需要用新的奖励设置来训练策略</p>
+<p>作者提出以下策略来稳定训练过程，产生更通用的策略。首先，我们在专家监督下通过预先训练策略网络来模拟模仿学习的概念。针对穷举搜索最优关键帧不可行的问题，提出了一种贪婪算法来近似oracle监控策略。</p>
+<p>如算法1中所述，我们从一个固定间隔的关键帧集开始，然后迭代地<strong>用一个跟踪得分最低的非关键帧替换跟踪得分最高的关键帧。</strong>为不同的速度-准确性权衡训练一个通用策略，一个基础的间隔偏移Dbase被随机初始化为5-30帧之间。跟踪时长和基础间隔的比值d/Dbase，在状态向量中编码，这样<strong>agent</strong>就能知道相对于基频的相对检测率。</p>
+<p>为了补偿不同视频之间不同的奖励分配，我们计算IOU分数的时间差异而不是原始值。它允许代理根据时间动态专注于策略优化。最后，我们在一个事件的结尾添加一个长期的惩罚，以限制策略过度或被动的检测。修改后的奖励函数Rt 可以表示为:</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpfh5a2aj315c05mq52.jpg" srcset="/img/loading.gif" alt="image-20210320214508242"></p>
+<p>其中η表示监测历史，λ是长程惩罚权重。详细过程在算法2中。</p>
+<p>为了对比RL策略，我们提出一个启发式调度器，将跟踪分数映射到关键帧间隔。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpfku7yhj30kg02wt99.jpg" srcset="/img/loading.gif" alt="image-20210320214513906" style="zoom:50%;" /></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>作者提出了一个新的框架，通过跨帧的目标跟踪提升检测。利用时间信息和实时跟踪器聚合的信息，使得检测更一致和有效。启发式和RL策略被提出，用于自适应关键帧调度。更进一步，object-level的聚合减轻了对特征图的依赖，使得其对变幻的检测和跟踪模型更通用。当前，作者为每个目标初始化一个跟踪器，这当跟踪多个目标时，线性增加了推理时间。未来作者将使用多目标跟踪来加速模型，并且并行地运行检测和跟踪模型。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/PLSA/">PLSA</a>
+                    
+                      <a class="hover-with-bg" href="/tags/OLTA/">OLTA</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/28/2-28/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">阅读笔记（2.28)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/20/1-20/">
+                        <span class="hidden-mobile">阅读笔记（1.20)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "阅读笔记（2.20)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

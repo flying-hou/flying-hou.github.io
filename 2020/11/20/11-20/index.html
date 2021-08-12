@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>阅读笔记（11.20) - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-11-20 07:40">
+      2020年11月20日 早上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年11月27日 下午
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>最近一周主要集中精力在CVPR2020上发表的MEGA视频目标检测方法上，</p>
+<ul>
+<li>认真研读了MEGA论文，做了详细的阅读笔记。</li>
+<li>运行了MEGA的demo代码和test代码，整理了相关笔记。</li>
+</ul>
+<p><strong>参考文献</strong>：Chen Y, Cao Y, Hu H, et al. Memory Enhanced Global-Local Aggregation for Video Object Detection[C]//Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2020: 10337-10346.</p>
+<h1 id="1-MEGA论文阅读笔记"><a href="#1-MEGA论文阅读笔记" class="headerlink" title="1.MEGA论文阅读笔记"></a>1.MEGA论文阅读笔记</h1><ul>
+<li>论文地址：</li>
+</ul>
+<p><a href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Chen_Memory_Enhanced_Global-Local_Aggregation_for_Video_Object_Detection_CVPR_2020_paper.pdf" target="_blank" rel="noopener">https://openaccess.thecvf.com/content_CVPR_2020/papers/Chen_Memory_Enhanced_Global-Local_Aggregation_for_Video_Object_Detection_CVPR_2020_paper.pdf</a></p>
+<ul>
+<li>代码地址：<a href="https://github.com/Scalsol/mega.pytorch" target="_blank" rel="noopener">https://github.com/Scalsol/mega.pytorch</a></li>
+</ul>
+<p>作者提出的Memory Enhanced Global-Local Aggregation（MEGA）首次同时考虑<strong>全局语义信息</strong>和局部<strong>定位信息</strong>。此外通过使用Long Range Memory(LRM)模块，MEGA使得关键帧能访问更多的内容。</p>
+<h2 id="全局语义信息："><a href="#全局语义信息：" class="headerlink" title="全局语义信息："></a>全局语义信息：</h2><p>  当单帧遇到诸如运动模糊、遮挡、失焦等问题时，人们自然会想到从整个视频中查找线索。当人们不确定目标的身份时，他们将寻求从其他帧中找到与当前目标具有高度语义相似性的独特目标，并将它们分配在一起。作者将这个线索作为视频中每一帧可以参考的<strong>全局语义信息</strong>。但是当不确定目标是否存在时，语义信息将会失效。例如一只黑猫在黑夜里走，因为无法确定关键帧中实例的存在性，所以不能依赖语义信息来判断目标在哪。</p>
+<h2 id="局部定位信息："><a href="#局部定位信息：" class="headerlink" title="局部定位信息："></a>局部定位信息：</h2><p>  如果给出临近帧，该问题将被减轻。借助由临近帧之间的差异计算出的运动信息，就可以在关键帧中定位目标。作者将这种信息来源称为局部定位信息。通常，人们主要通过这两种信息源来识别对象。</p>
+<h2 id="ineffective-problem"><a href="#ineffective-problem" class="headerlink" title="ineffective problem"></a>ineffective problem</h2><p>先前的视频目标检测方法可以被看成是不同的近似方法，可被分为两类：局部聚合方法和全局聚合方法。但这些方法都没有同时使用局部和全局信息，作者将该问题称为ineffective problem。</p>
+<h2 id="insufficient-problem"><a href="#insufficient-problem" class="headerlink" title="insufficient problem"></a>insufficient problem</h2><p>  先前方法的另一个问题是用于聚合的帧的数量问题。指的是关键帧可以收集的信息量。此前方法仅选择20-30帧，仅持续1-2秒用于特征聚合。这种小的聚合规模,不足以近似地反映出局部影响力或全局影响力,更不用说图1(a)了。作者将用于关键帧聚合的帧的数量太少的问题称为insufficient problem。</p>
+<h2 id="MEGA"><a href="#MEGA" class="headerlink" title="MEGA"></a>MEGA</h2><p>MEGA通过有效地聚合全局和局部信息来增强关键帧的候选框特征。MEGA是一个多阶段的结构，第一阶段MEGA解决ineffective问题，通过聚合全局和局部信息。如图1(b)上所示，可用的内容仍然十分有限。因此在第二阶段，作者引入了一个新颖的Long Range Memory(LRM)模块，使关键帧能够访问比以前任何方法更多的内容。特别是，不使用从头开始计算当前关键帧的特征，而是重用在先前帧的检测过程中获得的预先计算的特征。这些预先计算的特征存储在LRM中，并在当前帧和先前帧之间建立循环连接。注意，这些存储的特征首次用全局信息增强，这意味着当前关键帧可以获得更多局部和全局的信息。</p>
+<p>MEGA首先将选定的全局特征聚合到局部特征，然后这些经过global增强的局部特征与LRM模块将较长的全局内容和局部信息合并到关键帧中，以更好的进行检测。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qgg1dwsj30ry170hbv.jpg" srcset="/img/loading.gif" alt="image-20201127145138884" style="zoom: 33%;" /></p>
+<h2 id="符号定义"><a href="#符号定义" class="headerlink" title="符号定义"></a>符号定义</h2><p>视频目标检测的目的是对视频中的每一帧{It}Tt=1给出检测结果。假设当前帧为Ik，  Bt={bit}表示RPN在每一帧It上生成的候选框。临近帧{It}k+τt=k-τ中所有的候选框构成了   local pool:<strong>L</strong>={Bt}k+τt=k-τ。对于全局特征，随机打乱顺序排列的序列{1,…,T}，得到一个打乱的索引序列S，然后依次选取Tg帧，将其所有的候选框构成global pool：<img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3q6qcnz0j30h203cq4f.jpg" srcset="/img/loading.gif" alt="image-20201127144219511" style="zoom:25%;" />。最后，引入了一种新颖的long range存储模块<strong>M</strong>，用于存储在前一帧的检测过程中产生的中间特征，以使关键帧能够利用缓存的信息，从而具有对long-term全局和局部依赖性进行建模的能力。作者的终极目标是在<strong>L,G</strong>和<strong>M</strong>的帮助下，为关键帧中所有的候选框给出分类和回归的结果。</p>
+<p>用fi表示每个框bi的语义特征，用gi表示定位特征。gi同时表示空间信息（宽度、高度、中心位置）和时间信息（帧的编号）。</p>
+<h2 id="关系模块："><a href="#关系模块：" class="headerlink" title="关系模块："></a>关系模块：</h2><p>用于挖掘框之间的关系。给出一个框的集合B={bi}，目标关系模块为每个框bi,计算其与其他M个框的关系特征，作为语义特征的加权和。框bi的第m个关系特征计算公式为：</p>
+<p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3q72trqdj30nk02emy8.jpg" srcset="/img/loading.gif" alt="image-20201127144238991" style="zoom: 50%;" /></p>
+<p>其中WmV是一个线性变化矩阵。wij表示bi和bj之间的影响力，通过语义特征f和可能的定位特征g度量。*∈{L,N}表示定位特征是否被合并到w中，L表示合并，N表示不合并。因为定位特征在两个遥远的框之间在时间维度上是冗余的，可能会伤害整体的性能，所以作者设计了一个location-free的版本，去除关系模块，仅关注语义模块。作者的定位特征包含了时间信息，来区别不同帧对box的影响。</p>
+<p>最终将M个关系特征与其原始特征连接，获得增强后的输出特征：</p>
+<p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3q7qawzwj30ua03gabw.jpg" srcset="/img/loading.gif" alt="image-20201127144316936" style="zoom:50%;" /></p>
+<p>生成增强特征后，还附加了一个非线性变换函数h（·），该函数被实现为一个全连接层，并在其后附加了ReLU。此外，可以将关系模块扩展到两个box集合之间的关系。为了方便，使用 <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3q88b5rvj307m026t94.jpg" srcset="/img/loading.gif" alt="image-20201127144345945" style="zoom:50%;" />来表示聚集所有增强的proposal特征，例如<img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3q8lj054j30g203o402.jpg" srcset="/img/loading.gif" alt="image-20201127144407231" style="zoom:33%;" />表示B中所有通过P中的边界框特征增强过的边界框。</p>
+<h2 id="Global-local聚合来解决ineffective问题"><a href="#Global-local聚合来解决ineffective问题" class="headerlink" title="Global-local聚合来解决ineffective问题"></a>Global-local聚合来解决ineffective问题</h2><p>首先详细说明了我们如何设计网络来聚合全局和局部特征，来解决ineffective问题，这意味着分开考虑全局和局部信息。使用图2(a)中的base model来表示该结构。</p>
+<p>首先将<strong>G</strong>中的全局特征合并至<strong>L</strong>，更新函数表示为：</p>
+<p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3q8tvvt2j30gk01i74p.jpg" srcset="/img/loading.gif" alt="image-20201127144420262" style="zoom:50%;" /></p>
+<p>其中，<em>N</em>g(·)是一个堆叠的<strong>location-free</strong>关系模块的函数，Lg表示L通过该函数进行全局增强后的版本。我们的目的是完全利用潜在的特征来增强局部特征,我们使用Ng关系模块，用堆叠的方式迭代进行关系推理，以更好的表征<strong>G</strong>和<strong>L</strong>之间的关系。特别的，第k个关系模块的计算过程表示为。</p>
+<p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3q922z6lj30ie01ct9f.jpg" srcset="/img/loading.gif" alt="image-20201127144434021" style="zoom:33%;" /></p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3q9dw8yaj304g01ujrl.jpg" srcset="/img/loading.gif" alt="image-20201127144452536" style="zoom:33%;" />  表示等式(2)定义的location-free关系模块，<img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3q9qiblfj30400143yh.jpg" srcset="/img/loading.gif" alt="image-20201127144513142" style="zoom:33%;" />表示第一个关系模块的输入。后面的关系模块用前面关系模块的输出作为输入。第Ng个关系模块输出为<strong>L</strong>g。</p>
+<p>在将全局特征合并到局部特征之后，我们寻求使用在<strong>局部特征之下的语义信息和位置信息来进一步增强局部特征</strong>。为实现这一目的，采用一堆Nl <strong>location-based</strong>的关系模块。</p>
+<p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qad44vrj30ek012q36.jpg" srcset="/img/loading.gif" alt="image-20201127144548968" style="zoom:50%;" /></p>
+<p>其中<strong>L</strong>l表示最终增强版本的local pool。将Nl的整个过程进行如下分解：第k个关系模块的计算过程与Ng类似。</p>
+<p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qcf77qhj30rg02eab7.jpg" srcset="/img/loading.gif" alt="image-20201127144747425" style="zoom:50%;" /></p>
+<p>  <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qcqsebrj303801idfw.jpg" srcset="/img/loading.gif" alt="image-20201127144805931" style="zoom:50%;" />表示基于位置的关系模块。采用<strong>L</strong>g（经过全局增强的<strong>L</strong>）作为第一个基于位置的关系模块的输入。  是输出增强过的池<strong>L</strong>l。在最终更新完成后，<strong>L</strong>l中属于关键帧的所有box特征将被提取出来，并通过传统的RCNN头部进行传播，得出分类和回归结果。提取后的特征表示为<strong>C</strong>。</p>
+<h2 id="Long-Range-Memory用于解决insufficient-问题"><a href="#Long-Range-Memory用于解决insufficient-问题" class="headerlink" title="Long Range Memory用于解决insufficient 问题"></a>Long Range Memory用于解决insufficient 问题</h2><p>  如图2(a)所示，在base model中，单帧可以聚合整个Tg帧的全局特征和Tl帧的局部特，这朝着解决ineffective problem迈出了一大步，但仍未解决。该问题可以通过增加Tg和Tl至整个视频的长度来被幼稚的解决，前提是内存和算力无限大。</p>
+<p>  那么，如何能在有限的算力下解决insufficient问题呢？受[5]中循环机制的启发，作者设计了一个Long Range Memory(LRM)模块来实现这一目标。总的来说，LRM通过充分使用预计算的特征，使得base model能捕捉更长的全局和局部内容。作者将这个记忆增强过的版本称为MEGA。</p>
+<h1 id="2-MEGA代码运行结果及相关笔记"><a href="#2-MEGA代码运行结果及相关笔记" class="headerlink" title="2.MEGA代码运行结果及相关笔记"></a>2.MEGA代码运行结果及相关笔记</h1><h2 id="demo运行结果："><a href="#demo运行结果：" class="headerlink" title="demo运行结果："></a>demo运行结果：</h2><p>   <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qdi1vtdj30oq0iy7nn.jpg" srcset="/img/loading.gif" alt="image-20201127144849745" style="zoom:50%;" /></p>
+<p>   <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qdtd3raj30yo0jc4qp.jpg" srcset="/img/loading.gif" alt="image-20201127144906084" style="zoom:50%;" /></p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qe8yrr4j311m0g4b29.jpg" srcset="/img/loading.gif" alt="image-20201127144932144"></p>
+<h2 id="相关函数记录："><a href="#相关函数记录：" class="headerlink" title="相关函数记录："></a>相关函数记录：</h2><ul>
+<li>颜色更改：predictor.py line:562 compute_colors_for_labels()</li>
+<li>画边界框的函数：predictor.py line:570 overlay_boxes()</li>
+<li>给边界框打标签(类名、分数)：predictor.py line:592 overlay_class_names()</li>
+<li>predictor.py line:610 cv2.putText()可以更改字体、文字颜色</li>
+</ul>
+<h2 id="base-与-MEGA对比"><a href="#base-与-MEGA对比" class="headerlink" title="base 与 MEGA对比"></a>base 与 MEGA对比</h2><p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qerfo3pj30to0eih3u.jpg" srcset="/img/loading.gif" alt="image-20201127145002247" style="zoom:50%;" /></p>
+<p>左边为base，在某些帧会出现丢失目标现象，MEGA的效果好很多。</p>
+<p><img src="/Users/htx/Library/Application Support/typora-user-images/image-20201127145443365.png" srcset="/img/loading.gif" alt="image-20201127145443365" style="zoom:50%;" /></p>
+<p>但某些情况下MEGA会将目标误检为cat，并且持续好几帧（可能是由于LRM存储了前几帧检测结果的原因）。base对每一帧都重新检测，没有先前帧的干扰。</p>
+<h2 id="test-net-py的程序逻辑"><a href="#test-net-py的程序逻辑" class="headerlink" title="test_net.py的程序逻辑"></a>test_net.py的程序逻辑</h2><p>首先加载了checkpoints,初始化了用于验证的dataloader，之后在第116行调用Inference进行推理。inference.py中先初始化了计时器，然后调用compute_on_dataset()进行计算。</p>
+<p>计算完成后，调用_accumulate_predictions_from_multiple_gpus()对预测结果进行累积。</p>
+<h2 id="test-net-py运行结果："><a href="#test-net-py运行结果：" class="headerlink" title="test_net.py运行结果："></a>test_net.py运行结果：</h2><p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qfqh580j30q80zwqqq.jpg" srcset="/img/loading.gif" alt="image-20201127145058408" style="zoom:50%;" /></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/MEGA/">MEGA</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/11/27/11-27/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">阅读笔记（11.27)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/12/Java-1/">
+                        <span class="hidden-mobile">Java学习笔记1：快速入门</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "阅读笔记（11.20)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>文献翻译——AlexNet - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-08-29 19:42">
+      2020年8月29日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      81
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年9月12日 晚上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h1 id="ImageNet-Classification-with-Deep-Convolutional-Neural-Networks"><a href="#ImageNet-Classification-with-Deep-Convolutional-Neural-Networks" class="headerlink" title="ImageNet Classification with Deep Convolutional Neural Networks"></a>ImageNet Classification with Deep Convolutional Neural Networks</h1><h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>我们训练了一个庞大的深层卷积神经网络，将ImageNet LSVRC-2010比赛中的120万张高分辨率图像分为1000个不同的类别。在测试数据上，我们取得了37.5％和17.0％的top-1和top-5的错误率，这比以前的先进水平要好得多。具有6000万个参数和650,000个神经元的神经网络由五个卷积层组成，其中一些随后是最大池化层，三个全连接层以及最后的1000个softmax输出。为了加快训练速度，我们使用非饱和神经元和能高效进行卷积运算的GPU实现。为了减少全连接层中的过拟合，我们采用了最近开发的称为“dropout”的正则化方法，该方法证明是非常有效的。我们还在ILSVRC-2012比赛中使用了这种模型的一个变种，取得了15.3％的top-5测试失误率，而第二名的成绩是26.2％。</p>
+<h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h1><p>现有的目标检测方法本质上使用机器学习方法。为了改善他们的表现，我们可以收集更大的数据集，训练更强大的模型，并使用更好的技术来防止过拟合。直到最近，标记好图像的数据集相对还较小——大约上万的数量级（例如，NORB [16]，Caltech-101/256 [8,9]和CIFAR-10/100 [12]）。使用这种规模的数据集可以很好地解决简单的识别任务，特别是如果他们增加了保留标签的转换。例如，目前MNIST数字识别任务的最低错误率（&lt;0.3％）基本达到了人类的识别水平[4]。但是物体在现实环境中可能表现出相当大的变化性，所以要学会识别它们，就必须使用更大的训练集。事实上，小图像数据集的缺点已是众所周知（例如，Pinto[21]），但直到最近才可以收集到数百万的标记数据集。新的大型数据集包括LabelMe [23]，其中包含数十万个完全分割的图像，以及ImageNet [6]，其中包含超过15,000万个超过22,000个类别的高分辨率图像。</p>
+<p>要从数百万图像中学习数千个类别，我们需要一个具有强大学习能力的模型。然而，目标识别任务的巨大复杂性意味着即使是像ImageNet这样大的数据集也不能完美地解决这个问题，所以我们的模型也需要使用很多先验知识来弥补我们数据集不足的问题。卷积神经网络（CNN）就构成了一类这样的模型[16,11,13,18,15,22,26]。它们的容量可以通过改变它们的深度和宽度来控制，并且它们也对图像的性质（即统计量的定态假设以及像素局部依赖性假设）做出准确而且全面的假设。因此，与具有相同大小的层的标准前馈神经网络相比，CNN具有更少的连接和参数，因此它们更容易训练，而其理论最优性能可能稍微弱一些。</p>
+<p>尽管CNN具有很好的质量，并且尽管其局部结构的效率相对较高，但将它们大规模应用于高分辨率图像时仍然显得非常昂贵。幸运的是，当前的GPU可以用于高度优化的二维卷积，能够加速许多大型CNN的训练，并且最近的数据集（如ImageNet）包含足够多的标记样本来训练此类模型，而不会出现严重的过拟合。</p>
+<p>本文的具体贡献如下：我们在ILSVRC-2010和ILSVRC-2012比赛中使用的ImageNet子集上训练了迄今为止最大的卷积神经网络之一[2]，并在这些数据集上取得了迄今为止最好的结果。我们编写了一个高度优化的2D卷积的GPU实现以及其他训练卷积神经网络的固有操作，并将其公开。我们的网络包含许多新的和不同寻常的功能，这些功能可以提高网络的性能并缩短训练时间，详情请参阅第3节。我们的网络规模较大，即使有120万个带标签的训练样本，仍然存在过拟合的问题，所以我们采用了几个有效的技巧来阻止过拟合，在第4节中有详细的描述。我们最终的网络包含五个卷积层和三个全连接层，并且这个深度似乎很重要：我们发现去除任何卷积层（每个卷积层只包含不超过整个模型参数的1%的参数）都会使网络的性能变差。</p>
+<p>最后，网络的规模主要受限于目前GPU上可用的内存量以及我们可忍受的训练时间。我们的网络在两块GTX 580 3GB GPU上需要花费五到六天的时间来训练。我们所有的实验都表明，通过等待更快的GPU和更大的数据集出现，我们的结果可以进一步完善。</p>
+<h1 id="2-数据集"><a href="#2-数据集" class="headerlink" title="2.数据集"></a>2.数据集</h1><p>ImageNet是一个拥有超过1500万个已标记高分辨率图像的数据集，大概有22,000个类别。图像都是从网上收集，并使用Amazon-Mechanical Turk群智工具人工标记。从2010年起，作为Pascal视觉对象挑战赛的一部分，这是每年举办一次的名为ImageNet大型视觉识别挑战赛（ILSVRC）的比赛。 ILSVRC使用的是ImageNet的一个子集，每1000个类别中大约有1000个图像。总共有大约120万张训练图像，50,000张验证图像和150,000张测试图像。</p>
+<p>ILSVRC-2010是ILSVRC中的唯一可以使用测试集标签的版本，因此这也正是我们进行大部分实验的版本。由于我们也在ILSVRC-2012比赛中引入了我们的模型，因此在第6部分中，我们也会给出此版本数据集的结果，尽管这个版本的测试集标签不可用。在ImageNet上，习惯上使用两种错误率：top-1和top-5，其中top-5错误率是正确标签不在被模型认为最可能的五个标签之中的测试图像的百分率。</p>
+<p>mageNet由可变分辨率的图像组成，而我们的系统需要固定的输入尺寸。因此，我们将图像下采样到256×256的固定分辨率。给定一个矩形图像，我们首先重新缩放图像，使得短边长度为256，然后从结果中裁剪出中心的256×256的图片。除了将每个像素中减去训练集的像素均值之外，我们没有以任何其他方式对图像进行预处理。所以我们在像素的（中心）原始RGB值上训练了我们的网络。</p>
+<h1 id="3-结构"><a href="#3-结构" class="headerlink" title="3.结构"></a>3.结构</h1><h2 id="3-1ReLU非线性单元"><a href="#3-1ReLU非线性单元" class="headerlink" title="3.1ReLU非线性单元"></a>3.1ReLU非线性单元</h2><p>对一个神经元模型的输出的常规套路是，给他接上一个激活函数：$f(x)=tanh(x)$或者$f(x)=(1+e^{−x})^{−1}$.就梯度下降法的训练时间而言，这些饱和非线性函数比非饱和非线性函数如$f(x)=max(0,x)$慢得多。根据Nair和Hinton的说法[20]，我们将这种非线性单元称为——修正非线性单元（Rectified Linear Units (ReLUs)）。使用ReLUs做为激活函数的卷积神经网络比起使用tanh单元作为激活函数的训练起来快了好几倍。这个在图1中可被证明，该图展示了对于一个特定的四层CNN，CIFAR-10数据集训练中的误差率达到25%所需要的迭代次数。从这张图的结果可以看出，如果我们使用传统的饱和神经元模型来训练CNN，那么我们将无法为这项工作训练如此大型的神经网络。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gia3wdqpmmj30k60gkmxv.jpg" srcset="/img/loading.gif" alt="image-20200831170906584" style="zoom:50%;" /></center>
+
+<blockquote>
+<p>图1：带有ReLUs的四层卷积神经网络（实线）在CIFAR-10上达到25％的训练错误率，是具有tanh的同等神经网络（虚线）的六倍。每个网络的学习率是独立选择的，以使训练尽快。没有使用任何形式的正则化。这里展示的效果的大小随网络架构的不同而变化，但是具有ReLU的网络持续学习的速度要比具有饱和神经元的等效学习速度快几倍。</p>
+</blockquote>
+<p>我们并不是第一个考虑在CNN中替换掉传统神经元模型的。例如，Jarrett等人[11]声称，非线性函数$f(x)=|tanh(x)|$在他们的对比度归一化问题上，再接上局部均值池化单元，在Caltech-101数据集上表现的非常好。然而，在这个数据集中，主要担心的还是防止过拟合，所以他们观察到的效果与我们在使用ReLU时观察到的训练集的加速能力还是不一样。加快训练速度对大型数据集上训练的大型模型的性能有很大的影响。</p>
+<h2 id="3-2-在多GPU上训练"><a href="#3-2-在多GPU上训练" class="headerlink" title="3.2 在多GPU上训练"></a>3.2 在多GPU上训练</h2><p>单个GTX 580 GPU只有3GB内存，这限制了可以在其上训练的网络的最大尺寸。事实证明，120万个训练样本足以训练那些因规模太大而不适合使用一个GPU训练的网络。因此，我们将网络分布在两个GPU上。目前的GPU很适合于跨GPU并行化操作，因为它们能够直接读写对方的内存，而无需通过主机内存。我们采用的并行化方案基本上将半个内核（或神经元）放在各个GPU上，另外还有一个技巧：GPU只在某些层间进行通信。这意味着，例如，第3层的内核从第2层的所有内核映射（kernel maps）中获取输入。然而，第4层中的内核又仅从位于同一GPU上的第3层中的那些内核映射获取输入。选择连接模式对于交叉验证是一个不小的问题，但这使得我们能够精确调整通信量，直到它的计算量的达到可接受的程度。</p>
+<p>由此产生的架构有点类似于Ciresan等人使用的“柱状”CNN[5]，除了我们的每列不是独立的之外（见图2）。与一个GPU上训练的每个卷积层只有一半的内核数量的网络相比，该方案分别将我们的top-1和top-5错误率分别降低了1.7％和1.2％。双GPU网络的训练时间比单GPU网络更少。</p>
+<h2 id="3-3-局部响应归一化"><a href="#3-3-局部响应归一化" class="headerlink" title="3.3 局部响应归一化"></a>3.3 局部响应归一化</h2><p>ReLU具有理想的属性，它们不需要对输入进行归一化来防止它们饱和。如果至少有一些训练实例为ReLU产生了正的输入，那么这个神经元就会学习。设$a^i_{x,y}$表示第i个内核计算(x,y)位置的ReLU非线性单元的输出，而响应归一化（Local Response Normalization）的输出值定义为$b^i_{x,y}$：</p>
+<script type="math/tex; mode=display">b^i_{x,y}=\frac { a^i_{x,y} }{ (k+\alpha\sum_{j=max(0,i-n/2) }^{ min(N-1,i+n/2) }(\alpha^j_{x,y})^2)^\beta }</script><p>其中，求和部分公式中的nn表示同一个位置下与该位置相邻的内核映射的数量，而NN表示这一层所有的内核数（即通道数）。内核映射的顺序当然是任意的，并且在训练之前就已经定好了。这种响应归一化实现了一种模仿真实神经元的横向抑制，从而在使用不同内核计算的神经元输出之间产生较大的竞争。常数k、n、α和β都是超参数（hyper-parameters），它们的值都由验证集决定。我们取k=2、n=5、$α=10^{−4}$、β=0.75。我们在某些层的应用ReLU非线性单元后再使用这种归一化方法（参见第3.5节）。</p>
+<p>这个方案与Jarrett等人[11]的局部对比归一化方案有些相似之处，但我们的被更准确地称为“亮度归一化”，因为我们没有减去均值。响应归一化将我们的top-1和top-5的错误率分别降低了1.4％和1.2％。我们还验证了这种方案在CIFAR-10数据集上的有效性：没有进行归一化的四层CNN实现了13％的测试错误率，而进行了归一化的则为11％。</p>
+<h2 id="3-4-重叠池化"><a href="#3-4-重叠池化" class="headerlink" title="3.4 重叠池化"></a>3.4 重叠池化</h2><p>CNN中的池化层汇集了相同内核映射中相邻神经元组的输出。在传统方法中，相邻池化单元之间互不重叠（例如[17,11,4]）。更准确地说，一个池化层可以被认为是由一些间隔为s个像素的池化单元组成的网格，每个都表示了一个以池化单元的位置为中心的大小为z×z的邻域。如果我们令s = z，我们就可以得到CNN中常用的传统的局部池化。如果令s&lt;z，我们得到重叠池化。我们在整个网络中使s=2,z=3。与非重叠方案s= 2，z = 2相比，此方案将top-1和top-5的错误率分别降低了0.4％和0.3％，这产生了等效尺寸的输出。我们在训练中观察到，有重叠池化的模型很难过拟合。</p>
+<h2 id="3-5-整体结构"><a href="#3-5-整体结构" class="headerlink" title="3.5 整体结构"></a>3.5 整体结构</h2><p>现在我们已经准备好描述CNN的整体架构了。如图2所示，这个网络包含了八层权重;前五个是卷积层，其余三个为全连接层。最后的全连接层的输出被送到1000维的softmax函数，其产生1000个类分布的预测。我们的网络最大化多项逻辑回归目标，这相当于在预测的分布下最大化训练样本中正确标签对数概率的平均值。</p>
+<p>第二，第四和第五个卷积层的内核仅与上一层存放在同一GPU上的内核映射相连（见图2）。第三个卷积层的内核连接到第二层中的所有内核映射。全连接层中的神经元连接到前一层中的所有神经元。响应归一化层紧接着第一个和第二个卷积层。  在3.4节中介绍的最大池化层，后面连接响应归一化层以及第五个卷积层。将ReLU应用于每个卷积层和全连接层的输出。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gi94fti718j319a0em77q.jpg" srcset="/img/loading.gif" alt="image-20200830204209962"></p>
+<blockquote>
+<p>图2：一个我们CNN结构的插图，明确地显示两个gpu之间职责的划分。一个GPU运行在图形顶部的分层部分，而另一个运行图形底部的分层部分。GPU只在某些层上通信。网络的输入为150,528维，网络其余层中的神经元数量为253,440–186,624–64,896–64,896–43,264–4096–4096-1000。</p>
+</blockquote>
+<p>第一个卷积层的输入为224×224×3的图像，对其使用96个大小为11×11×3、步长为4（步长表示内核映射中相邻神经元感受野中心之间的距离）的内核来处理输入图像。第二个卷积层将第一个卷积层的输出（已进行响应归一化以及池化）作为输入，并使用256个内核处理图像，每个内核大小为5×5×48。第三个、第四个和第五个卷积层彼此连接而中间没有任何池化或归一化层。第三个卷积层有384个内核，每个的大小为3×3×256，其输入为第二个卷积层的输出(已归一化和池化）。第四个卷积层有384个内核，每个内核大小为3×3×192。第五个卷积层有256个内核，每个内核大小为3×3×192。全连接层各有4096个神经元。</p>
+<h1 id="4-减少过拟合"><a href="#4-减少过拟合" class="headerlink" title="4. 减少过拟合"></a>4. 减少过拟合</h1><p>我们的神经网络架构拥有6000万个参数。尽管ILSVRC的1000个类别使得每个训练样本从图像到标签的映射被限制在了10 bit之内，但这不足以保证训练这么多参数而不出现过拟合。下面，我们将介绍对付过度拟合的两个方法。</p>
+<h2 id="4-1-数据增强"><a href="#4-1-数据增强" class="headerlink" title="4.1 数据增强"></a>4.1 数据增强</h2><p>减小过拟合的最简单且最常用的方法就是，使用标签保留转换（label-preserving transformations，例如[25,4,5]），人为地放大数据集。我们采用两种不同形式的数据增强方法，它们都允许通过很少的计算就能从原始图像中生成转换图像，所以转换后的图像不需要存储在硬盘上。在我们实现过程中，转换后的图像是使用CPU上的Python代码生成的，在生成这些转换图像的同时，GPU还在训练上一批图像数据。所以这些数据增强方案在计算上实际上是很高效的。</p>
+<p>数据增强的第一种形式包括平移图像和水平映射。我们通过从256×256图像中随机提取224×224的图像块（及其水平映射）并在这些提取的图像块上训练我们的网络来做到这一点。如果没有这个方案，我们的网络就可能会遭受大量的的过拟合，可能会迫使我们不得不使用更小的网络。在测试时，网络通过提取5个224×224的图像块（四个角块和中心块）以及它们的水平映射（因此总共包括10个块）来进行预测，并通过十个块上的softmax层求预测结果的均值。</p>
+<p>第二种形式的数据增强包括改变训练图像中RGB通道的亮度。具体而言，我们在整个ImageNet训练集的图像的RGB像素值上使用PCA。对于每个训练图像，我们增加多个通过PCA找到的主成分，大小与相应的特征值成比例，乘以一个随机值，该随机值属于均值为0标准差为0.1的高斯分布。因此，对于每个图像的RGB像素有$I_{xy}=[I_{xy}^R,I_{xy}^G,I_{xy}^B]^T$，我们加入如下的值：</p>
+<script type="math/tex; mode=display">[P1,P2,P3][\alpha_1\lambda_1,\alpha_2\lambda_2,\alpha_3\lambda_3]^T</script><p>其中，$P_i$和$λ_i$分别是3x3的RGB协方差矩阵的第i个特征向量和第i个的特征值，而$α_i$是前面所说的随机值。对于一张特定训练图像中的所有像素，每个$α_i$只会被提取一次，直到这张图片再次用于训练时，才会重新提取随机变量。这个方案近似地捕捉原始图像的一些重要属性，对象的身份不受光照的强度和颜色变化影响。这个方案将top-1错误率降低了1％以上。</p>
+<h2 id="4-2-Dropout"><a href="#4-2-Dropout" class="headerlink" title="4.2 Dropout"></a>4.2 Dropout</h2><p>结合许多不同模型的预测结果是减少测试错误率的一种非常成功的方法[1,3]，但对于已经花费数天时间训练的大型神经网络来说，它似乎成本太高了。然而，有一种非常有效的<strong>模型组合方法</strong>，在训练期间，只需要消耗1/2的参数。这个新发现的技术叫做“Dropout”[10]，它会以50%的概率将隐含层的神经元输出置为0。以这种方法被置0的神经元不参与网络的前馈和反向传播。因此，每次给网络提供了输入后，神经网络都会采用一个不同的结构，但是这些结构都共享权重。这种技术减少了神经元复杂的共同适应，因为神经元无法依赖于其他特定的神经元而存在。因此，它被迫学习更强大更鲁棒的功能，使得这些神经元可以与其他神经元的许多不同的随机子集结合使用。在测试时，我们使用了所有的神经元，并将它们的输出乘以0.5。这是一个与采用指数级成倍增长的dropout的网络产生的预测结果分布的几何平均值的合理近似。</p>
+<p>我们在图2中的前两个全连接层上使用了dropout。没有dropout，我们的网络会出现严重的过拟合。Dropout大概会使达到收敛的迭代次数翻倍。</p>
+<h1 id="5-训练细节"><a href="#5-训练细节" class="headerlink" title="5. 训练细节"></a>5. 训练细节</h1><p>我们使用随机梯度下降法来训练我们的模型，每个batch有128个样本，动量（momentum）为0.9，权重衰减（weight decay）为0.0005。我们发现这种较小的权重衰减对于模型的训练很重要。换句话说，权重衰减在这里不仅仅是一个正则化方法：它减少了模型的训练误差。权重ω的更新法则是：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gia1nspxrvj30ps05qwew.jpg" srcset="/img/loading.gif" alt="image-20200831155137366" style="zoom:50%;" /></center>
+
+<p>其中，ii表示当前的迭代次数，vv表示动量（momentum），ε表示学习率， $⟨\frac{∂L}{∂ω}|_{ωi}⟩_{Di}$是第ii批次的目标函数关于w的导数（wi的偏导数）$Di$的平均值。</p>
+<p>我们使用标准差为0.01、均值为0的高斯分布来初始化各层的权重。我们使用常数1来初始化了网络中的第二个、第四个和第五个卷积层以及全连接层中的隐含层中的所有偏置参数。这种初始化权重的方法通过向ReLU提供了正的输入，来加速前期的训练。我们使用常数0来初始化剩余层中的偏置参数。</p>
+<p>我们对所有层都使用相同的学习率，在训练过程中又手动进行了调整。我们遵循的启发式方法是：以当前的学习速率训练，验证集上的错误率停止降低时，将学习速率除以10。学习率初始时设为0.01，并且在终止前减少3次。我们使用120万张图像的训练集对网络进行了大约90次迭代的训练，这在两块NVIDIA GTX 580 3GB GPU上花费了大约5到6天的时间。</p>
+<h1 id="6-结果"><a href="#6-结果" class="headerlink" title="6. 结果"></a>6. 结果</h1><p>我们在ILSVRC-2010上取得的结果如表1所示。我们的网络的top-1和top-5测试集错误率分别为37.5％和17.0％。在ILSVRC-2010比赛期间取得的最佳成绩是47.1％和28.2％，其方法是对六种不同的稀疏编码模型所产生的预测结果求平均[2]。此后公布的最佳结果为45.7％、25.7％，其方法是对两种经过密集采样的特征[24]计算出来的Fisher向量（FV）训练的两个分类器取平均值。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gia2d2yq7pj30j006at9j.jpg" srcset="/img/loading.gif" alt="image-20200831161557022" style="zoom:50%;" /></center>
+
+<blockquote>
+<p>表1：在ILSVRC-2010测试集上的结果对比。斜体是其他人实现的最好结果。</p>
+</blockquote>
+<p>我们还在ILSVRC-2012竞赛中使用了我们的模型，并在表2中给出了我们的结果。由于ILSVRC-2012测试集标签未公开，因此我们无法给出我们测试过的所有模型在测试集上的错误率。在本节的其余部分中，我们将验证集和测试集的错误率互换，因为根据我们的经验，它们之间的差值不超过0.1％（见表2）。本文描述的CNN的top-5错误率达到了18.2％。对五个相似CNN的预测结果计算均值，得到的错误率为16.4％。单独一个CNN，在最后一个池化层之后，额外添加第六个卷积层，对整个ImageNet Fall 2011 release(15M images, 22K categories)进行分类，然后在ILSVRC-2012上“微调”（fine-tuning）网络，得到的错误率为16.6％。对整个ImageNet Fall 2011版本的数据集下预训练的两个CNN，求他们输出的预测值与前面提到的5个不同的CNN输出的预测值的均值，得到的错误率为15.3％。比赛的第二名达到了26.2％的top-5错误率，他们的方法是：对几个在特征取样密度不同的Fisher向量上训练的分类器的预测结果取平均的方法[7]。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gia2purvq1j30t408smyk.jpg" srcset="/img/loading.gif" alt="image-20200831162813886" style="zoom:50%;" /></center>
+
+<blockquote>
+<p>表2:ILSVRC-2012验证和测试集的错误率比较。斜体是他人获得的最佳结果。对带有星号*的模型进行了“预训练”，以对整个ImageNet 2011 Fall release进行分类。有关详细信息，请参见第6节。</p>
+</blockquote>
+<p>最后，我们还在ImageNet Fall 2009版本的数据集上报告错误率，总共有10,184个类别和890万张图像。在这个数据集中，我们遵循文献中的使用一半图像用于训练，一半图像用于测试的惯例。由于没有建立测试集，所以我们的拆分方法有必要与先前作者使用的拆分方法不同，但这并不会对结果产生显著的影响。我们在这个数据集上的top-1和top-5错误率分别是67.4％和40.9％，是通过前面描述的网络获得的，但是在最后的池化层上还有额外的第6个卷积层。该数据集此前公布的最佳结果是78.1％和60.9％[19]。</p>
+<h2 id="6-1-定性评估"><a href="#6-1-定性评估" class="headerlink" title="6.1 定性评估"></a>6.1 定性评估</h2><p>图3显示了由网络的两个数据连接层学习得到的卷积核。该网络已经学习到许多频率和方向提取的内核，以及各种色块。请注意两个GPU所展现的不同特性，这也是3.5节中介绍的限制互连的结果。GPU1上的内核在很大程度上与颜色无关，然而GPU2上的内核在很大程度上都于颜色有关。这种特异性在每次迭代期间都会发生，并且独立于任何特定的随机权重初始化过程（以GPU的重新编号为模）。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gia20l0no1j30ii07y0yu.jpg" srcset="/img/loading.gif" alt="image-20200831160356963" style="zoom:50%;" /></center>
+
+<blockquote>
+<p>图3：第一个卷积层从224x224x3的输入图像学习到的11x11x3大小的卷积核。顶部48个卷积核在GPU1上学习，底部48个卷积核在GPU2上学习。第6.1节有详细介绍。</p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gia30k7o4zj318e0hmnpd.jpg" srcset="/img/loading.gif" alt="image-20200831163831435"></p>
+<blockquote>
+<p>图4：左边八个是ILSVRC-2010测试图像和我们的模型认为最可能的五个标签。正确的标签写在每个图像下，并且分配给正确标签的概率也用红色条显示（如果它恰好位于前5位）。右侧第一栏中的五个ILSVRC-2010测试图像。其余的列显示了六个训练图像，这些图像在最后一个隐藏层中生成特征向量，距离测试图像的特征矢量的欧几里得距离最小。</p>
+</blockquote>
+<p>在图4的左边，我们通过计算8张测试图像的top-5预测来定性评估网络的训练结果。请注意，即使是偏离中心的物体，如左上角的螨虫，也可以被网络识别出来。大多数top-5的标签都显得比较合理。例如，只有其他类型的猫才被认为是豹子的可能标签。在某些情况下（栅栏、樱桃），照片的关注点存在模糊性，不知道到底该关注哪个。</p>
+<p>另一个研究可视化的网络的方法是，考虑由最后一个4096维隐含层中的图像的特征的激活函数输出值。如果两幅图像产生有的欧氏距离，我们可以认为高层次的神经网络认为它们是相似的。图4显示了测试集中的5个图像和训练集的6个图像，这些图像根据这种度量方法来比较它们中的哪一个与其最相似。请注意，在像素层次上，待检测的训练图像通常不会与第一列中的查询图像有较小的L2距离。例如，检索到的狗和大象有各种不同的姿势。我们在补充材料中提供了更多测试图像的结果。</p>
+<p>通过使用欧式距离来计算两个4096维实值向量的相似性，效率不高，但是通过训练自编码器可以将这些向量压缩为较短的二进制码，能够使其更高效。与应用自编码器到原始像素[14]相比，这应该是更好的图像检索方法。它不使用图像标签，因此更倾向于检索具有相似图案边缘的图像，不管它们的图像语义是否相似。</p>
+<h1 id="7-讨论"><a href="#7-讨论" class="headerlink" title="7. 讨论"></a>7. 讨论</h1><p>我们的研究结果表明，一个大的深层卷积神经网络能够在纯粹使用监督学习的情况下，在极具挑战性的数据集上实现破纪录的结果。值得注意的是，如果移除任何一个卷积层，网络的性能就会下降。例如，删除任何中间层的结果会导致网络性能的top-1错误率下降2%。因此网络的深度对于实现我们的结果真的很重要。</p>
+<p>为了简化我们的实验，我们没有使用任何无监督的预训练方法，尽管这样可能会有所帮助，特别是如果我们获得了足够的计算能力来显著地增加网络的大小而不会相应地增加已标记数据的数量。到目前为止，我们的结果已经获得了足够的提升，因为我们已经使网络更大，并且训练了更长时间。但我们仍然有很大的空间去优化网络，使之能够像人类的视觉系统一样感知。最后，我们希望对视频序列使用非常大非常深的卷积神经网路，其中时间结构提供了非常有用的信息，这些信息往往在静态图像中丢失了，或者说不太明显。</p>
+<h1 id="附：原文"><a href="#附：原文" class="headerlink" title="附：原文"></a>附：原文</h1>
+
+	<div class="row">
+    <embed src="/pdf/AlexNet.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+ 
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/">文献翻译</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AlexNet/">AlexNet</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/09/02/newblog/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">网站新域名htx1998.cn正式启用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/28/EfficientDet/">
+                        <span class="hidden-mobile">文献翻译——EfficientDet：可扩展且高效的目标检测</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "文献翻译——AlexNet&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

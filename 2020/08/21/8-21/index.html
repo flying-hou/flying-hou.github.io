@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>阅读笔记（8.21) - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-08-21 14:40">
+      2020年8月21日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      75
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年8月21日 下午
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>计算机视觉领域和目标相关的经典任务有三种：分类、检测和分割。其中分类的目标是获取待检测目标“是什么？”，而检测则需要在图片上用方框出目标，知道目标“在哪里？”，目标分割则需要在像素级别上回答“在哪里？”的问题。目标分割又分为语义分割（Semantic segmentation）和实例分割（Instance segmentation），语义分割需要在像素级别上将同类物体分割出来，对于同类物体的不同实例不需单独分割。而实例分割需要在语义分割的基础上按个体分割，找出同一类物体的不同个体。</p>
+<p>此前我阅读学习了YOLO系列和R-CNN系列经典目标检测算法，本次阅读首先学习了将YOLO和Faster RCNN结合起来的SSD算法[1]，完善了对目标检测经典论文的阅读，我认为学习经典的算法有助于后续学习最新的算法。之后阅读了一篇目标分割方向的综述论文[2]，学习了常用的实例分割方法：MASK R-CNN[4],由于MASK R-CNN用到了FCN，所以先学习了FCN[3]。最后阅读了两篇目标跟踪方向的综述性论文[5,6]。对目标分割和目标跟踪方向有了初步的了解。</p>
+<p>阅读文献：</p>
+<p>[1] Liu W, Anguelov D, Erhan D, et al. Ssd: Single shot multibox detector[C]//European conference on computer vision. Springer, Cham, 2016: 21-37.</p>
+<p>[2] Song Y, Yan H. Image Segmentation Techniques Overview[C]//2017 Asia Modelling Symposium (AMS). IEEE, 2017: 103-107.</p>
+<p>[3] Long J, Shelhamer E, Darrell T. Fully convolutional networks for semantic segmentation[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2015: 3431-3440.</p>
+<p>[4] He K, Gkioxari G, Dollár P, et al. Mask r-cnn[C]//Proceedings of the IEEE international conference on computer vision. 2017: 2961-2969.</p>
+<p>[5]王鑫瑞.目标跟踪算法研究综述[J].信息通信,2020(04):42-43+46.</p>
+<p>[6]王海涛,王荣耀,王文皞,王海龙,刘强.目标跟踪综述[J].计算机测量与控制,2020,28(04):1-6+21.</p>
+<h1 id="1-SSD"><a href="#1-SSD" class="headerlink" title="1. SSD"></a>1. SSD</h1><p>R-CNN系列算法是基于“Proposal+Classification”的Two Stage目标检测算法，这一类算法先预先回归一次边框，然后进行骨干网络训练，精度较高但速度较慢。由此诞生了YOLO系列One Stage算法。YOLO只做了一次边框回归和打分，速度较快，能达到实时效果。但由于只做了一次边框回归和打分，导致对小目标训练不充分，对目标尺度敏感，对尺度变化较大的物体泛化能力较差。</p>
+<p>针对YOLO和Faster R-CNN各自的优缺点，WeiLiu等人提出了SSD算法（Single Shot MultiBox Detector），采用了One Stage的理念，提高检测速度。同时融入Faster R-CNN中的Anchors思想，进行特征分层提取并依次计算边框回归和分类操作，可适应多种尺度的目标训练和检测任务，同时精度高，实时性好。</p>
+<p>SSD网络的设计思想是：分层特征提取，依次进行边框回归和分类。因为不同层次的特征图代表不同层次的语义信息：低层次的特征图代表低层语义信息（含有更多细节），适合小尺度目标学习，能提高语义分割质量；高层次的特征图代表高层语义信息，适合对大尺度目标进行深入学习，能平滑分割结果。</p>
+<p>SSD网络的结构被分为6个stage，每个stage学到一幅特征图，然后进行边框回归和分类，每个Stage包含多个卷积层操作。SSD采用VGG16的前五层卷积网络作为第一个stage，将VGG16中fc6和fc7两个全连接层转换为两个卷积层conv6和conv7作为第2、3个stage。接着增加了Conv8、Conv9、Conv10、Conv11四层网络，用来提取高层次语义信息。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghyfg5bl52j31da0qs0zc.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>设计要点：</p>
+<ul>
+<li>Default Box生成：作者充分吸取Faster R-CNN中的Anchor机制，在每个stage中根据特征图的大小，按照固定的尺寸和长宽比生成Default Box。例如conv9这一层的特征图大小为5x5，每个点默认生成6个box，在这一层上共生成5x5x6=150个box。</li>
+<li>特征向量生成：在每张特征图上生成许多Default Box之后，还需要生成相应的特征向量，用来进行边框回归和分类。边框回归需要4维向量，分别是x、y方向的缩放和平移。假设数据集类别数为c，加上背景，总类别数为c+1类。故SSD网络采用c+1维向量来代表某个Default Box在每个类别上得到的分数。假设使用VOC数据集，该数据集有20个类别。每个Default Box将生成一个20+1+4=25维的特征向量。</li>
+<li>新增四层卷积网络。如前文所述，SSD共增加了Conv8、Conv9、Conv10、Conv11四个卷积层，新增的这些卷积层均通过一些小的卷积核操作。对于具有p个通道（num_output）的大小为m×n的特征层，使用3×3×p卷积核卷积操作，其中Padding和stride都为1，保证卷积后的特征图大小不变。</li>
+<li>损失函数设计：总体目标损失函数是位置损失（loc）和置信损失（conf）的加权和。</li>
+</ul>
+<p>SSD算法的基本步骤是：输入图片经过卷积神经网络提取特征，生成特征图；抽取其中六层特征图，并在其每个点上生成default box；将生成的所有default box执行非极大值抑制，输出筛选后的结果。</p>
+<p><strong>SSD算法总结：</strong></p>
+<p>创新点：</p>
+<ul>
+<li>采用不同尺度的特征图进行检测，大尺度的特征图可用来检测小物体，小尺度的特征图检测大物体。</li>
+<li>采用不同尺度和长宽比的先验框。</li>
+<li>实现高精度的端到端训练，即使输入相对低分辨率的图像依然可以在速度和精度上得到权衡。</li>
+</ul>
+<p>优点：运行速度快，可与YOLO媲美；检测精度高，可与Faster R-CNN媲美。</p>
+<p>缺点：需人工设置prior box的基础参数，prior box的基础大小和形状不能直接通过学习获得。</p>
+<h1 id="2-Image-Segmentation-Techniques-Overview"><a href="#2-Image-Segmentation-Techniques-Overview" class="headerlink" title="2. Image Segmentation Techniques Overview"></a>2. Image Segmentation Techniques Overview</h1><p>目前的图像分割技术包括：基于区域的分割、边缘检测分割、基于聚类的分割、基于弱监督学习的CNN分割。</p>
+<ul>
+<li><p><strong>阈值分割方法。</strong>阈值分割是基于区域的分割算法中最常用的分割技术之一。本质是根据特定标准自动确定最佳阈值，并根据灰度使用这些像素以实现聚类。</p>
+<ul>
+<li>阈值分割可以分为局部阈值法和全局阈值法。全局阈值方法通过单个阈值将图像分为目标和背景两个区域。局部阈值方法需要选择多个分割阈值，并通过多个阈值将图像分为多个目标区域和背景。</li>
+<li>最常用的阈值分割算法是最大的类间差异方法（Otsu），除此之外还有基于熵的阈值分割方法，最小误差方法，共现矩阵方法，矩保持方法，简单统计方法，概率松弛方法，模糊集方法。</li>
+<li>优点：计算简单，运算速度快。特别是当目标和背景具有高对比度时，可以获得良好的分割效果</li>
+<li>缺点：对于在图像中没有明显的灰度差异或灰度值有较大重叠的图像分割问题，很难获得准确的结果。由于它仅考虑图像的灰度信息而不考虑图像的空间信息，因此对噪声和灰度不均匀敏感，因此经常将其与其他方法结合使用。</li>
+</ul>
+</li>
+<li><p><strong>区域增长分割法。</strong>基本思想是将具有相似属性的像素合并以形成区域，对于每个要划分的区域，首先找到一个种子像素作为生长点，然后用该区域中具有相似属性的像素点合并周围邻域。</p>
+<ul>
+<li>优点：可以将具有相同特征的连接区域分开，并提供良好的边界信息和分割结果。</li>
+<li>缺点：计算量大，噪声和灰度不均匀会导致空隙和过度分割。阴影往往对图像造成不好的影响。</li>
+</ul>
+</li>
+<li><p><strong>边缘检测分割法。</strong>利用像素的不同区域边缘的的像素灰度或颜色不连续性检测区域来实现图像分割。</p>
+<ul>
+<li>对象的边缘呈图像的不连续局部特征的形式，即图像的最重要部分局部亮度发生变化，例如灰度值的突变，颜色的突变，纹理的变化等。使用不连续性是为了检测边缘，从而达到图像分割的目的。</li>
+<li>可以使用导数运算来检测两个相邻区域之间灰度值不连续的情况。</li>
+<li>广泛的一阶微分算子是Prewitt算子，Roberts算子和Sobel算子。</li>
+<li>二阶微分算子具有非线性算子，例如Laplacian，Kirsch算子和Wallis算子。</li>
+</ul>
+</li>
+<li><strong>基于聚类的分割。</strong>以事物之间的相似度为分类准则，即根据样本集的内部结构将其划分为多个子类，以使同类样本尽可能相似，不同的样本尽可能不相似。<ul>
+<li>利用特征空间聚类方法对图像空间中的像素点进行分割，得到相应的特征空间点。根据它们在特征空间中的聚集，对特征空间进行分割，然后将它们映射回原始图像空间，得到分割结果。</li>
+<li>K-Means是最常用的聚类算法之一。K-means的基本思想是根据距离将样本集合到不同的簇中。两点越接近，越能得到紧凑独立的簇作为聚类目标。</li>
+<li>K-Means优点：快速、简单、高效、可扩展，适用于大数据集。</li>
+<li>K-Means缺点：算法每次迭代都要遍历所有样本，时间复杂度高。且聚类数K没有明确的选择标准。</li>
+</ul>
+</li>
+<li><strong>基于弱监督学习的CNN分割方法。</strong>涉及为图像中的每个像素分配语义标签的问题，由三个部分组成。1）提供包含哪些对象的图像。2）给出对象的边界。3）图像中的目标区域标记有部分像素。</li>
+</ul>
+<h1 id="3-FCN"><a href="#3-FCN" class="headerlink" title="3. FCN"></a>3. FCN</h1><p>对于一般的分类CNN网络，如VGG和Resnet，网络的最后都是全连接层，经过softmax后可以获得类别的概率信息。但这个概率信息是一维的，适用于整个图片的分类，不能用于表示每个像素点的类别，所以全连接方法不适用于图像分割。FCN即把最后的全连接层都转换为卷积层，这样就可以获得一张二维特征图，之后经过softmax获得每个像素点的分类信息，从而解决分割问题。</p>
+<p>上采样有3种方法：双线性插值、反卷积和反池化。反卷积是一种特殊的正向卷积，先按照一定的比例补0来扩大输入图像尺寸，然后旋转卷积核进行正向卷积。上采样的意义在于将小尺寸的高维度feature map恢复回去，以便做逐像素的预测，获得每个点的分类信息。反卷积操作输出的图像实际是很粗糙的，丢失了很多细节。因此需要找到一种方式填补丢失的细节数据，所以就有了跳跃结构。</p>
+<p>FCN网络的原理（跳跃结构）如图所示：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghyfg68dw5j30wx0mf765.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>1） FCN-32s：直接对pool5特征层进行32倍上采样获得32x upsampled feature，再对其每个点做softmax，获得32x upsampled feature 分割图。</p>
+<p>2） FCN-16s:对pool5进行2倍上采样，将其与pool4逐点相加，最后对相加的特征图进行16倍上采样，并做softmax，获得16x upsampled feature prediction.</p>
+<p>3） FCN-8s:将FCN-16s中相加得到的特征图再与pool3逐点相加，得到更多层次的特征融合。</p>
+<p>作者在文中给出了三种网络的结果对比，显然多层特征融合有助于提高分割准确性。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghyfg6ts8bj30rm0bqwj0.jpg" srcset="/img/loading.gif" alt="img" style="zoom:33%;" /></center>
+
+<p><strong>FCN总结：</strong></p>
+<p>优点：</p>
+<ul>
+<li>FCN将传统CNN中的全连接层转换为一个个卷积层。因为没有全连接层，可适应任意尺寸输入，不用要求所有训练图像和测试图像具有同样的尺寸。</li>
+<li>FCN通过反卷积对低分辨率图像进行上采样，仅使用最后一层池化后的特征图进行上采样，得到的结果很粗糙，作者使用了一个跳跃结构，将不同池化层的结果进行特征融合，补充细节，优化输出结果。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>没有考虑到像素间的关系，忽略了在通常的基于像素分类的分割方法中使用的空间规整步骤，缺乏空间一致性。</li>
+<li>分割结果不够精细，图像过于模糊或平滑，没有分割出目标图像的具体细节。</li>
+</ul>
+<h1 id="4-MASK-R-CNN"><a href="#4-MASK-R-CNN" class="headerlink" title="4. MASK R-CNN"></a>4. MASK R-CNN</h1><center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghyfg7aeicj30u80fck1u.jpg" srcset="/img/loading.gif" alt="img" style="zoom: 33%;" /></center>
+
+<p>  Mask R-CNN是一个非常灵活的框架，可以增加不同的分支完成不同的任务，例如:实例分割、语义分割、目标检测、目标检测、目标分类、人体姿势识别等多种任务。为同时实现高速和高准确率检测，作者联合了经典的目标检测算法Faster R-CNN和经典的语义分割算法FCN。同时发现了ROI Pooling中存在的像素偏差问题，提出了ROI Align策略进行修正，进一步提高了准确率。</p>
+<p>  Mask R-CNN可被分解为3个模块：Faster R-CNN、ROIAlign和FCN，这里重点介绍ROIAlign。传统的ROI Pooling方法在进行池化操作时，会对非整数结果进行量化操作（即取整）。为了得到固定大小的feature map，需要经过两次量化过程：1）图像坐标-&gt;feature map坐标2)feature map坐标-&gt;ROI feature坐标。这就引入了两次误差，导致将feature空间的ROI对应到原图上时，会出现很大的偏差。为解决此问题，作者提出了ROIAlign方法，ROIAlign方法没有使用量化操作，即保留池化运算结果的小数点，不取整。但是像素点的位置都是整数，为小数的像素点的值应该是多少呢？作者使用了“双线性插值”算法，利用图像中虚拟点四周真实存在的四个像素值来估计出该虚拟点的值。这样以来，没有使用量化操作，也就没有引入误差，即feature map中的像素和原图中的像素完全对齐，没有偏差，这将有利于进行实例分割。</p>
+<p>  MASK R-CNN在损失函数中加入了Mask分支，定义了Lmask允许网络为每一类生成一个mask，计算loss的时候，并不是每个类别的sigmoid输出都计算二值交叉熵损失，而是该像素属于哪个类，哪个类的sigmoid输出才要计算损失。不用和其它类进行竞争，将分类和mask生成分解开来，不同的mask之间不存在竞争关系，可以提高实例分割的效果。</p>
+<p><strong>总结：</strong></p>
+<ul>
+<li>Mask R-CNN使用ResNet-FPN作为backbone，有利于多尺度物体的检测和分割。</li>
+<li>提出了RoI Align，解决了ROI Pooling的像素偏差问题，大幅提高分割的准确率。</li>
+<li>新增Mask分支, 在每个ROI上像素级别地预测分割masks，该分支与原有的classification、bounding box regression并行进行，将mask分割预测和分类预测彻底解耦。</li>
+<li>独立地为每个类别预测一个二进制掩码，类别之间没有竞争，并且依靠网络的ROI分类分支来预测类别。</li>
+</ul>
+<h1 id="5-目标跟踪算法研究综述"><a href="#5-目标跟踪算法研究综述" class="headerlink" title="5. 目标跟踪算法研究综述"></a>5. 目标跟踪算法研究综述</h1><p>跟踪算法的精度和鲁棒性取决于对运动目标的表达和相似性度量的定义。</p>
+<p>跟踪算法的实时性取决于匹配搜索策略和滤波预测算法。</p>
+<p>目标跟踪算法的分类：</p>
+<p>  按跟踪对象划分：基于模型的跟踪、基于区域的跟踪、基于轮廓的跟踪、基于特征的跟踪</p>
+<ul>
+<li><strong>基于模型的目标跟踪</strong></li>
+</ul>
+<p>根据目标的几何模型进行跟踪，在学习阶段构建模型，跟踪阶段对区域和目标模型进行匹配。</p>
+<p>鲁棒性强，跟踪精度高，抗干扰能力强，但计算复杂。</p>
+<p>模型构建有三种方式：</p>
+<p>1） 线图模型（Stick Figures Model）根据人的骨骼运动使用不同的直线组合来表示人体。</p>
+<p>2） 2D轮廓模型，利用人体投影建立模型。</p>
+<p>3） 3D模型，利用三维立体模型来描述人体。</p>
+<ul>
+<li><strong>基于区域的目标跟踪</strong></li>
+</ul>
+<p>根据先前目标检测的结果或手动输入的数据，提前确定好目标模板，在相邻图像上与目标模板进行匹配，根据匹配程度对目标进行跟踪。由于提取了完整的目标模板，相对于其他跟踪算法获取的信息更多。近期的研究集中在处理模板变化的情况。缺点：逐帧匹配，运算量大。</p>
+<ul>
+<li><strong>基于轮廓的目标跟踪</strong></li>
+</ul>
+<p>使用封闭的轮廓描述目标，先描述出初始目标，然后不断的更新轮廓，实现连续跟踪。</p>
+<ul>
+<li><strong>基于特征的目标跟踪</strong></li>
+</ul>
+<p>常用的局部特征：轮廓、颜色、卷积特征、纹理。</p>
+<p>相关滤波器用于描述数字信号之间的相似性，即信号之间的联系。</p>
+<p><strong>主流的相关滤波算法：</strong></p>
+<ul>
+<li><strong>最小输出平方误差和滤波器：</strong>在图像初始帧确定目标位置，跟踪时与前一帧模型进行比较。在根据PSR值检测到目标被遮挡时可以暂停跟踪，在目标重新出现后继续跟踪。适用于简单、小尺度变化的场景，算法鲁棒性好但只使用灰度作为特征，在目标尺度发生改变时难以适应。</li>
+<li><strong>基于颜色的粒子滤波器跟踪算法：</strong>将颜色分布集成到粒子滤波中，与基于边缘的图像特征结合使用。选用颜色分布是因为颜色对部分遮挡具有鲁棒性，旋转和缩放图像颜色不变。但由于颜色会随着光照、时间、视角、相机参数等因素发生变化，因此在跟踪图像时会动态调整目标模型。基于颜色的粒子滤波器常用于非线性和非高斯估计的问题，但容易受到光照影响，实时性差。</li>
+<li><strong>判别相关滤波器</strong>(Discriminative Correlation Filters)<strong>：</strong>利用训练样本的周期假设，有效的学习场景中所有补丁的分类器得到邻域。周期假设引入了不必要的边界效应，降低了跟踪模型的质量等级。可以应用于复杂场景，但难以适应目标出现大幅度的形变。</li>
+<li><strong>空间正则化判别滤波器</strong>（Spatially Regularized Discriminative Correlation Filters）<strong>：</strong>在学习阶段引入空间规则化分量，根据相关滤波器系数的空间分布阳离子来乘法了相关滤波器系数。也可用于复杂场景，但跟踪后图像分辨率降低。</li>
+</ul>
+<h1 id="6-目标跟踪综述"><a href="#6-目标跟踪综述" class="headerlink" title="6. 目标跟踪综述"></a>6. 目标跟踪综述</h1><p>根据跟踪目标数目的不同，目标跟踪可分为单目标跟踪和多目标跟踪。目前主流的目标跟踪算法主要由外观模型和目标搜索两个部分组成。目标搜索是对比视频中每一帧图像的信息来帮助目标跟踪，外观模型主要是充分利用目标特征，使跟踪目标和背景区分出来。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghyfg5rue0j30ou05y3zh.jpg" srcset="/img/loading.gif" alt="img" style="zoom:50%;" /></center>
+
+<p>  主流的目标跟踪系统结构如图1所示，分为初始化、特征提取、外观模型、目标搜索4个部分，其中外观模型和目标搜索是整个系统的核心。跟踪算法的效果很大程度上取决于目标外观模型的建立，建立合适的外观模型能有效提高算法的跟踪性能。目标搜索用于对目标下一帧的运动状态进行预测，减少目标搜索范围。</p>
+<p>  <strong>外观特征</strong>有：边缘特征、灰度特征、颜色特征、纹理特征、梯度特征。</p>
+<ul>
+<li>边缘检测寻找图像中亮度发生剧烈变化的点的集合即为目标轮廓。常用且效果好的算法：Canny算子。</li>
+<li>灰度特征转化简单、容易计算，其中灰度值和区域灰度变化特征(Haar特征)这两种灰度特征表征形式最为常用。使用灰度值作为外观模型的表达方式最为简单直接，但其对外观表征能力较弱，易受环境变量干扰。Haar特征反映了图像区域的灰度变化情况。</li>
+<li>颜色特征难以准确描述目标姿态变化，外观表征能力较弱，常与其他特征共同使用来表征目标外观。颜色直方图能通过计算图像中不同色彩所占的比例来大致表述其外观，是一种全局特征。</li>
+<li>纹理特征描述目标或目标周围的表面变化，也是一种全局特征。纹理特征只能表述目标的表面性质，具有局限性。因此仅用纹理特征无法描述目标的本质特征。常用LBP（Local Binary Pattern）来描述目标的纹理特征，通过对比目标像素与其邻域像素得到目标像素的LBP值，该值反映了该像素周围区域的纹理信息。</li>
+<li>梯度特征通过梯度分布来描述目标。最原始的描述算子为SIFT算子，SIFT算子的计算过程较为复杂且耗时，对实时性有影响。因此在SIFT的基础上增加SURF算子来减少计算时间，提高实时性。此外，在目标跟踪中使用更为广泛的是HOG算子，该算子对目标局部区域的梯度方向进行统计，能够良好的表征目标局部像素之间的关联。梯度特征的缺点是无法准确描述目标姿态、外观等信息。</li>
+</ul>
+<p>以上每种特征都有其优缺点，采用单一特征的方式往往不能很好的表达目标的外观变化，通常需要将多种特征进行融合，以提高目标外观模型与背景的区分能力。</p>
+<p><strong>外观模型：</strong></p>
+<p>  外观模型的发展经历了两个阶段：第一阶段是在环境条件提前设定且目标运动稳定的条件下提出。第二阶段针对周围环境和运动状态发生改变而设计自适应的外观模型。构建外观模型有两种方法：生成式模型和判别式模型。</p>
+<ul>
+<li>生成式模型：首先对跟踪目标进行学习，得到目标的外观模型，之后选择和目标最为接近的区域作为目标区域，需要不断的更新外观模型来保证跟踪的准确性。<ul>
+<li>基于模板的学习模型：固定特征模板、自适应特征模板。固定特征模板的缺点：无法提前改变参数来适应目标外观变化，固定的特征参数难以完全描述所有的外观变化情况。自适应高斯混合模型的特征分量可根据目标外观变化，调整分量的数量以达到最好的逼近目标外观变化的效果。</li>
+<li>基于子空间的学习模型：将目标映射到低维的子空间中，该子空间包含目标的外观模型数据，通过对子空间中的外观模型进行训练并不断更新，实现对目标的自适应跟踪。<ul>
+<li>基于向量的子空间模型：将目标通过向量的形式映射到子空间。</li>
+<li>基于非线性子空间：LLE算法采用非线性降维将目标映射到非线性子空间中，使跟踪算法能够适应复杂跟踪环境且对目标突然外观变化有良好的跟踪效果。</li>
+<li>基于稀疏子空间：稀疏表示归根结底是求约束条件的L1范数最小化问题，该方法计算量大但对目标被遮挡和目标姿态变化的情况具有良好的跟踪效果。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>判别式外观模型：借鉴机器学习的方法将跟踪目标和背景分成两类，将目标跟踪转换为分类问题。优点是对跟踪目标外观有良好的区分能力。<ul>
+<li>基于SVM的外观模型：将跟踪目标设定为正样本，背景设定为负样本，通过SVM方法对正负样本进行训练得到训练好的模型，并结合其他自适应的学习方法来实时更新目标外观模型。SVM方法只是对单一目标进行训练，需要准确选择训练目标，一旦训练目标选择错误将会影响跟踪效果。</li>
+<li>基于Boosting的外观模型：将一堆弱分类器提升为一个强分类器，通过不断迭代的方法优化分类器的分类效果。</li>
+</ul>
+</li>
+</ul>
+<p><strong>目标搜索算法：</strong></p>
+<p>  为减少计算量，提高算法的实时性，需要通过目标搜索算法预测运动目标在下一帧图像中可能出现的位置。</p>
+<ul>
+<li>卡尔曼滤波</li>
+</ul>
+<p>对跟踪目标的运动轨迹进行最小方差估计，从而对运动目标的下一帧位置进行预测。</p>
+<p><strong>优点</strong>：计算量小，实时性较高。<strong>局限性：</strong>仅适用于符合高斯分布的运动系统。</p>
+<ul>
+<li>粒子滤波</li>
+</ul>
+<p>通过在跟踪目标上一帧的位置附近进行粒子采样，得到每个粒子位置图像与目标的相似性分布，再对粒子进行重要性采样，形成对目标的实时跟踪。</p>
+<p><strong>优点：</strong>适用于非线性、非高斯系统，计算量小，实时性好。</p>
+<ul>
+<li>均值漂移算法（Meanshift算法）</li>
+</ul>
+<p>通过计算目标上一帧模板和当前帧目标位置的候选模板的相似性，选择相似程度较高的模板得到目标的Meanshift向量（由目标上一帧位置指向当前帧位置）。通过不断迭代计算新的Meanshift向量，最终收敛到当前帧目标的最终位置，实现目标跟踪。</p>
+<p>  文章介绍了目标跟踪算法在深度学习背景下的发展，指出深度学习在目标检测领域的应用，主要瓶颈是训练样本的缺失，因为深度学习的运用是在大量样本训练基础上实现的，而在目标跟踪中只能提供第一针的图像区域作为训练样本，很难针对当前目标训练深度模型。</p>
+<p>  <strong>基于深度学习的跟踪算法：</strong></p>
+<ul>
+<li>FCNT：直接使用ImageNet训练CNN网络来提取目标区域的特征，再通过相应的观测模型进行分类，实现目标跟踪。</li>
+<li>DLT和SO-DLT：通过对大量的非跟踪辅助数据进行预训练（该辅助数据需与跟踪目标有相同特征），得到对待跟踪目标的通用模型，在具体跟踪时根据目标样本对预训练模型进行微调即可得到对当前目标有很强分类能力的模型。</li>
+</ul>
+<p>文章最后介绍了目标跟踪的应用领域：智能安防监控、人机交互、异常行为识别分析、行人追踪、套牌车识别、无人机应用、无人驾驶及智能交通控制。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/SSD/">SSD</a>
+                    
+                      <a class="hover-with-bg" href="/tags/FCN/">FCN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/MASK-R-CNN/">MASK R-CNN</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/26/win10/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">win10安装指南</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/19/SSD/">
+                        <span class="hidden-mobile">文献翻译——SSD:Single Shot MultiBox Detector</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "阅读笔记（8.21)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>阅读笔记（7.10） - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-07-10 17:42">
+      2020年7月10日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      47
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年7月12日 晚上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>最近主要阅读了一篇实验室发表的文章、四篇目标检测方法综述和一篇YOLO算法的论文。对目标检测有了基本概念，了解了目前主流的目标检测算法。具体如下：</p>
+<p>[1]. L. Mao, Y. Yan, J. Xue and H. Wang, “Deep Multi-task Multi-label CNN for Effective Facial Attribute Classification,” in IEEE Transactions on Affective Computing, doi: 10.1109/TAFFC.2020.2969189.</p>
+<p>[2]吴帅,徐勇,赵东宁.基于深度卷积网络的目标检测综述[J].模式识别与人工智能,2018,31(04):335-346.</p>
+<p>[3]栗佩康,袁芳芳,李航涛.目标检测方法简要综述[J].科技风,2020(18):157.</p>
+<p>[4]Joseph Redmon, Santosh Divvala, Ross Girshick, Ali Farhadi; You Only Look Once: Unified, Real-Time Object Detection .The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2016, pp. 779-788</p>
+<p>[5]胡伏原,李林燕,尚欣茹,沈军宇,戴永良.基于卷积神经网络的目标检测算法综述[J].苏州科技大学学报(自然科学版),2020,37(02):1-10+25.</p>
+<p>[6]赵永强,饶元,董世鹏,张君毅.深度学习目标检测方法综述[J].中国图象图形学报,2020,25(04):629-654.</p>
+<h2 id="1-精读了《Deep-Multi-task-Multi-label-CNN-for-Effective-Facial-Attribute-Classiﬁcation》"><a href="#1-精读了《Deep-Multi-task-Multi-label-CNN-for-Effective-Facial-Attribute-Classiﬁcation》" class="headerlink" title="1.   精读了《Deep Multi-task Multi-label CNN for Effective Facial Attribute Classiﬁcation》"></a>1.   精读了《Deep Multi-task Multi-label CNN for Effective Facial Attribute Classiﬁcation》</h2><p>研究动机：</p>
+<p>(1)  最新的FAC方法独立的进行面部检测和属性分类，没有完全利用这两部分之间的依赖性。</p>
+<p>(2)  许多方法使用相同的CNN网络结构预测所有的面部属性，忽略了不同面部属性学习的复杂性。</p>
+<p>针对以上两点问题，作者提出了一种多任务多标签CNN，即DMM-CNN（deep multi-task multi-label CNN），将人脸关键点检测和属性分类联系起来，并将面部属性分为两组：客观属性和主观属性，为这两组属性分别涉及不同的网络结构。此外还提出了一种新颖的动态加权方案来为训练过程中的每一个属性自动分配损失权重，提出了一种自适应阈值策略缓解多标签分类不平衡的问题。在公开的CelebA和LFWA数据集上进行的实验表明，与几种最新的FAC方法相比，DMM-CNN具有更高的性能。</p>
+<p>在阅读过程中发现作者有些许笔误：在文章的3.2.1节Objective Attributes and Subjective Attributes第二句所举的客观属性和主观属性的例子似乎弄反了，原文为：</p>
+<p>In this paper, we propose to classify facial attributes into two groups: objective attributes (such as “Attractive”, “Big Nose”) and subjective attributes (such as “Bald”, “Male”). </p>
+<p>客观是指不依赖人的意识就客观存在的事物，而主观指受人的意识影响较大。显然“秃头”和“男性”应该是客观的，“有吸引力”、“大鼻子”应该是主观的。文章后续对于主观属性和客观属性所举的例子没有问题,符合上述定义。此处可能为笔误。</p>
+<h2 id="2-精读了《基于深度卷积网络的目标检测综述》"><a href="#2-精读了《基于深度卷积网络的目标检测综述》" class="headerlink" title="2.精读了《基于深度卷积网络的目标检测综述》"></a>2.精读了《基于深度卷积网络的目标检测综述》</h2><p>该文章系统总结了基于深度网络的目标检测方法，将其归为两类：基于候选窗口的目标检测框架、基于回归的目标检测框架。基于候选窗口的目标检测算法准确率较高，基于回归的目标检测方法检测效率较高。</p>
+<p>(1)  基于候选窗口的目标检测框架有：基于区域的卷积神经网络（RCNN）、尺度金字塔池化网络（SPPnet）、快速基于区域的神经网络（Fast-RCNN）、更快的基于区域的卷积神经网络（Faster-RCNN）、基于区域的全卷积网络（RFCN）。</p>
+<p>[1]  RCNN由3个独立的步骤组成：产生候选窗口、特征提取、SVM分类及窗口回归。</p>
+<p>[2]  SPPnet和Fast-RCNN不需要将所有候选窗口送入网络，只需送入一次，在将所有候选窗口在网络中某层上进行映射，提高检测速度。</p>
+<p>[3]  Faster-RCNN利用候选网络（RPN）产生候选窗口，利用与Fast-RCNN相同的结构进行分类和窗口回归，RPN和Fast-RCNN共享主要的深度网络。Faster-RCNN中所有窗口经过ROI池化后都会送入后续子网络进行分类和窗口回归。</p>
+<p>[4]  RFCN使用位置敏感的ROI池化层，使池化结果不需再经过子网络，直接进行分类和窗口回归。</p>
+<p>(2)  基于回归的目标检测框架有：基于Mask的目标检测模型、窗口位置回归、神经元预测窗口框架。</p>
+<p>[1]  基于Mask的目标检测模型，首先通过深度网络产生一张dxd大小的Mask，其值为0或1，表示原图所对应的区域是否为目标区域的一部分。进而采用多尺度检测，将得到的窗口不断送入网络进行精简，最终确定目标位置。</p>
+<p>[2]  窗口位置回归有：AttentionNet和G-CNN。AttentionNet对目标窗口左上角和右下角的点不断进行回归，判断这两个点的移动状态，当这两个点都不动时，即找到目标物体，AttentionNet只能检测单个目标。G-CNN首先定义少量Grid，通过不断迭代将初始Grid回归成包含目标的窗口。</p>
+<p>[3]  神经元预测窗口框架有：YOLO、SSD、DSSD。</p>
+<p>此外，文章还介绍了：</p>
+<ul>
+<li><p>提升目标检测准确率的辅助方法：超网络（HyperNet）、特征金字塔网络（FPN）、内外网络（ION）、对抗网络。</p>
+<p>​        HyperNet通过融合不同网络层的特征，提高检测准确率。FPN设计一个Top-to-Down的额外路径，通过Upsample的方式扩张网络顶端的特征层。ION不仅关注目标窗口内的信息，还关注目标窗口外的上下文信息。对抗网络的主要思想是：提高目标检测的性能，不仅可以分析对目标检测有用的信息，也可分析对目标检测不利的信息。A-Fast-RCNN利用网络本身产生遮挡、形变的样本，以提高处理这两类问题的能力。</p>
+</li>
+<li><p>处理形变问题的方法有：STN网络、DPM、DeepID、形变卷积网络（DCN）</p>
+</li>
+<li><p>目前使用的主流数据库有：PASCAL_VOC、IMAGENET、COCO。</p>
+</li>
+</ul>
+<h2 id="3-精读了《目标检测方法简要综述》"><a href="#3-精读了《目标检测方法简要综述》" class="headerlink" title="3.精读了《目标检测方法简要综述》"></a>3.精读了《目标检测方法简要综述》</h2><p>该文章同样将基于深度学习的目标检测算法分为两类：两阶段和单阶段。两阶段算法（即基于候选区域）首先在图像中选取候选区域，然后对候选区域进行目标分类和位置精修；单阶段算法（即基于全局回归分类）直接产生目标物体的位置及类别。</p>
+<ul>
+<li><p>R-CNN采用区域性搜索算法提取2000个候选区域，然后使用CNN对各候选区域进行特征提取，接着使用SVM进行分类，利用NMS回归目标位置。缺点：输入CNN的图像为固定尺寸（由于全连接层的限制），无特征提取共享，重复计算。</p>
+</li>
+<li><p>SPP-Net复用第五卷积层的特征响应图，将任意尺寸的候选区域转为固定长度的特征向量，最后一个卷积层后接入SPP层。优点：只对原图做一次卷积，共享卷积层的计算过程，提高速度。不同尺度候选区域输入能提高检测精度，共享不同候选区域SPP层前序的计算，提升检测效率。</p>
+</li>
+<li><p>Fast -RCNN使用ROI池化层代替SPP，原图经过卷积后产生特征相应图，然后从每个ROI池化层提取定长特征向量，每个特征向量输入到全连接层，分支两个输出层，一个是Softmax分类器用来预测类别，另一个用作物体位置定位框回归预测。优点：端到端、基于多任务损失函数的一阶段训练过程，节省了存储空间，减少训练，提升检测精度。缺点：候选区域提取仍采用区域选择性搜索算法，耗费时间。</p>
+</li>
+<li><p>Faster-RCNN摒弃了区域选择性搜索算法，使用区域选择网络（RPN）产生候选区域框，与检测网络共享卷积特征响应，减少计算量，提高检测速度。优点：端到端，具有一定实时性。缺点：RPN网络训练较为耗时，RPN不善于处理极端尺度及形状的目标检测。</p>
+</li>
+</ul>
+<p>以上为两阶段目标检测算法，检测精度较高，但检测效率低，无法满足实时性要求。因此，单阶段目标检测算法旨在提升检测实时性。</p>
+<ul>
+<li><p>YOLO算法：图像经过一个神经网络即可完成目标位置及其所属类别的检测，YOLOv1检测速度达到45fps，但检测精度不高。</p>
+</li>
+<li><p>YOLOv2在卷积层后加入了批归一化、去掉全连接层进行多尺度训练、加入先验框。使得可检测种类更多、精度更高，时间更快。</p>
+</li>
+<li><p>YOLOv3采用新的网络结构Darknet-53，利用多尺度进行目标检测，使用逻辑回归代替softmax分类器，提高了检测精度，对小目标检测效果更好。</p>
+</li>
+<li><p>YOLOv4加入SPP block改善感受野大小，使用PANet代替FPN进行多通道特征融合，选用CSP-Darknet53作为主干网络，进一步提高检测精度和速度。</p>
+</li>
+</ul>
+<p>以上两篇文章均提到了YOLO，遂根据参考文献找来阅读。</p>
+<h2 id="4-阅读并翻译了《You-Only-Look-Once》REDMON-J，DIVVALA-S，GIRSHICK-R，et-al"><a href="#4-阅读并翻译了《You-Only-Look-Once》REDMON-J，DIVVALA-S，GIRSHICK-R，et-al" class="headerlink" title="4.   阅读并翻译了《You Only Look Once》REDMON J，DIVVALA S，GIRSHICK R，et al."></a>4.   阅读并翻译了《You Only Look Once》REDMON J，DIVVALA S，GIRSHICK R，et al.</h2><p>文章提出了一种新的目标检测方法，将目标检测问题框架化为一个空间分割边界框和相关类概率回归问题。直接从完整图像中用单个神经网络预测边界框和类概率，只需看一次即可预测存在哪些对象以及他们在哪里。YOLO的神经网络有24个卷积层和2个全连接层。Fast-YOLO仅使用9个卷积层，网络的最终输出为7x7x30张量的预测。与基于分类器的方法不同，YOLO直接在对应检测性能的损失函数上训练，并且整个模型联合训练。YOLO有如下优点：（1）速度非常快，Fast-YOLO的帧速率可以超过150fps，具有良好的实时检测性能。（2）YOLO预测时在整幅图像上进行推理，考虑有关类的上下文信息，预测产生的背景错误更少。（3）YOLO可以学习物体的泛化表示，具有高度可通用性，并且可在艺术图像上进行人物检测。缺点：YOLO的检测精度相比其他算法有些逊色，尤其是对成群的小物体的识别效果不好。</p>
+<p>文章中大量出现了Accuracy、Precision、Recall、AP 、mAP、IOU、top-5等计算机视觉评价指标，最初并不理解这些指标的含义，遂查阅资料学习了这些评价指标。</p>
+<ul>
+<li>准确度（Accuracy）：</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggo8gc60k0j30l0040weq.jpg" srcset="/img/loading.gif" alt="img" style="zoom: 33%;" /></p>
+<p>其中TP为真阳性、FN为假阴性、FP为假阳性、TN为真阴性。</p>
+<p>在正负样本分布均匀的情况中，Accuracy能够较好地反映检测指标，但在分布不均匀的样本中Accuracy指标存在缺陷，比如有一个由90张狗的正样本图片和10张非狗的负样本图片组成的数据集，若分类器将所有图片全判断为狗，也能取得90%的Accuracy指标，这显然是不合理的。为此，引出了精确度（Precision）和召回率（Recall）的评价指标</p>
+<ul>
+<li>精确度（Precision）表示所有预测为正的样本中，真实正样本所占的比例。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggo8gcmu3aj30eq03sdfx.jpg" srcset="/img/loading.gif" alt="img" style="zoom:33%;" /></p>
+<ul>
+<li>召回率（Recall）表示所有正样本中，预测为正的样本比例。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggo8gd2c1kj30cc03m3yl.jpg" srcset="/img/loading.gif" alt="img" style="zoom:33%;" /></p>
+<p>用Top-1和Top-5 error rate指标来评价分类性能：</p>
+<ul>
+<li><p>Top-1 error rate：使用预测结果和正确结果进行对比，如果相同则表示预测正确。将输出的C维向量按照降序排列，如果最大值所对应label与ground truth label不符，则该图片属于分类错误，最后用分类错误的样本数量除以样本集的数量得到Top-1 error rate；</p>
+</li>
+<li><p>Top-5 error rate：使用预测结果的Top-5（分类结果标签的前五个）与正确结果进行对比，如果五个之中有一个正确那么就认为分类器预测结果正确。将输出的C维向量按照降序排列，如果前5个对应的label没有包含ground truth label，则该图片属于分类错误，最后用分类错误的样本数量除以样本集的数量得到Top-5 error rate；显然，Top-1比Top-5更严格。</p>
+</li>
+</ul>
+<p>在目标检测中，一般用AP（average precision）和mAP（mean average precision）两个指标评估每个bounding box对应的类别概率，注意AP强调的是每一个类别的检测指标，比如狗的检测AP、汽车的检测AP、人的检测AP等。</p>
+<ul>
+<li><p>AP(average precision)平均精确度。比precision多了一个average，显然计算AP时有一个求平均的过程。precision和recall存在一定关系，当调整算法的阈值提高recall时，precision会降低，反之，precision会提高。通俗的说就是提高recall可以让检测出来的样本更多的预测为正样本（减少FN），但这样会让一些负样本也预测为正样本（FP增高），导致precision降低。对于一个分类器而言，precision和recall往往是此消彼长的，AP这个指标则很好的兼顾了两者，AP即为precision/recall曲线下方围成的曲面面积。</p>
+</li>
+<li><p>Top-N ranked：对排序后的样本统计数据按照前n个样本划分N次rank，分别求出每次rank后的precision和recall，直至n=N，N为预测的总数量。</p>
+</li>
+</ul>
+<p>注意，VOC2010之前AP的计算产生了变化，选取Recall&gt;=0,0.1,0.2,…,1这11个Recall值处的Precision的最大值。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggo8gbr41hj30ej044wel.jpg" srcset="/img/loading.gif" alt="img" style="zoom:33%;" /></p>
+<p>  VOC2010之后对recall的判断值作了修改，选取Recall&gt;=0,0.14,0.29,0.43,0.57,0.71,1这7个位置的Precision最大值。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggo8gb9mj1j30c102uwef.jpg" srcset="/img/loading.gif" alt="img" style="zoom:33%;" /></p>
+<ul>
+<li><p>mAP(mean average precision)。AP指的是一个类别的指标，而一个目标检测任务包含多个类别，如VOC包含20类object，则会计算出20个AP，将其累加取平均便得到mAP。</p>
+</li>
+<li><p>IOU（Intersection Over Union）交并比：预测的bounding box和ground truth bounding box之间的交集和并集的面积比值，当两者完全重合时，IOU为100%，没有任何交集时为0，显然IOU值越大，模型预测的bounding box性能越好。</p>
+</li>
+</ul>
+<h2 id="5-速读了《基于卷积神经网络的目标检测算法综述》"><a href="#5-速读了《基于卷积神经网络的目标检测算法综述》" class="headerlink" title="5.   速读了《基于卷积神经网络的目标检测算法综述》"></a>5.   速读了《基于卷积神经网络的目标检测算法综述》</h2><p>该文章将目标检测方法分为基于人工特征的目标检测算法和基于卷积神经网络的目标检测算法。</p>
+<ul>
+<li><p>基于人工特征的目标检测算法需要人工设计特征描述算子，提取图像特征，然后利用分类器进行图像特征分类。需要对不同类型的目标设计不同形式的对象表征模型，产生大量计算开销。并且特征提取算子大多基于像素级的浅层特征信息，缺乏语义表达能力。</p>
+</li>
+<li><p>针对特征提取与目标检测问题的解决思路，将当前目标检测算法分为多阶段和一阶段两类。多阶段目标检测算法将特征提取与目标分类分开处理。一阶段目标检测算法在一个处理过程中将图像的特征提取与目标检测同时完成。</p>
+</li>
+<li><p>多阶段目标检测算法的核心是利用CNN代替传统的人工提取特征方法。一阶段算法的核心思想是将目标检测问题转换为回归问题求解，直接利用CNN提取图像特征，输出待预测的特征向量，直接得到目标检测结果。</p>
+</li>
+<li>论文介绍了CNN算法的原理及特点：(1)多层卷积与池化。(2)局部感知。(3)权值共享。(4)稀疏性限制。</li>
+</ul>
+<h2 id="6-速读了《深度学习目标检测方法综述》"><a href="#6-速读了《深度学习目标检测方法综述》" class="headerlink" title="6.   速读了《深度学习目标检测方法综述》"></a>6.   速读了《深度学习目标检测方法综述》</h2><ul>
+<li>该文章指出了基于深度学习的目标检测算法的挑战：优化主流目标检测算法的性能、提高小目标物体检测精度、实现多类别物体检测、轻量化检测模型。</li>
+<li>针对以上挑战，文章从双阶段、单阶段目标检测算法的改进与结合的角度分析了改进与优化主流目标检测算法的方法。</li>
+<li>从骨干网络、增加视觉感受野、特征融合、级联卷积神经网络和模型的训练方式的角度分析了提升小目标检测精度的方法。</li>
+<li>从训练方式和网络结构的角度分析了用于多类别物体检测的方法。</li>
+<li>从网络结构的角度分析了用于轻量化检测模型的方法。</li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/FPN/">FPN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/SSD/">SSD</a>
+                    
+                      <a class="hover-with-bg" href="/tags/YOLO/">YOLO</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Fast-RCNN/">Fast-RCNN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Faster-RCNN/">Faster-RCNN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/SPPnet/">SPPnet</a>
+                    
+                      <a class="hover-with-bg" href="/tags/FAC/">FAC</a>
+                    
+                      <a class="hover-with-bg" href="/tags/RCNN/">RCNN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/RFCN/">RFCN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Mask/">Mask</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/17/YOLOv2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">文献翻译——YOLO9000:Better,Faster,Stronger(YOLOv2)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/10/%E5%B0%8F%E6%B5%AA%E5%BA%95/">
+                        <span class="hidden-mobile">2020小浪底调水调沙</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "阅读笔记（7.10）&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>YOLO系列总结 （7.24 阅读笔记） - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-07-25 23:36">
+      2020年7月25日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      76
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年7月27日 上午
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>最近研读了YOLO系列的4篇论文，并加以对比分析。</p>
+<p>[1].Redmon J , Divvala S , Girshick R , et al. You Only Look Once: Unified, Real-Time Object Detection[J]. 2015.</p>
+<p>[2]. Redmon J, Farhadi A. YOLO9000: better, faster, stronger[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2017: 7263-7271.</p>
+<p>[3] Redmon J, Farhadi A. Yolov3: An incremental improvement[J]. arXiv preprint arXiv:1804.02767, 2018.</p>
+<p>[4] Bochkovskiy, A., Wang, C. Y., &amp; Liao, H. Y. M. (2020). YOLOv4: Optimal Speed and Accuracy of Object Detection. arXiv preprint arXiv:2004.10934.</p>
+<p>总的来说YOLO是将目标检测问题当成回归来做，而Fast-CNN是将目标检测问题转换为分类。</p>
+<h1 id="1-YOLOv1："><a href="#1-YOLOv1：" class="headerlink" title="1.   YOLOv1："></a><strong>1.</strong>   <strong>YOLOv1</strong>：</h1><p>处理图像的流程：首先将输入图像调整到448x448大小，然后将图像送入卷积神经网络，并对预测结果执行非极大值抑制算法。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3moqzft7j31510hvdk6.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>YOLOv1的神经网络输入为448x448x3,经过24个卷积层和2个全连接层，输出为7x7x30，其中7x7为将图像分为7x7的网格，每个网格负责检测中心落在该网格中的物体。30可以拆分为2x5+20，每个网格预测2个bounding box，每个bounding box预测5个参数，分别为：x,y,w,h,confidence:</p>
+<p>(1)   (x,y)坐标为bounding box 的中心相对于 grid cell 左上角点的相对位置，归一化为[0,1]。</p>
+<p>(2)   w,h为边界框相对于整个图像的宽和高，也被归一化为[0,1]。此处预测的均为相对位置，而非绝对像素位置，可以避免图像resize后产生错误。</p>
+<p>(3)   Confidence定义为Pr(Object) * IOU。如果ground truth落在这个grid cell里，那么Pr（Object）就取1，否则就是0，IOU就是bounding box与实际的ground truth之间的交并比。confidence代表了所预测的box中含有object的置信度和这个box预测的有多准两重信息</p>
+<p>而20对应的是类别数，原文是基于Pascal Voc数据集训练的，因此类别数为20。为每个类预测一个条件类别概率：Pr(Classi|Object)，即在一个网格包含一个Object的前提下，它属于某个类的概率。只为每个网格预测一组（C个）类概率，而不考虑边界框B的数量。</p>
+<p> 注意：类别信息是针对每个网格的，而confidence是针对每个bounding box的</p>
+<p>在测试时将每个网格的条件类概率和和每个边界框的置信度预测相乘，这既包含了该类出现在框中的概率又包含了预测框拟合目标的程度。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3mon9kazj30u202g74e.jpg" srcset="/img/loading.gif" alt="image-20200702092439875" style="zoom:50%;" /></center>
+
+<p>损失函数设计：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3mop6f53j30qg0gkmy4.jpg" srcset="/img/loading.gif" alt="img" style="zoom:50%;" /></center>
+
+<p>(1)   前两行为坐标损失，对于包含了目标中心点的网格，需要计算coordinate损失。x,y坐标通过计算相对于网格左上角的坐标可以归一化到0-1之间，w,h通过图像的宽和高也归一化到0-1之间。每个网格会预测两个bounding box，训练的时会选择与ground truth box的IOU最大的那个bounding box进行训练，这样做的好处是随着训练的逐步深入，不同的bounding box会逐渐适应特定尺寸的物体（可以从两个bounding box的预测中择优）。</p>
+<p>w,h的计算进行开根号，这是作者人为添加的，因为大的bounding box的损失会超过小的bounding box的损失，平方根有助于减少二者之间的差距。同样的，为了抵制过多的不含物体的网格confidence损失的影响力，避免真正有意义的、包含物体的bounding box信息被湮没，加入了一个系数λcoord=5进行加强。</p>
+<p>(2)   第三、四行为置信度损失，置信度损失是区分正负样本的关键。其分成grid cell包含与不包含object两种情况。对于包含物体中心点的网格来说，confidence包含了两层信息：所预测的bounding box中含有物体的confidence和这个bounding box预测的有多准。在一张图像中大多数的网格都不包含物体，使得这些网格中confidence的损失趋向于0，这将极大的削弱真正包含物体中心点的网格预测的confidence的影响力，因此加入了λnoobj=0.5进行弱化。</p>
+<p>(3)   第五行为预测类别误差，前面的系数只有在grid cell包含object的时候才为1。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结：</strong></h2><p>1.优点：</p>
+<p>(1)   YOLOv1将目标检测问题转换为回归问题，采用端到端的网络架构，易于进行模型构建和训练。</p>
+<p>(2)   检测速度快。每秒可以实时处理45帧图像。较小的网络Fast YOLO，其处理能力达到155帧/秒，精度实现了两倍于当时其他实时检测网络的mAP。</p>
+<p>(3)   背景误检率低。YOLOv1在预测时关注整张图像，联系上下文信息，将背景检测为目标的可能性更小。与Fast-R-CNN相比，YOLOv1产生的背景误检率少于一半。</p>
+<p>(4)   通用性强。YOLO可以学习物体的泛化表示，在迁移到其他领域如艺术领域时有着更好的表现</p>
+<p>2.缺点</p>
+<p>(1)   对成群的小目标识别效果不好。YOLOv1在边界框预测上实加了强大的空间约束，因为每个网格单元只预测两个bounding box，并且必须属于同一个类。这个空间约束限制了能够预测附近物体的数量。</p>
+<p>(2)   YOLOv1直接从数据中学习预测bounding box，因此很难在新的或不寻常的宽高比的对象中进行泛化。</p>
+<p>(3)   定位误差大。yolov1的损失函数没有处理好小的bounding box和大的bounding box之间的区别。因为大的bounding box的小误差通常是良性的，但小的bounding box的小误差对IOU的影响要大得多。</p>
+<h1 id="2-YOLOv2"><a href="#2-YOLOv2" class="headerlink" title="2.   YOLOv2"></a><strong>2.</strong>   <strong>YOLOv2</strong></h1><p>建立在YOLOv1的基础上，经过Joseph Redmon等的改进，YOLOv2和YOLO9000算法在2017年CVPR上被提出，重点解决YOLOv1召回率和定位精度方面的误差。相比v1提高了训练图像的分辨率；引入了Faster R-CNN中anchor box的思想，对网络结构的设计进行了改进，输出层使用卷积层替代全连接层。</p>
+<p>YOLOv2提出了一种联合目标检测和分类的训练方法。使用这种方法，在COCO检测数据集和ImageNet分类数据集上同时训练YOLO9000，可以实时预测9000多种不同对象类别的检测结果。文章实际提出了两个模型：YOLOv2和YOLO9000。后者在前者基础上提出，主体结构是一致的，区别是YOLO9000的每个单元格只采用3个Anchor Boxes而不是5个。</p>
+<p>通常检测数据集较少而分类数据集较多，同时为构建并标记检测数据集的开销比分类数据集更大。因此可以利用带标注的分类数据集量比较大的特点，解决带标注的检测数据集量比较少的问题。具体方法是：一方面采用WordTree融合数据集，另一方面联合训练分类数据集和检测数据集。分类信息学习自ImageNet分类数据集，而物体位置检测则学习自 COCO 检测数据集。</p>
+<p>检测数据集只有通用目标和通用标签，如“狗”或“船”。分类数据集具有更广更深的标签范围，比如“狗”就包括各个品种的狗。大多数分类方法使用softmax层来计算概率分布，而softmax假定类之间是互相独立的。所以如果想同时在检测数据集与分类数据集上进行训练，就需要用一种一致性的方法融合这些标签信息。</p>
+<p>文章提出了WordTree，一个视觉概念的分层模型，可以将两种数据集按照层级进行结合。ImageNet标签是从WordNet中提取的，采用以下策略构建WordTree：遍历ImageNet中的视觉名词，并查看它们通过WordNet图到根节点的路径（根节点是“physical object”）。如果到根节点的路径只有一条，将该路径直接加入到WordTree结构中。否则，选择一条最短路径，加入到WordTree结构中。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3moskptqj30u00v9k8w.jpg" srcset="/img/loading.gif" alt="img" style="zoom:50%;" /></center>
+
+<p>这样，在WordTree的某些节点上就可以计算一些条件概率，例如在terrier节点可以预测：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3mtkqlysj30b8046jtb.jpg" srcset="/img/loading.gif" alt="image-20200725232434308" style="zoom: 50%;" /></center>
+
+<p>如果想要计算一个特定节点的绝对概率，只需沿着通过树到达根节点的路径，再乘以条件概率。所以如果想知道一张图片是否是Norfolk terrier，则可计算：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3moos95lj30hj06njs3.jpg" srcset="/img/loading.gif" alt="img" style="zoom:50%;" /></center>
+
+<p>YOLO与Fast R-CNN相比有大量的定位误差。此外，与基于区域候选网络（RPN）相比，YOLO召回率相对较低。因此，YOLOv2在保持分类准确性的同时主要侧重于提高召回率和改进定位。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3moryo6nj30uk0ckdhi.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>改进一：添加了Batch Normalization层。</strong>Batch Normalization可显著提高收敛性，同时消除了对其他形式正则化的依赖。通过在YOLO的所有卷积层上添加批标准化，使得mAP提升了2%。同时也有助于模型正则化，并可以从模型中去掉dropout而不会过拟合。BN算法在卷积或池化之后，激活函数之前，对每个数据输出进行标准化，有助于提高训练速度，提升训练效果。</p>
+<p><strong>改进二：采用高分辨率分类器。</strong>YOLOv1在预训练时采用的是224<em>224的输入（在ImageNet数据集上进行），然后在检测的时候采用448</em>448的输入，这会导致从分类模型切换到检测模型的时候，模型还要适应图像分辨率的改变。YOLOv2将分辨率从 224<em>224 增加到了 448</em>448，这就意味着网络需要适应新的输入分辨率。YOLOv2则将预训练分成两步：先用224<em>224的输入在ImageNet数据集训练分类网络，大概160个epoch。后将输入调整到448</em>448，再训练10个epoch进行微调，让网络有时间调整滤波器以便更好的运行在新分辨率上（这两步都是在ImageNet数据集上操作）。然后利用预训练得到的模型在检测数据集上fine-tuning。这样训练得到的模型，在检测时用448*448的图像作为输入可以顺利检测，还需要微调用于检测的 Resulting Network。最终通过使用高分辨率，mAP 提升了 4%。</p>
+<p>​    此处引入了fine-tuning（微调）概念：用已经训练好的模型，加上自己的数据集，来训练新的模型。即使用别人的模型的前几层，来提取浅层特征，而非完全重新训练模型，从而提高效率。一般新训练模型准确率都会从很低的值开始慢慢上升，但是fine-tuning能够让我们在比较少的迭代次数之后得到一个比较好的效果。</p>
+<p>​    <strong>改进三：引入Anchor boxes。</strong>YOLOv1将输入图像分成7*7的网格，每个网格预测2个Bounding Box，因此一共有98个Box，同时YOLOv1包含有全连接层，从而能直接预测Bounding Boxes的坐标值，但也导致丢失较多的空间信息，定位不准。 Faster R-CNN的方法只用卷积层与RPN来预测Anchor Box的偏移值与置信度，而不是直接预测坐标值。作者发现通过预测偏移量而不是坐标值能够简化问题，让神经网络学习起来更容易。</p>
+<p>YOLOv2首先将YOLOv1的全连接层去掉，使用Anchor Boxes来预测 Bounding Boxes。同时将最后一个池化层去掉，使得最后的卷积层可以有更高分辨率的特征。然后缩减网络让其运行在 416<em>416 而不是 448</em>448，使得网络输出的特征图有奇数大小的宽和高，进而使得每个特征图在划分单元格（Cell）的时候只有一个中心单元格（Center Cell）。由于图片中的物体都倾向于出现在图片的中心位置，特别是大物体，所以有一个单元格单独位于物体中心的位置用于预测这些物体，而不要使用附近的四个单元格。</p>
+<p>YOLOv2通过引入Anchor Boxes，通过预测Anchor Box的偏移值与置信度，而不是直接预测坐标值。使用Anchor Box会让精确度稍微下降，但用了它能让YOLO能预测出大于一千个框，同时Recall达到88%，mAP达到69.2%。YOLOv2的卷积层采用32来下采样图片，所以通过选择416<em>416用作输入尺寸最终能输出一个13</em>13的特征图。若采用FSRCNN中的方式，每个Cell可预测出9个Anchor Box，共13<em>13</em>9=1521个（YOLOv2确定Anchor Boxes的方法是维度聚类，每个Cell选择5个Anchor Box）。</p>
+<p>以FSRCNN中一个51<em>39大小的特征图为例，其可以看做一个尺度为51</em>39的图像，对于该图像的每一个位置，考虑9个可能的候选窗口：3种面积3种比例。这些候选窗口称为Anchor Boxes。下图示出的是51*39个Anchor Box中心，以及9种Anchor Box示例：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3momdqc9j30cc0be0zz.jpg" srcset="/img/loading.gif" alt="img" style="zoom:50%;" /></center>
+
+<p>此处将YOLOv1和YOLOv2的特征图数据结构进行对比：</p>
+<ul>
+<li>YOLOv1：SxSx(Bx5+C) ——&gt; 7x7x(2x5+20)</li>
+</ul>
+<p>其中SxS为网格大小，取7。B为边界框的数量，YOLOv1中为2。5对应边界框的定位信息：x,y,w,h,confidence。C为类别数量，YOLOv1使用Pascal Voc数据集训练，因此类别数为20。</p>
+<p>​    <strong>YOLOv1只为每个网格预测一套类概率，供两个boxes共享。</strong></p>
+<ul>
+<li>YOLOv2：SxSxKx(5+C) ——&gt; 13x13x5x(5+20)</li>
+</ul>
+<p>S为分辨率，提升至13x13，对小目标适应性更好。借鉴了Faster R-CNN的思想，每个Cell对应K个Anchor box，YOLOv2中K取5。</p>
+<p><strong>YOLOv2为每个位置的各个Anchor box都单独预测一套类概率值，和SSD比较类似。</strong></p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3momrf4qj30lq0b23yy.jpg" srcset="/img/loading.gif" alt="img" style="zoom:60%;" /></center>
+
+<p>​    <strong>改进4：维度聚类。</strong>在Faster R-CNN中Anchor Box的大小和比例是按经验设定的，然后网络会在训练过程中调整Anchor Box的尺寸，最终得到准确的Anchor Boxes。若一开始就选择了更好的、更有代表性的先验Anchor Boxes，那么网络就更容易学到准确的预测位置。YOLOv2使用K-means聚类方法类训练Bounding Boxes，可以自动找到更好的宽高维度的值用于一开始的初始化。</p>
+<p>如果用标准的欧式距离的k-means，尺寸大的框比小框产生更多的错误，聚类结果可能会偏移。由于聚类目的是确定更精准的初始Anchor Box参数，即提高IOU值，这应与Box大小无关，因此YOLOv2采用IOU值为评判标准，即K-means 采用的距离函数（度量标准） 为：d(box,centroid) = 1 - IOU(box,centroid)。（即距离d减少时，IOU增大）。</p>
+<p>作者运行了各种k值的k-means，并画出聚类的簇个数和IOU的关系。在权衡模型复杂度、召回率与IOU值后，YOLOv2最终选择k=5。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3morgm00j30to0goq4a.jpg" srcset="/img/loading.gif" alt="img" style="zoom:50%;" /></center>
+
+<p>​    <strong>改进5：直接位置预测。</strong>用 Anchor Box 的方法，会让 model 变得不稳定，尤其是在最开始的几次迭代。大多数不稳定因素产生自预测 Box 的（x,y）位置的时候。YOLOv2的网络在特征图（13*13）的每一个单元格中预测出5个Bounding Boxes（对应5个Anchor Boxes），每个Bounding Box预测出5个值（tx,ty,tw,th,t0），其中前4个是坐标偏移值，t0是置信度结果（类似YOLOv1中的边界框置信度Confidence）。YOLOv2借鉴了如下的预测方式，即当Anchor Box的中心坐标和宽高分别是（xa,ya）和（wa,ha）时，Bounding Box坐标的预测偏移值（tx,ty,tw,th）与预测框的坐标宽高（x,y,w,h）的关系如下：             </p>
+<p>tx = (x-xa)/wa</p>
+<p>ty = (y-ya)/ha</p>
+<p>tw = log(w/wa)</p>
+<p>th = log(h/ha)</p>
+<p>其中：x,y,w,h来自于预测框。xa,wa,wa,ha来自于anchor框。</p>
+<p>基于这种思想，YOLOv2在预测Bounding Box的位置参数时采用了如下强约束方法：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3moobb94j30o00i6400.jpg" srcset="/img/loading.gif" alt="img" style="zoom: 33%;" /><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3moq2l8xj30es076glx.jpg" srcset="/img/loading.gif" alt="img" style="zoom:50%;" /></center>
+
+<p>上图中，黑色虚线框是Anchor Box，蓝色矩形框就是预测的Bounding Box结果，预测出的Bounding Box的坐标和宽高为（bx,by）和（bw,bh），计算方式如图中所示，其中：对每个Bounding Box预测出5个值（tx,ty,tw,th,t0），Cell与图像左上角的横纵坐标距离为（cx,cy），σ定义为sigmoid激活函数（将函数值约束到［0,1］），该Cell对应的Anchor Box对应的宽高为（pw,ph）。</p>
+<p>  简而言之，（bx,by）就是（cx,cy）这个Cell附近的Anchor Box针对预测值（tx,ty）得到的Bounding Box的坐标预测结果，同时可以发现这种方式对于较远距离的Bounding Box预测值（tx,ty）能够得到很大的限制。</p>
+<p>​    <strong>改进5：Fine-grained Features（细粒度特征）。</strong>YOLOv2 修改后的特征图大小为 13<em>13，这个尺寸对检测图片中尺寸大物体来说足够了，同时使用这种细粒度的特征对定位小物体的位置可能也有好处。Faster-RCNN、SSD 都使用不同尺寸的特征图来取得不同范围的分辨率，而 YOLO 采取了不同的方法，YOLO 加上了一个 Passthrough Layer 来取得之前的某个 26</em>26 分辨率的层的特征。这个 Passthrough layer 能够把高分辨率特征与低分辨率特征联系在一起，联系起来的方法是把相邻的特征堆积在不同的 Channel 之中，这一方法类似于 Resnet 的 Identity Mapping，从而把 26<em>26</em>512 变成 13<em>13</em>2048。YOLOv2 中的检测器位于扩展后的特征图的上方，所以他能取得细粒度的特征信息，这提升了 YOLO 1% 的性能。</p>
+<p>​    <strong>改进6：多尺度训练。</strong>YOLOv2每迭代几次就会改变网络参数，以适应不同尺度下的检测任务。每10个Batch，网络会随机地选择一个新的图片尺寸，由于使用了下采样参数是32，因此也采用32的倍数作为输入的size，即采用{320，352，…，608}的输入尺寸，最小 320<em>320，最大 608</em>608，网络会自动改变尺寸，并继续训练的过程。这一策略让网络在不同的输入尺寸上都能达到较好的预测效果，使同一网络能在不同分辨率上进行检测。当输入图片较大时，检测速度较慢，但精度较高。输入图片较小时，检测速度较快，总体上提高了准确率。因此多尺度训练在准确率和速度上提供了一个折中。</p>
+<p>​    </p>
+<p>YOLOv2使用的是 GoogLeNet 架构，比 VGG-16 快，完成一次前向传播只用 85.2 亿次运算，而 VGG-16 要 306.9 亿次。然而，它的准确性比VGG-16略差。在ImageNet上，对于224×224分辨率下的单张裁剪图像，YOLO的自定义模型获得了88.0%的top-5准确率，而VGG-16则为90.0%。</p>
+<p>YOLO v2 基于一个新的分类模型darknet19。YOLO v2 使用 3<em>3 的 filter，每次池化之后都增加一倍 Channels 的数量。YOLO v2 使用全局平均池化，使用Batch Normilazation来让训练更稳定，加速收敛，使模型规范化。最终的模型Darknet19，有 19 个卷积层和 5 个maxpooling 层，处理一张图片只需要 55.8 亿次运算，在 ImageNet 上达到 72.9% top-1 精确度，91.2% top-5 精确度。在训练时，如果把整个网络在更大的448</em>448分辨率上微调10个 epoches，初始学习率设置为0.001，网络达到76.5%top-1精确度，93.3%top-5精确度。</p>
+<h2 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a><strong>总结：</strong></h2><p>相比于YOLOv1，YOLOv2更好，更快，更强。在多种检测数据集中都要快过其他检测系统，并可以在速度与精确度上进行权衡。</p>
+<p>YOLO 9000 的网络结构允许实时地检测超过9000种物体分类，这归功于使用WordTree合并来自各种来源的数据，并使用联合优化技术在ImageNet和COCO上同时进行训练，朝着缩小检测与分类之间的数据集大小差距迈出的重要一步。此外，文章还提出了添加Batch Normalization层、采用高分辨率分类器、引入Anchor boxes、使用维度聚类、细粒度特征、多尺度训练等改进方法。</p>
+<h1 id="3-YOLOv3"><a href="#3-YOLOv3" class="headerlink" title="3.   YOLOv3"></a><strong>3.</strong>   <strong>YOLOv3</strong></h1><p>相较于v1和v2，YOLOv3主要改进了：提出了新的darknet-53基础网络、多尺度预测、改进损失函数。</p>
+<p><strong>(1)</strong>  <strong>提出新的Darknet-53基础网络</strong></p>
+<p>Darknet-53比Darknet-19更深，一共有53个卷积层，且连续使用了3x3和1x1的卷积层。借鉴了ResNet网络中的残差结构，使得网络能够达到很深程度的同时避免了梯度消失问题。去除了池化层，改用步长为2的卷积层进行特征图的降维。测试发现Darknet-53比ResNet-101更好，且速度提高了1.5倍。Darknet-53具有与ResNet-152相似的性能，并且快2倍。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3n1xful3j30h40o2ne8.jpg" srcset="/img/loading.gif" alt="image-20200725233235895" style="zoom:50%;" /></center>
+
+<p>​    </p>
+<p><strong>(2)</strong>  <strong>多尺度预测</strong></p>
+<p>YOLOv1仅利用最后一个卷积层进行特征预测，导致对小物体的检测效果不佳（因为小物体的信息经过层层卷积后几乎完全丧失）。YOLOv2中采用Passthrough提取细粒度信息，但只提升了1%的性能，效果依然不理想。YOLOv3在3种不同尺度上预测边界框，并使用类似特征金字塔网络的概念进行多尺度级联。</p>
+<p>具体来说，416<em>416</em>3的图像输入网络后，经过5次下采样，得到第一张尺寸为13<em>13的预测特征图。随后，为了实现细粒度特征检测，在第79层特征图处进行上采样，并与来自第61层的特征图进行特征拼接，得到了第二张尺寸为26</em>26的预测特征图。同样地，在第91层特征图处再次进行上采样，与第36层特征图进行特征拼接，得到了第三张尺寸为52*52的预测特征图。这种方法能够从上采样的特征中获得更有意义的语义信息，并从较早的特征图中获得更细粒度的信息。</p>
+<p>最终得到三张特征图，大小分别为13<em>13,26</em>26,52<em>52。13</em>13的特征图由于下采样倍数大，单元网格的感受野比较大，适合检测尺寸比较大的目标物；26<em>26的特征图中单元网格感受野适中，适合检测尺寸中等的目标物；52</em>52的特征图中单元网格感受野相对较小，适合检测尺寸较小的目标物。</p>
+<p>YOLOv3延续了YOLOv2使用的k-means聚类方法来确定Anchor box的尺寸。为每张特征图确定3个Anchor box的尺寸，最终聚类得到9种尺寸的Anchor box。在coco数据集上，这9个anchor box分别是(10x13)，(16x30)，(33x23)，(30x61)，(62x45)，(59x119)，(116x90)，(156x198)，(373x326)。分配的方式见下表所示，遵循的原则是特征图的尺寸越小，则分配的anchor box的尺寸越大。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3monpkm2j30k502fjsb.jpg" srcset="/img/loading.gif" alt="preview"></p>
+<p>YOLOv3通过多尺度预测，大大提升了对小目标的检测效果。</p>
+<p><strong>(3)</strong>  <strong>改进损失函数</strong></p>
+<p>YOLOv3不再采用softmax分类器，而采用独立的logistic classifiers。并且在训练过程中，使用二元交叉熵损失来进行类别预测。因为在更复杂的Open Image中，有很多标签的含义是重叠的（例如女人和人）。而softmax需要假定每一个需要预测的类别都是互相独立的，即每个框中只能有一个类别，显然softmax不适合这种情况。</p>
+<h1 id="4-YOLOv4"><a href="#4-YOLOv4" class="headerlink" title="4.    YOLOv4"></a><strong>4.</strong>    <strong>YOLOv4</strong></h1><p><strong>主要贡献：</strong></p>
+<ol>
+<li>提出了一个高效且强大的目标检测模型。任何人可以使用一个1080Ti或者2080Ti的GPU就可以训练出一个快速并且高精度的目标检测器。</li>
+<li>在检测器训练的过程中，测试了目标检测中最高水准的 Bag-of-Freebies和Bat-of-Specials方法。</li>
+<li>改进了最先进的算法，使得它们更加高效并且适合于在一个GPU上进行训练，比如CBN, PAN, SAM等。</li>
+</ol>
+<p>作者总结了近几年的单阶段和双阶段的目标检测算法以及技巧，并用一张图概括了单阶段和双阶段目标检测网络的差别。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh3molwjybj317w0lo45w.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>检测器通常由两部分组成：backbone和head。前者在ImageNet上进行预训练，后者用来预测类别信息和目标物体的边界框。在GPU平台上运行的检测器，它们的backbone可能是VGG, ResNet, ResNetXt,或者是DenseNet。在CPU平台上运行的检测器，它们的backbone可能是SqueezeNet，MobileNet或者是ShuffleNet。对于head部分，通常分为两类：one-stage和two-stage的目标检测器。Two-stage的目标检测器的代表是R-CNN系列，还有基于anchor-free的Two-stage的目标检测器，比如RepPoints。One-stage目标检测器的代表模型是YOLO, SSD和RetinaNet。在最近几年，出现了基于anchor-free的one-stage的算法，比如CenterNet, CornerNet, FCOS等等。</p>
+<p>​    作者将目前的调优方法分为两类：Bag of freebies 和 Bag of specials。将只改变训练策略或者只增加训练成本的方法称之为“bag of freebies”，常见的方法有：数据増广（包括模拟图片遮挡、多图片融合）、解决样本不均衡问题（包括focal loss，example mining）、解决难以描述类别关联度的方法（Label smoothing）、边界框回归的目标函数（MSE,GIOU,DIOU,CIOU）。将即插即用模块、后处理方法这些仅稍微增加推理成本但可极大提高准确度的方法称之为“bag of specials”。这一类常见的有：提高感受野（SPP,ASPP,RFB）、注意力模块、特征融合（FPN,SFAM,ASFF,BiFPN）、激活函数（Relu,SELU,Swish）.</p>
+<p>为了使设计的检测器更适合于单GPU上的训练，作者做了如下的附加设计和改进：(1)介绍了一种新的数据增强Mosaic法和Self-AdversarialTraining 自对抗训练法。(2)应用遗传算法选择最优超参数。(3)改进SAM，改进PANet，和交叉小批量标准化(CmBN)，使模型更适合于有效的训练和检测</p>
+<p><strong>YOLOv4的最终架构：</strong>Backbone:CSPDarknet53 Neck:SPP,PANet Head:YOLOv3 。</p>
+<p><strong>YOLOv4使用的调优技巧：</strong></p>
+<p><strong>BOF(Bag of freebies):</strong> </p>
+<p>backbone：CutMix和mosaic数据增强，DropBlock正则化，类标签平滑。</p>
+<p>detector：CIO-loss,CmBN, DropBlock正则化，Mosaic数据增强，自对抗训练，消除网格敏感性，</p>
+<p>为单个groundtruth使用多个anchors，余弦退火调度器，最优超参数，随机训练形状.</p>
+<p><strong>BOS(Bag of Specials):</strong></p>
+<p>backbone：Mish激活、跨级部分连接(CSP)、多输入加权剩余连接(MiWRC)。</p>
+<p>detector：Mish activation,SPP-block, SAM-block, PAN path-aggregation block,DIoU-NMS.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>YOLOv4其实并没有特别大的创新点，文章可以概括为三个部分：目标检测算法综述+最新算法的大量实验+最优的算法组合。也就是将当前目标检测的方法进行了对比实验研究，最终找到了一个最优的组合，这个组合所带来的整体增益最高。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/YOLO/">YOLO</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/28/pytorch-note/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">pytorch学习笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/23/YOLOv4/">
+                        <span class="hidden-mobile">文献翻译——YOLOv4:Optimal Speed and Accuracy of Object Detection</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "YOLO系列总结 （7.24 阅读笔记）&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

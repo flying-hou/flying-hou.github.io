@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>阅读笔记（10.16) - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-10-16 10:40">
+      2020年10月16日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      41
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年10月17日 早上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>最近主要阅读了两篇基于KeyPoint的目标检测论文：CenterNet和ExtremeNet，和一篇用卷积神经网络预测光流场的论文：FlowNet。</p>
+<p><strong>阅读文献：</strong></p>
+<p>[1] Duan K, Bai S, Xie L, et al. Centernet: Keypoint triplets for object detection[C]//Proceedings of the IEEE International Conference on Computer Vision. 2019: 6569-6578.</p>
+<p>[2] Zhou X, Zhuo J, Krahenbuhl P. Bottom-up object detection by grouping extreme and center points[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019: 850-859.</p>
+<p>[3] Dosovitskiy A, Fischer P, Ilg E, et al. Flownet: Learning optical flow with convolutional networks[C]//Proceedings of the IEEE international conference on computer vision. 2015: 2758-2766.</p>
+<h1 id="1-CenterNet"><a href="#1-CenterNet" class="headerlink" title="1.CenterNet"></a>1.CenterNet</h1><p>目标检测中基于关键点的方法通常会遇到大量不正确的边界框，可能是由于缺乏对被裁减掉区域的关注。本文探索了在每个被裁减的区域的视觉模式，提出了一个One-stage的关键点检测器，名为CenterNet。CenterNet将目标当做三个关键点来检测：左上角、右下角和中心点。此外文章提出了两个定制模型：Cascade corner pooling、Center pooling，用以增强左上角和右下角边角点收集到的信息、在中心区域提供更多可识别的信息。</p>
+<p>  CornerNet的性能受限于其对目标全局信息的提取能力较弱，因为CornerNet通过一对边角点来构造一个目标，导致算法对目标边界敏感，不知道哪一对边角点应被分为同一组。为了解决这一问题，作者对CornerNet做了改进，为其赋予了在每个提议区域内感知视觉模式的能力，使其能自己判断每个边界框的正确性。</p>
+<p>  在推理过程中，当用一对边角点生成一个proposal后，CenterNet通过检查是否有一个相同类的中心关键点落在该proposal的中心区域，来判断该proposal是否确实包含一个目标。</p>
+<p><strong>CenterNet</strong></p>
+<p>  以CornerNet为基线，在CornerNet的基础上增加了一个分支，用于预测中心关键点的偏移。首先使用CornerNet的方法生成top-k个边界框，通过以下步骤利用检测到的中心关键点滤除不正确的边界框：</p>
+<p>(1) 根据评分选择前k个中心关键点。</p>
+<p>(2) 使用相应的偏移将中心关键点映射回输入图像。</p>
+<p>(3) 为每个检测到的边界框定义一个中心区域，并检查中心区域是否包含相同类的中心关键点。</p>
+<p>(4) 若中心区域有相同类的中心关键点，则保留该边界框。边界框的评分为左上角、中心点、右下角分数的平均值。若中心区域没有中心关键点，则丢弃该边界框。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjrzpmduj1j30fu08iwfj.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>中心区域的尺寸选择会影响检测结果，较小的中心区域会导致小边界框低召回率，较大的中心区域导致大边界框低精确率。因此，作者提出了一种根据边界框尺寸，自动调整中心区域大小的方法:scale-aware central region。该方法旨在为较小的边界框生成较大的中心区域，为较大的边界框生成较小的中心区域。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjrzpoqnp9j31ak0bqtmp.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>Center Pooling</strong></p>
+<p>  用于预测中心关键点的分支，帮助中心关键点包含更多可识别的目标视觉模式，使其更容易察觉proposal的中心部分。通过在特征图上求出中心关键点的水平和垂直方向上的最大响应总和来预测中心关键点。</p>
+<p>  目标的几何中心通常没有传达可识别的视觉模式，为解决这一问题，作者提出center pooling来捕捉更丰富、更可识别的视觉模式。首先使用backbone输出特征图，然后在水平和垂直方向上查找最大值，并将其加在一起，进而决定特征图的某个像素点是否是中心关键点。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjrzpl2qc9j30ml08st9q.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>  图（a）展示了Center Pooling的结构，为了得到水平方向上的最大值，只需将Left Pooling和Right Pooling连接在一起；为了得到垂直方向上的最大值，只需将Top Pooling和Bottom Pooling连接在一起。图（b）展示了Cascade Top Corner Pooling的结构，在Top Pooling之前，增加了一个Left Corner Pooling。</p>
+<p><strong>Cascade Corner Pooling</strong></p>
+<p>  边角点通常在目标之外，缺乏局部表观特征，Corner Pooling通过寻找边界方向上的最大值来寻找边角点，然而，这样使得边角点对边缘过于敏感。因此需要边角点“看见”目标的视觉模式。Cascade Corner Pooling为Corner pooling添加了察觉内部信息的能力。通过在用于预测边角点的特征图上，求边界和内部方向上的最大值之和来实现。首先沿着边界查找边界最大值，然后沿着边界最大值的位置查找内部最大值。（最顶部的竖直向下朝着底部查找，最左边的水平向右查找，最右边的水平向左查找，最下面的竖直向上查找）</p>
+<p><strong>总结：</strong></p>
+<p>  CenterNet使用一个三联组来检测目标，包括：一个中心点和两个边角点。CenterNet针对CornerNet过度关注边缘信息的缺点，增加了对目标中心点的检测，帮助更好的筛选候选框。</p>
+<p><strong>创新点：</strong></p>
+<p>CenterNet在top-left和bottom-right两条分支的基础上，新增了一条没有embeddings的分支，用于预测特征图上每个位置是中心点的概率。找出中心点后，看中心区域里面有没有中心点，如果有就检测成功，否则就失败；通过这一思路可以有力地筛去误检。</p>
+<h1 id="2-ExtremeNet"><a href="#2-ExtremeNet" class="headerlink" title="2.ExtremeNet"></a>2.ExtremeNet</h1><p>随着深度学习的进步，目标检测从自底向上发展为为自顶向下的识别问题。本文展示了自底向上的方法仍然有竞争力，使用标准关键点检测网络，检测目标的四个极点（最顶部、最左、最右、最低部）和一个中心点。使用纯几何方式将四个极点分为一组。这样，目标检测变为纯粹的基于表观的关键点估计问题，而不是区域分类或盲目的特征学习。</p>
+<p>作者认为矩形边界框不是一种自然地表示目标的方法，因为许多目标没有与坐标轴对其的框，若将其拟合为一个矩形框就会包含许多背景干扰像素点。并且矩形框没有传达目标形状和姿势等细节信息。</p>
+<p>本文提出了一种自底向上的目标检测框架：ExtremeNet，使用最新的关键点估计框架，为每个目标类别预测四张多峰值的热图，来寻找目标的四个极点。此外，为每个类别使用一张热图来预测目标中心。最后使用纯几何的方法来将四个极点分为一组：当且仅当四个极点的几何中心在中心热图的预测值高于一个预定义的阈值时，将其分为一组。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjrzpnsbx7j30ee0c90ym.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>与CornerNet的不同：</strong></p>
+<p>ExtremeNet和CornerNet都是基于关键点的目标检测方法，但ExtremeNet与CornerNet有两个不同：关键点定义和分组。首先，关键点定义不同：CornerNet的边角点通常在目标之外，没有很强的表观特征，而ExtremeNet的极点在目标之上，是视觉可分的，并且与局部表观特征一致。其次，ExtremeNet使用几何方法为关键点分组，而CornerNet使用一个嵌入式向量。</p>
+<p><strong>网络框架：</strong></p>
+<p>  使用Hourglass网络来为每个类检测五个关键点（四个极点、一个中心点），训练设置、损失和偏移预测都与CornerNet相同（没有为中心热图预测偏移）。网络的输出为5XC张热图和4X2张偏移图。（C为类别数）</p>
+<p>  <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjrzpjdeb4j30u508o43b.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>Center Grouping:</strong></p>
+<p>  一旦极点被提取出来，使用纯几何的方法将其归为一组。因为极点通常在目标的不同侧，使得将其归为一组变得复杂。联合嵌入方法[30]可能没有一个足够全局的视角来为其分组。本文提出的分组算法的输入为五张热图，对于每张热图首先根据峰值提取对应的关键点。然后采用穷举方法，根据从四张热图中提取的四个极点，计算其几何中心点。若该几何中心点在中心热图上的响应大于某个阈值，就用这四个极点生成一个边界框，评分为五张热图的均值。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjrzplwqxrj30dv0eftai.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>Ghost box suppression:</strong></p>
+<p>  当出现3个连续的目标在一排或者在一列的时候，容易出现鬼影问题，比如，3个一排，如果选择了最左边的最左点，最右边的最右点，这样在判断中心的时候，可能选择了中间目标的中心点，这样这个大box也就被保留下来了，出现了误判，怎么解决这个问题呢？作者选择了一种后处理的方法：soft non-maxima suppression来减少ghost box。如果一个大框中，包含了多个目标（大于等于3个）就将该目标的得分除以2，通过这种方法来一定程度的抑制误检的出现。</p>
+<p><strong>Edge aggregation：</strong></p>
+<p>  由于极点的定义不唯一，例如目标的水平或垂直边界上的任何一个点都有可能被当做极点。因此该网络对任何排成一行的目标边界有较弱的响应，而非较强的单峰值响应。作者使用Edge aggregation（边缘聚类）来解决该问题，为每个极点提取局部最大值，对水平与竖直方向的极值点，分别向左右或上下两个方向聚类到极小值点。将第一个单调下降区间的点的score的和按一定权重累加到原极值点上，代替该极值点的分数。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjrzpk7os7j30dl06sgop.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>Extreme Instance Segmentation：</strong></p>
+<p>  作者提出了一个简单的方法来构建近似的目标mask：使用一个边界线的中心点为极点的八边形来近似表示目标。作者使用Deep Extreme Cut（DEXTR）进一步改进边界框分割。</p>
+<p><strong>总结：</strong></p>
+<p>  本文提出了一种基于自底向上极点估计的目标检测框架，提取四个极值点并用几何方法将其归为一组，根据提取到的极值点生成八边形mask，在目标检测和实例分割上均取得了较好的效果。</p>
+<h1 id="3-FlowNet"><a href="#3-FlowNet" class="headerlink" title="3.FlowNet"></a>3.FlowNet</h1><p>CNN已经在多种计算机视觉任务上取得成功，但还没有成功应用于预测光流。光流估计需要精确的逐像素定位，同时需要找到两张输入图像之间的对应。这不仅涉及图像特征表达，而且要学习匹配两张图片不同位置的特征。本文使用CNN有监督学习，解决了光流估计问题。提出了两种架构：FlowNetSimple和FlowNetCorr，前者更为通用，后者包含了一层从不同图像位置收集特征向量的网络层。</p>
+<p>本文与此前方法的最大不同是直接预测整个光流场。该网络结构受到逐像素预测任务的启发，如滑动窗口法虽然比较有效但计算量巨大，并且不能提取全局输出特征（如锋利的边缘），另一种是上采样特征图至全分辨率，可用于预测兴趣区域的像素值。本文不仅对粗糙预测进行上卷积，而且对整个粗糙特征图进行上卷积，使其能提取更高级别的信息来更好的预测。在网络的收缩部分将上卷积的结果与特征图联系起来。</p>
+<p>  卷积神经网络善于在给出大量标记数据时预测输入输出关系，因此作者使用一个端到端的学习方法来预测光流：给出一个包含一对图像和真实的光流，训练网络来直接从图像预测x-y光流场。为了实现这个目标，该如何设计网络结构呢？</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjrzpmvcwfj30nh0cfjv9.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>FlowNetSimple：</strong> </p>
+<p>一个简单的选择是将输入图像堆叠在一起，喂给一个普通的网络，使其自己决定自己该如何处理这一对图片来提取移动信息。作者将这种仅由卷积层构成的网络结构称为“FlowNetSimple”。但是这种结构不能保证使用局部梯度优化（如随机梯度下降）能使网络收敛。</p>
+<p><strong>FlowNetCorr：</strong></p>
+<p>因此，需要手工设计一个特殊的网络：为两张输入图像创建两个相互独立，但具有相同处理流程的结构，在之后的步骤中再将其合并。使用这种结构，可以强迫网络首先独立的处理两张图片有意义的表示，然后在更高的等级将其合并。类似于使用标准匹配方法从两张图像的块中首次提取特征，在给出两张图像的特征表示后，如何找到其相关性呢？作者介绍了一个“correlation layer”来帮助网络在匹配过程中，在两张特征图间执行多块对比。作者将包含了”correlation layer”的网络结构称为“FlowNetCorr”。</p>
+<p><strong>Refinement：</strong></p>
+<p>由于池化操作导致分辨率减小，作者采用上卷积层（包括上采样和卷积）来优化粗糙的池化表示，以提供密集的逐像素预测。具体是在特征图上应用上卷积层，将其与网络收缩部分的相应特征图和一个上采样的粗糙光流预测连接起来。使用这种方法能同时保留粗特征图提供的高等级信息和低级特征图提供的精细局部信息。重复这一过程4次，每次增加2倍分辨率，最终的光流分辨率仍然比原图小4倍。作者发现更一步使用该方法不能显著提高效果，最终选用variation approach作为替代方案，该方案虽然需要更多的计算量，但可以得到平滑、子像素精确的光流场。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjrzpo8xh1j30cr04vjsh.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>  此外，作者构建了一个合成数据集“<strong>Flying Chairs</strong>”（对3D椅子模型进行仿射变换得到），为网络提供高了泛化能力。在训练过程中采用了数据增强方法来避免过拟合（包括平移、旋转、缩放、增加高斯噪声、改变亮度、对比度、伽马值、颜色）。</p>
+<p><strong>EPE(Endpoint Error)</strong>，是光流估计中标准的误差度量，是预测光流向量与真实光流向量的欧氏距离在所有像素上的均值。</p>
+<p><strong>总结：</strong></p>
+<p>  <strong>优点：</strong></p>
+<ul>
+<li>实现了用卷积神经网络从两张输入图片直接预测光流</li>
+<li>在非真实的Flying Chairs数据集上训练的网络在真实光流数据集上也表现良好，击败了LDOF方法。</li>
+<li>FlowNet能保留更多细节信息。</li>
+<li>人工合成的Flying Chairs数据集提高了网络的泛化能力。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>FlowNetC更容易过拟合。</li>
+<li>EPE比EpicFlow高，说明准确率比EpicFlow低</li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CenterNet/">CenterNet</a>
+                    
+                      <a class="hover-with-bg" href="/tags/ExtremeNet/">ExtremeNet</a>
+                    
+                      <a class="hover-with-bg" href="/tags/FlowNet/">FlowNet</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/10/19/GA_TSP/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">计算智能作业:用遗传算法解决旅行商问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/10/12/object-detection-papers/">
+                        <span class="hidden-mobile">目标检测论文</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "阅读笔记（10.16)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>CornerNet阅读笔记 - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-09-29 11:40">
+      2020年9月29日 中午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年9月29日 下午
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>提出CornerNet:一种新的目标检测方法，使用单个卷积神经网络，将目标边界框当做一组关键点（左上角、右下角）进行检测。消除了Anchor Boxes。</p>
+<p>提出Corner Pooling，一种新的池化层，帮助网络更好的定位关键点。</p>
+<p>实验表明，CornerNet在MS COCO数据集上，达到42.2%的AP。</p>
+<h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h1><p>目前最先进目标检测方法的一个主要组成部分是Anchor Box，是用于检测候选的一些可变尺寸、可变长宽比的框。Anchor Box在one-stage检测器中广泛使用，实现高精度、高效率的结果。One stage检测器将anchor boxes密集的放在图像上，并通过对anchors进行评分、通过回归改善他们的坐标。</p>
+<p>使用anchor box有两个缺点：</p>
+<ul>
+<li>需要一个非常大的anchor boxes集合。检测器被用来训练判断每个anchor box是否与ground truth box 足够重叠。结果，仅仅一小部分anchors与ground truth重叠，这就造成阳性anchors box和阴性anchors box 之间的巨大不平衡，并且减慢训练。</li>
+<li>使用anchor box引入大量超参数和设计选择。包括：多少框？框的尺寸？框的长宽比。这些选择很大程度上通过特殊的启发式作出的，当联合多尺度结构时会变得更复杂，每个网络在多个分辨率下分别作出预测，每个尺度使用不同的特征和自己的anchor boxes集合。</li>
+</ul>
+<p>本文介绍了CornerNet，一种去掉anchor boxes的one-stage目标检测方法。通过一组左上角和右下角的关键点来检测目标。使用单个卷积神经网络预测一个（相同目标类别的所有实例的）左上角点的”热图、一个右下角点的”热图“、一个嵌入式向量。嵌入式向量用于将属于相同目标的关键点组合，即网络被训练用于为这些关键点预测相近的嵌入式向量。我们的方法极大简化了网络的输出，无需设计anchor boxes。</p>
+<p>CornerNet另一个新颖的内容是corner pooling，一种新的池化层，可帮助卷积神经网络更好地定位边界框的角落。Corner Pooling在两个特征图上执行，从第一个特征图上（在每个像素位置）最大池化所有的特征向量，第二个特征图直接池化所有特征向量，然后将两个池化结果相加。</p>
+<p>我们假设有两个原因使检测角落比检测边界框中心或proposals更好：1.边界框的中心很难定位，因为它依赖目标的4条边，而定位一个角落仅需要2条边，更容易些。Corner pooling更是如此，它编码了一些关于角落定义的明确的先验知识。2.角落提供了一个更高效的边界框空间密集离散化方法：我们仅需要O(wh)个边角点，来替代O(w<sup>2</sup>h<sup>2</sup>)可能的anchor boxes。</p>
+<p>CornerNet在MS COCO数据集上达到42.2%的AP。通过消融研究表明：corner pooling对CornerNet的优越性能至关重要。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj7euh1e5ij31no0u0kh5.jpg" srcset="/img/loading.gif" alt="image-20200929123132990"></p>
+<h1 id="2-Related-work"><a href="#2-Related-work" class="headerlink" title="2. Related work"></a>2. Related work</h1><p>我们的方法受到”Associative Embedding in the context of muti-person pose estimation”的启发。这个方法在单个网络中监测和组合人类的关节。每个被检测到的关节有一个嵌入式向量。关节被组合在一起，基于他们嵌入式向量之间的距离。我们是第一个构想将目标检测任务当做一个<strong>检测任务</strong>和用嵌入式向量<strong>组合边角点</strong>。另一个创新点是他提出了conrer pooling层，帮助更好的定位边角点。此外，我们对沙漏结构进行了重大修改，加入了我们提出的新奇的focal loss变体，帮助更好的训练网络。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj7ev3a77dj31wg0jie82.jpg" srcset="/img/loading.gif" alt="image-20200929123207572"></p>
+<h1 id="3-CornerNet"><a href="#3-CornerNet" class="headerlink" title="3. CornerNet"></a>3. CornerNet</h1><h2 id="3-1-Overview"><a href="#3-1-Overview" class="headerlink" title="3.1 Overview"></a>3.1 Overview</h2><p>CornerNet通过一对关键点（边界框左上角和右下角）来检测目标。使用一个卷积网络预测两个热图集合，来表示不同目标类别的边角点位置，一个是左上角边角点的热图集合，一个是右下角边角点的热图集合。此外，网络为每一个被检测到的边角点预测一个嵌入式向量，这样，同一目标的两个边角点的嵌入式向量之间的距离很小。为了产生更紧的边界框，网络同时预测一个偏移量，来轻微的调整边角点的位置。通过预测热图、嵌入式向量、和偏移量，我们应用一个简单的后处理算法来获得最终高度边界框。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj50d6kkh1j31ru0ja4fx.jpg" srcset="/img/loading.gif" alt="image-20200927103924915"></p>
+<p>图四是CornerNet的一个概述图，我们使用沙漏网络(Newell et al.,2016)作为CorNerNet的Back-bone网络。沙漏网络后面跟着<strong>两个预测模块</strong>，一个模块预测左上角点，另一个预测右下角点。每个模块有他们自己的CornerPooling模块来池化来自沙漏网络的特征，之后预测热图、嵌入式向量和偏移。我们没有使用不同尺度的特征来检测不同尺寸的目标，我们仅仅将这两个模块应用于沙漏网络的输出。</p>
+<h2 id="3-2-检测Corners"><a href="#3-2-检测Corners" class="headerlink" title="3.2 检测Corners"></a>3.2 检测Corners</h2><p>我们预测两个热图集合，一个是左上角点的，一个是右下角点的。每个热图集合有C个通道（C是类别数目，尺寸为HxW,没有背景通道），每个通道是一个二进制的mask，指示属于同一个类别的边角点的位置。</p>
+<p>每个边角点，有一个阳性的ground-truth位置，其他所有的位置是阴性的。在训练过程中不是相等的惩罚所有阴性位置，而是减少那些在阳性位置某个半径内的阴性位置的惩罚。这是因为一组错误的边角点检测结果，如果他们与各自的ground truth 位置很近，仍然可以预测一个与ground-truth重叠很大的边界框。如果在半径内的一组点所产生的边界框与ground-truth的IoU大于0.3，那么就使用这个半径值。给出这个半径后，惩罚减少的数量通过一个非正规化的2维高斯函数给出。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj7eynmq1dj30w70u0qv5.jpg" srcset="/img/loading.gif" style="zoom: 33%;" /></p>
+<p>p<sub>cij</sub>是在预测出的热图上，坐标(i,j)是类别c的分数。y<sub>cij</sub>是被非正规化高斯函数增大的ground-truth热图。我们设计了一个focal loss的变体：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj7epq0p4zj30xk042t9c.jpg" srcset="/img/loading.gif" alt="image-20200929122659653"></p>
+<p>许多方法用下采样层来聚集全局信息，减少内存使用。当他们被用于一张全卷积图像，输出的尺寸通常比原始图像小。当坐标点重新映射到原图时，会丢失一些精度，这会极大地影响小的边界框和其ground-truth之间的IoU。为了解决这个问题，我们在重映射到输入图像分辨率之前，通过预测位置偏移来轻微的调整边角点的位置。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj7eq9qkisj30xg03q0sz.jpg" srcset="/img/loading.gif" alt="image-20200929122731092" style="zoom: 50%;" /></p>
+<p>我们在训练时为ground-truth边角点应用平滑L1损失。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj7eqtb4k8j30xi04agm0.jpg" srcset="/img/loading.gif" alt="image-20200929122802250" style="zoom: 50%;" /></p>
+<h2 id="3-3-组合边角点"><a href="#3-3-组合边角点" class="headerlink" title="3.3 组合边角点"></a>3.3 组合边角点</h2><p>一张图片中可能会有多个目标，会有多个左上角点和多个右下角点被检测出来。我们需要确定一对左上角点和右下角点是否来自相同的边界框。我们的方法灵感来自于“Associative Embedding method”，Newell等人检测人类所有的关节，为每个关节生成一个嵌入式向量。基于这些嵌入式向量之间的距离来组合关节。</p>
+<p>这种联合嵌入式的方法也适用于我们的任务。网络为每一个检测到的边角点预测一个嵌入式向量，这样如果一个左上角点和一个右下角点属于相同的边界框，那么他们之间的嵌入式向量距离应该很小。我们就能基于这个距离将其分为一组。嵌入式向量的实际值不重要，仅仅需要知道他们之间的距离。</p>
+<p>我们使用一维的嵌入式向量，e<sub>tk</sub>是目标k左上角点的嵌入式向量，e<sub>bk</sub>是右下角的。我们使用“pull”损失来训练网络组合边角点，用”push”损失来训练网络分离边角点。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj7ere15f3j30y00em3zs.jpg" srcset="/img/loading.gif" alt="image-20200929122835309" style="zoom: 33%;" /></p>
+<p>e<sub>k</sub>是e<sub>tk</sub>和e<sub>bk</sub>的平均值，△=1。与偏移损失类似，我们只对ground-truth边角点位置应用该损失。</p>
+<h2 id="3-4-Corner-Pooling"><a href="#3-4-Corner-Pooling" class="headerlink" title="3.4 Corner Pooling"></a>3.4 Corner Pooling</h2><p>为了确定某个像素点是否是一个左上角点，我们需要在目标最顶部的边界水平向右看，在最底部的边界水平向左看来判断是否为右下角点。因此我们提出Corner Pooling来通过编码明确的先验知识，更好的定位边角点。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj7ertzyuoj30xu0bi75q.jpg" srcset="/img/loading.gif" alt="image-20200929122901224" style="zoom: 33%;" /></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj7evuogg6j31wi0sq0zd.jpg" srcset="/img/loading.gif" alt="image-20200929123252338"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj7esfenkcj31wo0lo77e.jpg" srcset="/img/loading.gif" alt="image-20200929122935161"></p>
+<h2 id="3-5-Hourglass-Network"><a href="#3-5-Hourglass-Network" class="headerlink" title="3.5 Hourglass Network"></a>3.5 Hourglass Network</h2><p>CornerNet 采用沙漏网络作为backbone网络。沙漏网络首先被用于人类姿态估计任务。它是一个全卷积神经网络，由一到多个沙漏模块组成。一个沙漏网络首先通过一系列卷积核最大池化层，对输入特征图进行下采样。然后通过一系列上采样层和最大池化层，将特征上采样回原始分辨率。因为细节在最大池化层中丢失，添加skip层用于将细节加回已上采样的特征。沙漏网络在一个统一的结构中捕获所有局部和全局特征。当多个沙漏模块被堆叠到网络中，沙漏模块能重新处理特征，来捕获更高层级的信息。这些性质也使得沙漏网络成为目标检测的一个理想选择。</p>
+<p>本文的沙漏网络由两个沙漏模块组成，并对沙漏模块的结构做了一些修改。</p>
+<p>与Newell等人相同，我们也在训练中增加一个中间超视图。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj7esxzvh5j31wk0q6n29.jpg" srcset="/img/loading.gif" alt="image-20200929123004633"></p>
+<h1 id="4-实验"><a href="#4-实验" class="headerlink" title="4. 实验"></a>4. 实验</h1><p>略</p>
+<h1 id="5-结论"><a href="#5-结论" class="headerlink" title="5. 结论"></a>5. 结论</h1><p>我们提出了一种新的目标检测方法，通过一组边角点来检测边界框。我们在MSCOCO数据集上评估CornerNet，证明了有竞争力的结果。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CornerNet/">CornerNet</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/10/04/FCOS/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">FCOS阅读笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/09/26/MidAutumn/">
+                        <span class="hidden-mobile">2020中秋博饼</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "CornerNet阅读笔记&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

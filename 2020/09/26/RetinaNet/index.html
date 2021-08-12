@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>RetinaNet阅读笔记 - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-09-26 11:40">
+      2020年9月26日 中午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      41
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年9月28日 上午
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>Two- Stage :sparse</p>
+<p>One-stage:dense(更快，更简单，但精度落后于Two-Stage，极端前景背景类别失衡是主要原因）</p>
+<p><strong>FocalLoss在稀疏的hard examples上训练，避免大量easy negatives在训练时淹没检测器</strong>。</p>
+<p>通过reshape标准交叉熵损失，降低已经很好被分类的样本的损失，从而解决类不平衡问题。</p>
+<p>设计和训练了一个简单的稠密检测器：RetinaNet，达到先前One-stage检测器的速度，并且超过最先进的two-stage检测器的精度。</p>
+<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h1><p>Two-stage（proposal-driven 机制）例如RCNN框架，第一步生成一个稀疏的候选目标位置集合，第二步使用卷积神经网络将每个候选位置分为前景的类别之一或背景。通过一系列改进，two-stage达到了最佳精度。</p>
+<p>One-stage检测器对目标位置、尺寸、长宽比进行有规律的、密集的采样（例如YOLO、SSD）相对于最先进的two-stage检测器提升了10-40%的精度。</p>
+<p>本文提出了一个可与最先进two-stage检测器的精度匹配的One-Stage检测器。为了实现该结果，作者将训练过程中的类不平衡问题看作主要障碍，并提出了一个新的损失函数来消除该障碍。</p>
+<p>类不平衡问题在像RCNN一样的检测器中通过两步级联和抽样启发被解决。</p>
+<h4 id="Two-stage"><a href="#Two-stage" class="headerlink" title="Two-stage:"></a>Two-stage:</h4><p>Proposal Stage：Selective Search、EdgeBoxes、DeepMask、RPN</p>
+<p>​            快速的缩小候选目标位置的数量到一个很小的值（1-2k),并且滤除大部分背景样本</p>
+<p>Second分类步骤：执行启发式采样，例如固定前景和背景的比例（1：3）或者online hard example mining(OHEM),以在前景和背景之间维持一个可管理的平衡。</p>
+<h4 id="One-stage"><a href="#One-stage" class="headerlink" title="One-stage:"></a>One-stage:</h4><p>必须处理在图像中定期采样的大量候选目标位置。在实践中意味着枚举100k个位置，密集的覆盖空间位置、尺度和长宽比。类似的启发采样是低效的，因为训练步骤容易被已分类的背景样本所主导。这些低效率是目标检测中的一个经典问题，通常通过bootstrapping或hard example mining解决。</p>
+<p>本文提出了一个新的损失函数，更高效的替代之前处理类不平衡问题的方法。损失函数是动态缩放交叉熵损失，当对正确类的信心增加时，比例因子衰减为0。直观的说，这个比例因子能自动降低简单例的贡献权重，快速的将模型集中在难例上。Focal损失的具体形式不重要，其他实例也能实现相似的结果。</p>
+<p>为了证明所提出的focal loss的有效性，我们设计了一个简单的one-stage检测器RetinaNet，由它对输入图片的目标位置进行密集采样命名。它的设计特点是一个高效的网络特征金字塔和使用锚框。</p>
+<h1 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2.Related Work"></a>2.Related Work</h1><p>经典的目标检测器:滑动窗口  boosted object  HOG  DPMs </p>
+<h5 id="Two-stage检测器："><a href="#Two-stage检测器：" class="headerlink" title="Two-stage检测器："></a>Two-stage检测器：</h5><ul>
+<li>First stage:生成稀疏的候选proposal集合，应当包含所有目标同时滤除主要的negative位置</li>
+<li>Second-stage:将proposal分类为前景或背景。（R-CNN将Second-stage分类器升级到卷积神经网络）【区域建议网络RPN将生成proposal和Second-stage分类器 整合为单个卷积神经网络，形成Faster R-CNN的框架】</li>
+</ul>
+<h5 id="One-stage检测器："><a href="#One-stage检测器：" class="headerlink" title="One-stage检测器："></a>One-stage检测器：</h5><p>OverFeat第一个现代的基于深度网络的one-stage的检测器。SSD和YOLO更新了One-stage方法，他们的速度可以，但精度不如two-stage方法。</p>
+<p>RetinaNet检测器的设计与以前的密集检测器有许多相似之处，特别是RPN引入的“锚”的概念，以及SSD和FPN[中引入的特征金字塔的使用。特别强调：我们简单检测器实现最高的结果不是基于网络设计的创新，而是由于所提出的Focal Loss。</p>
+<h5 id="类不平衡："><a href="#类不平衡：" class="headerlink" title="类不平衡："></a>类不平衡：</h5><p>Boosted detectors、DPMs、SSD面临较大的类不平衡，检测器对每张图片评估10<sup>4</sup>-10<sup>5</sup>个候选位置，但只有少数位置包含物体。</p>
+<p>类不平衡导致两个问题：</p>
+<ol>
+<li>训练效率低，<strong>大多数位置是easy negative</strong> ，没有贡献有用的学习信号</li>
+<li>Easy negative能淹没训练，导致模型退化。</li>
+</ol>
+<p>一个常见的解决方案是执行某种形式的硬负挖掘[33,37,8,31,22]，在训练中采样硬例子或更复杂的采样/重新分配权重方案[2]。相比之下，我们证明了我们所提出的focal loss自然地处理了one-stage检测器所面临的类不平衡，并允许我们高效地训练所有的例子，而不需要采样,不需要担心easy negatives淹没损失和计算梯度。</p>
+<h5 id="鲁棒估计："><a href="#鲁棒估计：" class="headerlink" title="鲁棒估计："></a>鲁棒估计：</h5><p>人们对设计<strong>鲁棒损失</strong>函数很感兴趣，例如Huberloss，通过降低有很大错误的样本的损失，来减少异常值outliers(hard examples)的贡献。相比之下，我们的focal loss没有解决异常值(outliers)，而是<strong>降低inliers(easy examples)的权重,</strong>这样即使他们的数量很大，他们对总损失的贡献也很小。换句话说，focal loss扮演了与robust loss对立的角色，它关注在稀疏的hard examples上的训练。</p>
+<h1 id="3-Focal-Loss"><a href="#3-Focal-Loss" class="headerlink" title="3.Focal Loss"></a>3.Focal Loss</h1><p>Focal Loss被用来解决one-stage检测方案中训练时前景和背景极端不平衡的问题。从二分类的交叉熵(CE)损失来介绍Focal Loss，</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1wva3ph1j30dr02a74a.jpg" srcset="/img/loading.gif" alt="image-20200924182142381" style="zoom: 67%;" /></p>
+<p>y=±1指定ground-truth类，p∈[0,1]是模型对于类标签y=1的概率。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1xd6svy0j30cw0390ss.jpg" srcset="/img/loading.gif" alt="image-20200924183857022" style="zoom:67%;" /></p>
+<p>CE损失在图1中用蓝线画出，一个值得注意的性质是：即使样本已经被很容易的分类(p&gt;&gt;0.5)，CE损失依然很大。当把大量easy样本加和起来，这些小的损失能淹没稀有的类别。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1xen7zh1j30gb0aj75c.jpg" srcset="/img/loading.gif" alt="image-20200924184020821" style="zoom:67%;" /></p>
+<h2 id="3-1-平衡的交叉熵"><a href="#3-1-平衡的交叉熵" class="headerlink" title="3.1 平衡的交叉熵"></a>3.1 平衡的交叉熵</h2><p>解决类不平衡的一种常用方法是对类1引入权重因子α。在实际应用中，α可采用逆类频率设置，也可作为交叉验证设置的超参数。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1xsqbgn0j30bg01aq2s.jpg" srcset="/img/loading.gif" alt="image-20200924185352955"></p>
+<p>这种损失是CE的简单扩展，我们将其作为我们提出的Focal损失的实验基线。</p>
+<h2 id="3-2-Focal-Loss-定义"><a href="#3-2-Focal-Loss-定义" class="headerlink" title="3.2 Focal Loss 定义"></a>3.2 Focal Loss 定义</h2><p>正如实验将显示的那样，在密集检测器的训练过程中 遇到的较大的类不平衡压倒了交叉熵损失。容易被分类的负样本构成了大部分损失，并支配着梯度。尽管α平衡了正负样本的重要性，但他没有区分easy/hard样本。<strong>我们重构了loss function来降低easy样本的权重，关注hard negative的训练。</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1ymj45y2j30ci01mmx1.jpg" srcset="/img/loading.gif" alt="image-20200924192231368"></p>
+<p>性质1：当一个样本被误分类并且概率很低，调制因子趋近于1，损失不受影响。当概率趋近于1，因子趋近于0，这样就降低了已经被良好分类的样本的损失占比。</p>
+<p>性质2：聚焦参数γ平滑的调整easy样本的权重降低率。当γ=0时 FL=CE，随着γ的增加调制因子的影响也最值增加。（我们发现γ=2在实验中效果最佳）。</p>
+<p>直观的说，调制因子减少了easy样本的损失贡献，并且扩展了损失较低样本的范围。例如当γ=2，一个样本被分类的概率为0.9，FL损失比CE损失低100倍，当概率增加到0.968，损失低了1000倍。这反过来增加了校正误分类样本的重要性。（它的损失降低了4倍，当概率&lt;0.5,γ=2）</p>
+<p>在实验中，使用一个FL的α-balanced变体：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj1zsm7emej30cm01nt8l.jpg" srcset="/img/loading.gif" alt="image-20200924200258905" style="zoom:67%;" /></p>
+<p>我们在实验中采用这种形式，因为他比不适用α-balanced形式产生了轻微的精度提高。最后，我们注意到损失层的实现将计算p的sigmoid操作与损失计算相结合，从而获得更大的数值稳定性。</p>
+<h2 id="3-3-类不平衡和模型初始化"><a href="#3-3-类不平衡和模型初始化" class="headerlink" title="3.3 类不平衡和模型初始化"></a>3.3 类不平衡和模型初始化</h2><p>二分类通常默认初始化为相同的输出概率（y=-1or1）。在这这样的初始化条件下，在类不平衡的情况下，由于频繁类别的损失会主导整个损失，造成训练早期的不稳定。为了解决这个问题，我们引入了一个先验概念，用于在训练开始时模型对稀有类（前景）估计的p值。我们用pi表示先验值，并设置它，以便模型对稀有类示例的估计p很低，例如0.01。我们注意到，这是模型初始化的变化(见§4.1)，而不是损失函数的变化。我们发现，在严重的类不平衡情况下，这可以提高交叉熵和FL损失的训练稳定性。</p>
+<h2 id="3-4-类不平衡和Two-stage检测器"><a href="#3-4-类不平衡和Two-stage检测器" class="headerlink" title="3.4 类不平衡和Two-stage检测器"></a>3.4 类不平衡和Two-stage检测器</h2><p>Two-stage检测器经常使用交叉熵损失训练，而不用α-balanced或者我们提出的FL。相反，他们解决类不平衡问题通过两种机制：(1).两步级联 (2).偏置小批采样。第一个级联步骤是一个目标提议机制，将几乎无限目标可能位置集合减小到1000-2000。重要的是，被选择的proposals并不是随机的，而是可能与真实的目标位置相对应，从而消除大多数easy negatives。在训练第二阶段时，通常使用偏置抽样来构建minibatches，包含例如1:3的正例与负例。这个比率就像一个通过采样实现的隐式α平衡因子。我们提出的FocalLoss是用来在one-stage检测系统中<strong>通过损失函数</strong>解决这些机制。</p>
+<h1 id="4-RetinaNet-Detector"><a href="#4-RetinaNet-Detector" class="headerlink" title="4. RetinaNet Detector"></a>4. RetinaNet Detector</h1><p>RetinaNet是一个单一的、统一的网络，由一个基石网络和两个特定任务的子网络组成。基石网络负责在整个输入图像上计算卷积特征图，并且它不是一个自卷积神经网络。第一个子网络在基石网络的输出上做卷积目标分类，第二个子网络执行卷积边框回归。</p>
+<h4 id="特征金字塔基石"><a href="#特征金字塔基石" class="headerlink" title="特征金字塔基石"></a>特征金字塔基石</h4><p>采用FPN作为RetinaNet的基石网络，FPN使用自顶向下的路径和侧面连接扩展了一个标准的卷积神经网络，这样网络可以从单分辨率输入图像高效的构建一个rich、多尺度的特征金字塔。金字塔的每一个等级被用来检测不同尺度的目标。FPN从FCN提高了多尺度预测。在ResNet的顶部建立FPN结构。</p>
+<h4 id="Anchors"><a href="#Anchors" class="headerlink" title="Anchors"></a>Anchors</h4><p>与RPN网络类似，也使用anchors来产生proposals。特征金字塔的每层对应一个anchor面积，为了产生更加密集的coverage，增加了三个面积比例 {2<sup>0</sup>,2<sup>1/2</sup>,2<sup>2/3</sup>}（即使用当前anchor对应的面积分别乘以相应的比例，形成三个尺度），然后anchors的长宽比仍为{1:2,1:1,2:1} ，因此<strong>特征金字塔的每一层对应A = 9种Anchors。</strong></p>
+<p>我们使用和RPN变体相似的平移不变的Anchor boxes，在每一个金字塔等级有9个Anchors。<strong>每个Anchors有一个长度为K的one-hot向量（作为分类信息），和4个边界框回归目标向量。</strong>0.5的IoU阈值的Anchors被分配到ground-truth目标框，[0,0.4)的IoU被分配到背景。每个Anchor最多被分配到一个目标框，并且把长度为K的标签向量的相对应的位置设为1，其他为0 。如果一个Ancho没有被分配，它或许在[0.4,0.5)之间发生了重叠，我们在训练期间忽略它。每个Anchor和被分配的目标框之间的偏移被计算为边界框回归目标。</p>
+<h4 id="分类子网络"><a href="#分类子网络" class="headerlink" title="分类子网络"></a>分类子网络</h4><p>分类子网络预测了A个Anchors和K个目标类别在每个空间位置存在的概率。该子网络的参数与所有级别的金字塔共享。从金字塔等级输入的特征图有C个通道，子网络应用3x3的卷积层，C个过滤器跟着一个ReLU激活函数，后面跟着一个有KA个滤波器的3x3的卷积层。最终每个空间位置输出KA个二进制的预测，后接Sigmoid激活。</p>
+<p>与RPN相比，我们的目标分类子网络更深，仅使用3x3的卷积，没有与边界框回归子网络共享参数。</p>
+<h4 id="边界框回归子网络"><a href="#边界框回归子网络" class="headerlink" title="边界框回归子网络"></a>边界框回归子网络</h4><p>与目标分类子网络平行，我们为<strong>每一个金字塔层级</strong>增加了另一个小的FCN，来回归每个anchorBox和附近的ground-truth的偏移。除了在结束时每个空间位置改为输出一个4A个线性输出，其他的设计和边界框回归子网络完全一致。我们使用类怀疑边界框回归器，使用更少的参数，同样高效。</p>
+<h2 id="4-1推理和训练"><a href="#4-1推理和训练" class="headerlink" title="4.1推理和训练"></a>4.1推理和训练</h2><h4 id="推理"><a href="#推理" class="headerlink" title="推理"></a>推理</h4><p>RetinaNet形成了一个由ResNet-FPN作为基石的简单的FCN网络，包括分类子网络、边界框回归子网络。因此，推理只涉及在网络上传播一张图片。为了提高速度，我们只对每个FPN层上分数最高的1k个预测解码边界框预测（在阈值检测置信度为0.05之后）。将所有层级的顶部预测合并，执行阈值为0.5的非极大值抑制，产生最终的检测。</p>
+<h4 id="Focal-Loss"><a href="#Focal-Loss" class="headerlink" title="Focal Loss"></a>Focal Loss</h4><p>采用FocalLoss作为分类子网络输出的损失。γ=2效果比较好，γ=[0.5,5]时RetinaNet相对鲁棒。在训练RetinaNet时，FocalLoss被应用于每个被采样的图片中所有(大约100k个)anchors上。这与使用启发式抽样(RPN)或硬实例挖掘(OHEM, SSD)为每个mini选择一小组Anchors(例如，256)的常见做法形成了对比。整张图片的focalloss是所有大约100k个anchors 的focalloss的总和。被已分配ground-truth box的anchors的数量正规化（不是所有anchors）因为绝大多数的anchors是easy negatives，损失在focal loss下可忽略不计。最后我们注意到，被分类给稀有类别的α权重也有一个稳定的范围，他与γ相互作用，两者必须同时选择。通常α应该被轻微减小，γ应该被增加。（γ=2，α=0.25时最佳）</p>
+<h1 id="5-实验"><a href="#5-实验" class="headerlink" title="5.实验"></a>5.实验</h1><p>略</p>
+<h1 id="6-结论"><a href="#6-结论" class="headerlink" title="6.结论"></a>6.结论</h1><p>本文将类不平衡看作阻止one-stage目标检测器超过two-stage方法表现的主要障碍。为了解决这个问题，我们提出了focal loss，他对交叉熵损失应用了一个可调制的项，使得学习过程更关注hard negative样本。我们的方法简单高效。我们设计了一个全卷积one-stage检测器，报告大量实验分析，证明它的效果。表明他实现了最先进的速度和精度。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/RetinaNet/">RetinaNet</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/09/26/MidAutumn/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2020中秋博饼</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/09/18/9-18/">
+                        <span class="hidden-mobile">阅读笔记（9.18)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "RetinaNet阅读笔记&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

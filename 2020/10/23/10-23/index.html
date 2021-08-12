@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>阅读笔记（10.23) - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-10-23 07:40">
+      2020年10月23日 早上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      39
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年10月23日 早上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>最近主要阅读了Flow-Related的三篇视频目标检测的相关论文：FGFA、DFF、MANet。其中，FGFA使用FlowNet计算帧间光流信息，根据光流信息将临近帧的特征图加权融合到参考帧上，然后利用整合后的信息做检测和分类。DFF对FGFA进行了改进，仅在稀疏的关键帧上运行卷积子网络，并且通过光流场将其深度特征图传播给其他帧。</p>
+<p><strong>阅读文献：</strong></p>
+<p>[1] Zhu X, Wang Y, Dai J, et al. Flow-guided feature aggregation for video object detection[C]//Proceedings of the IEEE International Conference on Computer Vision. 2017: 408-417.</p>
+<p>[2] Zhu X, Xiong Y, Dai J, et al. Deep feature flow for video recognition[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2017: 2349-2358.</p>
+<p>[3] Wang S, Zhou Y, Yan J, et al. Fully motion-aware network for video object detection[C]//Proceedings of the European Conference on Computer Vision (ECCV). 2018: 542-557.</p>
+<h1 id="1-FGFA"><a href="#1-FGFA" class="headerlink" title="1.FGFA"></a>1.FGFA</h1><p>将用于图像的目标检测器应用于视频非常有挑战，视频中会出现运动模糊、失焦、和罕见的姿势等目标表观退化的情况。现有的一些方法在box level利用时间信息做出尝试，但其不是端到端的训练。本文采用光流指导的特征聚合，提出了一种featue-level的端到端学习的视频目标检测框架，提升了逐帧特征，可生成高质量的边界框。</p>
+<h2 id="Flow-Guided-Feature-Aggregation-FGFA"><a href="#Flow-Guided-Feature-Aggregation-FGFA" class="headerlink" title="Flow-Guided Feature Aggregation(FGFA)"></a>Flow-Guided Feature Aggregation(FGFA)</h2><p>为每一帧图像应用特征提取网络，产生逐帧的特征图。使用FlowNet估计参考帧及其临近帧之间的运动，根据运动流将临近帧的特征图扭曲到参考帧。最后将扭曲的特征图、参考帧自己的特征图用自适应权重网络进行聚合，以增强参考帧的特征。之后将产生的聚合特征图喂给检测网络，来在参考帧上产生预测结果。</p>
+<p>在特征传播、增强参考帧过程中有两个必要模块：1）运动指导的空间扭曲，根据帧与帧之间的运动扭曲特征图。2）特征聚合模块，解决怎样恰当的融合多帧特征。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5pe0cwj30ef0hc0xl.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="模型设计："><a href="#模型设计：" class="headerlink" title="模型设计："></a>模型设计：</h2><ul>
+<li><strong>光流指导的扭曲</strong>：<img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5rygshj30ch00yt8k.jpg" srcset="/img/loading.gif" alt="img">F是由FlowNet产生的光流场，Ii是参考帧，Ij是临近帧，W是双线性扭曲函数，作用于特征图每个通道的所有位置。</li>
+<li><strong>特征聚合</strong>：在特征扭曲后，参考帧累积了多张特征图（包括其自己的），这些特征图提供了目标的不同信息（如变化的光照、视角、姿势、非刚体形变）。作者在不同的空间位置采用不同的权重，并使所有的特征通道共享相同的空间权重。聚合的特征图表示为<img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5qiq1uj306i01mweb.jpg" srcset="/img/loading.gif" alt="img">其中，从j到i的二维权重图用wj-&gt;i表示。聚合后的特征图喂给检测子网络以获得检测结果：<img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5ilbv9j303r00tmwy.jpg" srcset="/img/loading.gif" alt="img"></li>
+<li><strong>自适应权重</strong>：自适应权重表示在每个空间位置上临近帧到参考帧的重要性。在位置p上，如果扭曲的特征图fj-&gt;i(p)与特征图fi(p)相似，就被分配一个大权重。否则就分配一个小权重。作者使用cos相似度来度量扭曲特征图和参考帧特征图之间的相似性。使用一个小的卷积神经网络：嵌入子网络来将fi和fi-&gt;j投影到一个新的embedding用于相似性度量。<img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5rk5fpj308t01tq2t.jpg" srcset="/img/loading.gif" alt="img">使用以上公式估计权重，其中<img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5myo6yj303500vmwx.jpg" srcset="/img/loading.gif" alt="img">是用于相似性度量的嵌入特征，wj-&gt;i在每个空间位置p在相邻帧进行正则化：<img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5lxr8bj302100ejr5.jpg" srcset="/img/loading.gif" alt="img">。权重的估计也就是通过SoftMax操作计算嵌入特征之间cos相似度的过程。</li>
+</ul>
+<h2 id="网络结构："><a href="#网络结构：" class="headerlink" title="网络结构："></a>网络结构：</h2><p>  使用FlowNet来预测光流场，采用在ImageNet上预训练的ResNet(-50and-101)和Aligned-Inception-Resnet作为特征网络。一个随机初始化的嵌入网络，检测网络采用R-FCN和RPN。</p>
+<h2 id="ImageNet-VID数据集："><a href="#ImageNet-VID数据集：" class="headerlink" title="ImageNet VID数据集："></a>ImageNet VID数据集：</h2><p>  是一个普遍用于视频目标检测的大规模基准数据集，训练集有3862个视频片段，验证集有555个视频片段。片段被完全标注，帧率为25或30fps，有30个目标类别。类别是ImageNet DET数据集的子集。</p>
+<h2 id="评价标准："><a href="#评价标准：" class="headerlink" title="评价标准："></a>评价标准：</h2><p>  为了便于分析，将ground truth目标根据其运动速度进行分类。目标的速度定义为在其相邻的前后10帧上对应实例的平均IoU，称为“motion IoU”，motion IoU越小，说明目标移动速度越快。IoU&gt;0.9的为slow，0.7&lt;IoU&lt;0.9的为medium，IoU&lt;0.7的为fast。相对应的：沿用目标检测中的mAP，但是会根据目标的速度分为mAP(slow), mAP(medium), mAP(fast)。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5k48n1j30ed088glq.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><h4 id="创新点："><a href="#创新点：" class="headerlink" title="创新点："></a>创新点：</h4><ul>
+<li>使用FlowNet计算帧间光流信息，根据光流信息将临近帧的特征图加权融合到参考帧上。</li>
+<li>利用前后帧光流信息增强当前参考帧的特征，从而提升识别精度。</li>
+</ul>
+<h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h4><ul>
+<li>识别速度很慢。</li>
+<li>物体运动速度越快，光流的效果就会越差。</li>
+<li>仅融合与当前帧相邻的前后帧，有一定局限性，是否有更加全局的特征融合</li>
+</ul>
+<h1 id="2-Deep-Feature-Flow-for-video-Recognition"><a href="#2-Deep-Feature-Flow-for-video-Recognition" class="headerlink" title="2.Deep Feature Flow for video Recognition"></a>2.Deep Feature Flow for video Recognition</h1><p>  直接将图像识别方法应用在视频的每一帧上需要更大的计算量，并且更慢。作者提出了一种用于视频目标检测的快速且精确的框架：deep feature flow，该框架仅在稀疏的关键帧上运行卷积子网络，并且通过光流场将其深度特征图传播给其他帧。因为光流估计和特征传播比计算卷积特征更快，所以可以避免计算瓶颈，提升检测速度。</p>
+<h2 id="Deep-Feature-Flow"><a href="#Deep-Feature-Flow" class="headerlink" title="Deep Feature Flow"></a>Deep Feature Flow</h2><p>  deep feature flow首次在一个深度学习框架中联合训练光流和识别任务。作者将卷积神经网络N分为两个连续的子网络Nfeat和Ntask:第一个称为特征子网络，输出若干中间特征图;第二个称为任务网络，对于任务有特定的结构，在特征图上执行识别任务（在执行目标检测任务时，采用R-FCN、RPN，使用了anchors）。</p>
+<p>  连续的视频帧具有高度相似性，编码高级别语义概念的深度特征图的相似性甚至更高。作者正是利用这些相似性来减少计算开销。特征网络Nfeat仅仅在某些稀疏关键帧Ik上运行，非关键帧Ii的特征图来自于之前的关键帧Ik的传播。</p>
+<h2 id="数学推导："><a href="#数学推导：" class="headerlink" title="数学推导："></a>数学推导：</h2><p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5jhk6oj307901gjr8.jpg" srcset="/img/loading.gif" alt="img"><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5omoe0j304e00n0si.jpg" srcset="/img/loading.gif" alt="img">是一个由光流估计算法获得的二维光流场。</p>
+<p>  特征扭曲通过双线性插值实现：          (1) 其中c为特征图f的通道数，q枚举特征图上所有的空间位置，<img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5j2v07j303k00r742.jpg" srcset="/img/loading.gif" alt="img">，G（·,·）是双线性插值核，G是二维的，可被分为两个一维的核：<img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5ubrh2j30ay00u0sm.jpg" srcset="/img/loading.gif" alt="img">，其中<img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5tveo0j306l00pq2r.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>  由于光流估计的误差，空间扭曲有时不精确，故使用“scale field”Si-&gt;k来调整其振幅。最终，特征传播函数定义为：<img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5q2riej305p00u0sj.jpg" srcset="/img/loading.gif" alt="img">(3) 其中，W在特征图的所有通道和所有位置应用了等式(1)，并按元素乘以Si-&gt;k。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5r3v7nj30cu0bf75g.jpg" srcset="/img/loading.gif" alt="img"> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5t4tztj30dt0artaj.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="训练过程："><a href="#训练过程：" class="headerlink" title="训练过程："></a>训练过程：</h2><p>使用CNN估计光流场和尺度场，所有的内容以任务为导向进行联合的端到端训练。网络结构如图b所示，使用随机梯度下降（SGD）训练，在每个mini-batch中随机采样Ik和Ii，i与k相隔不超过9帧。在前向传播过程中，首先在Ik上应用特征网络Nfeat，获得特征图fk。然后在Ik和Ii上运行光流网络F，预测光流场和尺度场。当i&gt;k时，按照等式(3)将特征图fk传播给fi。最终Ntask作用于fi来产生结果yi。通过在最后一个卷积层增加一些通道，作者在网络的输出加入了一个尺度函数S。尺度函数被初始化为1（输出层的权重初始化为0，偏差初始化为1）</p>
+<h2 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a>总结：</h2><h4 id="创新点：-1"><a href="#创新点：-1" class="headerlink" title="创新点："></a>创新点：</h4><ul>
+<li>利用轻量的光流网络计算帧与帧之间的关系，根据计算出的光流场将关键帧的特征传播至其他帧。无需对每一帧计算特征图，提升了检测速度。</li>
+<li>传统的逐帧训练仅可使用标注过的帧进行训练，而DFF可以使用所有帧进行训练（只要参考帧被标注）。</li>
+</ul>
+<h4 id="缺点：-1"><a href="#缺点：-1" class="headerlink" title="缺点："></a>缺点：</h4><ul>
+<li>传播后的特征会变弱，造成非关键帧的精度有一定损失。</li>
+<li>使用固定的关键帧持续长度l，当图像内容急剧变化时，没有分配新的关键帧。</li>
+</ul>
+<h1 id="3-MANet"><a href="#3-MANet" class="headerlink" title="3.MANet"></a>3.MANet</h1><p>  为了增强视频每一帧的特征，此前的做法是聚合相邻帧的特征。但由于目标和摄像机的移动，目标的特征通常没有进行逐帧的空间校准。本文提出了一个端到端的模型：MANet，在<strong>像素级别</strong>和<strong>实例级别</strong>以一个统一的框架，联合校准目标特征。像素级校准可以灵活地对详细的运动进行建模，而实例级校准则可以捕获更多的全局运动线索，以便对遮挡具有鲁棒性。</p>
+<p>  FGFA使用光流估计来预测逐像素的运动（以下称为像素级别的特征校准），当目标的表观剧烈变化时，尤其是目标被遮挡时，这种方法将会不精确。一旦光流估计不精确，光流指导的扭曲就会误导特征校准。</p>
+<p>  本文在现有像素级别的方法上，提出了<strong>实例级别</strong>的校准方法。估计每个目标随时间的运动，以更加精确的聚合特征。具体地，为参考帧的每个proposal，提取其相应的运动特征来预测附近帧与当前帧之间的相对运动。根据预测的相对运动，将相邻帧中同一对象的特征进行RoI池化和合并，以更好地表示。对比像素级别的校准，实例级别的校准对较大的表观变化（如遮挡）更鲁棒。</p>
+<p>  作者在观察的基础上，提出了一个<strong>运动模式推理模块</strong>：若某个运动模式更有可能是非刚体的，并且没有发生遮挡，最终结果将会更依赖像素级别的校准，否则就更依赖实例级别的校准。</p>
+<h2 id="MANet结构："><a href="#MANet结构：" class="headerlink" title="MANet结构："></a>MANet结构：</h2><p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5o0qszj30pg09awhn.jpg" srcset="/img/loading.gif" alt="img"></p>
+<ul>
+<li>首先，Nfeat特征提取器对三帧图像进行计算，产生三张中间特征图ft-τ，ft，ft+τ。</li>
+<li>第二步，对ft-τ和ft+τ应用pixel-level的校准，生成ft-τ-&gt;t和ft+τ-&gt;t，被合并为fpixel，随后喂给Nrpn和Nrfcn产生proposal。fpixel也被喂给Nrfcn，对第i个proposal产生<strong>Sipixel</strong>。</li>
+<li>第三步，在Nrfcn 位置敏感得分图上执行instance-level校准。在ft-τ，ft，ft+τ上应用专门的卷积层，产生一组k2个位置敏感的得分图St-τ，St，St+τ。对St的第i个proposal(xit,yit,wit,hit)。引入一个过程，回归相对应的St-τ的proposal位置(xit-τ,yit-τ,wit-τ,hit-τ)和St+τ的proposal位置(xit+τ,yit+τ,wit+τ,hit+τ)。通过这些预测出的proposal，附近帧的特征被RoI池化，合并为<strong>Siinsta</strong>。</li>
+<li>最终，执行<strong>运动模式推理模块</strong>,将pixel-level的校准和instance-level的校准合并。运动模式推理模块根据动态的运动模式合并<strong>Siinsta</strong>和<strong>Sipixel</strong>得到综合的score map。</li>
+</ul>
+<p>以上所有模块（包括Nfeat,Nrpn,Nrfcn,pixel-level校准、instance-level校准）都被端到端的训练。</p>
+<h2 id="Pixel-level-Calibration："><a href="#Pixel-level-Calibration：" class="headerlink" title="Pixel-level Calibration："></a>Pixel-level Calibration：</h2><p>  与FGFA、DFF相似，在此不再赘述。对非刚体建模更灵活(如tiny animals)</p>
+<h2 id="Instance-level-Calibration："><a href="#Instance-level-Calibration：" class="headerlink" title="Instance-level Calibration："></a>Instance-level Calibration：</h2><p>  instance-level对常规运动轨迹更好(如汽车)，对遮挡的容忍度更高。实例级校准是在R-FCN的分数图上进行的。R-FCN使用专门的卷积层来生成位置敏感的得分图St。为了对第i个proposal合并出分数Sit,需要知道St-τ、St+τ和proposal位移。前两者可以通过将ft-τ和ft+τ喂给R-FCN获得，下面详细介绍如何学习到第i个proposal的相对位移。</p>
+<p>  作者采用光流估计和参考帧的proposal作为输入，期望生成每一个proposal在临近帧和参考帧之间的位移。计算相对位移需要运动信息，尽管FlowNet预测的逐像素的运动由于遮挡可能不精确，但其有能力描述运动趋势。作者将这个运动趋势作为输入，输出整个目标的位移。首先使用RoI池化操作来生成池化过的特征mit-τ<img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5ur2eaj30cc0150sm.jpg" srcset="/img/loading.gif" alt="img">（在（x,y,h,w）的第i个proposal），φ指RoI池化，F指光流估计。然后根据mit-τ，利用回归网络R(·)来估计第i个proposal在t-τ和t之间的相对位移。<img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5l57eaj30dd016jr9.jpg" srcset="/img/loading.gif" alt="img">其中R(·)是一个全连接层。根据估计到的相邻帧的proposal位置，合并后的第i个proposal的特征为Siinsta，其中Sj是相邻的分数图，ψ是位置敏感的池化层。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gjyx5hufxgj30cj01y0so.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="总结：-2"><a href="#总结：-2" class="headerlink" title="总结："></a>总结：</h2><p>MANet利用R-FCN对FGFA进行了改进，在<strong>像素级别</strong>和<strong>实例级别</strong>联合校准目标特征。先根据提取出的feature和用FlowNet提取出帧间的光流信息，完成pixel-level的calibration。接着通过预测出来的instance的位移（其实就是R-FCN得到的proposal的位移），进行instance-level的calibration。最后使用Motion pattern reasoning model融合pixel-level和instance-level得到的feature用于训练和测试。</p>
+<h4 id="创新点：-2"><a href="#创新点：-2" class="headerlink" title="创新点："></a><strong>创新点：</strong></h4><ul>
+<li>在现有像素级别的方法上，提出了实例级别的校准方法，对遮挡更鲁棒。</li>
+<li>提出了运动模式推理模块，根据运动，动态的联合像素级别和实例级别的校准。</li>
+</ul>
+<h4 id="缺点：-2"><a href="#缺点：-2" class="headerlink" title="缺点："></a><strong>缺点：</strong></h4><ul>
+<li>实验部分仅对比了精度，速度没有提，可能会更慢一些。</li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/FGFA/">FGFA</a>
+                    
+                      <a class="hover-with-bg" href="/tags/DFF/">DFF</a>
+                    
+                      <a class="hover-with-bg" href="/tags/MANet/">MANet</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/11/06/11-6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">阅读笔记（11.6)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/10/19/minist/">
+                        <span class="hidden-mobile">深度学习作业：MINIST多层感知机分类</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "阅读笔记（10.23)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

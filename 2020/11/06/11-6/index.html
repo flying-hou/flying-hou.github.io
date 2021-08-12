@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>阅读笔记（11.6) - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-11-06 07:40">
+      2020年11月6日 早上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      37
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年11月10日 早上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>最近主要阅读了三篇视频目标检测方向的文章，这三篇都是Attention-Related的文章，主要目的在于提高检测的精度。</p>
+<h2 id="阅读文献："><a href="#阅读文献：" class="headerlink" title="阅读文献："></a>阅读文献：</h2><p>[1] Han M, Wang Y, Chang X, et al. Mining Inter-Video Proposal Relations for Video Object Detection[J]// Proceedings of the European Conference on Computer Vision (ECCV). 2020</p>
+<p>[2] Wu H, Chen Y, Wang N, et al. Sequence level semantics aggregation for video object detection[C]//Proceedings of the IEEE International Conference on Computer Vision. 2019: 9217-9225.</p>
+<p>[3] Deng J, Pan Y, Yao T, et al. Relation distillation networks for video object detection[C]//Proceedings of the IEEE International Conference on Computer Vision. 2019: 7023-7032.</p>
+<h1 id="1-HVR-Net"><a href="#1-HVR-Net" class="headerlink" title="1.HVR-Net"></a>1.HVR-Net</h1><ul>
+<li><strong>论文地址：</strong><a href="http://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123660426.pdf" target="_blank" rel="noopener"><strong>http://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123660426.pdf</strong></a></li>
+<li><strong>代码地址：</strong><a href="https://github.com/youthHan/HVRNet" target="_blank" rel="noopener"><strong>https://github.com/youthHan/HVRNet</strong></a></li>
+</ul>
+<p>此前的方法证明了合并不同帧间的proposal信息可以增强视频目标检测的性能，然而这些方法主要探索了单个视频内部的proposal关系，忽略了不同视频间的proposal关系。不同视频之间的proposal关系有助于识别易混淆的目标。作者为了解决这一问题，提出了Inter-Video Proposal Relation module和Hierarchical Video Relation Network（HVR-Net）。前者基于一个简明的多级三元选择体系，通过对不同视频间的困难proposal建模，学习更有效的目标表示。后者通过分层的方式，整合Intra-video和Inter-video的proposal关系，促进视频目标检测。</p>
+<p>​                               <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gkjrq3q5trj30ck0cok0z.jpg" srcset="/img/loading.gif" alt="image-20201110082413497"></p>
+<h2 id="Video-level-Triplet-Selection"><a href="#Video-level-Triplet-Selection" class="headerlink" title="Video-level Triplet Selection"></a>Video-level Triplet Selection</h2><p>  作者设计了一个video-level的triplet-selection模块，可以为一个Target Video从一组Support Videos中选出两个Confused Videos。Confused videos可以来自相同类别中最不相似的视频，或不同类别中最相似的两个视频。至此，在每个训练batch中得到了一个Confused videos的三元组，可用于指导HVR-Net对视频间的易混淆目标建模。</p>
+<p>  详细来说，作者从训练集中随机选择K个目标类别，每个类随机选N个视频。这样，一个batch就有KxN个视频，随机选择其中一个视频作为target video，其余KxN-1个为support video。对每个视频，随机选一帧作为目标帧t，其余T-1帧为辅助帧。</p>
+<p>  将每个视频的T帧单独喂给Faster RCNN的CNN backbone，提取特征。最终得到的该视频的特征张量的尺寸为HxWxCxT，H和W是尺寸，C为通道数。然后在空间和时间维度执行global average pooling，产生C维的视频表示。根据视频间cosine相似度得到video triplet:   <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gkjrvwq753j30hm01yaaw.jpg" srcset="/img/loading.gif" alt="image-20201110082949155">其中V+是同类中最不相似的辅助视频，V-是不同类间最相似的辅助视频。</p>
+<h2 id="Intra-Video-Proposal-Relation"><a href="#Intra-Video-Proposal-Relation" class="headerlink" title="Intra-Video Proposal Relation"></a>Intra-Video Proposal Relation</h2><p>  HVR-Net将上述三元组中的每个视频，抽取其样本帧(如t-s,t,t+e)喂给Faster RCNN的RPN和ROI层，为每个样本帧产生目标proposal的特征向量。随后加权合并t-s和t+e的proposals以增强目标帧t的proposal。这样可以解决Intra-Video的问题（如运动模糊、遮挡等）。使用下式加权合并所有辅助帧的所有proposal特征：(concise non-local-style relation module)</p>
+<p>  是目标帧t的第m个proposal特征，  是辅助帧i的第j个proposal特征，i属于{t-s,t+e}。上式使用一个核函数g(···,·)（例如Embedded Gaussian）来对比  和  的相似性。</p>
+<h2 id="Proposal-level-Triplet-Selection"><a href="#Proposal-level-Triplet-Selection" class="headerlink" title="Proposal-level Triplet Selection"></a>Proposal-level Triplet Selection</h2><p>  上述Intra-video增强proposal只考虑了每个独立视频内的目标语义，忽略了视频间的目标差异。为了对这个差异建模，作者从视频三元组Vtriplet中根据Intra-video增强过的proposal特征，选择hard proposal triplets。</p>
+<p>  详细来说，根据等式(2)进行了视频内增强过的特征，对比这些proposal的cosine相似性。对于目标视频中的一个proposal  ，获得其对应的proposal triplet：</p>
+<p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gkjrs5cuiij30c600qaa6.jpg" srcset="/img/loading.gif" alt="image-20201110082612431"></p>
+<p>其中<strong>P+是同类中最不相似的proposal</strong>，<strong>P-是不同类中最相似的proposal</strong>。</p>
+<h2 id="Inter-Video-Proposal-Relation"><a href="#Inter-Video-Proposal-Relation" class="headerlink" title="Inter-Video Proposal Relation"></a>Inter-Video Proposal Relation</h2><p>  为每个proposal triplets从support video的proposal合并增强到target video的proposal。每个proposal特征都进一步利用视频之间的依存关系来解决视频之间的目标混淆。</p>
+<p>  为proposal triplets之间的关系建模，以描述视频间的目标差异。为每个proposal triplet采用concise non-local-style relation module：</p>
+<p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gkjrsa1rz7j30ds00qdg5.jpg" srcset="/img/loading.gif" alt="image-20201110082619766"></p>
+<p>其中f(·,·)是用于相似性对比的核函数（例如Embedded Gaussian），α+是经过视频内增强的hard positive proposal P+的特征，α-是经过视频内增强的 hard negative proposal P-。</p>
+<p>作者使用以下损失函数来有效的减少检测时的目标混淆：</p>
+<p>​    <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gkjrstso0ij306y00qt8x.jpg" srcset="/img/loading.gif" alt="image-20201110082651032"> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gkjrsvxzlhj308200mt8w.jpg" srcset="/img/loading.gif" alt="image-20201110082654644"></p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gkjrt1ow4ej30ea00wdgr.jpg" srcset="/img/loading.gif" alt="image-20201110082704279"></p>
+<p>这里我发现作者的表述有一定问题，与梁俊学长讨论，他也发现了这个问题：文中所述损失函数中的d为欧氏距离。作者的目的是增强当前Proposal Ptargett,m和P+的关系，减少当前Proposal Ptargett,m和P-的关系。那么就应该缩短与P+的距离，增加与P-的距离。而按照作者的Lrelation的定义则恰恰相反。经过与作者沟通，作者表示通过实验发现这样的Loss效果比较好，但还是感觉解释的有点牵强。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>创新点：</p>
+<ul>
+<li>基于灵活的多级triplet selection体系，提出了一个分层视频关系网络HVR-Net。</li>
+<li>学习了不同视频间的关系，提升了视频目标检测效果。</li>
+</ul>
+<p>缺点：损失函数定义可能有误，与文章描述的意图描述不符。</p>
+<h1 id="2-SELSA"><a href="#2-SELSA" class="headerlink" title="2.SELSA"></a>2.SELSA</h1><ul>
+<li><strong>论文链接：</strong></li>
+<li><strong>代码链接：</strong><a href="https://github.com/happywu/Sequence-Level-Semantics-Aggregation" target="_blank" rel="noopener"><strong>https://github.com/happywu/</strong></a></li>
+</ul>
+<p>此前的视频目标检测方法依赖光流或循环神经网络进行特征融合，更强调时间上相邻帧。本文在full-sequence level(整个序列级别)上进行特征融合，具有更多的判别性和鲁棒性。作者不将视频看为连续的，而是将其看为一组无序帧，并尝试在整个序列级别上学习每个类的不变表示。将视频目标检测从顺序检测任务重新解释为multi-shot检测任务。本文的方法设法在proposal级别利用视频级别的信息合并特征，并且是端到端的优化，没有后处理步骤。</p>
+<p>  FGFA和MANet从一个短的时间窗口中提取特征。然而，目标表观退化会在一个较长的时间窗口持续发生，使得基于时间的方法效率不高。而且，这些帧在短时间窗口内可能是高度冗余的，因此削弱了特征聚合的优势。为了解决该问题，作者提出从语义邻域中聚合特征，该特征不易随时间持续出现外观退化。</p>
+<p>  理想的特征聚合方式是在ground truth小片段内合并，但在测试阶段无法为proposal获得跨帧的黄金关联。对于每一帧f，Xf={xf1,xf2,…}表示Faster-RCNN中RPN生成的proposals。对于特定的一对proposal(xki,xlj)使用cosine相似性度量其语义相似性。相似度越高，说明proposal属于同一类的概率越大。</p>
+<p>在定义了proposal间的相似性后，语义相似性就可以指导参考proposal从其他proposal合并特征。通过合并多个proposal，新的proposal将包含更丰富的信息，并且对目标外观变化（如姿势、运动模糊、变形）具有鲁棒性。由于相似性建立在proposal级别上，因此与需要在特征图的每个位置计算光流的方法相比，更具有鲁棒性。</p>
+<p>为了保持合并后的特征大小不变，在所有proposal上使用softmax函数将相似性进行标准化。假设从视频中随机选择F帧进行合并，每帧有N个proposal，合并后的参考proposal定义为：  ，其中Ω是帧的索引。SELSA可以用标准SGD进行端到端的优化，在合并之后，增强过的proposal特征被喂给检测header网络，进行分类和边界框回归。</p>
+<p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gkjrtchr5vj30ig05yjv4.jpg" srcset="/img/loading.gif" alt="image-20201110082721299"></p>
+<p>SELSA的结构如上图所示，首先在视频的不同帧提取proposal，然后计算其语义相似性，最后根据语义相似性合并其他proposal的特征，从而获得更具有辨识性和鲁棒的目标检测特征。</p>
+<p>此外，作者进一步揭示了该方法与经典光谱聚类算法的紧密联系，从类内方差减少的角度阐明了SELSA的工作方式。</p>
+<h2 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a>总结：</h2><p>本文使用全序列级别的特征聚合，提出了一个简单高效的SELSA模块，聚合帧间的语义特征。对于关键帧上的某个proposal，聚合来自其他帧中的同类proposal。本文的特征聚合是在proposal level的，而非在feature map级或像素级，所以该方法对运动模糊或较大的姿势变化比较鲁棒。</p>
+<p><strong>创新点：</strong></p>
+<ul>
+<li><p>将聚合的目标放在具有相同语义的proposal上，对于关键帧上的某个proposal，聚合来自其他帧中的同类proposal。</p>
+</li>
+<li><p>将抽样的角度放在了整个序列，将检测与时序解耦，通过打乱视频帧顺序，又一次的提高了准确度。</p>
+</li>
+<li>由于进行了全视频序列采样，该方法很好融合了序列信息，所以不需要进行 SeqNMS 之类的后处理，极大简化了整个方法流程。</li>
+</ul>
+<h1 id="3-Relation-Distillation-Networks"><a href="#3-Relation-Distillation-Networks" class="headerlink" title="3.Relation Distillation Networks"></a>3.Relation Distillation Networks</h1><ul>
+<li><p><strong>论文链接：</strong><a href="https://arxiv.org/pdf/1908.09511v1.pdf" target="_blank" rel="noopener"><strong>https://arxiv.org/pdf/1908.09511v1.pdf</strong></a></p>
+</li>
+<li><p><strong>代码链接：暂未公开</strong></p>
+</li>
+</ul>
+<p>RDN直接在局部范围学习不同帧的候选框之间的关系来增强box-level的特征。</p>
+<p>众所周知，对目标间的关系建模有助于目标检测。但探索目标间的交互对于增强视频目标检测器同样重要。本文设计了RDN来捕捉时空上下文间的目标交互，RDN聚集和传播目标关系来增强用于检测的目标特征。首先通过RPN生成目标proposals，一方面通过多步推理对目标关系建模，另一方面用级联方式的高度对象性的评分，通过精练辅助目标proposals，逐步提炼关系。所学习到的关系验证了该算法在提高帧内目标检测和帧间框连接方面的有效性。</p>
+<p>视频目标检测通过两个方向来探索时空一致性：1）box-level 聚合2)特征聚合。前者在连续帧的bbox内探索关联，生成tubelets。后者通过聚合临近的特征来提升每帧的特征。以上这些增强视频目标检测的方法都没有充分研究如何利用目标之间的关系。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gkjrtgkad1j30eo08uwj8.jpg" srcset="/img/loading.gif" alt="image-20201110082727995"> </p>
+<p>目标关系描述了目标间的交互或几何位置。文章《Relation networks for object detection》的基本思想是，测量一个目标的关系特征，作为图像中其他目标的外观特征的加权总和，权重反映外观和几何信息方面的目标依赖性。图(a)展示了一个堆叠的关系模块，以多步方式聚合关系特征并增强目标特征。该方法验证了对目标关系建模来增强图像目标检测的有效性。然而，将挖掘图像的目标关系扩展至视频非常有挑战，因为视频包含复杂的时空上下文信息。从相邻帧提取的辅助目标以及参考帧的目标都需要被考虑到。这个区别就导致了计算开销和内存需求的急剧增加。如果直接使用《Relation networks for object detection》中的目标关系度量，不考虑增加辅助目标proposals会导致更多无效的proposals，可能会影响整个关系学习的稳定性。</p>
+<p>为了解决这一问题，作者提出了如图(b)所示的多步模块，其独到的设计是逐步安排关系蒸馏。我们从所有支持框架中选择具有较高客观性得分的目标proposals，并且仅通过目标关系来增强这些提议的特征，以进一步提炼相对于参考帧中proposal的关系。这种级联的方法一方面可以减少计算量，过滤掉无效的proposal，另一方面可以更好地改善目标关系。</p>
+<h2 id="总结：-2"><a href="#总结：-2" class="headerlink" title="总结："></a>总结：</h2><p>作者通过巩固时空上下文中对象关系建模的思想，提出了关系蒸馏网络（RDN），用于增强视频对象检测。具体来说，利用Region Proposal Network（RPN）从参考帧和所有支持帧中生成目标proposal。从支持帧中提取的proposal被打包放入supportive pool。RDN的目标是：通过聚合supportive pool中proposals的关系特征，增强参考帧中每个目标proposal的特征。</p>
+<p>RDN采用多阶段推理结构，包括基础阶段和高级阶段。在基础阶段，RDN利用supportive pool中的所有proposal来度量在外观和几何信息上度量的关系特征。无论proposal的有效性如何，都将在此阶段对所有支持proposal的交互进行整体探讨。相反，在高级阶段，RDN会很好地选择具有高客观性得分的支持proposal，并且首先为这些proposal的特征赋予其与所有支持proposal的关系。然后，这些合并的特征反过来加强了参考帧中proposal的关系蒸馏。用目标关系增强过的每个proposal特征最终被用于proposal分类和回归。并且学习到的关系也有利于box-linking的后处理，RDN适用于任何基于region的视觉任务。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/HVR-Net/">HVR-Net</a>
+                    
+                      <a class="hover-with-bg" href="/tags/SELSA/">SELSA</a>
+                    
+                      <a class="hover-with-bg" href="/tags/RDN/">RDN</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/11/12/Java-1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java学习笔记1：快速入门</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/10/23/10-23/">
+                        <span class="hidden-mobile">阅读笔记（10.23)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "阅读笔记（11.6)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

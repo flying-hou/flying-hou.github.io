@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>pytorch学习笔记 - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-07-28 14:51">
+      2020年7月28日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      39
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年10月4日 晚上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h1><h2 id="1-1-Pytorch-简介"><a href="#1-1-Pytorch-简介" class="headerlink" title="1.1 Pytorch 简介"></a>1.1 Pytorch 简介</h2><p>说到Pytorch首先要了解torch，Torch是一个与Numpy类似的张量(tensor)操作库,与Numpy不同的是Torch对GPU的支持很好，Lua是Torch的上层包装。</p>
+<p>PyTorch和Torch使用包含所有相同性能的C库：TH, THC, THNN, THCUNN，并且它们将继续共享这些库。<strong>PyTorch和Torch都使用的是相同的底层，只是使用了不同的上层包装语言。</strong></p>
+<p>PyTorch是一个基于Torch的Python开源机器学习库，用于自然语言处理等应用程序。 它主要由Facebook的人工智能研究小组开发。</p>
+<p>总结：Pytorch是一个Python包，提供两个高级功能：</p>
+<ul>
+<li>具有强大的GPU加速的张量计算（如NumPy)</li>
+<li>包含自动求导系统的深度神经网络</li>
+</ul>
+<p>此外，具有以下特点：</p>
+<ul>
+<li>类似于Numpy，但可以使用GPU。</li>
+<li>可以用它定义深度学习模型，可以灵活地进行深度学习模型的训练和使用</li>
+</ul>
+<p>此外具有如下优点：</p>
+<ul>
+<li>简洁、优雅、高效、快速</li>
+<li>设计追求最少的封装，避免重复造轮子</li>
+<li>符合人们的思维，让用户专注实现自己的想法</li>
+<li>良好的FAIR团队支持，确保Pytorch获得持续的开发更新</li>
+<li>文档完善，Pytorch的作者亲自维护论坛</li>
+<li>入门简单</li>
+</ul>
+<h2 id="1-2-环境搭建"><a href="#1-2-环境搭建" class="headerlink" title="1.2 环境搭建"></a>1.2 环境搭建</h2><p>笔者使用的操作系统为MAC OS Catelina 10.15.5，conda 4.8.3。可在<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fpytorch.org" target="_blank" rel="noopener">官网</a>选择环境，复制生成的命令安装即可。由于MAC不支持CUDA，我安装的是torch-1.5.1不含CUDA。</p>
+<p>使用以下命令安装：</p>
+<p><code>pip install torch torchvision</code></p>
+<p>由于在安装过程中下载包的速度较慢，故将pip换成清华源：</p>
+<pre><code class="hljs vim">pip install pip -U
+pip config <span class="hljs-keyword">set</span> <span class="hljs-keyword">global</span>.<span class="hljs-built_in">index</span>-url http<span class="hljs-variable">s:</span>//pypi.tuna.tsinghua.edu.<span class="hljs-keyword">cn</span>/simple</code></pre>
+<p>验证是否安装成功：</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> torch
+torch.__version__
+<span class="hljs-comment">#得到结果：1.5.1</span></code></pre>
+<p>安装Jupyter:</p>
+<p><code>pip3 install --user jupyer</code></p>
+<p>在当前目录打开Jupyter：</p>
+<p><code>python -m IPython notebook</code></p>
+<h2 id="1-3-Pytorch深度学习：60分钟快速入门（官方）"><a href="#1-3-Pytorch深度学习：60分钟快速入门（官方）" class="headerlink" title="1.3 Pytorch深度学习：60分钟快速入门（官方）"></a>1.3 Pytorch深度学习：60分钟快速入门（官方）</h2><h3 id="1-3-1张量"><a href="#1-3-1张量" class="headerlink" title="1.3.1张量"></a>1.3.1张量</h3><pre><code class="hljs python"><span class="hljs-keyword">from</span> __future__ <span class="hljs-keyword">import</span> print_function
+<span class="hljs-keyword">import</span> torch</code></pre>
+<p>创建未初始化的矩阵：<code>x = torch.empty(5,3)</code></p>
+<p>创建随机初始化的矩阵：<code>x = torch.rand(5,3)</code></p>
+<p>创建0填充的矩阵，数据类型为long: <code>x = torch.zeros(5, 3, dtype=torch.long)</code></p>
+<p>创建tensor并初始化: <code>x = torch.tensor([5.5, 3])</code></p>
+<p>根据现有张量创建张量。将重用原张量的属性，除非设置新的值进行覆盖：</p>
+<pre><code class="hljs python">x = x.new_ones(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>, dtype=torch.double)
+x = torch.randn_like(x, dtype=torch.float) <span class="hljs-comment">#随机产生一个与x形状相同的tensor</span></code></pre>
+<p>获取尺寸：<code>print(x.size())</code></p>
+<p>加法运算：</p>
+<p><code>x+y,  torch.add(x, y, out=result),  y.add_(x)</code>  <strong>（任何以_结尾的操作都会替换原变量）</strong></p>
+<p>改变张量的维度和大小：torch.view()</p>
+<pre><code class="hljs python">x = torch.randn(<span class="hljs-number">4</span>, <span class="hljs-number">4</span>)
+y = x.view(<span class="hljs-number">16</span>)
+z = x.view(<span class="hljs-number">-1</span>, <span class="hljs-number">8</span>)  <span class="hljs-comment">#  size为-1 从其他维度推断</span>
+print(x.size(), y.size(), z.size())
+<span class="hljs-comment">#torch.Size([4, 4]) torch.Size([16]) torch.Size([2, 8])</span></code></pre>
+<p>只有一个元素的张量使用<code>x.item()</code>得到Python数据类型的值</p>
+<p><strong>Numpy与Torch Tensor相互转换：</strong></p>
+<p>Torch Tensor与Numpy数组共享低层内存地址，修改一个会导致另一个的变化。</p>
+<p>Torch Tensor转换为Numpy数组：</p>
+<pre><code class="hljs python">a = torch.ones(<span class="hljs-number">5</span>)  <span class="hljs-comment">#tensor([1., 1., 1., 1., 1.])</span>
+b = a.numpy() <span class="hljs-comment">#[1. 1. 1. 1. 1.]</span></code></pre>
+<p>Numpy数组转换为Torch Tensor:</p>
+<pre><code class="hljs python">a = np.ones(<span class="hljs-number">5</span>)
+b = torch.from_numpy(a)</code></pre>
+<h3 id="1-3-2-Autograd：自动求导"><a href="#1-3-2-Autograd：自动求导" class="headerlink" title="1.3.2 Autograd：自动求导"></a>1.3.2 Autograd：自动求导</h3><p>PyTorch 中所有神经网络的核心是 <code>autograd</code> 包。 </p>
+<p><code>autograd</code>包为张量上的所有操作提供了自动求导。 它是一个在运行时定义的框架，这意味着反向传播是根据你的代码来确定如何运行，并且每次迭代可以是不同的。</p>
+<h4 id="张量（Tensor）"><a href="#张量（Tensor）" class="headerlink" title="张量（Tensor）"></a>张量（Tensor）</h4><p><code>torch.Tensor</code>是这个包的核心类。如果设置 <code>.requires_grad</code> 为 <code>True</code>，那么将会追踪所有对于该张量的操作。 当完成计算后通过调用 <code>.backward()</code>，自动计算所有的梯度， 这个张量的所有梯度将会自动积累到 <code>.grad</code> 属性。</p>
+<p>要阻止张量跟踪历史记录，可以调用<code>.detach()</code>方法将其与计算历史记录分离，并禁止跟踪它将来的计算记录。</p>
+<p>为了防止跟踪历史记录（和使用内存），可以将代码块包装在<code>with torch.no_grad()：</code>中。 在评估模型时特别有用，因为模型可能具有<code>requires_grad = True</code>的可训练参数，但是我们不需要梯度计算。<code>.requires_grad_( ... )</code> 可以改变现有张量的 <code>requires_grad</code>属性。 如果没有指定的话，默认输入的flag是 <code>False</code>。</p>
+<p>在自动梯度计算中还有另外一个重要的类<code>Function</code>.</p>
+<p><code>Tensor</code> 和 <code>Function</code>互相连接并生成一个非循环图，它表示和存储了完整的计算历史。 每个张量都有一个<strong><code>.grad_fn</code>属性</strong>，这个属性引用了一个创建了<code>Tensor</code>的<code>Function</code>（除非这个张量是用户手动创建的，即，这个张量的 <code>grad_fn</code> 是 <code>None</code>）。</p>
+<p>如果需要计算导数，你可以在<code>Tensor</code>上调用<code>.backward()</code>。 如果<code>Tensor</code>是一个标量（即它包含一个元素数据）则不需要为<code>backward()</code>指定任何参数， 但是如果它有更多的元素，你需要指定一个<code>gradient</code> 参数来匹配张量的形状。</p>
+<h3 id="1-3-3-神经网络"><a href="#1-3-3-神经网络" class="headerlink" title="1.3.3 神经网络"></a>1.3.3 神经网络</h3><p>使用torch.nn包来构建神经网络。</p>
+<p>上一讲已经讲过了<code>autograd</code>，<code>nn</code>包依赖<code>autograd</code>包来定义模型并求导。 一个<code>nn.Module</code>包含各个层和一个<code>forward(input)</code>方法，该方法返回<code>output</code>。</p>
+<p>它是一个简单的前馈神经网络，它接受一个输入，然后一层接着一层地传递，最后输出计算的结果。</p>
+<p>神经网络的典型训练过程如下：</p>
+<ol>
+<li>定义包含一些可学习的参数(或者叫权重)神经网络模型； </li>
+<li>在数据集上迭代； </li>
+<li>通过神经网络处理输入； </li>
+<li>计算损失(输出结果和正确值的差值大小)；</li>
+<li>将梯度反向传播回网络的参数； </li>
+<li>更新网络的参数，主要使用如下简单的更新原则： <code>weight = weight - learning_rate * gradient</code></li>
+</ol>
+<p>在模型中必须要定义 <code>forward</code> 函数，<code>backward</code> 函数（用来计算梯度）会被<code>autograd</code>自动创建。 可以在 <code>forward</code> 函数中使用任何针对 Tensor 的操作。</p>
+<p> <code>net.parameters()</code>返回可被学习的参数（权重）列表和值</p>
+<p><strong>回顾:</strong></p>
+<ul>
+<li><code>torch.Tensor</code>：一个用过自动调用 <code>backward()</code>实现支持自动梯度计算的 <em>多维数组</em> ， 并且保存关于这个向量的<em>梯度</em> w.r.t.</li>
+<li><code>nn.Module</code>：神经网络模块。封装参数、移动到GPU上运行、导出、加载等。</li>
+<li><code>nn.Parameter</code>：一种变量，当把它赋值给一个<code>Module</code>时，被 <em>自动</em> 地注册为一个参数。</li>
+<li><code>autograd.Function</code>：实现一个自动求导操作的前向和反向定义，每个变量操作至少创建一个函数节点，每一个<code>Tensor</code>的操作都回创建一个接到创建<code>Tensor</code>和 <em>编码其历史</em> 的函数的<code>Function</code>节点。</li>
+</ul>
+<p><strong>重点如下：</strong></p>
+<ul>
+<li>定义一个网络</li>
+<li>处理输入，调用backword</li>
+</ul>
+<p><strong>还剩：</strong></p>
+<ul>
+<li>计算损失</li>
+<li>更新网络权重</li>
+</ul>
+<p>一个损失函数接受一对 (output, target) 作为输入，计算一个值来估计网络的输出和目标值相差多少。</p>
+<p><strong>反向传播</strong></p>
+<p>调用loss.backward()获得反向传播的误差。</p>
+<p>但是在调用前需要清除已存在的梯度，否则梯度将被累加到已存在的梯度。</p>
+<p><strong>更新权重</strong></p>
+<p>在实践中最简单的权重更新规则是随机梯度下降（SGD）：</p>
+<p> weight = weight - learning_rate * gradient</p>
+<p>当使用神经网络是想要使用各种不同的更新规则时，比如SGD、Nesterov-SGD、Adam、RMSPROP等，PyTorch中构建了一个包<code>torch.optim</code>实现了所有的这些规则。 使用它们非常简单：</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> torch.optim <span class="hljs-keyword">as</span> optim
+<span class="hljs-comment">#create your optimizer</span>
+optimizer = optim.SGD(net.parameters(), lr=<span class="hljs-number">0.01</span>)
+<span class="hljs-comment">#in your training loop:</span>
+optimizer.zero_grad()   <span class="hljs-comment"># zero the gradient buffers</span>
+output = net(input)
+loss = criterion(output, target)
+loss.backward()
+optimizer.step()    <span class="hljs-comment"># Does the update</span></code></pre>
+<h3 id="1-3-4-训练一个分类器"><a href="#1-3-4-训练一个分类器" class="headerlink" title="1.3.4 训练一个分类器"></a>1.3.4 训练一个分类器</h3><h4 id="关于数据？"><a href="#关于数据？" class="headerlink" title="关于数据？"></a>关于数据？</h4><p>一般情况下处理图像、文本、音频和视频数据时，可以使用标准的Python包来加载数据到一个numpy数组中。 然后把这个数组转换成 <code>torch.*Tensor</code>。</p>
+<ul>
+<li>图像可以使用 Pillow, OpenCV</li>
+<li>音频可以使用 scipy, librosa</li>
+<li>文本可以使用原始Python和Cython来加载，或者使用 NLTK或 SpaCy 处理</li>
+</ul>
+<p>特别的，对于图像任务，我们创建了一个包 <code>torchvision</code>，它包含了处理一些基本图像数据集的方法。这些数据集包括 Imagenet, CIFAR10, MNIST 等。除了数据加载以外，<code>torchvision</code> 还包含了图像转换器， <code>torchvision.datasets</code> 和 <code>torch.utils.data.DataLoader</code>。</p>
+<p><code>torchvision</code>包不仅提供了巨大的便利，也避免了代码的重复。</p>
+<p>在这个教程中，我们使用CIFAR10数据集，它有如下10个类别 ：‘airplane’, ‘automobile’, ‘bird’, ‘cat’, ‘deer’, ‘dog’, ‘frog’, ‘horse’, ‘ship’, ‘truck’。CIFAR-10的图像都是 3x32x32大小的，即，3颜色通道，32x32像素。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh86lpcwqfj30d40a940j.jpg" srcset="/img/loading.gif" alt=""></p>
+<h4 id="训练一个图像分类器"><a href="#训练一个图像分类器" class="headerlink" title="训练一个图像分类器"></a>训练一个图像分类器</h4><p>依次按照下列顺序进行：</p>
+<ol>
+<li>使用<code>torchvision</code>加载和归一化CIFAR10训练集和测试集</li>
+<li>定义一个卷积神经网络</li>
+<li>定义损失函数</li>
+<li>在训练集上训练网络</li>
+<li>在测试集上测试网络</li>
+</ol>
+<ol>
+<li>读取和归一化 CIFAR10</li>
+</ol>
+<p>使用<code>torchvision</code>可以非常容易地加载CIFAR10。</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> torch
+<span class="hljs-keyword">import</span> torchvision
+<span class="hljs-keyword">import</span> torchvision.transforms <span class="hljs-keyword">as</span> transforms</code></pre>
+<p>torchvision的输出是[0,1]的PILImage图像，我们把它转换为归一化范围为[-1, 1]的张量。</p>
+<pre><code class="hljs python">transform = transforms.Compose(
+    [transforms.ToTensor(),
+     transforms.Normalize((<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>), (<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>))])
+
+trainset = torchvision.datasets.CIFAR10(root=<span class="hljs-string">'./data'</span>, train=<span class="hljs-literal">True</span>,
+                                        download=<span class="hljs-literal">True</span>, transform=transform)
+trainloader = torch.utils.data.DataLoader(trainset, batch_size=<span class="hljs-number">4</span>,
+                                          shuffle=<span class="hljs-literal">True</span>, num_workers=<span class="hljs-number">2</span>)
+
+testset = torchvision.datasets.CIFAR10(root=<span class="hljs-string">'./data'</span>, train=<span class="hljs-literal">False</span>,
+                                       download=<span class="hljs-literal">True</span>, transform=transform)
+testloader = torch.utils.data.DataLoader(testset, batch_size=<span class="hljs-number">4</span>,
+                                         shuffle=<span class="hljs-literal">False</span>, num_workers=<span class="hljs-number">2</span>)
+
+classes = (<span class="hljs-string">'plane'</span>, <span class="hljs-string">'car'</span>, <span class="hljs-string">'bird'</span>, <span class="hljs-string">'cat'</span>,
+           <span class="hljs-string">'deer'</span>, <span class="hljs-string">'dog'</span>, <span class="hljs-string">'frog'</span>, <span class="hljs-string">'horse'</span>, <span class="hljs-string">'ship'</span>, <span class="hljs-string">'truck'</span>)</code></pre>
+<p>2.定义神经网络</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn
+<span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Net</span><span class="hljs-params">(nn.Module)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(<span class="hljs-number">3</span>, <span class="hljs-number">6</span>, <span class="hljs-number">5</span>)
+        self.pool = nn.MaxPool2d(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>)
+        self.conv2 = nn.Conv2d(<span class="hljs-number">6</span>, <span class="hljs-number">16</span>, <span class="hljs-number">5</span>)
+        self.fc1 = nn.Linear(<span class="hljs-number">16</span> * <span class="hljs-number">5</span> * <span class="hljs-number">5</span>, <span class="hljs-number">120</span>)
+        self.fc2 = nn.Linear(<span class="hljs-number">120</span>, <span class="hljs-number">84</span>)
+        self.fc3 = nn.Linear(<span class="hljs-number">84</span>, <span class="hljs-number">10</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span><span class="hljs-params">(self, x)</span>:</span>
+        x = self.pool(F.relu(self.conv1(x)))
+        x = self.pool(F.relu(self.conv2(x)))
+        x = x.view(<span class="hljs-number">-1</span>, <span class="hljs-number">16</span> * <span class="hljs-number">5</span> * <span class="hljs-number">5</span>)
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
+        <span class="hljs-keyword">return</span> x
+
+
+net = Net()</code></pre>
+<p>3.定义损失函数和优化器</p>
+<p>我们使用交叉熵作为损失函数，使用带动量的随机梯度下降。</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> torch.optim <span class="hljs-keyword">as</span> optim
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.SGD(net.parameters(), lr=<span class="hljs-number">0.001</span>, momentum=<span class="hljs-number">0.9</span>)</code></pre>
+<p>4.训练网络</p>
+<p>只需在数据迭代器上循环，将数据输入给网络，并优化。</p>
+<pre><code class="hljs python"><span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> range(<span class="hljs-number">2</span>):  <span class="hljs-comment"># 多批次循环</span>
+
+    running_loss = <span class="hljs-number">0.0</span>
+    <span class="hljs-keyword">for</span> i, data <span class="hljs-keyword">in</span> enumerate(trainloader, <span class="hljs-number">0</span>):
+        <span class="hljs-comment"># 获取输入</span>
+        inputs, labels = data
+
+        <span class="hljs-comment"># 梯度置0</span>
+        optimizer.zero_grad()
+
+        <span class="hljs-comment"># 正向传播，反向传播，优化</span>
+        outputs = net(inputs)
+        loss = criterion(outputs, labels)
+        loss.backward()
+        optimizer.step()
+
+        <span class="hljs-comment"># 打印状态信息</span>
+        running_loss += loss.item()
+        <span class="hljs-keyword">if</span> i % <span class="hljs-number">2000</span> == <span class="hljs-number">1999</span>:    <span class="hljs-comment"># 每2000批次打印一次</span>
+            print(<span class="hljs-string">'[%d, %5d] loss: %.3f'</span> %
+                  (epoch + <span class="hljs-number">1</span>, i + <span class="hljs-number">1</span>, running_loss / <span class="hljs-number">2000</span>))
+            running_loss = <span class="hljs-number">0.0</span>
+
+print(<span class="hljs-string">'Finished Training'</span>)</code></pre>
+<p>5.在测试集上测试网络</p>
+<p>我们在整个训练集上进行了2次训练，但是我们需要检查网络是否从数据集中学习到有用的东西。 通过预测神经网络输出的类别标签与实际情况标签进行对比来进行检测。 如果预测正确，我们把该样本添加到正确预测列表。 第一步，显示测试集中的图片并熟悉图片内容。</p>
+<pre><code class="hljs python">dataiter = iter(testloader)
+images, labels = dataiter.next()
+
+<span class="hljs-comment"># 显示图片</span>
+imshow(torchvision.utils.make_grid(images))
+print(<span class="hljs-string">'GroundTruth: '</span>, <span class="hljs-string">' '</span>.join(<span class="hljs-string">'%5s'</span> % classes[labels[j]] <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(<span class="hljs-number">4</span>)))</code></pre>
+<p><strong>在GPU上训练</strong></p>
+<p>把一个神经网络移动到GPU上训练就像把一个Tensor转换GPU上一样简单。并且这个操作会递归遍历有所模块，并将其参数和缓冲区转换为CUDA张量。</p>
+<pre><code class="hljs python">device = torch.device(<span class="hljs-string">"cuda:0"</span> <span class="hljs-keyword">if</span> torch.cuda.is_available() <span class="hljs-keyword">else</span> <span class="hljs-string">"cpu"</span>)
+
+<span class="hljs-comment"># 确认我们的电脑支持CUDA，然后显示CUDA信息：</span>
+print(device)</code></pre>
+<h3 id="1-3-5-数据并行"><a href="#1-3-5-数据并行" class="headerlink" title="1.3.5 数据并行"></a>1.3.5 数据并行</h3><p>在这个教程里，我们将学习如何使用 <code>DataParallel</code> 来使用多GPU。</p>
+<p>PyTorch非常容易就可以使用多GPU，用如下方式把一个模型放到GPU上：</p>
+<pre><code class="hljs abnf"><span class="hljs-attribute">device</span> = torch.device(<span class="hljs-string">"cuda:0"</span>)
+model.to(device)</code></pre>
+<p>GPU: 然后复制所有的张量到GPU上：</p>
+<pre><code class="hljs ini"><span class="hljs-attr">mytensor</span> = my_tensor.to(device)</code></pre>
+<p>请注意，只调用<code>my_tensor.to(device)</code>并没有复制张量到GPU上，而是返回了一个copy。所以你需要把它赋值给一个新的张量并在GPU上使用这个张量。</p>
+<p>在多GPU上执行前向和反向传播是自然而然的事。 但是PyTorch默认将只使用一个GPU。</p>
+<p>使用<code>DataParallel</code>可以轻易的让模型并行运行在多个GPU上。</p>
+<pre><code class="hljs gams"><span class="hljs-keyword">model</span> = nn.DataParallel(<span class="hljs-keyword">model</span>)</code></pre>
+<p>DataParallel会自动的划分数据，并将作业发送到多个GPU上的多个模型。 并在每个模型完成作业后，收集合并结果并返回。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Pytorch/">Pytorch</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/30/R-CNN/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">文献翻译——R-CNN</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/25/7-24/">
+                        <span class="hidden-mobile">YOLO系列总结 （7.24 阅读笔记）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "pytorch学习笔记&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>深度学习作业：MINIST多层感知机分类 - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-10-19 22:46">
+      2020年10月19日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      57
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年10月19日 晚上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h1 id="Assignment-1-Multi-Layer-Perceptron-with-MNIST-Dataset"><a href="#Assignment-1-Multi-Layer-Perceptron-with-MNIST-Dataset" class="headerlink" title="Assignment 1: Multi-Layer Perceptron with MNIST Dataset"></a>Assignment 1: Multi-Layer Perceptron with MNIST Dataset</h1><p>In this assignment, you are required to train two MLPs to classify images from the <a href="http://yann.lecun.com/exdb/mnist/" target="_blank" rel="noopener">MNIST database</a> hand-written digit database by using PyTorch.</p>
+<p>The process will be broken down into the following steps:</p>
+<ol>
+<li>Load and visualize the data.</li>
+<li>Define a neural network. (30 marks)</li>
+<li>Train the models. (30 marks)</li>
+<li>Evaluate the performance of our trained models on the test dataset. (20 marks)</li>
+<li>Analysis your results. (20 marks)</li>
+</ol>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> torch
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-keyword">import</span> os
+os.environ[<span class="hljs-string">'KMP_DUPLICATE_LIB_OK'</span>]=<span class="hljs-string">'True'</span>  <span class="hljs-comment"># 解决macos下重复初始化libiomp5.dylib问题</span></code></pre>
+<hr>
+<h2 id="Load-and-Visualize-the-Data"><a href="#Load-and-Visualize-the-Data" class="headerlink" title="Load and Visualize the Data"></a>Load and Visualize the Data</h2><p>Downloading may take a few moments, and you should see your progress as the data is loading. You may also choose to change the <code>batch_size</code> if you want to load more data at a time.</p>
+<p>This cell will create DataLoaders for each of our datasets.</p>
+<pre><code class="hljs python"><span class="hljs-keyword">from</span> torchvision <span class="hljs-keyword">import</span> datasets
+<span class="hljs-keyword">import</span> torchvision.transforms <span class="hljs-keyword">as</span> transforms
+
+<span class="hljs-comment"># number of subprocesses to use for data loading</span>
+num_workers = <span class="hljs-number">0</span>
+<span class="hljs-comment"># how many samples per batch to load</span>
+batch_size = <span class="hljs-number">20</span>
+
+<span class="hljs-comment"># convert data to torch.FloatTensor</span>
+transform = transforms.ToTensor()
+
+<span class="hljs-comment"># choose the training and test datasets</span>
+train_data = datasets.MNIST(root=<span class="hljs-string">'data'</span>, train=<span class="hljs-literal">True</span>,
+                                   download=<span class="hljs-literal">True</span>, transform=transform)
+test_data = datasets.MNIST(root=<span class="hljs-string">'data'</span>, train=<span class="hljs-literal">False</span>,
+                                  download=<span class="hljs-literal">True</span>, transform=transform)
+
+<span class="hljs-comment"># prepare data loaders</span>
+train_loader = torch.utils.data.DataLoader(train_data, batch_size=batch_size, num_workers=num_workers)
+test_loader = torch.utils.data.DataLoader(test_data, batch_size=batch_size, num_workers=num_workers)</code></pre>
+<h3 id="Visualize-a-Batch-of-Training-Data"><a href="#Visualize-a-Batch-of-Training-Data" class="headerlink" title="Visualize a Batch of Training Data"></a>Visualize a Batch of Training Data</h3><p>The first step in a classification task is to take a look at the data, make sure it is loaded in correctly, then make any initial observations about patterns in that data.</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+%matplotlib inline
+    
+<span class="hljs-comment"># obtain one batch of training images</span>
+dataiter = iter(train_loader)
+images, labels = dataiter.next()
+images = images.numpy()
+
+<span class="hljs-comment"># plot the images in the batch, along with the corresponding labels</span>
+fig = plt.figure(figsize=(<span class="hljs-number">25</span>, <span class="hljs-number">4</span>))
+<span class="hljs-keyword">for</span> idx <span class="hljs-keyword">in</span> np.arange(<span class="hljs-number">20</span>):
+    ax = fig.add_subplot(<span class="hljs-number">2</span>, <span class="hljs-number">20</span>/<span class="hljs-number">2</span>, idx+<span class="hljs-number">1</span>, xticks=[], yticks=[])
+    ax.imshow(np.squeeze(images[idx]), cmap=<span class="hljs-string">'gray'</span>)  <span class="hljs-comment"># np.squeeze():从数组的形状中删除单维度条目，把shape中为1的维度去掉</span>
+    <span class="hljs-comment"># print out the correct label for each image</span>
+    <span class="hljs-comment"># .item() gets the value contained in a Tensor</span>
+    ax.set_title(str(labels[idx].item()))</code></pre>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjv0pc9iptj312p06z3yp.jpg" srcset="/img/loading.gif" alt="png"></p>
+<h3 id="View-an-Image-in-More-Detail"><a href="#View-an-Image-in-More-Detail" class="headerlink" title="View an Image in More Detail"></a>View an Image in More Detail</h3><pre><code class="hljs python">img = np.squeeze(images[<span class="hljs-number">1</span>])
+
+fig = plt.figure(figsize = (<span class="hljs-number">12</span>,<span class="hljs-number">12</span>)) 
+ax = fig.add_subplot(<span class="hljs-number">111</span>)
+ax.imshow(img, cmap=<span class="hljs-string">'gray'</span>)
+width, height = img.shape
+thresh = img.max()/<span class="hljs-number">2.5</span>
+<span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(width):
+    <span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> range(height):
+        val = round(img[x][y],<span class="hljs-number">2</span>) <span class="hljs-keyword">if</span> img[x][y] !=<span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>  <span class="hljs-comment"># round：四舍五入2位</span>
+        ax.annotate(str(val), xy=(y,x),
+                    horizontalalignment=<span class="hljs-string">'center'</span>,
+                    verticalalignment=<span class="hljs-string">'center'</span>,
+                    color=<span class="hljs-string">'white'</span> <span class="hljs-keyword">if</span> img[x][y]&lt;thresh <span class="hljs-keyword">else</span> <span class="hljs-string">'black'</span>)</code></pre>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjv0pd3887j30j20iztag.jpg" srcset="/img/loading.gif" alt="png"></p>
+<hr>
+<h2 id="Define-the-Network-Architecture-30-marks"><a href="#Define-the-Network-Architecture-30-marks" class="headerlink" title="Define the Network Architecture (30 marks)"></a>Define the Network Architecture (30 marks)</h2><ul>
+<li>Input: a 784-dim Tensor of pixel values for each image.</li>
+<li>Output: a 10-dim Tensor of number of classes that indicates the class scores for an input image. </li>
+</ul>
+<p>You need to implement three models:</p>
+<ol>
+<li>a vanilla multi-layer perceptron. (10 marks)</li>
+<li>a multi-layer perceptron with regularization (dropout or L2 or both). (10 marks)</li>
+<li>the corresponding loss functions and optimizers. (10 marks)</li>
+</ol>
+<h3 id="Build-model-1"><a href="#Build-model-1" class="headerlink" title="Build model_1"></a>Build model_1</h3><pre><code class="hljs python"><span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> nn
+<span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> optim
+<span class="hljs-keyword">import</span> torch
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">from</span> torch.nn <span class="hljs-keyword">import</span> init
+torch.manual_seed(<span class="hljs-number">1</span>) <span class="hljs-comment"># 设置随机数种子</span>
+
+<span class="hljs-comment">## Define the MLP architecture</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VanillaMLP</span><span class="hljs-params">(nn.Module)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super(VanillaMLP, self).__init__()
+        
+<span class="hljs-comment"># 手动实现全连接层</span>
+<span class="hljs-comment">#         self.w1 = nn.Parameter(torch.randn(784,hidden_features))</span>
+<span class="hljs-comment">#         self.b1 = nn.Parameter(torch.randn(hidden_features))</span>
+<span class="hljs-comment">#         self.w2 = nn.Parameter(torch.randn(hidden_features,10))</span>
+<span class="hljs-comment">#         self.b2 = nn.Parameter(torch.randn(10))</span>
+<span class="hljs-comment">#         self.relu = nn.ReLU() ,nn.BatchNorm1d(1024)</span>
+        
+        self.layer1 = nn.Sequential(nn.Linear(<span class="hljs-number">784</span>, <span class="hljs-number">1024</span>),nn.ReLU())
+        self.layer2 = nn.Sequential(nn.Linear(<span class="hljs-number">1024</span>, <span class="hljs-number">512</span>),nn.ReLU())
+        self.layer3 = nn.Sequential(nn.Linear(<span class="hljs-number">512</span>, <span class="hljs-number">256</span>),nn.ReLU())
+        self.layer4 = nn.Sequential(nn.Linear(<span class="hljs-number">256</span>, <span class="hljs-number">100</span>),nn.ReLU())
+        self.layer5 = nn.Sequential(nn.Linear(<span class="hljs-number">100</span>, <span class="hljs-number">10</span>))
+<span class="hljs-comment">#         init.xavier_normal_(self.layer1[0].weight)  # 初始化权重为正态分布（nn.Linear默认初始化为均匀分布）</span>
+<span class="hljs-comment">#         init.xavier_normal_(self.layer2[0].weight)</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span><span class="hljs-params">(self, x)</span>:</span>
+        <span class="hljs-comment"># flatten image input</span>
+        x = x.view(<span class="hljs-number">-1</span>, <span class="hljs-number">28</span> * <span class="hljs-number">28</span>)
+
+<span class="hljs-comment"># 调用手动实现的全连接层</span>
+<span class="hljs-comment">#         x = x.mm(self.w1)</span>
+<span class="hljs-comment">#         h = x + self.b1.expand_as(x)</span>
+<span class="hljs-comment">#         h = self.relu(h)  # 应用激活函数</span>
+<span class="hljs-comment">#         h = h.mm(self.w2)</span>
+<span class="hljs-comment">#         x = h + self.b2.expand_as(h)</span>
+        x = self.layer1(x)
+        x = self.layer2(x)
+        x = self.layer3(x)
+        x = self.layer4(x)
+        x = self.layer5(x)
+        
+        <span class="hljs-keyword">return</span> x
+
+<span class="hljs-comment"># initialize the MLP</span>
+model_1 = VanillaMLP() 
+
+<span class="hljs-comment"># specify loss function</span>
+<span class="hljs-comment"># implement your codes here</span>
+loss1 = nn.CrossEntropyLoss()
+
+<span class="hljs-comment"># specify your optimizer</span>
+<span class="hljs-comment"># implement your codes here</span>
+optimizer = optim.SGD(params=model_1.parameters(), lr=<span class="hljs-number">0.005</span>)
+optimizer.zero_grad()  <span class="hljs-comment"># 梯度清零</span>
+optimizer</code></pre>
+<pre><code>SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.005
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+)
+</code></pre><h3 id="Build-model-2"><a href="#Build-model-2" class="headerlink" title="Build model_2"></a>Build model_2</h3><pre><code class="hljs python"><span class="hljs-comment">## Define the MLP architecture</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RegularizedMLP</span><span class="hljs-params">(nn.Module)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        super(RegularizedMLP, self).__init__()
+        
+        <span class="hljs-comment"># implement your codes here</span>
+        <span class="hljs-comment">#self.layer1 = nn.Sequential(nn.Linear(784, hidden_features),nn.ReLU(),nn.Dropout(0.5))</span>
+        <span class="hljs-comment">#self.layer2 = nn.Sequential(nn.Linear(hidden_features, 10))</span>
+        self.layer1 = nn.Sequential(nn.Linear(<span class="hljs-number">784</span>, <span class="hljs-number">1024</span>),nn.ReLU(),nn.Dropout(<span class="hljs-number">0.5</span>))
+        self.layer2 = nn.Sequential(nn.Linear(<span class="hljs-number">1024</span>, <span class="hljs-number">512</span>),nn.ReLU(),nn.Dropout(<span class="hljs-number">0.5</span>))
+        self.layer3 = nn.Sequential(nn.Linear(<span class="hljs-number">512</span>, <span class="hljs-number">256</span>),nn.ReLU(),nn.Dropout(<span class="hljs-number">0.5</span>))
+        self.layer4 = nn.Sequential(nn.Linear(<span class="hljs-number">256</span>, <span class="hljs-number">100</span>),nn.ReLU(),nn.Dropout(<span class="hljs-number">0.5</span>))
+        self.layer5 = nn.Sequential(nn.Linear(<span class="hljs-number">100</span>, <span class="hljs-number">10</span>))
+        
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span><span class="hljs-params">(self, x)</span>:</span>
+        <span class="hljs-comment"># flatten image input</span>
+        x = x.view(<span class="hljs-number">-1</span>, <span class="hljs-number">28</span> * <span class="hljs-number">28</span>)
+
+        <span class="hljs-comment"># implement your codes here</span>
+        x = self.layer1(x)
+        x = self.layer2(x)
+        x = self.layer3(x)
+        x = self.layer4(x)
+        x = self.layer5(x)
+        
+        <span class="hljs-keyword">return</span> x
+
+<span class="hljs-comment"># initialize the MLP</span>
+model_2 = RegularizedMLP()
+
+<span class="hljs-comment"># specify loss function</span>
+<span class="hljs-comment"># implement your codes here</span>
+loss2 = nn.CrossEntropyLoss()
+<span class="hljs-comment"># specify your optimizer</span>
+<span class="hljs-comment"># implement your codes here</span>
+optimizer = optim.SGD(params=model_2.parameters(), lr=<span class="hljs-number">0.005</span>)
+optimizer.zero_grad()  <span class="hljs-comment"># 梯度清零</span>
+optimizer</code></pre>
+<pre><code>SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.005
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+)
+</code></pre><hr>
+<h2 id="Train-the-Network-30-marks"><a href="#Train-the-Network-30-marks" class="headerlink" title="Train the Network (30 marks)"></a>Train the Network (30 marks)</h2><p>Train your models in the following two cells.</p>
+<p>The following loop trains for 30 epochs; feel free to change this number. For now, we suggest somewhere between 20-50 epochs. As you train, take a look at how the values for the training loss decrease over time. We want it to decrease while also avoiding overfitting the training data. </p>
+<p><strong>The key parts in the training process are left for you to implement.</strong></p>
+<h3 id="Train-model-1"><a href="#Train-model-1" class="headerlink" title="Train model_1"></a>Train model_1</h3><pre><code class="hljs python"><span class="hljs-comment"># number of epochs to train the model</span>
+n_epochs = <span class="hljs-number">20</span>  <span class="hljs-comment"># suggest training between 20-50 epochs</span>
+
+model_1.train() <span class="hljs-comment"># prep model for training 将当前module及其子module中的所有training属性都设为True</span>
+
+<span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> range(n_epochs):
+    <span class="hljs-comment"># monitor training loss</span>
+    train_loss = <span class="hljs-number">0.0</span>
+    total_correct = <span class="hljs-number">0</span>
+    
+    <span class="hljs-keyword">for</span> data, target <span class="hljs-keyword">in</span> train_loader:
+        y_pre = model_1(data)
+        l = loss1(y_pre, target).sum()
+        optimizer.zero_grad()
+        l.backward()
+        optimizer.step()  <span class="hljs-comment"># 执行优化</span>
+        
+        <span class="hljs-comment"># implement your code here</span>
+        train_loss += l.item()<span class="hljs-comment"># the total loss of this batch</span>
+        total_correct += (y_pre.argmax(dim=<span class="hljs-number">1</span>) == target).sum().item() <span class="hljs-comment"># the accumulated number of correctly classified samples of this batch</span>
+        
+    <span class="hljs-comment"># print training statistics </span>
+    <span class="hljs-comment"># calculate average loss and accuracy over an epoch</span>
+    train_loss = train_loss / len(train_loader.dataset)
+    train_acc = <span class="hljs-number">100.</span> * total_correct / len(train_loader.dataset)
+    
+    print(<span class="hljs-string">'Epoch: &#123;&#125; \tTraining Loss: &#123;:.6f&#125; \tTraining Acc: &#123;:.2f&#125;%%'</span>.format(
+        epoch+<span class="hljs-number">1</span>, 
+        train_loss,
+        train_acc
+        ))</code></pre>
+<pre><code>Epoch: 1     Training Loss: 0.113190     Training Acc: 22.09%%
+Epoch: 2     Training Loss: 0.046626     Training Acc: 74.66%%
+Epoch: 3     Training Loss: 0.019871     Training Acc: 88.53%%
+Epoch: 4     Training Loss: 0.014905     Training Acc: 91.53%%
+Epoch: 5     Training Loss: 0.011858     Training Acc: 93.19%%
+Epoch: 6     Training Loss: 0.009501     Training Acc: 94.55%%
+Epoch: 7     Training Loss: 0.007791     Training Acc: 95.55%%
+Epoch: 8     Training Loss: 0.006547     Training Acc: 96.28%%
+Epoch: 9     Training Loss: 0.005593     Training Acc: 96.83%%
+Epoch: 10     Training Loss: 0.004822     Training Acc: 97.28%%
+Epoch: 11     Training Loss: 0.004186     Training Acc: 97.69%%
+Epoch: 12     Training Loss: 0.003650     Training Acc: 98.00%%
+Epoch: 13     Training Loss: 0.003196     Training Acc: 98.28%%
+Epoch: 14     Training Loss: 0.002803     Training Acc: 98.48%%
+Epoch: 15     Training Loss: 0.002459     Training Acc: 98.71%%
+Epoch: 16     Training Loss: 0.002155     Training Acc: 98.91%%
+Epoch: 17     Training Loss: 0.001881     Training Acc: 99.08%%
+Epoch: 18     Training Loss: 0.001634     Training Acc: 99.24%%
+Epoch: 19     Training Loss: 0.001413     Training Acc: 99.38%%
+Epoch: 20     Training Loss: 0.001215     Training Acc: 99.51%%
+</code></pre><h3 id="Train-model-2"><a href="#Train-model-2" class="headerlink" title="Train model_2"></a>Train model_2</h3><pre><code class="hljs python"><span class="hljs-comment"># number of epochs to train the model</span>
+n_epochs = <span class="hljs-number">30</span>  <span class="hljs-comment"># suggest training between 20-50 epochs</span>
+
+model_2.train() <span class="hljs-comment"># prep model for training</span>
+
+<span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> range(n_epochs):
+    <span class="hljs-comment"># monitor training loss</span>
+    train_loss = <span class="hljs-number">0.0</span>
+    total_correct = <span class="hljs-number">0</span>
+    
+    <span class="hljs-keyword">for</span> data, target <span class="hljs-keyword">in</span> train_loader:
+        y_pre = model_2(data)
+        l = loss2(y_pre, target).sum()
+        optimizer.zero_grad()
+        l.backward()
+        optimizer.step()  <span class="hljs-comment"># 执行优化</span>
+        
+        <span class="hljs-comment"># implement your code here</span>
+        train_loss += l.item()<span class="hljs-comment"># the total loss of this batch</span>
+        total_correct += (y_pre.argmax(dim=<span class="hljs-number">1</span>) == target).sum().item() <span class="hljs-comment"># the accumulated number of correctly classified samples of this batch</span>
+        
+    <span class="hljs-comment"># print training statistics </span>
+    <span class="hljs-comment"># calculate average loss and accuracy over an epoch</span>
+    train_loss = train_loss / len(train_loader.dataset)
+    train_acc = <span class="hljs-number">100.</span> * total_correct / len(train_loader.dataset)
+    
+    print(<span class="hljs-string">'Epoch: &#123;&#125; \tTraining Loss: &#123;:.6f&#125; \tTraining Acc: &#123;:.2f&#125;%%'</span>.format(
+        epoch+<span class="hljs-number">1</span>, 
+        train_loss,
+        train_acc
+        ))</code></pre>
+<pre><code>Epoch: 1     Training Loss: 0.114623     Training Acc: 14.26%%
+Epoch: 2     Training Loss: 0.089865     Training Acc: 37.94%%
+Epoch: 3     Training Loss: 0.047813     Training Acc: 66.14%%
+Epoch: 4     Training Loss: 0.033164     Training Acc: 79.35%%
+Epoch: 5     Training Loss: 0.024138     Training Acc: 86.14%%
+Epoch: 6     Training Loss: 0.018936     Training Acc: 89.40%%
+Epoch: 7     Training Loss: 0.015476     Training Acc: 91.53%%
+Epoch: 8     Training Loss: 0.013406     Training Acc: 92.89%%
+Epoch: 9     Training Loss: 0.011899     Training Acc: 93.57%%
+Epoch: 10     Training Loss: 0.010539     Training Acc: 94.33%%
+Epoch: 11     Training Loss: 0.009646     Training Acc: 94.91%%
+Epoch: 12     Training Loss: 0.008601     Training Acc: 95.45%%
+Epoch: 13     Training Loss: 0.008043     Training Acc: 95.69%%
+Epoch: 14     Training Loss: 0.007412     Training Acc: 96.11%%
+Epoch: 15     Training Loss: 0.006955     Training Acc: 96.30%%
+Epoch: 16     Training Loss: 0.006423     Training Acc: 96.61%%
+Epoch: 17     Training Loss: 0.006151     Training Acc: 96.65%%
+Epoch: 18     Training Loss: 0.005697     Training Acc: 96.97%%
+Epoch: 19     Training Loss: 0.005397     Training Acc: 97.13%%
+Epoch: 20     Training Loss: 0.005209     Training Acc: 97.30%%
+Epoch: 21     Training Loss: 0.004915     Training Acc: 97.39%%
+Epoch: 22     Training Loss: 0.004662     Training Acc: 97.48%%
+Epoch: 23     Training Loss: 0.004268     Training Acc: 97.67%%
+Epoch: 24     Training Loss: 0.004211     Training Acc: 97.69%%
+Epoch: 25     Training Loss: 0.004022     Training Acc: 97.78%%
+Epoch: 26     Training Loss: 0.003985     Training Acc: 97.87%%
+Epoch: 27     Training Loss: 0.003757     Training Acc: 97.95%%
+Epoch: 28     Training Loss: 0.003597     Training Acc: 98.03%%
+Epoch: 29     Training Loss: 0.003284     Training Acc: 98.17%%
+Epoch: 30     Training Loss: 0.003382     Training Acc: 98.12%%
+</code></pre><hr>
+<h2 id="Test-the-Trained-Network-20-marks"><a href="#Test-the-Trained-Network-20-marks" class="headerlink" title="Test the Trained Network (20 marks)"></a>Test the Trained Network (20 marks)</h2><p>Test the performance of trained models on test data. Except the total test accuracy, you should calculate the accuracy for each class.</p>
+<h3 id="Test-model-1"><a href="#Test-model-1" class="headerlink" title="Test model_1"></a>Test model_1</h3><pre><code class="hljs python"><span class="hljs-comment"># initialize lists to monitor test loss and accuracy</span>
+test_loss = <span class="hljs-number">0.0</span>
+class_correct = list(<span class="hljs-number">0.</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>))
+class_total = list(<span class="hljs-number">0.</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>))
+
+model_1.eval() <span class="hljs-comment"># prep model for *evaluation*  #把training属性都设为False,固定BN和dropout层</span>
+
+<span class="hljs-keyword">for</span> data, target <span class="hljs-keyword">in</span> test_loader:
+    y_pre = model_1(data)
+    l = loss1(y_pre, target).sum()
+    <span class="hljs-comment"># implement your code here</span>
+    
+    test_loss += l.item()<span class="hljs-comment"># the total loss of this batch</span>
+    
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(batch_size):
+        <span class="hljs-keyword">if</span> y_pre.argmax(dim=<span class="hljs-number">1</span>)[i] == target[i]: <span class="hljs-comment"># 预测正确</span>
+            class_correct[target[i]] += <span class="hljs-number">1</span>  <span class="hljs-comment"># the list of number of correctly classified samples of each class of this batch. label is the index.</span>
+        class_total[target[i]] +=<span class="hljs-number">1</span>  <span class="hljs-comment"># the list of total number of samples of each class of this batch. label is the index.</span>
+        
+
+<span class="hljs-comment"># calculate and print avg test loss</span>
+test_loss = test_loss / len(test_loader.dataset)
+print(<span class="hljs-string">'Test Loss: &#123;:.6f&#125;\n'</span>.format(test_loss))
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>):
+    <span class="hljs-keyword">if</span> class_total[i] &gt; <span class="hljs-number">0</span>:
+        print(<span class="hljs-string">'Test Accuracy of class %d: %.2f%%'</span> % (i, <span class="hljs-number">100</span> * class_correct[i] / class_total[i]))
+    <span class="hljs-keyword">else</span>:
+        print(<span class="hljs-string">'Test Accuracy of class %d: N/A (no training examples)'</span> % (i))
+
+print(<span class="hljs-string">'\nTest Accuracy (Overall): %.2f%%'</span> % (<span class="hljs-number">100.</span> * np.sum(class_correct) / np.sum(class_total)))</code></pre>
+<pre><code>Test Loss: 0.004451
+
+Test Accuracy of class 0: 98.67%
+Test Accuracy of class 1: 98.77%
+Test Accuracy of class 2: 97.19%
+Test Accuracy of class 3: 98.61%
+Test Accuracy of class 4: 98.47%
+Test Accuracy of class 5: 96.64%
+Test Accuracy of class 6: 96.45%
+Test Accuracy of class 7: 96.11%
+Test Accuracy of class 8: 96.20%
+Test Accuracy of class 9: 97.52%
+
+Test Accuracy (Overall): 97.49%
+</code></pre><h3 id="Test-model-2"><a href="#Test-model-2" class="headerlink" title="Test model_2"></a>Test model_2</h3><pre><code class="hljs python"><span class="hljs-comment"># initialize lists to monitor test loss and accuracy</span>
+test_loss = <span class="hljs-number">0.0</span>
+class_correct = list(<span class="hljs-number">0.</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>))
+class_total = list(<span class="hljs-number">0.</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>))
+
+model_2.eval() <span class="hljs-comment"># prep model for *evaluation*</span>
+
+<span class="hljs-keyword">for</span> data, target <span class="hljs-keyword">in</span> test_loader:
+    y_pre = model_2(data)
+    l = loss2(y_pre, target).sum()
+    <span class="hljs-comment"># implement your code here</span>
+    
+    test_loss += l.item()<span class="hljs-comment"># the total loss of this batch</span>
+    
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(batch_size):
+        <span class="hljs-keyword">if</span> y_pre.argmax(dim=<span class="hljs-number">1</span>)[i] == target[i]: <span class="hljs-comment"># 预测正确</span>
+            class_correct[target[i]] += <span class="hljs-number">1</span>  <span class="hljs-comment"># the list of number of correctly classified samples of each class of this batch. label is the index.</span>
+        class_total[target[i]] +=<span class="hljs-number">1</span>  <span class="hljs-comment"># the list of total number of samples of each class of this batch. label is the index.</span>
+
+
+<span class="hljs-comment"># calculate and print avg test loss</span>
+test_loss = test_loss / len(test_loader.dataset)
+print(<span class="hljs-string">'Test Loss: &#123;:.6f&#125;\n'</span>.format(test_loss))
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>):
+    <span class="hljs-keyword">if</span> class_total[i] &gt; <span class="hljs-number">0</span>:
+        print(<span class="hljs-string">'Test Accuracy of class %d: %.2f%%'</span> % (i, <span class="hljs-number">100</span> * class_correct[i] / class_total[i]))
+    <span class="hljs-keyword">else</span>:
+        print(<span class="hljs-string">'Test Accuracy of class %d: N/A (no training examples)'</span> % (i))
+
+print(<span class="hljs-string">'\nTest Accuracy (Overall): %.2f%%'</span> % (<span class="hljs-number">100.</span> * np.sum(class_correct) / np.sum(class_total)))</code></pre>
+<pre><code>Test Loss: 0.003905
+
+Test Accuracy of class 0: 98.98%
+Test Accuracy of class 1: 99.47%
+Test Accuracy of class 2: 98.16%
+Test Accuracy of class 3: 98.42%
+Test Accuracy of class 4: 98.17%
+Test Accuracy of class 5: 97.98%
+Test Accuracy of class 6: 97.60%
+Test Accuracy of class 7: 97.86%
+Test Accuracy of class 8: 97.02%
+Test Accuracy of class 9: 96.93%
+
+Test Accuracy (Overall): 98.08%
+</code></pre><hr>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">num</th>
+<th style="text-align:center">epoch</th>
+<th style="text-align:center">hidden_neural</th>
+<th style="text-align:center">lr</th>
+<th style="text-align:center">TrainLoss</th>
+<th style="text-align:center">TrainAcc</th>
+<th style="text-align:center">TestAcc</th>
+<th style="text-align:center">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">0.2</td>
+<td style="text-align:center">0.016939</td>
+<td style="text-align:center">90.97</td>
+<td style="text-align:center">86.76</td>
+<td style="text-align:center">手动实现的全连接层</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">0.2</td>
+<td style="text-align:center">0.008375</td>
+<td style="text-align:center">95.4</td>
+<td style="text-align:center">93.9</td>
+<td style="text-align:center">手动实现+Relu</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">0.2</td>
+<td style="text-align:center">0.004658</td>
+<td style="text-align:center">97.2</td>
+<td style="text-align:center">94.59</td>
+<td style="text-align:center">使用nn.Linear</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">0.2</td>
+<td style="text-align:center">0.005426</td>
+<td style="text-align:center">96.72</td>
+<td style="text-align:center">95.54</td>
+<td style="text-align:center">加入BatchNorm层</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">0.2</td>
+<td style="text-align:center">0.005731</td>
+<td style="text-align:center">96.68</td>
+<td style="text-align:center">95.19</td>
+<td style="text-align:center">加入均匀初始化</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">0.2</td>
+<td style="text-align:center">0.033589</td>
+<td style="text-align:center">77.92</td>
+<td style="text-align:center">92.08</td>
+<td style="text-align:center">Dropout+BN</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">0.2</td>
+<td style="text-align:center">0.034423</td>
+<td style="text-align:center">77.33</td>
+<td style="text-align:center">91.96</td>
+<td style="text-align:center">仅Dropout</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">0.1</td>
+<td style="text-align:center">0.003467</td>
+<td style="text-align:center">97.92</td>
+<td style="text-align:center">95.36</td>
+<td style="text-align:center">无Dropout</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">0.1</td>
+<td style="text-align:center">0.030022</td>
+<td style="text-align:center">79.61</td>
+<td style="text-align:center">92.57</td>
+<td style="text-align:center">仅Dropout</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">40</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">0.01</td>
+<td style="text-align:center">0.006123</td>
+<td style="text-align:center">96.46</td>
+<td style="text-align:center">95.53</td>
+<td style="text-align:center">无Dropout</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center">40</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">0.01</td>
+<td style="text-align:center">0.028218</td>
+<td style="text-align:center">81.17</td>
+<td style="text-align:center">93.53</td>
+<td style="text-align:center">有Dropout</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center">40</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">0.01</td>
+<td style="text-align:center">0.002915</td>
+<td style="text-align:center">98.41</td>
+<td style="text-align:center">97.31</td>
+<td style="text-align:center">无Dropout</td>
+</tr>
+<tr>
+<td style="text-align:center">13</td>
+<td style="text-align:center">40</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">0.01</td>
+<td style="text-align:center">0.012396</td>
+<td style="text-align:center">92.38</td>
+<td style="text-align:center">96.16</td>
+<td style="text-align:center">有Dropout</td>
+</tr>
+<tr>
+<td style="text-align:center">14</td>
+<td style="text-align:center">40</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">0.005</td>
+<td style="text-align:center">0.005171</td>
+<td style="text-align:center">97.09</td>
+<td style="text-align:center">96.53</td>
+<td style="text-align:center">无Dropout</td>
+</tr>
+<tr>
+<td style="text-align:center">15</td>
+<td style="text-align:center">40</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">0.005</td>
+<td style="text-align:center">0.014154</td>
+<td style="text-align:center">91.52</td>
+<td style="text-align:center">95.48</td>
+<td style="text-align:center">有Dropout</td>
+</tr>
+<tr>
+<td style="text-align:center">16</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">0.005</td>
+<td style="text-align:center">0.004808</td>
+<td style="text-align:center">97.62</td>
+<td style="text-align:center">96.97</td>
+<td style="text-align:center">无Dropout</td>
+</tr>
+<tr>
+<td style="text-align:center">17</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">0.005</td>
+<td style="text-align:center">0.01167</td>
+<td style="text-align:center">92.77</td>
+<td style="text-align:center">96.21</td>
+<td style="text-align:center">有Dropout</td>
+</tr>
+<tr>
+<td style="text-align:center">18</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">1024/512/256/100</td>
+<td style="text-align:center">0.005</td>
+<td style="text-align:center">0.000003</td>
+<td style="text-align:center">100</td>
+<td style="text-align:center">98.55</td>
+<td style="text-align:center">有BN，无Dropout</td>
+</tr>
+<tr>
+<td style="text-align:center">19</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">1024/512/256/100</td>
+<td style="text-align:center">0.005</td>
+<td style="text-align:center">0.005303</td>
+<td style="text-align:center">97.16</td>
+<td style="text-align:center">97.71</td>
+<td style="text-align:center">无BN，有Dropout</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>20</strong></td>
+<td style="text-align:center"><strong>20</strong></td>
+<td style="text-align:center"><strong>1024/512/256/100</strong></td>
+<td style="text-align:center"><strong>0.005</strong></td>
+<td style="text-align:center"><strong>0.001215</strong></td>
+<td style="text-align:center"><strong>99.51</strong></td>
+<td style="text-align:center"><strong>97.49</strong></td>
+<td style="text-align:center"><strong>仅Relu</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>21</strong></td>
+<td style="text-align:center"><strong>30</strong></td>
+<td style="text-align:center"><strong>1024/512/256/100</strong></td>
+<td style="text-align:center"><strong>0.005</strong></td>
+<td style="text-align:center"><strong>0.003382</strong></td>
+<td style="text-align:center"><strong>98.12</strong></td>
+<td style="text-align:center"><strong>98.08</strong></td>
+<td style="text-align:center"><strong>有Dropout</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="Analyze-Your-Result-20-marks"><a href="#Analyze-Your-Result-20-marks" class="headerlink" title="Analyze Your Result (20 marks)"></a>Analyze Your Result (20 marks)</h2><p>Compare the performance of your models with the following analysis. Both English and Chinese answers are acceptable.</p>
+<p>1.Does your vanilla MLP overfit to the training data? (5 marks)</p>
+<p>Answer: Yes.</p>
+<p>2.If yes, how do you observe it? If no, why? (5 marks)</p>
+<p>Answer: The accuracy during training is close to 100%.<br>      But the accuracy on the test set is relatively low.</p>
+<p>3.Is regularized model help prevent overfitting? (5 marks)</p>
+<p>Answer: When I used Dropout, the training accuracy dropped, and the accuracy of the test improved by 5% compared to the inapplicable Dropout.The regularized model effectively avoids overfitting.</p>
+<p>4.Generally compare the performance of two models. (5 marks)</p>
+<p>Answer:<br>    The vanilla model converges quickly and the training accuracy is close to 100%.The model using regularization converges relatively slowly, but overfitting is avoided.<br>    In addition, I found that using both Dropout and BatchNormal did not work as well as expected.</p>
+<h1 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h1><p><a href="https://blog.csdn.net/lxslx/article/details/81746556" target="_blank" rel="noopener">https://blog.csdn.net/lxslx/article/details/81746556</a></p>
+<p><a href="https://blog.csdn.net/zjh12312311/article/details/107217024/" target="_blank" rel="noopener">https://blog.csdn.net/zjh12312311/article/details/107217024/</a></p>
+<p><a href="https://www.zhihu.com/question/68433311" target="_blank" rel="noopener">https://www.zhihu.com/question/68433311</a></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Pytorch/">Pytorch</a>
+                    
+                      <a class="hover-with-bg" href="/tags/MINIST/">MINIST</a>
+                    
+                      <a class="hover-with-bg" href="/tags/DeepLearning/">DeepLearning</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/10/23/10-23/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">阅读笔记（10.23)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/10/19/GA_TSP/">
+                        <span class="hidden-mobile">计算智能作业:用遗传算法解决旅行商问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "深度学习作业：MINIST多层感知机分类&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

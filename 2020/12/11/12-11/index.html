@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>阅读笔记（12.11) - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-12-11 10:00">
+      2020年12月11日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      55
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年12月11日 早上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>最近重读了AAAI2020的TCENet这篇文章，对其有了更深入的理解。此外阅读了一篇ICCV2019的文章、一篇NIPS2016的文章。</p>
+<h3 id="阅读文献："><a href="#阅读文献：" class="headerlink" title="阅读文献："></a>阅读文献：</h3><p>[1] He F, Gao N, Li Q, et al. Temporal Context Enhanced Feature Aggregation for Video Object Detection[C]//AAAI. 2020: 10941-10948.</p>
+<p>[2] Deng H, Hua Y, Song T, et al. Object guided external memory network for video object detection[C]//Proceedings of the IEEE International Conference on Computer Vision. 2019: 6678-6687.</p>
+<p>[3] Dai J, Li Y, He K, et al. R-fcn: Object detection via region-based fully convolutional networks[J]. Advances in neural information processing systems, 2016, 29: 379-387.</p>
+<h1 id="1-TCENet重读"><a href="#1-TCENet重读" class="headerlink" title="1.TCENet重读"></a>1.TCENet重读</h1><p>本次重读主要针对算法伪代码部分，对其有了更深入的理解。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1glisfua8s0j30oa0rejwn.jpg" srcset="/img/loading.gif" alt="image-20201210152340438" style="zoom:40%;" /></p>
+<p>上述算法的第L3-L6行对特征buffer和时间步长进行了初始化。这里假设$s_{min}=10$,$s_{max}=40$,那么算法首先将s1-s41初始化为10。算法的L10-L13进行了特征对齐，注意其中高亮的一句。这里K=1，即j取-1或1。对于1-11帧，$si=10, max(1,i-10)=1, max(1,i+10)=i+10$，即前11帧选择的是分别是：第1帧和第11帧、第1帧和第12帧……进行聚合。从第12帧开始，若s12仍然为10（可能被L17更新），则选择第2帧和第22帧进行聚合。同理，第13帧选择第3帧和第23帧……</p>
+<p>对于视频序列最后的几帧的情况，由于算法中的i取的是无穷大，没有对这种情况进行讨论。当i接近序列结束时，第L18行计算特征图时，可能就会计算失败，因为要计算的帧可能已经越界，不存在。进而L17行的步长也无法计算，L11行也无法计算。</p>
+<h1 id="2-OGEMN"><a href="#2-OGEMN" class="headerlink" title="2.OGEMN"></a>2.OGEMN</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>现有的视频目标检测方法通过聚合和对齐多个相邻帧的整个特征图，来将时间信息传播到退化的帧。然而，由于受到特征图的低存储效率和脆弱的内容地址分配问题，这些现有方法没有充分强调长程时间信息。本文提出了第一个目标指导的外部memory网络，用于在线视频目标检测。存储效率问题通过目标指导的hard-attention选择性的存储有价值的特征来解决，并且长程信息通过存储在可寻址的外部数据矩阵中来保护。设计出的读/写操作来精确的在目标指导下传播/分配/删除多级memory特征。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1glahekr0tej30ue0u0n6o.jpg" srcset="/img/loading.gif" alt="image-20201203105724288" style="zoom:33%;" /></p>
+<h3 id="图a）密集聚合方法（FGFA、MaNet、STSN）"><a href="#图a）密集聚合方法（FGFA、MaNet、STSN）" class="headerlink" title="图a）密集聚合方法（FGFA、MaNet、STSN）"></a>图a）密集聚合方法（FGFA、MaNet、STSN）</h3><p>memory由相邻的多个特征图组成。Reading操作包含包含对齐和聚合所有memory特征图到当前帧。聚合过的特征图用于在当前帧检测。Writing操作发生在每次检测过后，下一帧相邻的特征图被复写到当前memory。</p>
+<h3 id="图b）循环聚合方法-Towards-High-Performance-Video-Object-Detection、STMN、Video-object-detection-with-locally-weighted-deformable-neighbors"><a href="#图b）循环聚合方法-Towards-High-Performance-Video-Object-Detection、STMN、Video-object-detection-with-locally-weighted-deformable-neighbors" class="headerlink" title="图b）循环聚合方法(Towards High Performance Video Object Detection、STMN、Video object detection with locally-weighted deformable neighbors)"></a>图b）循环聚合方法(Towards High Performance Video Object Detection、STMN、Video object detection with locally-weighted deformable neighbors)</h3><p>memory仅由一个特征图组成。Reading和Writing操作同时发生。当memory特征图被对齐和聚合到当前帧时，聚合过的特征图被用于在当前帧检测，并且成为新的memory。这些方法非常快，并且能够在线进行因果推断。</p>
+<p>上述密集聚合方法和循环聚合方法的memory都由检测网络中<strong>全尺寸的特征图</strong>组成，其尺寸和内容地址依赖于检测网络和输入帧的行为，因此，作者将这些memory称为”internal”。这种internal memory 有一些缺点：在一些<strong>密集方法</strong>中，通常有超过20个相邻帧被存储，来提供充足的信息。由于internal memory中存储的是全尺寸的特征图，一些与检测目标无关的冗余信息也被存储和传播，导致较低的存储效率。在循环方法中，所有之前的信息被把索道一个特征图中，其中，信息的空间位置只依赖于当前帧内容的位置。因此，当当前帧内容退化、表观突变、脱离视野时，因为当前聚合过的特征图将成为新的internal memory，长期的信息容易被中断。</p>
+<h3 id="图C-OGEMN"><a href="#图C-OGEMN" class="headerlink" title="图C) OGEMN"></a>图C) OGEMN</h3><p>为了更好的利用时间信息，本文提出了OGEMN。通过外部memory，memory的尺寸和内容地址独立于检测网络和输入帧。首先，检测产生的目标信息提供了一个自然的hard attention来提升存储效率。通过有选择的存储检测到bbox 的特征，而非所有特征图，更多时间跨度大的信息可以被存储到相同大小的存储空间中。其次，在神经图林机(NTM)和记忆网络[37,31]的驱动下，可以通过将事前的时间信息存储到一个可寻址的data矩阵中，并只删除冗余的，来解决长期的依赖和推理能力问题。之前重要的信息可以被精确的recall，没有意外遗忘的风险。外部memory的尺寸随着存储特征的数量而改变。新颖的read和write操作被用于访问这个动态的外部memory，其中attention-based read操作关注精确的传播可变尺寸的memory到当前帧，同时平衡 当前/memory 特征在聚合过的特征图中的信号强度。write操作，在目标指导的hard attention下，选择性的存储新特征、删除冗余特征。</p>
+<h2 id="本文贡献："><a href="#本文贡献：" class="headerlink" title="本文贡献："></a>本文贡献：</h2><ul>
+<li>提出使用目标指导的hard attention来提升存储效率、通过外部memory传播时间信息来解决视频目标检测中长程依赖问题。</li>
+<li>设计了一个目标指导的外部memory网络，和新颖的write和read操作，来高效的存储、精确的传播多级特征。</li>
+<li>实验表明，本文的方法是SOTA的，并且速度和精度有良好的平衡。同时，可视化了外部memory，展示了推理细节和长程依赖的重要性。</li>
+</ul>
+<h2 id="外部Memory"><a href="#外部Memory" class="headerlink" title="外部Memory"></a>外部Memory</h2><p>外部Memory被用于增强神经网络的序列推理能力。外部Memory通常是一个可寻址的外部数据矩阵。由一个独立的网络维持，通常包含read和write过程。信息可以通过基于注意力的全局搜索和聚合从外部memory中检索出来。新的信息被写入到特定位置的外部存储器中，因此存储器信息可以显式地长期保留。</p>
+<h2 id="用于Memory寻址的注意力"><a href="#用于Memory寻址的注意力" class="headerlink" title="用于Memory寻址的注意力"></a>用于Memory寻址的注意力</h2><p>注意力被用作外部存储器上的一个“软”寻址机制，为了从memory中检索信息，在所有memory位置和查询该记忆的输入特征之间的相似性上计算一个注意力权重，然后根据这些注意力权重对所有记忆进行聚合。</p>
+<h2 id="使用目标指导的外部Memory检测"><a href="#使用目标指导的外部Memory检测" class="headerlink" title="使用目标指导的外部Memory检测"></a>使用目标指导的外部Memory检测</h2><p>我们提出的框架基于单图像检测器构建，通过合并一个新奇的目标指导的外部memory网络Nmem来精确的传播/存储时间信息into/from单图像检测器，在每帧的检测上。Nmem由两个外部memory矩阵组成：Mpix Minst，分别存储pixel级别和instance级别的特征，并且有read和write操作来读写他们。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1glancqj9v0j31kb0u0h37.jpg" srcset="/img/loading.gif" alt="image-20201203142314174" style="zoom: 25%;" /></p>
+<p>使用R-FCN作为backbone检测器，给出一个视频，我们的框架在线按序检测每一帧。假设当前检测帧为t，首先通过特征网络Nfeat产生卷积特征图F。通过read操作，Mpix被传播至F，他们被聚合为一个增强过的特征图F~，F~被用于产生位置敏感的特征图S和region proposals。之后，S经过位置敏感的roi池化，产生实例特征R。再次通过read操作，Minst被传播至R，他们被聚合为一个增强过的实例特征R~。每个R~被池化，来产生一个检测结果。第三步，使用NMS来移除重复。在第t帧检测过之后，Nmem可以在检测到的目标的信息的指导下，从F~和R~选择有价值的特征，通过write操作将其存储到外部memory中。与此同时，外部memory中的冗余特征被删除。将来自F~的特征定义为pixel级别的特征，将来自R~的特征定义为实例级别的特征，这两个级别的特征分别被存储在外部memory矩阵Mpix和Minst中。</p>
+<h2 id="目标指导的外部Memory网络（OGEMN）"><a href="#目标指导的外部Memory网络（OGEMN）" class="headerlink" title="目标指导的外部Memory网络（OGEMN）"></a>目标指导的外部Memory网络（OGEMN）</h2><p>OGEMN（Nmem）由包含两个外部memory矩阵Mpix和Minst，以及read、write操作。注意，外部memory仅存储同一个视频的特征。</p>
+<h3 id="外部memory矩阵"><a href="#外部memory矩阵" class="headerlink" title="外部memory矩阵"></a>外部memory矩阵</h3><p>用Mpix的每一行存储像素级别的特征，其每一行为来自卷积特征图F~的某些位置的特征向量。Mins的每一行是一个经过位置敏感roi池化的实例特征。外部数据的大小随着新特征被写入而增大，随着特征被删除而缩小。除非视频结束或写入操作明确删除了某个特征，否则外存储器中的特征矩阵将被永久存储。</p>
+<h2 id="使用外部Memory高效检测"><a href="#使用外部Memory高效检测" class="headerlink" title="使用外部Memory高效检测"></a>使用外部Memory高效检测</h2><p>我们提出的memory网络允许我们传播memory到不同尺寸的特征图。为了时间效率，作者设置了一个关键帧体系，下采样所有非关键帧，来减少其在Nfeat上的计算时间。作者只在全尺寸关键帧上更新外部Memory，并且将高质量的特征传播到下采样过的非关键帧，来补偿由下采样引发的退化。基于注意力的read操作，与空间位置、图像尺寸无关，因此可以无缝的聚合来自不同尺寸的输入。</p>
+<h1 id="3-R-FCN"><a href="#3-R-FCN" class="headerlink" title="3.R-FCN"></a>3.R-FCN</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Fast/Faster R-CNN:apply a costly per-region subnetwork hundreds of times.</p>
+<p>R-FCN:全卷积、计算在整个图像上共享</p>
+<p>提出position-sensitive sore maps，解决图像分类的平移不变、目标检测的平移变化。</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="用于目标检测的深度子网络可被分为两类："><a href="#用于目标检测的深度子网络可被分为两类：" class="headerlink" title="用于目标检测的深度子网络可被分为两类："></a>用于目标检测的深度子网络可被分为两类：</h3><ul>
+<li>独立于ROI，共享的全卷积子网络。</li>
+<li>RoI-wise 子网络，不共享计算。</li>
+</ul>
+<p>图像分类网络AlexNet和VGG，设计了两个子网络：一个卷积子网络，最后是空间池化层。紧跟一个全连接层。图像分类网络最后的空间池化层可以自然地被连接到目标检测网络的RoI池化层。</p>
+<p>如ResNets、GoogleNets这样的图像分类网络是全卷积的。很自然的使用所有卷积层来构建共享的卷积子网络，利用RoI-wise子网络，没有隐藏层。然而，这种解决方式被证明检测精度较差，不能与分类精度匹配。为了解决这一问题，ResNet和RoI池化被不自然的插入到两个卷积层之间，这构建了一个更深的RoI-wise子网络，提升了精度，但由于没有共享每个ROI的计算，速度更慢。</p>
+<p>本文提出了R-FCN，一个共享的，全卷积结构的FCN。为了将平移变化合并到FCN，我们使用一组专门的卷积层作为FCN的输出，构建了一组位置敏感分数图。每个分数图编码了关于相对空间位置的位置信息（例如”目标的左侧“）。在这个FCN的顶部，增加了一个位置敏感的ROI池化层，从分数图中引领信息，跟着一个没有加权的卷积或者全连接层。整个结构可被端到端的学习。所有可学习的层是卷积的，且在整张图像上共享，编码了目标检测所需的空间信息。</p>
+<p>使用ResNet101作为backbone,在PASCAL2007上的精度达到83.6%,比Faster R-CNN快2.5-20倍。实验表明我们的方法解决了平移变化、不变之间的窘境，并且如ResNet这种全卷积图像级别的分类器可被高效的转换成全卷积目标检测器。</p>
+<h2 id="Our-approach"><a href="#Our-approach" class="headerlink" title="Our approach"></a>Our approach</h2><p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gle5t2izglj31be0omdnn.jpg" srcset="/img/loading.gif" alt="image-20201206151822759"></p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gle5tukddzj31bk0mk79l.jpg" srcset="/img/loading.gif" alt="image-20201206151910703"></p>
+<p>给出ROI，R-FCN结构旨在将ROI分类为目标类和背景类。在R-FCN中，所有可学习的权重层是卷积的，并且可在整个图像上计算。最后的卷积层为每一类产生<strong>k<sup>2</sup>张</strong>的位置敏感分数图<strong>（如k=3时，产生9张，分别对应9个位置）</strong>，输出层为：k<sup>2</sup>张通道数为(C+1)，（C个目标类别和1个背景类）。k<sup>2</sup>张分数图分别对应kxk网格的每个bin，描述相对位置。例如，当k=3时，9个分数图分别编码了一个目标类别的{左上角，上部中间……}</p>
+<p>R-FCN以一个位置敏感的RoI池化层结束，这一层聚合最后一个卷积层的输出，为每一个ROI生成分数。我们的位置敏感的RoI池化是选择性的，kxk中的每一个bin只聚合一个分数图。通过端到端的训练，位置敏感的RoI层引领最后一个卷积层专门学习位置敏感的分数图。</p>
+<h3 id="Backbone"><a href="#Backbone" class="headerlink" title="Backbone"></a>Backbone</h3><p>Backbone：ResNet101，其有100个卷积层，紧跟一个全局平均池化层、一个1000类的全连接层。我们移除平均池化层和全连接层，仅使用卷积层来计算特征图。由于ResNet101的最后一块的2048维的，因此采用一个随机初始化的1024维的1x1卷积来降低纬度。之后，使用kxk的C+1通道的卷积层来产生分数图。</p>
+<h3 id="位置敏感的分数图和位置敏感的RoI池化"><a href="#位置敏感的分数图和位置敏感的RoI池化" class="headerlink" title="位置敏感的分数图和位置敏感的RoI池化"></a>位置敏感的分数图和位置敏感的RoI池化</h3><p>为了给每个RoI清晰地编码位置信息，采用一个均匀的网格将每个RoI矩形分成kxk的bins。</p>
+<p><strong>每个bin只在一张分数图上的对应位置执行池化。</strong></p>
+<p>也就是说：物体的各个部位的位置和特定的一张ROI分数图的子区域的位置是一一对应的。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gle7czfwozj311c042t9c.jpg" srcset="/img/loading.gif" alt="image-20201206161207385"></p>
+<p>其中rc(i,j)是第(i,j)个bin对第c类的池化响应，z是一个分数图，x0,y0是RoI左上角点的坐标，ø代表多有可学习的网络参数。n为这个bin所包含的像素数。</p>
+<p>第i,j个bin的跨越的范围是：其中w,h是RoI矩形的长和宽。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gle7f3nfiej30qy01wt8v.jpg" srcset="/img/loading.gif" alt="image-20201206161411777"></p>
+<p>之后，k<sup>2</sup>个位置敏感的分数在RoI上进行投票，本文简化投票为分数的均值，每个RoI得到一个C+1维的向量。之后计算跨类的softmax响应，用于在训练期间评估交叉熵损失，在推理期间对RoI排序。</p>
+<p>作者通过相似的方法解决边界框回归问题。使用4k<sup>2</sup>维的卷积层用于边界框回归，在4k<sup>2</sup>的图上执行位置敏感的ROI池化，为每一个RoI产生一个4K<sup>2</sup>的向量，然后被平均投票聚合为一个4维向量，表示（tx,ty,tw,th)。作者在这里执行了类别不可知的边界框回归，若执行指定类别的副本，则需要4k<sup>2</sup>C维的输出。</p>
+<h3 id="可视化："><a href="#可视化：" class="headerlink" title="可视化："></a>可视化：</h3><p>图三和图四可视化了R-FCN学习到的位置敏感分数图。这些特定的分数图被期望强烈激活，在目标的一个特定相对位置。例如”顶部中心敏感“的分数图在目标的顶部中心粗略的表现出高分数。如果一个候选框签好与真实目标重合，则kxk个bin的大多数都被强烈激活，投票分数很高。相反，如果一个候选框没有正确的与一个真实目标重合，一些bin将不被激活，导致偷票分数降低。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gle8dugb6lj30ui0u0kjl.jpg" srcset="/img/loading.gif" alt="image-20201206164733647"></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><h3 id="主要贡献："><a href="#主要贡献：" class="headerlink" title="主要贡献："></a>主要贡献：</h3><p>解决了分类网络位置不敏感性和检测网络的位置敏感性之间的矛盾。在提升检测速度的同时，利用位置敏感的分数提升了检测精度。</p>
+<h3 id="与Faster-R-CNN的不同："><a href="#与Faster-R-CNN的不同：" class="headerlink" title="与Faster R-CNN的不同："></a>与Faster R-CNN的不同：</h3><p>Faster R-CNN可分为两部分：</p>
+<ol>
+<li>Fully Convolutional subnetwork before RoI Layer</li>
+<li>RoI-wise subnetwork</li>
+</ol>
+<p>第一部分：普通分类网络的卷积层，用来提取共享特征。之后使用一个RoI池化层在第一部分的最后一张特征图上提取每个RoI的特征向量，之后将所有RoI的特征向量都交由第二部分进行分类和回归（对每个RoI分别有一个子网络）</p>
+<p>第一部分是如VGG/GoogleNet/ResNet之类的基础分类网络，其是所有RoI共享的，具有”位置不敏感性“，测试时对一张图片只需进行一次前向计算即可。而第二部分的RoI-wise subnetwork，不是所有RoI共享的。</p>
+<p>如果我们将一个分类网络比如ResNet的所有卷积层都放置在第1部分用来提取特征，而第2部分则只剩下全连接层，这样的目标检测网络是“位置不敏感的translation-invariance”，所以其检测精度会较低，并且也白白浪费了分类网络强大的分类能力（does not match the network’s superior classification accuracy）。而<strong>ResNet</strong>论文中为了解决这样的位置不敏感的缺点，做出了一点让步，即将<strong>RoI Pooling Layer</strong>不再放置在ResNet-101网络的最后一层卷积层之后而是放置在了“<strong>卷积层之间</strong>”，这样RoI Pooling Layer之前和之后都有卷积层，并且RoI Pooling Layer之后的卷积层不是共享计算的，它们是针对每个RoI进行特征提取的，所以这种网络设计，其RoI Pooling Layer之后就具有了“位置敏感性translation-variance”，但是这样做<strong>牺牲了测试速度</strong>，因为所有RoIs都要经过若干层卷积计算，测试速度会很慢</p>
+<ul>
+<li><strong>为什么position-sensitive score map能够具有“在含有某个类别的物体的某个部位的区域上有高响应值”</strong></li>
+</ul>
+<p>这种有高响应值现在只是作者自己在yy的啊，如果网络不满足这一点的话，那么前的所有分析都gg了啊。好，现在我们就大致解释一下为什么训练该网络能够让网络最终满足这一点。首先根据网络的loss公式，如果一个RoI含有人这个物体，那么该RoI通过“position-sensitive score map”+“Position-sensitive RoI pooling”得到的 <img src="https://www.zhihu.com/equation?tex=C%2B1" srcset="/img/loading.gif" alt="[公式]"> 个值中的属于人的那个值必然会在softmax损失函数的要求下“变得尽量的大”，那么如何才能使得属于人的这个值尽量的大呢？那么我们现在就要想到，属于人的这个预测值是怎么来的？在前面的分析，我们已经知道它是通过Position-sensitive RoI pooling这种池化操作的来的，那么也就是说使得 <img src="https://www.zhihu.com/equation?tex=C%2B1" srcset="/img/loading.gif" alt="[公式]"> 个值中属于人的那个值尽量大，必然会使得position-sensitive score map中属于人的那个score map上的“该RoI对应的位置区域的平均值”尽量大，从而也就是该score map上在该区域上的响应值尽量大，因为只有该区域的响应值大了，才能使得预测为人的概率大，才会降低softmax的loss。</p>
+<p>所以这种end-to-end的训练会达到这一目的，并且从论文中的图也可以看出来。</p>
+<p>为了减少计算量，作者将所有RoIs的loss值都计算出来后，对其进行排序，并只对“最大的128个损失值对应的RoIs”执行反向传播操作，其它的则忽略。并且训练策略也是采用的Faster R-CNN中的4-step alternating training进行训练。</p>
+<p>FasterRCNN的RoIPooling是不区分物体部位，相当于k=1 直接获取整个物体的特征，任何含有该物体的区域都高亮，RFCN的位置敏感得分图相当于将一个物体分解，不同特征图负责不同部分的位置敏感，相当于是显示地建立位置敏感特征，并直接对特征值进行监督</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/MANet/">MANet</a>
+                    
+                      <a class="hover-with-bg" href="/tags/R-FCN/">R-FCN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/OGEMN/">OGEMN</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/10/1-10/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">阅读笔记（1.10)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/04/12-4/">
+                        <span class="hidden-mobile">阅读笔记（12.4)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "阅读笔记（12.11)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

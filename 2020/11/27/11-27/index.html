@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>阅读笔记（11.27) - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-11-27 07:40">
+      2020年11月27日 早上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      46
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年11月27日 下午
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>最近主要阅读了三篇视频目标检测方向的论文，分别是STSN(ECCV2018)、STMN(ECCV2018)、TCENet(AAAI2020)。</p>
+<p><strong>阅读文献：</strong></p>
+<p>[1] Bertasius G, Torresani L, Shi J. Object detection in video with spatiotemporal sampling networks[C]//Proceedings of the European Conference on Computer Vision (ECCV). 2018: 331-346.</p>
+<p>[2] Xiao F, Jae Lee Y. Video object detection with an aligned spatial-temporal memory[C]//Proceedings of the European Conference on Computer Vision (ECCV). 2018: 485-501.</p>
+<p>[3] He F, Gao N, Li Q, et al. Temporal Context Enhanced Feature Aggregation for Video Object Detection[C]//AAAI. 2020: 10941-10948.</p>
+<h1 id="1-STSN"><a href="#1-STSN" class="headerlink" title="1. STSN"></a>1. STSN</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>时空采样网络（STSN）使用跨时间的可变形卷积来检测视频中的目标。通过从相邻帧中进行空间采样来在一个视频帧检测目标。这自然使该方法对于单个帧中的遮挡或运动模糊具有鲁棒性。该框架不需要额外的监督，因为它直接针对目标检测性能优化采样位置。该方法在STSN上取得SOTA效果，对比之前的视频目标检测方法，设计更简单，训练中不需要光流数据。</p>
+<p>此前的后处理方法旨在使目标检测在时间上连贯，然而，因为时间一致性被强制在第二个步骤，使得这些方法不能被端到端的训练。本文提出了一个简单高效的时空采样网络STSN，在空间和时间上使用变形卷积，来利用时间信息进行视频目标检测。STSN学会从临近的视频帧中对有用的特征点进行空间采样，以使给定视频帧中的目标检测精度达到最大。</p>
+<p>与标准的变形CNN（其在空间域上执行变形卷积）不同，STSN学会了在不用的视频帧之间采样特征，提高了视频目标检测的精度。预训练的光流CNN不总是在新的数据集上通用，这可能阻碍视频目标检测的性能。相比之下，本文的方法有一个可学习的时空采样模块，该模块可以从目标检测标签中进行有区别的训练，没有以上问题。</p>
+<p>STSN可以在一步中进行端到端的训练。相比之下，依赖于光流的方法需要一个额外的步骤来训练一个光流CNN，这使得训练过程更加繁琐和冗长。例如，从头开始训练FGFA [24]的光流CNN大约需要四天，然后再训练FGFA [24]进行视频目标检测又需要四天，因此它需要八天的总训练时间。相比之下，STSN只需4天就可以训练一个阶段。最后， STSN在视频目标检测的准确性上也取得了一定的增长，尽管是中等的。</p>
+<h2 id="背景：变形卷积"><a href="#背景：变形卷积" class="headerlink" title="背景：变形卷积"></a>背景：变形卷积</h2><p>标准的2维卷积由两步组成：</p>
+<ol>
+<li><p>在一个等距的空间网格R上采样位置。</p>
+</li>
+<li><p>使用权重w对采样到的值执行一个加权和。</p>
+</li>
+</ol>
+<p>例如，一个核大小为3x3的标准2D卷积，膨胀因子为1，网格R被定义为：{(-1,-1),(-1,0),…,(0,1),(1,1)}。此时，在输出特征图y的p0位置的新值为：                               <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qpzylckj30lq046myr.jpg" srcset="/img/loading.gif" alt="image-20201127150050204" style="zoom:33%;" /></p>
+<p>其中x为输入特征图。在变形2D卷积中，网格R用一个数据条件偏移增强，</p>
+<p>   <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qqc37fbj30q806ajui.jpg" srcset="/img/loading.gif" alt="image-20201127150109591" style="zoom:33%;" /></p>
+<p>∆pn通常是分数，以上操作是使用双线性插值实现的。注意，偏移是通过将单独的卷积层用于包含特征图x的激活张量而获得的。这将产生具有与输入要素图相同的空间分辨率的偏移图。另外，请注意，偏移量在给定激活张量的所有特征通道之间共享。在训练过程中，可变形卷积核和偏移核的权重是通过使用双线性插值算子传播梯度来共同学习的。</p>
+<h2 id="时空采样网络"><a href="#时空采样网络" class="headerlink" title="时空采样网络"></a>时空采样网络</h2><p>作者的目标是设计一种网络架构，该架构结合了用于视频中对象检测的时间信息。</p>
+<p>系统将视频中的每个帧依次视为参考帧，以便在视频的每个帧中进行目标检测。在实验中使用2K个支持帧来检测参考帧，（前面K帧，后面K帧）</p>
+<p>为了高效的合并时间信息，需要两点：</p>
+<ol>
+<li><p>来自图像级别网络的强大的目标级特征。（通过backbone 网络实现）</p>
+</li>
+<li><p>从支持帧中为参考帧采样有用的目标级别特征的能力。（通过设计时空采样框架实现）</p>
+</li>
+</ol>
+<h2 id="STSN可被总结为4步："><a href="#STSN可被总结为4步：" class="headerlink" title="STSN可被总结为4步："></a>STSN可被总结为4步：</h2><ol>
+<li><p>使用backbone卷积网络为每个视频帧独立的计算目标级别的特征。</p>
+</li>
+<li><p>时空采样块被应用于目标级别的特征，来从相邻帧采样相关特征（在输入参考帧的条件下）。</p>
+</li>
+<li><p>使用每个像素的加权求和将每个视频帧的采样特征在时间上聚合为参考帧的单个特征张量。</p>
+</li>
+<li><p>特征向量输入到检测网络来产生参考帧最终的的检测结果。</p>
+</li>
+</ol>
+<p>STSN的框架将这些在概念上截然不同的四个步骤集成到一个体系结构中，对其进行了端到端的训练。</p>
+<h2 id="Backbone-Architecture"><a href="#Backbone-Architecture" class="headerlink" title="Backbone Architecture"></a>Backbone Architecture</h2><p>采用基于ResNet-101的变形CNN，采用6个可变形卷积层。</p>
+<h2 id="时空特征采样"><a href="#时空特征采样" class="headerlink" title="时空特征采样"></a>时空特征采样</h2><p>时空采样机制是本文的主要贡献，它可以在给出的视频中无缝的合并时间信息。第一步，将参考帧It和支持帧It+k喂给图像级别的backbone网络，分别产生特征张量ft和ft+k。</p>
+<p>  <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qr2d8glj30du02m3za.jpg" srcset="/img/loading.gif" alt="image-20201127150152330" style="zoom: 25%;" />其中c,h,w是激活张量的通道数、高度、宽度。然后将ft和ft+k串联为一个新的特征张量<img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qrdye6cj30gq032jsk.jpg" srcset="/img/loading.gif" alt="image-20201127150210506" style="zoom:25%;" />注意，这个张量是初始张量的通道数的两倍。其包含了参考帧和支持帧的目标级别的信息。</p>
+<p>接下来，使用ft,t+k来预测(x,y)位置偏移量，这将被用于采样支持张量ft+k。采样机制使用一个变形卷积层来实现，输入有两个：预测到的偏移量和支持张量ft+k，输出一个新的采样过的特征张量gt,t+k，其可被用于在参考帧进行目标检测。使用下标t，t+k来表示重采样的张量，尽管g是通过重采样支持帧来获得，但是偏移量的计算同时使用参考帧和支持帧。</p>
+<p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qrs5mwmj310c0k0qlp.jpg" srcset="/img/loading.gif" alt="image-20201127150233081" style="zoom:50%;" /></p>
+<blockquote>
+<p>图：STSN框架。给出参考帧，目标是从相邻的支持帧合并信息。首先从支持帧和参考帧使用backbone提取特征。之后将参考帧和支持帧的特征串联，喂给多个可变形卷积层。其将产生偏移量，用于从支持帧采样有信息的特征。STSN体系允许在参考帧出现模糊或遮挡的情况下，执行精确的检测。</p>
+</blockquote>
+<h1 id="2-STMN"><a href="#2-STMN" class="headerlink" title="2.STMN"></a>2.STMN</h1><p>本文介绍了一个用于视频目标检测的时空记忆网络(STMN)，其核心是时空记忆模块（STMM）作为循环计算单元，以对长时间表观和运动变化建模。STMM的设计允许完全集成从静态图像预训练的CNNbackbone权重，这对于精确的检测十分重要。此外，提出了一个新颖的MatchTrans模块来将帧与帧之间的时空memory对齐。</p>
+<p>本文的方法能在一个较长并且数量可变的帧上捕捉信息，而现有方法仅能捕捉短而固定长度帧的信息。本文的方法仅仅需要计算单个frame-level的空间memory，计算独立于proposal的数量。</p>
+<p>Detect and Track方法旨在统一检测和跟踪，两个连续帧间的关系被用于预测检测框的位移。与之不同，本文的时空记忆模块，聚合t&gt;2帧的信息。并且使用所提出的MatchTrans模块来对整个特征图进行对齐，而不是预测框的位移。</p>
+<p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qsdalvpj314u0puqt5.jpg" srcset="/img/loading.gif" alt="image-20201127150306794" style="zoom:50%;" /></p>
+<h2 id="时空memory对齐的必要性："><a href="#时空memory对齐的必要性：" class="headerlink" title="时空memory对齐的必要性："></a>时空memory对齐的必要性：</h2><p>如果不对齐，时空memory将不会遗忘一个目标，即使它的位置已经改变。例如第四行的显著性图，由于多个没有对齐的特征图重叠在一起，产生的幻觉特征将导致误警检测、不精确的定位（第三行）。</p>
+<p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qsnt7f3j311e0s0kjl.jpg" srcset="/img/loading.gif" alt="image-20201127150322942" style="zoom:50%;" /></p>
+<p>为了减轻这一问题，作者提出了MatchTrans模块来对时空memory进行跨帧对齐，对于一个在位置（x,y)的特征cell Ft(x,y)∈1x1xD，MatchTrans计算Ft（x,y)与Ft-1中小的相邻区域之间的亲和力，以将Mt-1的时空memory转换对齐到第t帧：</p>
+<p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qsyni71j316k05a41r.jpg" srcset="/img/loading.gif" alt="image-20201127150340883" style="zoom: 33%;" /></p>
+<p>用T将非对齐的memory Mt-1对齐到M’t-1:</p>
+<p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qt5k4spj312s054djg.jpg" srcset="/img/loading.gif" alt="image-20201127150352341" style="zoom:33%;" /></p>
+<blockquote>
+<p>自己的理解：先计算出一个当前帧t的(x,y)位置与t-1帧的一个小区域的变换系数。使用这个系数，将t-1帧的Memory的一个小区域，对齐到M’的(x,y)位置</p>
+</blockquote>
+<p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qts6x6rj319k0gyasz.jpg" srcset="/img/loading.gif" alt="image-20201127150428748"></p>
+<p>直觉是：使用给出的变换T，重构空间memory M’t-1(x,y)为在Mt-1与(x,y)相邻的(2k+1 X 2k+1)小邻域内的加权均值。可以用得到的M’t-1简单的替代等式1-4中的Mt-1。</p>
+<p>通过合适的对齐之后，生成的memory更干净(如图4第二行所示)，可以更精确的检测。因为计算代价是k的平方，实验中将k设为2。</p>
+<p>MatchTrans模块相比使用光流，更高效，节省了用于存储光流的空间。</p>
+<h1 id="3-TCENet"><a href="#3-TCENet" class="headerlink" title="3.TCENet"></a>3.TCENet</h1><p>  为解决视频表观退化问题，现有的一些方法聚合相邻帧的特征来增强每一帧的表观特征。然而这些方法忽略了聚合帧之间的时间关系，这对于提升识别精度十分重要。作者提出了一个“时间上下文增强网络”——TCENet来通过时间聚合利用时间上下文信息。为了处理目标视频中目标位移问题，作者提出了一个DeformAlign模块来对齐帧与帧之间的空间特征。此外，作者没有采用固定的融合窗口长度，提出了一个temporal stride predictor来自适应的选择用于聚合的视频帧，有利于利用可变的时间信息，用更少的视频帧进行聚合来实现更好的结果。</p>
+<p>  一些方法使用固定的相邻帧长度来增强参考帧的表观特征，作者将其称为增强空间特征的聚合(SFEA)，这些方法忽略了用于聚合的帧的时间关系。特别是当打乱用于聚合的帧的顺序时，这些方法的性能几乎不受影响，也就是说这些模型没有从时间上下文中受益。仅执行外观特征表示，可能难以识别一些外观严重恶化的目标，如罕见的姿势、部分遮挡。</p>
+<p>  本文的哲学是相邻帧间的时间上下文信息在视频目标检测中扮演重要的角色。本文提出的TCEA方法，聚合相邻帧的特征来对时间上下文建模，以增强参考帧的特征。具体来说，对于每个参考帧，根据<strong>attention weights</strong>和<strong>temporal order</strong>聚合相邻帧的特征和参考帧的特征。</p>
+<h2 id="TCENet框架"><a href="#TCENet框架" class="headerlink" title="TCENet框架"></a>TCENet框架</h2><p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qu3ep0cj310k0n6tp1.jpg" srcset="/img/loading.gif" alt="image-20201127150446536" style="zoom:50%;" /></p>
+<p>TCENet基于R-FCN构建，在每个时间t，TCENet将参考帧t与t-s(t)和t+s(t)聚合，其中s(t)通过 temporal stride predictor计算。特征提取器Nfeat产生这三帧图像的中间特征ft-s(t)、ft、ft+s(t)。在进行特征聚合之前，首先使用DeformAlign模块，将前后两张特征图的空间特征对齐到ft，生成ft-s(t)-&gt;t和ft+s(t)-&gt;t。之后使用聚合模块TCEA将三张特征图聚合生成gt。最终将合并过的特征gt喂给检测网络，获得参考帧的检测结果。</p>
+<h2 id="Temporal-Context-Enhanced-Aggregation-TCEA"><a href="#Temporal-Context-Enhanced-Aggregation-TCEA" class="headerlink" title="Temporal Context Enhanced Aggregation(TCEA)"></a>Temporal Context Enhanced Aggregation(TCEA)</h2><p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3qub6oitj311k0fyarh.jpg" srcset="/img/loading.gif" alt="image-20201127150459481"></p>
+<p>  如上图中间所示，<strong>时间融合</strong>被提出，用于聚合相邻帧的特征来对时间上下文建模。来自N个相邻帧的，尺寸为CxHxW的特征首先被串联在一起，合并事件信息，形成一个NC通道的特征图。与常见的表观特征不同，这里包含了一个额外的时间维度。之后，使用一个1x1的卷积核对串联的特征图进行卷积，捕捉帧间的时间关系。最终生成一个C通道的特征图，同时保留了时间和空间信息。</p>
+<p>  此外，TCEA也采用了增加了时空注意力模块，来为每一帧分配pixel-level的聚合权重。<strong>时间注意力</strong>的目标是：在一个嵌入空间中计算帧的相似性，来关注<strong>“何时”</strong>的相邻帧重要。直觉上，在位置p，如果对齐过的特征fi-&gt;t(p)与ft(p)越接近，就越该被关注。这里作者采用点积相似性度量来度量相似性。与时间注意力木桶，<strong>空间注意力</strong>关注<strong>“哪里”</strong>的信息最丰富。空间注意力图从时间融合后的特征图计算。为了突出信息区域并增加注意力感受野，首先将平均池化和最大池化应用于融合后的特征，获得两张半分辨率的特征图。然后将它们连接起来以生成特征描述符，并在描述符上应用卷积层以生成中间特征图。中间特征图使用双线性插值上采样生成一张空间注意力图fs。之后使用公式(2)将其与ft融合，空间注意力为特征提供了一个细粒度的控制，即哪些地方应该被强调，哪些地方应该被抑制。</p>
+<h2 id="DeformAlign-feature-alignment"><a href="#DeformAlign-feature-alignment" class="headerlink" title="DeformAlign feature alignment"></a>DeformAlign feature alignment</h2><p>  相同目标实例的特征，由于视频的运动，通常没有在帧与帧之间空间对齐。如果在进行特征聚合之前，没有进行恰当的特征对齐，目标检测器可能会发生检测识别、定位不准的问题。因此，作者提出了DeformAlign模块，采用变形卷积，实现精确的像素级别的空间对齐。</p>
+<p> <img src="https://tva1.sinaimg.cn/large/0081Kckwly1gl3quo1s24j30ta0fwdnz.jpg" srcset="/img/loading.gif" alt="image-20201127150519561" style="zoom:50%;" /></p>
+<p>  为了将第i帧的特征图与参考帧t对齐，DeformAlign模块首先使用fi和ft作为输入，预测采样参数θ，使用采样参数θ和fi，采用变形卷积计算出fi-&gt;t。</p>
+<h2 id="Temporal-Stride-Predictor"><a href="#Temporal-Stride-Predictor" class="headerlink" title="Temporal Stride Predictor"></a>Temporal Stride Predictor</h2><p>  为了获得更丰富的信息，一些模型基于固定的滑动窗口长度，聚合较长的输入视频帧特征。使用大卷积核，可以在特征图上获得更大的空间感受野。然而，参考帧的时间邻域主要包括冗余信息，并且对于提升当前目标的信念几乎是无用的。此外，巨大的滑动窗口时间长度计算开销更大。</p>
+<p>  作者发现增加聚合帧之间的时间步长，能增加时间感受野，并且能聚合更多有用的信息，不增加计算量。这里的时间步长定义为s=|t2-t1|。低级的时间步长选取策略在每一个参考帧t，使用固定的时间步长，使得建模变化的时间信息变的困难。更好的时间步长选取策略应该是能适应时间阈的变化。</p>
+<p>  一个自然地判断时间步长的标准是根据视频内容的变化速度。如果内容变化速度很快，就选择一个更小的时间步长，合并更近的帧。相反，如果变化速度慢，就选择更长的时间步长，合并更远的帧。视频内容的速度可以用ground truth目标的变化速度来度量。目标的运动速度通过其与相邻帧（±10帧）对应实例的IoU分数度量。这个指标被定义为“motion IoU”，motion IoU越小，目标运动越快。</p>
+<p>  基于此，作者设计了Temporal Stride Predictor,来为参考帧t选择哪些帧用于聚合。该预测器将特征t和特征k之间的差异作为输入（如ft-fk），预测第t帧和第k帧之间的偏差分数（即motion IoU）。若motion IoU<0.7（说明目标运动快）就将当前参考帧设为快时间步长（默认为9）。若0.7≤motion IoU≤0.9（说明目标运动适中）就将当前参考帧设为中时间步长（默认为24）。若motion IoU>0.9（说明目标运动慢）就将当前参考帧设慢快时间步长（默认为38）。</p>
+<p>  该预测网络由：2个卷积层（核大小为3x3,256通道），全局池化层，全连接层，sigmoid函数组成。在运行时，ft和ft-10被喂给该网络，来预测参考帧t的运动速度。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>创新点：</p>
+<ul>
+<li>提出了TCENet来通过时间聚合利用时间上下文信息。</li>
+<li>提出了TCEA，聚合相邻帧的特征来对时间上下文建模，以增强参考帧的特征，更有效的处理表观退化问题。</li>
+<li>提出了temporal tride predictor，来自适应的选择用于聚合的视频帧，有利于利用可变的时间信息，用更少的视频帧进行聚合来实现更好的结果。</li>
+<li>提出了DeformAlign模块，对由帧间运动引发的位移建模，实现精确的像素级空间特征对齐。</li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/STSN/">STSN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/STMN/">STMN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/TCENet/">TCENet</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/03/Java-2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java学习笔记2：面向对象编程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/20/11-20/">
+                        <span class="hidden-mobile">阅读笔记（11.20)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "阅读笔记（11.27)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

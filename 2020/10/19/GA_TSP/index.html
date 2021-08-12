@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>计算智能作业:用遗传算法解决旅行商问题 - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-10-19 11:46">
+      2020年10月19日 中午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年10月19日 下午
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h1 id="1-问题描述："><a href="#1-问题描述：" class="headerlink" title="1.问题描述："></a><strong>1.问题描述：</strong></h1><p>编写一个程序，使用遗传算法求解旅行商问题：</p>
+<p>旅行商问题(Travelling Salesman Problem, 简记TSP，亦称货郎担问题):设有n个城市和距离矩阵D=[dij]，其中dij表示 城市i到城市j的距离，i，j=1，2 … n，问题是要找出遍访每个城市恰好一次的一条回路并使其路径长度为最短。</p>
+<h1 id="2-问题定义："><a href="#2-问题定义：" class="headerlink" title="2.问题定义："></a><strong>2.问题定义：</strong></h1><ol>
+<li><strong>定义个体、种群：</strong>每一条可能的路径为一个个体、所有个体构成种群。</li>
+<li><strong>定义适应度：</strong>计算每个个体的路径长度，以路径长度的倒数作为适应度。（即路径越长，适应度越差）</li>
+<li><strong>定义杂交方法</strong>：若产生的随机数大于交叉概率，则直接将父本保留，否则进行交叉。随机选择父本2的一个片段，遍历父本1：若该城市号码不在父本2中，则将其插入到交叉结果，若到达交叉点1则将父本2的片段插入交叉结果。</li>
+<li><strong>定义选择方法：</strong>每次选择适应度最低的个体，将其杀死。</li>
+<li><strong>定义突变方法：</strong>若产生的随机数大于突变概率，则不进行突变。否则采用倒置变异法，随机选择该基因的某一片段进行逆序。</li>
+</ol>
+<h1 id="3-算法流程："><a href="#3-算法流程：" class="headerlink" title="3.算法流程："></a><strong>3.算法流程：</strong></h1><ol>
+<li>确定种群规模N、杂交概率Pc、变异概率Pm、适应度函数F、终止条件。</li>
+<li>产生初始种群，计算种群中每个个体的适应度。</li>
+<li>开始进行进化操作：<ul>
+<li>使用选择方法杀死种群中适应度较低的若干个体。（物竞天择，适者生存）</li>
+<li>开始繁殖：选择适应度最高的个体作为父本1，随机选择一个个体作为父本2。使其进行杂交，产生新个体。直到当前个体数量恢复到原始种群数量。</li>
+<li>使新产生的种群按突变概率进行突变。</li>
+</ul>
+</li>
+<li>重复执行进化操作，直到达到迭代次数时，输出最优个体。</li>
+</ol>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjujjhov2wj311w0ouwh5.jpg" srcset="/img/loading.gif" alt="image-20201019124155656"></p>
+<h1 id="4-源代码："><a href="#4-源代码：" class="headerlink" title="4.源代码："></a>4.源代码：</h1><pre><code class="hljs python"><span class="hljs-keyword">import</span> math
+<span class="hljs-keyword">import</span> random
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> sys
+<span class="hljs-keyword">import</span> copy
+<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GA</span><span class="hljs-params">(object)</span>:</span>
+    <span class="hljs-comment"># 定义类属性</span>
+    <span class="hljs-comment"># 输入全国34个省、市、自治区直辖市的省会城市坐标</span>
+    city_x = [<span class="hljs-number">86.61</span>, <span class="hljs-number">89.13</span>, <span class="hljs-number">127.34</span>, <span class="hljs-number">126.32</span>, <span class="hljs-number">123.42</span>, <span class="hljs-number">112.17</span>, <span class="hljs-number">116.40</span>, <span class="hljs-number">106.27</span>, <span class="hljs-number">111.98</span>, <span class="hljs-number">115.21</span>, <span class="hljs-number">117.04</span>, <span class="hljs-number">97.07</span>, <span class="hljs-number">103.82</span>,
+              <span class="hljs-number">118.01</span>, <span class="hljs-number">108.94</span>, <span class="hljs-number">113.46</span>, <span class="hljs-number">117.28</span>, <span class="hljs-number">120.26</span>, <span class="hljs-number">121.46</span>, <span class="hljs-number">103.36</span>, <span class="hljs-number">112.29</span>, <span class="hljs-number">120.15</span>, <span class="hljs-number">107.51</span>, <span class="hljs-number">112.08</span>, <span class="hljs-number">115.89</span>, <span class="hljs-number">106.91</span>,
+              <span class="hljs-number">120.31</span>, <span class="hljs-number">101.71</span>, <span class="hljs-number">123.01</span>, <span class="hljs-number">108.67</span>, <span class="hljs-number">113.98</span>, <span class="hljs-number">110.03</span>, <span class="hljs-number">113.54</span>, <span class="hljs-number">114.17</span>]
+    city_y = [<span class="hljs-number">45.79</span>, <span class="hljs-number">30.66</span>, <span class="hljs-number">48.05</span>, <span class="hljs-number">44.38</span>, <span class="hljs-number">42.29</span>, <span class="hljs-number">42.81</span>, <span class="hljs-number">40.40</span>, <span class="hljs-number">36.76</span>, <span class="hljs-number">37.65</span>, <span class="hljs-number">38.44</span>, <span class="hljs-number">39.52</span>, <span class="hljs-number">35.62</span>, <span class="hljs-number">36.05</span>, <span class="hljs-number">36.37</span>,
+              <span class="hljs-number">34.46</span>, <span class="hljs-number">34.25</span>, <span class="hljs-number">31.86</span>, <span class="hljs-number">32.54</span>, <span class="hljs-number">31.28</span>, <span class="hljs-number">30.65</span>, <span class="hljs-number">30.98</span>, <span class="hljs-number">29.28</span>, <span class="hljs-number">29.63</span>, <span class="hljs-number">27.79</span>, <span class="hljs-number">27.97</span>, <span class="hljs-number">26.67</span>, <span class="hljs-number">26.07</span>, <span class="hljs-number">24.84</span>, <span class="hljs-number">23.54</span>,
+              <span class="hljs-number">22.68</span>, <span class="hljs-number">22.82</span>, <span class="hljs-number">19.33</span>, <span class="hljs-number">22.19</span>, <span class="hljs-number">22.32</span>]
+    city = [<span class="hljs-string">'乌鲁木齐'</span>, <span class="hljs-string">'拉萨'</span>, <span class="hljs-string">'哈尔滨'</span>, <span class="hljs-string">'长春'</span>, <span class="hljs-string">'沈阳'</span>, <span class="hljs-string">'呼和浩特'</span>, <span class="hljs-string">'北京'</span>, <span class="hljs-string">'银川'</span>, <span class="hljs-string">'太原'</span>, <span class="hljs-string">'石家庄'</span>, <span class="hljs-string">'天津'</span>, <span class="hljs-string">'西宁'</span>,
+            <span class="hljs-string">'兰州'</span>, <span class="hljs-string">'济南'</span>, <span class="hljs-string">'西安'</span>, <span class="hljs-string">'郑州'</span>, <span class="hljs-string">'合肥'</span>, <span class="hljs-string">'南京'</span>, <span class="hljs-string">'上海'</span>, <span class="hljs-string">'成都'</span>, <span class="hljs-string">'武汉'</span>, <span class="hljs-string">'杭州'</span>, <span class="hljs-string">'重庆'</span>, <span class="hljs-string">'长沙'</span>, <span class="hljs-string">'南昌'</span>,
+            <span class="hljs-string">'贵阳'</span>, <span class="hljs-string">'福州'</span>, <span class="hljs-string">'昆明'</span>, <span class="hljs-string">'台北'</span>, <span class="hljs-string">'南宁'</span>, <span class="hljs-string">'广州'</span>, <span class="hljs-string">'海口'</span>, <span class="hljs-string">'澳门'</span>, <span class="hljs-string">'香港'</span>]
+    city_num = <span class="hljs-number">34</span>  <span class="hljs-comment"># 城市数量</span>
+    max_population_size = <span class="hljs-number">100</span>
+    population_size = max_population_size  <span class="hljs-comment"># 种群大小</span>
+    killnum = <span class="hljs-number">40</span>  <span class="hljs-comment"># 每次迭代杀死多少个个体</span>
+    crossover_rate = <span class="hljs-number">0.8</span>  <span class="hljs-comment"># 交叉概率</span>
+    mutation_rate = <span class="hljs-number">0.05</span>  <span class="hljs-comment"># 突变概率</span>
+    iter = <span class="hljs-number">500</span>  <span class="hljs-comment"># 迭代次数</span>
+    best_dist = <span class="hljs-number">0</span>  <span class="hljs-comment"># 最优距离</span>
+    best_route = []  <span class="hljs-comment"># 最优路线</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-comment"># 定义实例属性：</span>
+        self.population = np.array([])  <span class="hljs-comment"># 种群数组</span>
+        self.fitness = np.array([])  <span class="hljs-comment"># 适应度数组</span>
+        self.population = self.createpop(self.population_size)  <span class="hljs-comment"># 创建初始种群</span>
+        self.fitness = self.get_fitness(self.population)  <span class="hljs-comment"># 计算初始化种群的适应度</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">createpop</span><span class="hljs-params">(self, size)</span>:</span>  <span class="hljs-comment"># 创建种群</span>
+        pop = []
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(size):
+            route = random.sample(range(<span class="hljs-number">0</span>, self.city_num), self.city_num)  <span class="hljs-comment">#从0-n截取n个数据（得到初始随机路径）</span>
+            pop.append(route)
+        <span class="hljs-keyword">return</span> np.array(pop)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_fitness</span><span class="hljs-params">(self, pop)</span>:</span>
+        fitness = np.array([])
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(self.population.shape[<span class="hljs-number">0</span>]):
+            d = self.get_distance(pop[i])  <span class="hljs-comment"># 取一个个体，计算该个体的距离</span>
+            fitness = np.append(fitness, <span class="hljs-number">1</span>/d)  <span class="hljs-comment"># np.array追加元素  以距离的倒数为适应度</span>
+        <span class="hljs-keyword">return</span> fitness
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_distance</span><span class="hljs-params">(self, route)</span>:</span>  <span class="hljs-comment"># 计算当前路径的长度</span>
+        d = <span class="hljs-number">0.0</span>
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">-1</span>, self.city_num<span class="hljs-number">-1</span>):
+            x = (self.city_x[route[i]]-self.city_x[route[i+<span class="hljs-number">1</span>]])**<span class="hljs-number">2</span>
+            y = (self.city_y[route[i]]-self.city_y[route[i+<span class="hljs-number">1</span>]])**<span class="hljs-number">2</span>
+            d += np.sqrt(x+y)
+        <span class="hljs-keyword">return</span> d
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">kill2</span><span class="hljs-params">(self)</span>:</span>
+        worst_f_index = np.argmin(self.fitness)  <span class="hljs-comment"># 当前最差适应值的位置</span>
+        self.population = np.delete(self.population, worst_f_index, axis=<span class="hljs-number">0</span>)  <span class="hljs-comment"># 杀死若干个体</span>
+        self.population_size = self.population.shape[<span class="hljs-number">0</span>]
+        self.fitness = self.get_fitness(self.population)  <span class="hljs-comment"># 更新适应度</span>
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">breed</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">while</span> self.population_size &lt; self.max_population_size:  <span class="hljs-comment"># 当前个体数小于种群数量时,进行繁衍</span>
+            best_f_index = np.argmax(self.fitness)  <span class="hljs-comment"># 当前最好适应值的位置</span>
+            p1 = self.population[best_f_index]  <span class="hljs-comment"># 选适应值最高的作为父本1</span>
+            p2 = self.population[np.random.randint(<span class="hljs-number">0</span>, self.population.shape[<span class="hljs-number">0</span>]<span class="hljs-number">-1</span>)]  <span class="hljs-comment"># 随机选父本2</span>
+            c = self.cross(p1, p2)
+            c = c[np.newaxis, :]  <span class="hljs-comment"># 将（34， 转换为（1,34）</span>
+            <span class="hljs-comment"># print('交叉成功：',c)</span>
+            <span class="hljs-comment"># print('shape',self.population.shape,c.shape)</span>
+            self.population = np.append(self.population, c, axis=<span class="hljs-number">0</span>)  <span class="hljs-comment"># 进行交叉，追加到种群</span>
+            self.fitness = self.get_fitness(self.population)  <span class="hljs-comment"># 更新适应度</span>
+            self.population_size = self.population.shape[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 更新种群大小</span>
+            <span class="hljs-comment"># print(self.fitness.shape)</span>
+            <span class="hljs-comment"># print(self.fitness)</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cross</span><span class="hljs-params">(self, parent1, parent2)</span>:</span>  <span class="hljs-comment"># 交叉p1和p2的片段</span>
+        <span class="hljs-keyword">if</span> np.random.rand() &gt; self.crossover_rate:  <span class="hljs-comment"># 大于交叉概率0.7直接替换</span>
+            <span class="hljs-keyword">return</span> parent1
+        <span class="hljs-keyword">else</span>:
+            index1 = np.random.randint(<span class="hljs-number">0</span>, self.city_num<span class="hljs-number">-1</span>) <span class="hljs-comment">#随机产生位置1 注意：randint可以取到第二个参数的位置</span>
+            index2 = np.random.randint(index1, self.city_num<span class="hljs-number">-1</span>)  <span class="hljs-comment"># 随机产生位置1之后的位置2</span>
+            tempGene = parent2[index1:index2]  <span class="hljs-comment"># 选取交叉的基因片段</span>
+            newGene = []
+            p1len = <span class="hljs-number">0</span>
+            <span class="hljs-keyword">for</span> g <span class="hljs-keyword">in</span> parent1:
+                <span class="hljs-keyword">if</span> p1len == index1:  <span class="hljs-comment"># 如果当前位置到达交叉点1</span>
+                    newGene.extend(tempGene)  <span class="hljs-comment"># 插入基因片段（将p2随机选取的一段作为新基因的开头）</span>
+                <span class="hljs-keyword">if</span> g <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> tempGene:
+                    newGene.append(g)  <span class="hljs-comment"># 若g没有在随机选的基因段里，则插入g</span>
+                p1len += <span class="hljs-number">1</span>
+            newGene = np.array(newGene)
+
+            <span class="hljs-keyword">if</span> newGene.shape[<span class="hljs-number">0</span>] != self.city_num:
+                print(<span class="hljs-string">'交叉错误'</span>)
+                <span class="hljs-keyword">return</span> self.createpop(<span class="hljs-number">1</span>)
+                <span class="hljs-comment"># return parent1</span>
+            <span class="hljs-keyword">return</span> newGene
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mutate</span><span class="hljs-params">(self, gene)</span>:</span>  <span class="hljs-comment"># 突变</span>
+        <span class="hljs-keyword">if</span> np.random.rand() &gt; self.mutation_rate:  <span class="hljs-comment"># 大于突变概率0.005（大部分）</span>
+            <span class="hljs-keyword">return</span> gene
+        <span class="hljs-keyword">else</span>:
+            index1 = np.random.randint(<span class="hljs-number">0</span>, self.city_num<span class="hljs-number">-1</span>)
+            index2 = np.random.randint(index1, self.city_num<span class="hljs-number">-1</span>)
+            newgene = self.reverse(gene, index1, index2)  <span class="hljs-comment"># 倒置变异法</span>
+            <span class="hljs-keyword">if</span> newgene.shape[<span class="hljs-number">0</span>] != self.city_num:
+                print(<span class="hljs-string">"突变错误！"</span>)
+                <span class="hljs-keyword">return</span> self.createpop(<span class="hljs-number">1</span>)
+            <span class="hljs-keyword">return</span> newgene
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse</span><span class="hljs-params">(self, gene, i, j)</span>:</span>  <span class="hljs-comment"># 翻转i-j之间的片段</span>
+        <span class="hljs-keyword">if</span> i &gt; j <span class="hljs-keyword">or</span> j &gt; self.city_num<span class="hljs-number">-1</span>:
+            print(<span class="hljs-string">"error"</span>)
+            <span class="hljs-keyword">return</span> gene
+        <span class="hljs-keyword">else</span>:
+            gg = np.copy(gene)
+            temp = gg[i:j]  <span class="hljs-comment"># 截取基因片段</span>
+            new = []
+            n = <span class="hljs-number">0</span>
+            <span class="hljs-keyword">for</span> g <span class="hljs-keyword">in</span> gg:
+                <span class="hljs-keyword">if</span> n == i:  <span class="hljs-comment"># 到达第i个位置</span>
+                    new.extend(temp[::<span class="hljs-number">-1</span>])  <span class="hljs-comment"># 插入逆序基因片段</span>
+                <span class="hljs-keyword">if</span> g <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> temp:  <span class="hljs-comment"># 跳过已存在的基因片段（发生在插入基因片段之后的位置）</span>
+                    new.append(g)
+                n += <span class="hljs-number">1</span>
+        <span class="hljs-keyword">return</span> np.array(new)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">evolution</span><span class="hljs-params">(self)</span>:</span>  <span class="hljs-comment"># 进化</span>
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(self.iter):  <span class="hljs-comment"># 迭代次数</span>
+            <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> range(self.killnum):  <span class="hljs-comment"># 杀死后20个个体</span>
+                self.kill2()  <span class="hljs-comment"># 物竞天择，适者生存，杀死一些较差的个体</span>
+            <span class="hljs-comment"># print("杀死完个体数", self.population_size)</span>
+            self.breed()  <span class="hljs-comment"># 开始繁殖  繁殖到达种群数量即停止</span>
+            <span class="hljs-comment"># print("繁殖完个体数", self.population_size)</span>
+            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(self.population_size):
+                self.population[j] = self.mutate(self.population[j])  <span class="hljs-comment"># 突变</span>
+            best_f_index = np.argmax(self.fitness)  <span class="hljs-comment"># 当前最好适应值的位置</span>
+            self.best_route = self.population[best_f_index]
+            self.best_dist = self.get_distance(self.best_route)
+            print(<span class="hljs-string">'迭代次数：%d,最优距离：%s'</span> % (i, self.best_dist))
+        self.draw(self.best_route)
+        print(<span class="hljs-string">"最佳路线："</span>, [self.city[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> self.best_route])
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(self, best)</span>:</span>  <span class="hljs-comment"># 绘图方法</span>
+        result_x = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> range(self.city_num + <span class="hljs-number">1</span>)]
+        result_y = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> range(self.city_num + <span class="hljs-number">1</span>)]
+
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(self.city_num):
+            result_x[i] = self.city_x[best[i]] * <span class="hljs-number">8</span> - <span class="hljs-number">575</span>
+            result_y[i] = (<span class="hljs-number">376</span> - self.city_y[best[i]] * <span class="hljs-number">8</span> + <span class="hljs-number">65</span>) * <span class="hljs-number">1.2</span>
+        result_x[self.city_num] = result_x[<span class="hljs-number">0</span>]
+        result_y[self.city_num] = result_y[<span class="hljs-number">0</span>]
+        <span class="hljs-comment"># print(result_x)</span>
+        <span class="hljs-comment"># print(result_y)</span>
+        img = Image.open(<span class="hljs-string">"./map.jpg"</span>)
+        plt.figure(<span class="hljs-string">"map"</span>)
+        plt.imshow(img)
+        plt.plot(result_x, result_y, marker=<span class="hljs-string">'o'</span>, mec=<span class="hljs-string">'r'</span>, mfc=<span class="hljs-string">'w'</span>, label=<span class="hljs-string">u'Route'</span>)
+        plt.legend()  <span class="hljs-comment"># 让图例生效</span>
+        plt.margins(<span class="hljs-number">0</span>)
+        plt.subplots_adjust(bottom=<span class="hljs-number">0.15</span>)
+        plt.xlabel(<span class="hljs-string">u"x"</span>)  <span class="hljs-comment"># X轴标签</span>
+        plt.ylabel(<span class="hljs-string">u"y"</span>)  <span class="hljs-comment"># Y轴标签</span>
+        plt.title(<span class="hljs-string">"TSP best:%05.3f iter:%d pop:%d kill:%d p:%d%%"</span> % (self.best_dist, self.iter, self.max_population_size, self.killnum, self.crossover_rate*<span class="hljs-number">100</span>))  <span class="hljs-comment"># 标题</span>
+        plt.show()
+        plt.close(<span class="hljs-number">0</span>)
+
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+    np.set_printoptions(threshold=<span class="hljs-number">1e6</span>)  <span class="hljs-comment"># 设置打印数量的阈值</span>
+    tsp = GA()
+    tsp.evolution()
+    <span class="hljs-comment">#print(tsp.fitness)</span></code></pre>
+<h1 id="5-实验验证："><a href="#5-实验验证：" class="headerlink" title="5.实验验证："></a>5.实验验证：</h1><p>实验选取全国34个省、市、自治区的省会城市作为样本，根据地图描绘出其大概坐标位置。使用遗传算法求取最短路径，并将其绘制在地图上。实验中动态调整交叉概率、种群大小、每次迭代杀死个体的数目。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">实验编号</th>
+<th style="text-align:center">交叉概率</th>
+<th style="text-align:center">种群大小</th>
+<th style="text-align:center">杀死数目</th>
+<th style="text-align:center">迭代次数</th>
+<th style="text-align:center">最优解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0.85</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">200</td>
+<td style="text-align:center">238</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0.7</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">200</td>
+<td style="text-align:center">217</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0.9</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">300</td>
+<td style="text-align:center">201</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">0.8</td>
+<td style="text-align:center">100</td>
+<td style="text-align:center">40</td>
+<td style="text-align:center">500</td>
+<td style="text-align:center">176</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="实验1："><a href="#实验1：" class="headerlink" title="实验1："></a><strong>实验1：</strong></h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjujm507ppj30hs0dcadd.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="实验2："><a href="#实验2：" class="headerlink" title="实验2："></a><strong>实验2：</strong></h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjujm5jo5nj30hs0dcn0g.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="实验3："><a href="#实验3：" class="headerlink" title="实验3："></a><strong>实验3：</strong></h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjujm3uls7j30hs0dc0w0.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="实验4："><a href="#实验4：" class="headerlink" title="实验4："></a><strong>实验4：</strong></h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gjujm4i2oej30hs0dc41p.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>最短距离：176.056</strong> [‘天津’, ‘石家庄’, ‘呼和浩特’, ‘太原’, ‘西安’, ‘银川’, ‘兰州’, ‘西宁’, ‘乌鲁木齐’, ‘拉萨’, ‘成都’, ‘重庆’, ‘贵阳’, ‘昆明’, ‘南宁’, ‘海口’, ‘澳门’, ‘广州’, ‘香港’, ‘台北’, ‘福州’, ‘杭州’, ‘上海’, ‘南京’, ‘合肥’, ‘南昌’, ‘长沙’, ‘武汉’, ‘郑州’, ‘济南’, ‘沈阳’, ‘长春’, ‘哈尔滨’, ‘北京’]</p>
+<h1 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h1><p><a href="https://blog.csdn.net/jiang425776024/article/details/84532018" target="_blank" rel="noopener">https://blog.csdn.net/jiang425776024/article/details/84532018</a><br>        <a href="https://blog.csdn.net/u010451580/article/details/51178225" target="_blank" rel="noopener">https://blog.csdn.net/u010451580/article/details/51178225</a><br>        <a href="https://blog.csdn.net/woaixuexihhh/article/details/83826256" target="_blank" rel="noopener">https://blog.csdn.net/woaixuexihhh/article/details/83826256</a><br>        <a href="https://blog.csdn.net/sinat_31184961/article/details/85218294" target="_blank" rel="noopener">https://blog.csdn.net/sinat_31184961/article/details/85218294</a><br>        <a href="https://www.cnblogs.com/pengsixiong/p/4823473.html" target="_blank" rel="noopener">https://www.cnblogs.com/pengsixiong/p/4823473.html</a></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/TSP/">TSP</a>
+                    
+                      <a class="hover-with-bg" href="/tags/GA/">GA</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/10/19/minist/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">深度学习作业：MINIST多层感知机分类</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/10/16/10-16/">
+                        <span class="hidden-mobile">阅读笔记（10.16)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "计算智能作业:用遗传算法解决旅行商问题&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

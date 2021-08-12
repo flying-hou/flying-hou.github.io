@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>阅读笔记（2.28) - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-02-28 10:00">
+      2021年2月28日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      22
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年3月20日 晚上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h1 id="1-CenterNet-Heatmap-propagation-for-Real-time-Video-Object-Detection"><a href="#1-CenterNet-Heatmap-propagation-for-Real-time-Video-Object-Detection" class="headerlink" title="1.CenterNet Heatmap propagation for Real-time Video Object Detection"></a>1.CenterNet Heatmap propagation for Real-time Video Object Detection</h1><p>本文介绍了一种基于CentNet One-Stage检测器的方法。以<strong>heatmap的形式传播</strong>之前可依赖的长程检测，来加速未来图像的结果。</p>
+<h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h1><p>此前的视频目标检测方法大多是基于Two-Stage检测器的，直接在已有的时间信息聚合方法上应用One-Stage检测器困难很大，或者不可行。因为One-Stage和Two-Stage的目标边界框表示大大不同，一些方法通过对ROI池化过的特征进行操作，然而其在One-stage方法中并不存在。</p>
+<p>本文提出了一种热图传播方法，来高效的解决视频目标检测问题。该方法基于一个One-Stage检测器：CenterNet，其对一张图像的不同类别输出所检测到的所有目标的中心点的热图。</p>
+<p>对于视频中的一帧，将稳定的、可检测到的目标转移到一个propagation heatmap，在这张热图中，用其对应类的置信度分数来高亮每个目标中心的潜在位置。对于下一帧，考虑propagationrequest和网络输出的热图，生成一张平衡的热图。这与为每个目标生成一个在线的跟踪小片段类似，此外根据每一帧的检测结果更新置信度分数。</p>
+<h2 id="2-Related-work"><a href="#2-Related-work" class="headerlink" title="2.Related work"></a>2.Related work</h2><p>CornerNet检测目标边界框的关键点，例如顶点或中心点。网络的输出是关键点的热图和一些用于偏移的回归值，或者是依赖于不同结构的原始边界框尺寸。</p>
+<h2 id="3-Proposed-Method"><a href="#3-Proposed-Method" class="headerlink" title="3.Proposed Method"></a>3.Proposed Method</h2><h3 id="3-1-CenterNet"><a href="#3-1-CenterNet" class="headerlink" title="3.1 CenterNet"></a>3.1 CenterNet</h3><p>CenterNet是一个基于heatmap的one-stage检测器，其预测目标的中心位置和目标的尺寸。若某个像素点对应目标的中心，则为1，否则对应背景，为0。此外，网络预测一个局部偏移O来恢复输出步长引起的离散误差、以及一个回归S，用于目标尺寸回归。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gn362kh8jej31a60mwdlq.jpg" srcset="/img/loading.gif" alt="image-20210128094659101"></p>
+<p>如图1所示，整个网络包含3个内容：一个普通的卷积网络Nfeat，如ResNet，从输入图像提取特征图。一个反卷积网络Ndecv，由3x3的变形卷积层DCL和up conv层组成。最后有三个分离的头部 Nhead，共享相同的backbone特征图，输出Y、O、S。<img src="https://tva1.sinaimg.cn/large/008eGmZEly1gn36efkcz2j309y024t8p.jpg" srcset="/img/loading.gif" alt="image-20210128095825840" style="zoom:33%;" />表示某像素点是否是目标中心，O是局部偏移，S用于回归目标尺寸。</p>
+<p>由于计算开销的原因，所有的类共享相同的偏移预测和目标尺寸，因此，网络最终的输出尺寸是WxHx(C+4)。</p>
+<h3 id="3-2-Heatmap传播"><a href="#3-2-Heatmap传播" class="headerlink" title="3.2 Heatmap传播"></a>3.2 Heatmap传播</h3><p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gn36rj1qu6j318x0u0b29.jpg" srcset="/img/loading.gif" alt="image-20210128101100310"></p>
+<p>传播过程：将输出热图的面积扩大为$(2P+1)^2$,并将不同目标的热图合并为一张热图，并通过公式5和6进行热图传播。在估计边界框尺寸时，使用等式7而不是等式5，不包含跟踪长度，原因是目标的尺寸会随着时间而改变（相机和目标之间有相对位移）。在这里仅使用之前帧和当前帧进行估计。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><h3 id="创新点："><a href="#创新点：" class="headerlink" title="创新点："></a>创新点：</h3><ul>
+<li>将One-Stage检测器CenterNet用于视频目标检测</li>
+<li>以热图的形式传播先前帧的检测结果（而不是特征图）</li>
+<li>由于One-Stage检测器的先天优势，该方法的速度较快，为37FPS，达到实时</li>
+</ul>
+<h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3><ul>
+<li>该方法的mAP为76.7%，而基于Two-Stage的方法精度在82%左右</li>
+<li>检测精度相比基于Two-Stage的检测器还有一定差距</li>
+</ul>
+<h1 id="2-Single-Shot-Video-Object-Detector"><a href="#2-Single-Shot-Video-Object-Detector" class="headerlink" title="2.Single Shot Video Object Detector"></a>2.Single Shot Video Object Detector</h1><p>本文所提出的SSVD，使用one-stage检测器进行特征聚合，使用特征金字塔网络FPN作为backbone，产生多尺度的特征。SSVD一方面估计运动，沿着运动路径聚合相邻帧的特征，另一方面在一个“双流结构”中直接从相邻帧采样特征。</p>
+<p>Sampling Stream:通过self-guided从相邻帧采样，直接生成特征。</p>
+<p>当目标因运动模糊或遮挡造成了表观退化，Sampling Stream比motion Stream有效。</p>
+<p>当目标快速运动时，Sampling Stream不能精确的定位目标。这是由于Sampling Stream的感受野比光流生成更小。因此，Sampling Stream的运动估计范围比运动流更短。导致Sampling Stream在目标快速运动时无法捕捉运动。</p>
+<p>最终，作者将两者结合，同时利用运动校准和self-guided采样，即采用一个双流特征聚合结构进行视频目标检测。此外，作者将single shot 目标检测框架整合到特征聚合中，更适用于计算敏感的视频场景。</p>
+<p>SSVD包含三个核心模块：</p>
+<ol>
+<li>特征金字塔网络（FPN）</li>
+<li>双流特征聚合结构</li>
+<li>class/box子网络</li>
+</ol>
+<p>FPN用于输出多尺度特征图，金字塔的每张特征图被喂给双流特征聚合结构。第一个是motion Stream，根据光流估计帧间目标位移，并沿着运动路径扭曲相邻帧的特征图到参考帧。另一个是Sampling Stream，通过可变形卷积对相邻帧的时空特征进行采样，直接产生参考帧的特征图。每个流聚合过的特征图被输入到class/box子网络，进行anchor box的分类、回归anchor box到ground truth目标框。最终的结果是两个流中所有特征映射的混合输出。整个SSVD通过最小化框分类的Focal Loss和框回归的标准平滑L1损失进行端到端的训练。</p>
+<p>本文的主要贡献是提出了一个one-stage检测器SSVD用于解决视频目标检测问题。SSVD一方面利用single-shot检测器的优点（比two-stage更简单、更快）,另一方面利用帧间时间一致性来加速检测。</p>
+<p>SSVD属于feature-level聚合方法，创新点是探索利用双流特征聚合（motion和sampling流）。motion流通过光流和扭曲相邻帧的特征图来估计运动，执行特征聚合。sampling流通过从相邻帧进行时空采样，直接获得参考帧的特征图。</p>
+<h2 id="Motion-Stream"><a href="#Motion-Stream" class="headerlink" title="Motion Stream"></a>Motion Stream</h2><p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpkumlysj315w0oswnx.jpg" srcset="/img/loading.gif" alt="image-20210320215016113"></p>
+<p>首先使用PWC-Net预测每个尺度的光流（由FPN得到），之后在光流的指导下执行motion-aware校准（通过双线性扭曲）。文中介绍PWC-Net光流提取法尺寸更小，更容易训练。在得到所有支持帧的校准过的特征图后，在每个尺度上对其求平均。</p>
+<h2 id="Sampling-Stream"><a href="#Sampling-Stream" class="headerlink" title="Sampling Stream"></a>Sampling Stream</h2><p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpl32cszj31200t6qf2.jpg" srcset="/img/loading.gif" alt="image-20210320215031317"></p>
+<p>用self-guided采样，直接通过从支持帧采样获取特征。变形卷积比标准卷积多了一个2D偏移，2D偏移通过输入特征自己计算得到，没有额外的监督。在本文中，作者将标准变形卷积增加了空间采样位置，只以一个特征图为条件，来测量参考帧和支持帧之间的变形。换句话说，sampling Stream的特征聚合模块，通过输入帧的2D偏移学习预测参考帧和支持帧之间潜在的相关性，没有用到光流。</p>
+<h1 id="3-A-Delay-Metric-for-Video-Object-Detection-What-Average-Precision-Fails-to-Tell"><a href="#3-A-Delay-Metric-for-Video-Object-Detection-What-Average-Precision-Fails-to-Tell" class="headerlink" title="3.A Delay Metric for Video Object Detection: What Average Precision Fails to Tell"></a>3.A Delay Metric for Video Object Detection: What Average Precision Fails to Tell</h1><p>Average Precision（AP）被广泛用于评估图像和视频目标检测器的检测精度。但是只用AP不足以捕捉视频目标检测自然存在的时间信息。本文提出了一个综合的度量方法：Average delay(AD)，来度量和对比检测延时。为了便于延迟计算，我们仔细地选择了ImageNet VID的一个子集，我们将其命名为ImageNet VIDT，并强调了复杂的轨迹。通过在VIDT上广泛评估检测器，我们表明大多数方法大幅度增加了检测延迟，但仍然保持较高的AP。换句话说，<strong>AP不够灵敏，无法反映视频目标检测器的时间特征。</strong>作者认为视频目标检测方法应该加上用delay metric进行评估，特别是一些不能容忍延时的应用场景：如自动驾驶。</p>
+<h4 id="创新点：-1"><a href="#创新点：-1" class="headerlink" title="创新点："></a>创新点：</h4><ul>
+<li>针对视频目标检测问题，提出了一种新的度量方式Average delay(AD)</li>
+</ul>
+<h4 id="缺点：-1"><a href="#缺点：-1" class="headerlink" title="缺点："></a>缺点：</h4><ul>
+<li>Average delay(AD)不能很好地支持现有数据集（如ImageNet VID）</li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CHP/">CHP</a>
+                    
+                      <a class="hover-with-bg" href="/tags/SSVD/">SSVD</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Delay-metric/">Delay metric</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/12/3-12/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">阅读笔记（3.12)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/20/2-20/">
+                        <span class="hidden-mobile">阅读笔记（2.20)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "阅读笔记（2.28)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

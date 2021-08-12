@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>FCOS阅读笔记 - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-10-04 21:40">
+      2020年10月4日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      36
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年10月4日 晚上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>提出了一个全卷积one-stage目标检测器——FCOS，以逐像素的方式解决目标检测，类似语义分割。目前所有最先进的目标检测器依赖预定义的Anchor Boxes。相比之下，我们所提出的FCOS是anchor box free、proposal free的。通过消除预定义的anchor box集合，FCOS完全避免了anchor box相关的计算，例如在训练期间计算重叠率。更重要的是，我们避免了与anchor box相关的所有超参数，它们对检测性能非常敏感。仅仅通过非极大值抑制的后处理，FCOS在单模型单尺度测试中达到了44.7%的AP。因其更简单，超过了之前的one-stage检测器。第一次，我们展示了一个更加简单和灵活的检测框架，提高了检测精度。</p>
+<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h1><p>目标检测是计算机视觉中一个基础而有挑战性的任务，需要算法为图片中每一个实例预测一个边界框和一个类别标签。当前所有主流检测器（例如Faster R-CNN、SSD、YOLO）都依赖于一个预定义的anchor boxes集合，一直以来人们相信使用anchor box是检测器成功的关键。尽管他们很成功，但了解基于anchor的检测器的缺点也很重要：</p>
+<p>1)检测性能对anchor boxes的尺寸、长宽比、数量敏感。例如RetinaNet将超参数改变，在COCO上提高了4%的AP。因此基于anchor的检测器的超参数需要被仔细调整。</p>
+<p>2）即使很仔细的设计，检测器在候选目标形状出现大变化，特别是小目标时会遭遇困难，因为anchor boxes的尺寸和长宽比保持固定。预定义的anchor boxes也会妨碍检测器的泛化能力，因为在不同的目标尺寸或长宽比的新检测任务上，anchor需要被重新设计。</p>
+<p>3）为了实现高召回率，基于anchor的检测器需要在输入图像上密集的放置anchor box。（例如FPN上一张短边为800的图片有超过180K个anchor boxes）。这些anchor box在训练时绝大多数被标注为负样本。过多的负样本加重了训练期间的正负样本不平衡。</p>
+<p>4）Anchor box包含复杂的计算，例如计算和ground-truth bbox之间的IoU。</p>
+<p>最近全卷积网络在注入语义分割、深度估计、关键点检测等密集预测任务上取得巨大成功。作为高等级视觉任务之一，目标检测或许是唯一一个偏离了优雅的全卷积逐像素预测框架，主要是因为使用了anchor boxes。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj7cdhiu4gj30dr0cyqbi.jpg" srcset="/img/loading.gif" alt="image-20200929110602589"></p>
+<p>如图1左所示，4维向量描述了边界框的四条边的相对偏移量。图1右显示了高度重叠的边界框导致了棘手的模棱两可：在重叠区域中的像素中，不知道该回归哪个哪个边界框。</p>
+<p>为了压制低质量检测器，我们引入了一个新奇的“Center-ness”分支（仅仅一层）来预测某个像素与其对应bbox中心点的偏移。这个评分被用于降低检测到的低质量的边界框的权重，并且在NMS中合并检测结果。这个简单高效的centerness分支，使得基于FCN的检测器比基于anchor的检测器效果更好。</p>
+<p>新的检测框架有如下优点：</p>
+<ul>
+<li>检测现在已经与许多其他fcn可解决的任务(如语义分割)统一起来，使重用这些任务中的思想变得更加容易。</li>
+<li>检测变为proposal free和anchor free，显著降低了设计参数的数量。为了实现高性能，设计参数通常需要启发式调节并涉及许多技巧。因此，我们新的检测器结构，使检测器，特别是训练，变的非常简单。</li>
+<li>通过消除anchor boxes，我们的新检测器完全避免了anchor boxes相关的复杂计算，例如在训练期间的IoU计算和匹配anchor box和ground truth box，导致更快的训练和测试，同时减少训练期间内存用量。</li>
+<li>我们还表明，所提出的FCOS可以作为两级检测器的区域建议网络(RPNs)，并显著优于基于Anchor的RPN。anchor-free检测器更简单并且性能高，我们建议社区重新考虑目标检测中anchor box的必要性，虽然目前anchor被认为是检测的实际标准。</li>
+<li>所提出的检测器通过很小的修改就能立即扩展到解决其他视觉任务，包括实例分割和关键点检测。我们相信这种新方法可作为许多实例预测问题的新baseline。</li>
+</ul>
+<h1 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2. Related Work"></a>2. Related Work</h1><ul>
+<li>基于Anchor的检测器：<ul>
+<li>使用CNN的特征图，避免重复计算特征</li>
+<li>需要过多的超参数来描述anchor的形状和标注每个anchor box是否为正负样本(通常使用IoU)</li>
+<li>超参数对最终精度影响很大，需要被启发式调节。超参数是特定于检测任务的，使得检测任务从优雅的全卷积网络结构（被用于密集预测任务，如语义分割）中分离出来。</li>
+</ul>
+</li>
+<li>Anchor free的检测器：<ul>
+<li>YOLOv1(Anchor free）:只在目标中心点预测边界框，召回率低。</li>
+<li>YOLOv2重新启用anchor box。</li>
+<li>FCOS利用ground-truth中所有点来预测边界框，使用”center-ness“分支压制检测到的低质量边界框。</li>
+<li>CornerNet(One-stage、AnchorFree）：通过检测一对bbox的边角点，并将他们分组以形成最终的检测结果。CornerNet需要复杂的后处理来对属于相同实例的边角点分组。需要为分组学习一个额外的距离度量。</li>
+<li>DenseBox系列：不适用于通用目标检测（由于处理重叠的bbox比较困难）且召回率低。本文表明，这些问题可以使用多等级的FPN大大减轻。</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-Our-Approach"><a href="#3-Our-Approach" class="headerlink" title="3. Our Approach"></a>3. Our Approach</h1><p>本部分首先在逐像素预测方式下修订目标检测。其次展示了我们如何使用多等级的预测来提高召回率、解决由重叠bbox造成的模棱两可的结果。</p>
+<h2 id="3-1-全卷积One-stage检测器"><a href="#3-1-全卷积One-stage检测器" class="headerlink" title="3.1 全卷积One-stage检测器"></a>3.1 全卷积One-stage检测器</h2><p>我们的检测器直接回归bbox，将这些位置看作训练样本（而不是anchors),这与用于语义分割的FCN相同。</p>
+<p>如果某个位置(x,y)在任一ground-truth box中，那么将其看为正样本，c*为其类别标签，c*=0表示其为负样本（背景）。4维的实向量t* = {l*,t*,r*,b*}是位置回归目标，里面的元素是从该位置到bbox四条边的距离。如果某个位置有多个边界框，那么将其看为模棱两可的样本，简单的选择最小区域的边界框作为回归目标。下一部分介绍的多等级预测将显著减少模棱两可样本的数量。</p>
+<p>值得注意，FCOS利用尽可能多的前景样本来训练回归器。这与基于anchor的检测器不同，它们仅将与GT的IoU足够高的样本看为正样本。这也是FCOS比基于anchor的检测器出色的原因之一。</p>
+<p><strong>网络输出</strong>：80维的分类标签向量p、4维的边界框坐标向量t={l,t,r,b}。我们训练C个二维分类器，而不是一个多类分类器。我们在backbone网络的特征图之后为每个类别和回归分支增加4个卷积层。我们在回归分支顶部采用exp(x)，因为回归目标总是正的。值得注意的是：FCOS比基于anchor的检测器的输出变量少了9倍。</p>
+<p><strong>损失函数：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj79fdp92sj30bp07mq3q.jpg" srcset="/img/loading.gif" alt="image-20200929092402094"></p>
+<p><strong>推理</strong>：FCOS的推理过程直截了当，将输入图像放入网络前向传播，并获得类别评分p<sub>x,y</sub>和回归预测tx,y（在特征图Fi的每一个位置）。将评分p<sub>x,y</sub>&gt;0.05的位置作为正样本。</p>
+<h2 id="3-2-用FPN为FCOS进行多等级预测"><a href="#3-2-用FPN为FCOS进行多等级预测" class="headerlink" title="3.2 用FPN为FCOS进行多等级预测"></a>3.2 用FPN为FCOS进行多等级预测</h2><p>这里我们表明所提出的FCOS的两个可能的问题如何通过使用FPN多等级预测被解决。</p>
+<p>1）CNN最终特征图的大步长（例如16）会导致相对低的BPR(best possible recall)。即使步长很大，基于FCN的FCOS仍人能产生一个好了BPR，比基于anchor的BPR更好。因此BPR确实不是FCOS的问题。通过多等级的FPN预测，BPR能被进一步的提高来匹配基于anchor的RetinaNet的最好BPR。</p>
+<p>2）ground-truth boxes的重叠能导致棘手的模棱两可问题，重叠的位置应该回归哪个边界框？这个模棱两可导致基于FCN的检测器性能退化。本文表明该问题可被多等级预测很好的解决，</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj7aewdwh8j30nq0aggns.jpg" srcset="/img/loading.gif" alt="image-20200929095812380"></p>
+<p>追随FPN，我们在不同等级的特征图上检测不同尺寸的目标。P3-P7是用于最终预测的特征等级，P3-P5由backboneCNN的特征图产生（使用一个自顶向下的1x1的卷积层）。P6/P7分别通过在P5/P6上应用一个步长为2的卷积层产生。P3 P4 P5 P6 P7分别有8、16、32、64、128的步长。</p>
+<p>与基于Anchor的检测器不同（它们为不同的特征层级分配不同尺寸的anchor），我们直接限制了每个层级上bbox回归的范围。具体来说，我们首先为所有特征层级上每个位置计算l*,t*,r*,b*。如果某个位置满足max(l,t,r,b)&gt;mi 或 max(l,t,r,b)&lt;mi-1,就将其设为一个负样本，不再需要回归边界框。这里mi是该特征层级上需要去回归的最大距离。在本工作中m2,m3,m4,m5,m6,m7分别为0,64,128,256,512,∞。因为不同尺寸的目标被分配到不同的特征层级，并且许多目标重叠发生在不同的目标尺寸之间。如果某个位置，即使使用了多层级预测，仍然被分配了多于一个的GT box，我们就简单的选择最小区域的ground-truth box作为其目标。我们的实验表明，多层级预测可以大大缓解此前提到的模棱两可问题，并提高基于FCN的检测器的性能到基于anchor的检测器的同级别性能。</p>
+<p>我们共享不同特征层级的头部，不仅使检测器参数更高效，而且提升了检测器性能。我们观察到不同的特征层级需要回归不同的尺寸范围（例如P3的范围是[0,64],P4的范围是[64,128])，一次为不同特征层级使用相同的头部不合理。因此，我们摒弃标准的指数函数exp(x),使用exp(s<sub>i</sub>x)（有一个可训练的标量si）来自动的调整特征层级i的指数函数的基，这轻微提高了检测性能。</p>
+<h2 id="3-3-Center-ness"><a href="#3-3-Center-ness" class="headerlink" title="3.3 Center-ness"></a>3.3 Center-ness</h2><p>在FCOS上使用多层级的预测之后，FCOS的性能依然与基于Anchor的检测器有很大代沟。我们观察到这是因为许多位置预测的低质量的边界框远离目标的中心点。</p>
+<p>我们提出了一个简单但高效的策略来压制检测到的低质量边界框，没有引入任何超参数。具体来说，我们增加了一个与分类分支并行的单层分支来预测一个位置的”center-ness”。center-ness描述了该位置到目标中心点位置的正规化距离。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj7by4hduhj30an020weg.jpg" srcset="/img/loading.gif" alt="image-20200929105116976"></p>
+<p>使用开方来减慢center-ness的衰减，center-ness的范围为0-1，使用二进制交叉熵损失训练。在测试时最终评分（用于排列检测到的边界框）通过将预测到的center-ness与相对应的类别评分相乘得到。<strong>center-ness可以减少远离目标中心点的边界框的权重分数。</strong>因此，在最终的非极大值抑制过程中，这些低质量的边界框有很大概率被过滤掉，从而显著提高检测器的性能。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gj7cc923xij30dj0eptds.jpg" srcset="/img/loading.gif" alt="image-20200929110451262"></p>
+<h1 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4. Experiments"></a>4. Experiments</h1><p>略</p>
+<h1 id="5-在Region-Proposal-网络上的扩展"><a href="#5-在Region-Proposal-网络上的扩展" class="headerlink" title="5. 在Region Proposal 网络上的扩展"></a>5. 在Region Proposal 网络上的扩展</h1><p>我们已经表明在one-stage检测器是，我们的FCOS比基于anchor的检测器能实现更好的性能。直觉上，FCOS也应该能替代Region Proposal 网络（RPNs）中的anchor box。我们用实验给出了证明。</p>
+<h1 id="6-Conclusion"><a href="#6-Conclusion" class="headerlink" title="6. Conclusion"></a>6. Conclusion</h1><p>我们提出了一个anchor-free、proposal-free的one-stage检测器：FCOS。正如实验中所表明的，FCOS与机遇anchor的one-stage检测器相比更胜一筹，包括RetinaNet、YOLO、SSD，同时设计更简单。FCOS完全避免了所有关于anchor box的计算和超参数，并且以逐像素预测的方式解决目标检测，类似于语义分割等稠密预测任务。FCOS也在one-stage检测器中达到了最先进的性能。我们还表明FCOS能被用于two-stage检测器Faster R-CNN的RPN，并且比其RPN的性能有了很大提高。鉴于其有效性和效率，我们希望FCOS可作为当前主流基于anchor检测器的一种强大而简单的替代。我们也相信FCOS能被扩展到解决许多其他实例级识别任务。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/FCOS/">FCOS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/10/07/ssh/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">设置ssh远程端口转发，实现内网穿透</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/09/29/CornerNet/">
+                        <span class="hidden-mobile">CornerNet阅读笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "FCOS阅读笔记&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

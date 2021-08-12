@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>阅读笔记（3.19) - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-03-19 10:00">
+      2021年3月19日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      46
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年3月20日 晚上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h2 id="阅读论文："><a href="#阅读论文：" class="headerlink" title="阅读论文："></a>阅读论文：</h2><p>[1] Tang P, Wang C, Wang X, et al. Object detection in videos by high quality object linking[J]. IEEE transactions on pattern analysis and machine intelligence, 2019, 42(5): 1272-1278.</p>
+<p>[2] Geng Q, Zhang H, Jiang N, et al. Object-aware Feature Aggregation for Video Object Detection[J]. arXiv preprint arXiv:2010.12573, 2020.</p>
+<p>[3] Zheng Z, Wang P, Liu W, et al. Distance-IoU loss: Faster and better learning for bounding box regression[C]//Proceedings of the AAAI Conference on Artificial Intelligence. 2020, 34(07): 12993-13000.</p>
+<p>[4] Han W, Khorrami P, Paine T L, et al. Seq-nms for video object detection[J]. arXiv preprint arXiv:1602.08465, 2016.</p>
+<h1 id="1-Object-detection-in-videos-by-high-quality-object-linking"><a href="#1-Object-detection-in-videos-by-high-quality-object-linking" class="headerlink" title="1. Object detection in videos by high quality object linking"></a>1. Object detection in videos by high quality object linking</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>此前的方法大都在相邻帧关联目标，本文首次提出在同一帧内关联目标。与其他方法不同，作者在相同帧连接目标，并且跨帧传播box分数，而非传播特征。</p>
+<p>本文创新点：</p>
+<ol>
+<li>提出了一个cuboid proposal network(CPN,立方体提议网络),提取约束物体运动的时空候选长方体。</li>
+<li>提出了一个短的tubelet detection网络，在短视频中监测short tuubelets。</li>
+<li>提出了一个短的tubelet连接算法，连接有时间重叠的short tubelets来形成长的tubelets。</li>
+</ol>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h4 id="不使用Object-Linking进行特征传播"><a href="#不使用Object-Linking进行特征传播" class="headerlink" title="不使用Object Linking进行特征传播"></a>不使用Object Linking进行特征传播</h4><p>FGFA STSN STMN MANet:当前帧的特征通过聚合来自其他相邻帧的特征进行增强，FGFA和MANet使用光流来对齐不同帧的特征，进而聚合。STSN使用变形卷积网络跨时空传播特征。STMN采用Conv-GRU来从相邻帧传播特征。此外，DFF也利用特征传播来加速目标检测。作者提出用非常深的高代价网络来计算关键帧的特征，从而将其通过shallow计算出的光流传播到非关键帧。以上这些方法都没有使用Object Linking。</p>
+<h4 id="使用Object-Linking进行特征传播"><a href="#使用Object-Linking进行特征传播" class="headerlink" title="使用Object Linking进行特征传播"></a>使用Object Linking进行特征传播</h4><p>Tubelet Proposal Network首先生成静态的目标proposals，进而预测之后帧的相对位移。tubelets中box的特征通过使用CNN-LSTM网络传播到每个box用于分类。MANet为当前真的每个proposal预测相邻帧的相对位移，相邻帧box的特征通过平均池化被传播到当前帧对应box。与这些方法不同，作者在相同帧连接目标，并且跨帧传播box分数，而非传播特征。此外，作者的方法直接为视频片段生成时空cuboid proposals，而非像Tubelet Proposal Network和MANet一样生成逐帧proposal。</p>
+<h4 id="使用Object-Linking进行分数传播"><a href="#使用Object-Linking进行分数传播" class="headerlink" title="使用Object Linking进行分数传播"></a>使用Object Linking进行分数传播</h4><p>Object detection from video tubelets witth convolutional neural networks.(Object Linking）<br>T-CNN:Tubelets with convolutional neral networks for object from videos(Object Linking)</p>
+<p>以上两篇文章提出了两种Object Linking方法。第一种跟踪当前帧检测到的box到其相邻帧来用更高的召回率增强其原始的检测结果。分数也被传播来提升分类精度。这种连接是基于box内的平均光流向量。第二种使用跟踪算法连接目标和long tubelet，之后采用分类器来聚合tubelets中的检测分数。</p>
+<p>Seq-NMS方法通过选择相邻帧box的空间重叠小来连接目标，不考虑运动信息，之后聚合所连接目标的分数作为最终的分数。Detect to track and track to detect中的方法同时预测两帧的目标位置，以及从前一帧到后一帧的目标位移。之后使用位移来连接检测到的目标和tubelets。相同tubelet的检测分数通过一些方式重新加权。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>视频目标检测的任务是：推断出视频每一帧目标的位置和类别。为了得到高质量的目标连接，作者提出在相同的帧连接目标，这可以提升分类精度。</p>
+<p>给出被分割成具有时间重叠的视频片段作为输入，作者的方法由3步组成：</p>
+<ol>
+<li>为一个片段生成立方体proposal。这一步旨在生成一组立方体（容器）来约束不同帧的相同目标。</li>
+<li>为一个小片段执行Short tubelet detection。对于每个立方体proposal，回归和分类产生<strong>short tubelet（是边界框的序列，每个边界框定位一帧的目标位置）</strong>空间重叠的short tubelet通过tublet非极大值抑制移除。short tubelet是在视频片段中不同帧连接过的目标的一种表示。</li>
+<li>对整个视频进行short tubelet linking。这一步将具有时间重叠的片段的目标连接起来，并且优化连接过的tubelets的分类分数。</li>
+</ol>
+<p>其中，前两步cuboid proposal generation和short tubelet detection生成时间重叠的short tubelets，从而确保可以在short tubelet linking 这一步进行连接。</p>
+<h3 id="1-Cuboid-Proposal-Generation"><a href="#1-Cuboid-Proposal-Generation" class="headerlink" title="1.Cuboid Proposal Generation"></a>1.Cuboid Proposal Generation</h3><p>Tubelet:一组ground turth box的集合。</p>
+<p>Cuboid：我的理解是一组相同的bbox的集合，用来约束目标的位移。在cuboid中的不同帧的目标被看成相同的目标。</p>
+<p>作者那个Faster R-CNN的 Region Proposal Network修改为 Cuboid Proposal Network。RPN的输入是单张图像，CPN的输入是K帧图像。输出whk个cuboid proposals，其中有wxh个空间网格，其中每个位置有k个参考boxes。每个cuboid proposal都与一个客观评分关联。</p>
+<h3 id="2-Short-Tubelet-Detection"><a href="#2-Short-Tubelet-Detection" class="headerlink" title="2.Short Tubelet Detection"></a>2.Short Tubelet Detection</h3><p>作者采用Cuboid Proposal的二维形式，作为视频片段每一帧的2Dbox(区域)proposal，对每一帧分别进行分类和细化。（就是说，类似RPN生成的proposal是对目标位置的一个粗略回归，这里选择二维的CPN输出作为每一帧的粗略proposal)</p>
+<p>对于视频片段某一帧，作者采用与Fast R-CNN相同的方法来精炼边界框并且计算其分类分数。输入是一个二维的Region Proposal <strong>b</strong>、通过CNN获得的响应图I，之后执行ROI池化操作，ROI池化的结果喂给分类层和回归层，分别产生(C+1)维的分类分数向量、形成精炼后的边界框。</p>
+<p>最终，对K帧分别生成K个精炼过的边界框，即为<strong>Short tubelet detection result。</strong></p>
+<p>为了移除冗余的short tubelets，作者将标准的非极大值抑制方法(NMS)扩展为Tubelet-NMS（T-NMS)来移除位置重叠的short tubelets。（与单张图像类似，若没有NMS会有许多重叠的冗余框，作者将标准NMS扩展到Tubelet)这种策略通过助阵NMS独立的为每一帧移除2D框，保证tubelets不被破坏（如果逐帧进行NMS，会打破现有Tubelet)。</p>
+<p>作者依据<strong>相同帧</strong>的边界框IOU来度量两个tubelets的空间重叠度。（此处可能是因为一个视频片段可能产生了多个tubelets，就需要一种方式来度量两个Tubelets的相似性，也就是说只要有一堆边界框没有完全重合，那么这两个tubelets就不相同）</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqq2us9rqj30sa03kgmg.jpg" srcset="/img/loading.gif" alt="image-20210320220736103" style="zoom:50%;" /></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1gojo26cfotj20ri0lu7wh.jpg" srcset="/img/loading.gif" alt="image-20210314193845899" style="zoom:50%;" /></p>
+<h3 id="3-Short-Tubelet-Linking"><a href="#3-Short-Tubelet-Linking" class="headerlink" title="3.Short Tubelet Linking"></a>3.Short Tubelet Linking</h3><p>作者将一段视频分为一系列长度为K帧的具有重叠帧的小片段（步长为K-1），每个小片段分别生成一个tubelet，当不同tubelet的重叠帧(相同帧)的空间重合度高于一个预定义的阈值时，将其连接在一起。</p>
+<p>作者采用了一种贪婪地连接算法：开始时将所有视频片段的short tubelets放到一个池中，并且记录每个tubelet对应的视频片段。然后算法首先从池中选出分类得分最高的short tubelet,计算其重叠帧与其他tubelet的IOU，当IOU大于0.4时，将这两个short tubelets合并为一个长的tubelet，并且移除两个Tubelet的重叠帧中较低的分数，根据等式（2）$Aggregation(·)=\frac{1}{2}(mean(·)+max(·))$计算出新的分类分数。重复以上过程，直到没有tubelet可以合并。</p>
+<p>最终，池中剩余的tubelets形成了视频目标检测的结果。tubelet的分数被分给每一个box。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1gojnwqbrusj20o20e4gxc.jpg" srcset="/img/loading.gif" alt="image-20210314193330219" style="zoom:50%;" /></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本篇论文提出的cuboid proposal network(CPN)让人眼前一亮，其主要思路是将一个长的视频片段分割成一个个短的片段，每个短的片段之间都有一帧重合。之后通过对不同tubelet之间重叠帧进行相似性度量，将多个tubelet连接在一起，并且优化连接过的tubelets的分类分数。</p>
+<p>这种方法与此前的聚合方法有很大不同，此前方法大都集中在选择关键帧与非关键帧，而本文的方法是将长的视频片段分割成小片段。这种思路以后可以借鉴。</p>
+<h3 id="存在的问题："><a href="#存在的问题：" class="headerlink" title="存在的问题："></a>存在的问题：</h3><ul>
+<li>分割片段的长度如何选择？2</li>
+<li>图(b)中出现错误的分类，如何度量其相似性？</li>
+<li>如果某个tubelet与其他的tubelet的IOU都很低怎么办？允许broken links</li>
+</ul>
+<h1 id="2-Object-aware-Feature-Aggregation-for-Video-Object-Detection"><a href="#2-Object-aware-Feature-Aggregation-for-Video-Object-Detection" class="headerlink" title="2.  Object-aware Feature Aggregation for Video Object Detection"></a>2.  Object-aware Feature Aggregation for Video Object Detection</h1><p>本文提出了一个Object-aware Feature Aggregation(OFA)模块，有选择的聚合与proposal相对应的特征。具体来说，输入特征被分为两个部分，并喂给两个路径：语义路径和定位路径。a)语义路径。首先从整个视频的proposal中收集object-aware知识。与此同时，通过计算proposal之间的相似性得到成对的语义上下文。通过聚合以上得到的成对的语义上下文和proposal的object-aware知识，这些特征编码了更多关于其他区域和整个视频的知识。b)定位路径。定位特征也可以通过成对定位上下文来增强。对比于语义路径，作者局部增强这些特征来确保特征对相对位置敏感。</p>
+<h3 id="OFA模块"><a href="#OFA模块" class="headerlink" title="OFA模块"></a>OFA模块</h3><p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpxttymjj315k0hqalg.jpg" srcset="/img/loading.gif" alt="image-20210320220246050"></p>
+<p>给出参考帧和支持帧，使用Faster-rcnn的方式提取proposal。之后将proposal的特征用两个堆叠的OFA模块进行增强。作者设计了两条独立的路径（语义路径和定位路径）来用语义信息和的定位信息增强object-aware feature。在随后的后处理过程中，使用DIoU NMS来进一步提升性能。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><h3 id="创新点："><a href="#创新点：" class="headerlink" title="创新点："></a>创新点：</h3><ul>
+<li>提出OFA模块，分别用两条路径并行的进行分类和回归。</li>
+<li>使用成对的先验上下文知识来提升性能。</li>
+<li>使用DIoU NMS的后处理方法提高性能。</li>
+</ul>
+<h1 id="3-Distance-IoU-loss-Faster-and-better-learning-for-bounding-box-regression"><a href="#3-Distance-IoU-loss-Faster-and-better-learning-for-bounding-box-regression" class="headerlink" title="3. Distance-IoU loss: Faster and better learning for bounding box regression"></a>3. Distance-IoU loss: Faster and better learning for bounding box regression</h1><p>边界框回归是目标检测中重要的一步。现有方法大多采用Ln-norm loss用于边界框回归，如交并比IOU。本文提出了Distance-IoU Loss（DIoU），合并预测框和目标框的正规化距离。使用DIOU Loss的收敛速度比IOU Loss和GIoU Loss更快。此外，本文总结了边界框回归中三个几何因素：1.重叠区域 2.中心点距离 3.长宽比。基于此提出了Complete Iou Loss(CIoU)，收敛更快，性能更好。通过同时应用DIoU Loss和CIoU Loss，SOTA方法的性能有所提高。此外DIoU可以作为NMS的标准，进一步加速性能提升。</p>
+<h3 id="传统的IoU"><a href="#传统的IoU" class="headerlink" title="传统的IoU"></a>传统的IoU</h3><p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpy4acm7j307e02wjrg.jpg" srcset="/img/loading.gif" alt="image-20210320220303374" style="zoom:50%;" /></p>
+<p>其中$B(x,y,w,h)$是预测框的坐标，$B^{gt}(x^{gt},y^{gt},w^{gt},h^{gt})$是ground-truth的坐标。通常在$B$和$B^{gt}$上采用L1或L2 norm loss 来度量边界框之间的距离。之后有学者指出，Ln-norm Loss不是包含最优IoU度量的合适选择，并且提出了IoU loss，提升IoU度量：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpy9bhhfj309e02odfx.jpg" srcset="/img/loading.gif" alt="image-20210320220311046" style="zoom:50%;" /></p>
+<p>但是IoU Loss只能在bbox有重叠的情况下使用，并不能对非重叠的情况提供任何运动梯度。</p>
+<h3 id="GIoU-Loss"><a href="#GIoU-Loss" class="headerlink" title="GIoU Loss"></a>GIoU Loss</h3><p>之后，有学者通过对IoU loss增加一个惩罚项，提出了generalized IoU Loss(GIoU)。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpyfs5loj30e802uaa7.jpg" srcset="/img/loading.gif" alt="image-20210320220321860" style="zoom:50%;" /></p>
+<p>其中C是覆盖$B$和$B^{gt}$的最小的框，惩罚项的加入使得预测框朝着目标框移动。（此前两框并不重叠）。</p>
+<p>GIoU可以减轻当两框不重叠时的梯度消失问题，但仍然有一些局限性。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpykydzvj30i80aaq49.jpg" srcset="/img/loading.gif" alt="image-20210320220330072" style="zoom:50%;" /></p>
+<blockquote>
+<p>上图展示了GIoU loss(第一行)和DIoU Loss(第二行)的回归过程。绿色框表示目标框，黑色框是anchor box。蓝色和红色是预测框。</p>
+</blockquote>
+<p>如上图所示，从图中可以看出GIoU Loss首先倾向于增加预测框的尺寸，使其与目标框重叠（这是惩罚项在起作用）。之后IoU项才起作用，使得bbox的重叠区域最大。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpypn1hwj30lq0bq76r.jpg" srcset="/img/loading.gif" alt="image-20210320220337240" style="zoom:50%;" /></p>
+<p>从图二可以看出，GIoU loss在封闭框内将退化为IoU Loss。GIoU由于过度依赖IoU项，需要更多的迭代次数才能收敛（特别是对于水平和垂直框）。</p>
+<h3 id="DIoU-Loss"><a href="#DIoU-Loss" class="headerlink" title="DIoU Loss"></a>DIoU Loss</h3><p>本文提出了Distance-IoU Loss，简单的在IoU Loss后加了一个惩罚项，<strong>直接最小化两个边界框中心点之间的距离。</strong>这样以来使得其比GIoU Loss收敛更快。DIoU只需120个迭代就能很好的匹配目标框，而GIoU在400次迭代后也没有收敛。作者进一步进行了总结：一个好的边界框损失应该包含三个重要的几何度量：1.重叠区域 2.中心点距离 3.长宽比。这三点被长期忽略掉。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpz6llkbj30ie0323yu.jpg" srcset="/img/loading.gif" alt="image-20210320220404602" style="zoom:50%;" /></p>
+<p>其中b和$b^{gt}$表示B和$B^{gt}$的中心点，$\rho(·)$是欧氏距离，c是能包含两个框的最小框的对角线长度。$d=\rho(b,b^{gt})$</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpzgli7sj30am07ydhf.jpg" srcset="/img/loading.gif" alt="image-20210320220419929" style="zoom:50%;" /></p>
+<h5 id="与IoU和GIoU-loss对比："><a href="#与IoU和GIoU-loss对比：" class="headerlink" title="与IoU和GIoU loss对比："></a>与IoU和GIoU loss对比：</h5><ul>
+<li>DIoU损失对回归问题的尺度仍然是不变的</li>
+<li>与GIoU一样，可以为与目标框不重叠的bbox提供移动方向</li>
+<li>当两个边界框完全匹配时$L_{IoU}=L_{GIoU}=L_{DIoU}=0$，当两个边界框离的很远时$L_{GIoU}=L_{DIoU}\rightarrow2$</li>
+</ul>
+<h3 id="CIoU-Loss"><a href="#CIoU-Loss" class="headerlink" title="CIoU Loss"></a>CIoU Loss</h3><p>通过联合这三个几何度量，作者进一步提出了Complete IoU Loss（CIoU），比IoU loss 和 GIoU loss收敛更快，性能更高。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqpzwbtpmj30la032aag.jpg" srcset="/img/loading.gif" alt="image-20210320220445954" style="zoom:50%;" /></p>
+<p>其中α是一个正的平衡参数，v度量长宽比的一致性：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqq02du7ij30je038aag.jpg" srcset="/img/loading.gif" alt="image-20210320220455608" style="zoom:50%;" /></p>
+<p>平衡因子定义为：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqq09fhtej30bs03c3ym.jpg" srcset="/img/loading.gif" alt="image-20210320220506354" style="zoom:50%;" /></p>
+<p>作者提出的DIoU和CIoU Loss可以轻易的整合到现有SOTA方法中。此外，DIoU可以作为NMS的标准，在抑制冗余框的时候，不仅考虑重叠区域，也考虑两个边界框中心点的距离，使得其在有遮挡的情况下更鲁棒。</p>
+<h2 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a>总结：</h2><h5 id="创新点：-1"><a href="#创新点：-1" class="headerlink" title="创新点："></a>创新点：</h5><ul>
+<li>提出DIoU Loss用于边界框回归，比IoU和GIoU loss收敛更快</li>
+<li>考虑三个几何度量，提出CIoU Loss，更好的描述矩形框的回归</li>
+<li>所提出的DIoU可以应用在NMS，在抑制冗余框上比原始NMS效果更好</li>
+</ul>
+<h1 id="4-Seq-NMS-for-Video-Object-Detection"><a href="#4-Seq-NMS-for-Video-Object-Detection" class="headerlink" title="4. Seq-NMS for Video Object Detection"></a>4. Seq-NMS for Video Object Detection</h1><p>本文是一种基于后处理的方法，给出一个包含region proposals和对应类别分数的视频序列，作者的方法通过使用一个简单的重叠判据，将相邻帧的bbox 相关联。之后选择box来最大化序列分数，这些box之后被用于在其各自对应的帧内抑制重叠box，随后被重新评分来加速弱检测。</p>
+<h3 id="Seq-NMS"><a href="#Seq-NMS" class="headerlink" title="Seq-NMS"></a>Seq-NMS</h3><p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqq0ooow7j315o0gcqdx.jpg" srcset="/img/loading.gif" alt="image-20210320220530693"></p>
+<p>Seq-NMS有3步：1.序列选择，选择具有最高序列分数的序列box 2.序列Re-Scoring：重新对序列中box的分数进行评估计算。3.抑制：抑制重叠度高的任何box。</p>
+<h4 id="序列选择"><a href="#序列选择" class="headerlink" title="序列选择"></a>序列选择</h4><p>对于视频序列中相邻的两帧，当两帧的IoU大于某个阈值时，第一帧的一个bbox可以与第二帧的一个bbox建立连接。作者为视频片段中每一对相邻帧寻找潜在的连接。之后尝试找到整个序列最大化的分数序列。也就是说，作者试图找到符合约束条件的box序列，即所有相邻的box必须被链接,且具有最大的目标分数之和。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goqq0u5mknj315u0iw7jt.jpg" srcset="/img/loading.gif" alt="image-20210320220540137"></p>
+<blockquote>
+<p>文中提到的序列选择过程。当相邻帧的box之间的IoU&gt;0.5时，从中选择总分最高的一组序列。在序列选择之和，每一帧最多只有一个box，删除IoU&gt;0.3的其他box。</p>
+</blockquote>
+<h3 id="序列Re-Scoring"><a href="#序列Re-Scoring" class="headerlink" title="序列Re-Scoring"></a>序列Re-Scoring</h3><p>在选择完序列之后，将该序列的分数提升。作者尝试使用了平均值和最大值。</p>
+<h3 id="抑制"><a href="#抑制" class="headerlink" title="抑制"></a>抑制</h3><p>被选择序列中的box被从连接过的box集合中移除。如果某一帧的bbox与选中的bbox的IoU大于某个阈值，则从候选框中移除它。</p>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><h4 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h4><ul>
+<li>本文提出了一种基于后处理的方法，在一定程度上可以提升视频目标检测的性能。</li>
+</ul>
+<h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h4><ul>
+<li>在有多个相似的目标比较靠近时，容易出现错误检测。</li>
+<li>有时会增加更多的误警</li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CPN/">CPN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Object-aware/">Object-aware</a>
+                    
+                      <a class="hover-with-bg" href="/tags/DIoU-Loss/">DIoU Loss</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Seq-NMS/">Seq-NMS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/26/3-26/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">阅读笔记（3.26)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/12/3-12/">
+                        <span class="hidden-mobile">阅读笔记（3.12)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "阅读笔记（3.19)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

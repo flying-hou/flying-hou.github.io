@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>阅读笔记（9.4) - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-09-04 21:40">
+      2020年9月4日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      81
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年9月4日 晚上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>  本次阅读首先学习了CVPR2020上的SOTA目标检测方法：EfficientDet[1]。之前在学习SSD算法时，其网络结构采用了VGG16中的一些网络层，之前也在很多地方见过将VGG16作为对比参照。YOLO中也采用了GoogLeNet架构。此前的学习过程中一直对VGG16、GoogLeNet不太熟悉，故本次补充学习了4个基础的CNN经典模型：LeNet[2]、AlexNet[3]、VGGNet[4]、GoogLeNet[5]。</p>
+<p><strong>参考文献：</strong></p>
+<p>[1] Tan M, Pang R, Le Q V. Efficientdet: Scalable and efficient object detection[C]//Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2020: 10781-10790.</p>
+<p>[2]LeCun Y, Bottou L, Bengio Y, et al. Gradient-based learning applied to document recognition[J]. Proceedings of the IEEE, 1998, 86(11): 2278-2324.</p>
+<p>[3]Krizhevsky A, Sutskever I, Hinton G E. Imagenet classification with deep convolutional neural networks[C]//Advances in neural information processing systems. 2012: 1097-1105.</p>
+<p>[4]Simonyan K, Zisserman A. Very deep convolutional networks for large-scale image recognition[J]. arXiv preprint arXiv:1409.1556, 2014.</p>
+<p>[5] Szegedy C, Liu W, Jia Y, et al. Going deeper with convolutions[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2015: 1-9.</p>
+<h1 id="1-EfficientDet"><a href="#1-EfficientDet" class="headerlink" title="1.  EfficientDet"></a>1.  EfficientDet</h1><p>这是Google Brain团队提出的目标检测方法，发表在CVPR2020上。提出了BiFPN和EfficientDet。BiFPN是一种加权双向特征金字塔网络，可快速的进行多尺度特征融合。此外，提出了一种复合缩放方法，可同时对所有主干网络、特征网络的深度、宽度、分辨率进行统一缩放。通过将EfficientNet的主干网络和所提出的BiFPN和复合缩放方法相结合，提出了一个新的目标检测器系列：EfficientDet，与之前的目标检测器相比，其准确率更高，参数和FLOPs更少。EfficientDet-D7在COCO上实现最先进的52.2 AP，使用52M参数和325B FLOPs，与之前的检测器相比，其FLOP减少了13倍– 42倍，参数缩小了4-9倍。（FLOPs：是floating point operations的缩写（s表复数），意指浮点运算数，可理解为计算量。可以用来衡量算法/模型的复杂度。）</p>
+<p><strong>BiFPN：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1giex9hltx2j30vf0b1wh8.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>多尺度特征融合旨在聚合不同分辨率的特征。常规的自上而下的FPN固有地受到单向信息流的限制。为了解决这个问题，PANet添加了一个额外的自下而上的路径聚合网络，如图（b）所示。NAS-FPN 采用神经架构搜索来搜索更好的跨尺度特征网络拓扑，但是在搜索过程中需要数千个GPU小时，并且发现的网络不规则且难以解释或修改，如图（c）所示。作者研究发现PANet的精度比FPN和NAS-FPN更好，但需要更多的参数和计算成本。</p>
+<p>为了提高模型效率，文章针对跨尺度连接提出了几种优化方法，形成BiFPN：</p>
+<ul>
+<li>删除只有一个输入边的节点。（如果一个节点只有一个输入边且没有特征融合，那么对于致力于融合不同特征的特征网络的贡献将较小。）</li>
+<li>如果原始输入与输出节点处于同一级别，则在原始输入和输出节点之间添加一条额外的边。（以便在不增加Cost的情况下融合更多功能。）</li>
+<li>将每个双向（自上而下和自下而上）路径视为一个特征网络层，并重复这一相同层多次以实现更高的水平的特征融合。</li>
+</ul>
+<p><strong>EfficientDet：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1giex9o5f3tj30vt0bp0vg.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>采用ImageNet预训练的EfficientNets作为骨干网络。使用BiFPN用作特征网络，从骨干网络中获取3-7级的特征，并反复应用自上而下和自下而上的双向特征融合。这些融合的特征被馈送到一个分类和Box预测网络，以分别生成目标类别和边界框预测，类和边框网络权重在所有级别的特征之间共享。</p>
+<p><strong>复合缩放：</strong></p>
+<p>  以前的工作主要是通过使用更大的主干网（例如ResNeXt或AmobaNet），使用更大的输入图像，或堆叠更多的FPN层来扩大基线检测器的规模。这些方法通常是无效的，因为它们只关注单个或有限的缩放维度。本文提出了一种新的目标检测复合缩放方法，它使用一个简单的复合系数φ来联合放大主干网、BiFPN网络、类/框网络和分辨率的所有维度。由于目标检测器比图像分类模型具有更大的缩放维度，所有维度的网格搜索成本高得令人望而却步。因此，文章使用了基于启发式的缩放方法，但仍然遵循联合放大所有维度的主要思想。</p>
+<p><strong>骨干网络</strong>——重用EfficientNet-B0到B6的相同宽度/深度缩放系数，这样就可以重用ImageNet预训练CheckPoints。</p>
+<p><strong>BiFPN网络</strong>——线性增加BiFPN深度Dbifpn， BiFPN 的宽度Wbifpn呈指数增长。文章使用一个数值列表{1.2、1.25、1.3、1.35、1.4、1.45}执行网格搜索，并选择最佳值1.35作为BiFPN的宽度缩放因子。</p>
+<p>BiFPN宽度和深度按以下公式缩放：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1giexboeqlbj317602qdj7.jpg" srcset="/img/loading.gif" alt="image-20200904210930570" style="zoom: 25%;" /></center>
+
+<p><strong>框/类预测网络</strong>——将其宽度固定为与BiFPN相同（即Wpred = Wbifpn），但使用以下等式线性增加深度（层数）：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1giexcb8dr9j318603a77s.jpg" srcset="/img/loading.gif" alt="image-20200904211007253" style="zoom:25%;" /></center>
+
+<p><strong>输入图像分辨率</strong>——由于在BiFPN中使用了特征级别3-7，输入分辨率能被27=128整除，因此使用以下等式线性增加分辨率：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1giexcrqku1j30zu03adib.jpg" srcset="/img/loading.gif" alt="image-20200904211033181" style="zoom:25%;" /></center>
+
+<p>根据不同的φ值，将EfficientDet-D0（φ= 0）发展为D7（φ= 7），其中序号越大，缩放尺寸越大，训练所需参数越多，同时精确度越高。</p>
+<p><strong>实验：</strong></p>
+<p>  实验方面，作者分别测试了EfficientDet用于目标检测和语义分割。</p>
+<p>目标检测方面，EfficientDet-D0达到了与YOLOv3相似的精度，FLOPs少了28倍。与RetinaNet 和Mask-RCNN 相比，EfficientDet-D1达到了相似的精度，参数减少了8倍，FLOP减少了21倍。在高精度体制下，EfficientDet也始终比NAS-FPN好，EfficientDet-D7实现了针对单模型单尺度的最先进的52.2AP（在测试集上）和51.8的 AP（在验证集上）。</p>
+<p>语义分割方面，作者修改了EfficientDet模型进行测试。将特征级别{P2，P3，…，P7}保留在BiFPN中，仅将P2用于最终的每像素分类。基于EfficientDet-D4的模型使用ImageNet预训练的EfficientNet-B4骨干网（大小与ResNet-50相似）。在相同的单模型单标度设置下，作者的模型比DeepLabV3 +的现有技术提高了1.7％的精度，而FLOP减少了9.8倍。这些结果表明，Efficient-Det在语义分割方面也很有前途。</p>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结：</strong></h4><p><strong>创新点：</strong></p>
+<p>1） 提出了一种双向特征金字塔型网络（BiFPN），实现高效的双向跨尺度连接和更高水平的加权特征融合。</p>
+<p>2） 提出了一种新的复合缩放方法，联合放大主干网、BiFPN网络、类/框网络和分辨率的所有维度。</p>
+<p>3） 基于BiFPN，提出了EfficientDet系列检测模型，在目标检测和语义分割上均取得了良好的效果。</p>
+<p><strong>优点：</strong></p>
+<p>1） EfficientDet实现了速度和精度的极佳平衡，同时参数和FLOP更少。</p>
+<p>2） 遵循one-stage设计，结构简单、高效。</p>
+<p><strong>缺点：</strong></p>
+<p>1） 设计基于经验法则，难以解释的参数多。</p>
+<h1 id="2-LeNet"><a href="#2-LeNet" class="headerlink" title="2.  LeNet"></a>2.  LeNet</h1><p>LeNet 诞生于 1994 年，经过多次迭代，于1998年发表此篇论文，并最终命名为 LeNet5。LeNet5是最早的卷积神经网络之一，推动了深度学习领域的发展。LeNet5通过巧妙的设计，利用卷积、参数共享、池化等操作提取特征，避免了大量的计算成本，最后再使用全连接神经网络进行分类识别，这个架构也是目前大量神经网络架构的基础。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1giex9n7k5zj30jg05dglx.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>LeNet5由7层CNN（不包含输入层）组成，上图中输入的原始图像大小是32×32像素，卷积层用Ci表示，子采样层（pooling，池化）用Si表示，全连接层用Fi表示。</p>
+<p><strong>1、C1层（卷积层）：6@28×28</strong></p>
+<p>该层使用了6个卷积核，每个卷积核的大小为5×5，这样就得到了6个特征图。特征图大小为（32-5+1）×（32-5+1）= 28×28；由于使用了权值共享，所以使用相同卷积核每个神经元均使用的参数相同。参数个数为（5×5+1）×6= 156（其中5×5为卷积核大小，1为偏置参数，6为特征图数量）。每个特征图有28×28个神经元，每个神经元参数为5×5+1，共有6幅特征图，因此该层的连接数为（5×5+1）×6×28×28=122304。</p>
+<p><strong>2、S2层（下采样层，池化层）：6@14×14</strong></p>
+<p>池化单元大小为2×2，因此，6个特征图的大小经池化后即变为14×14。这一层的计算过程是：2×2 单元里的值相加，然后再乘以训练参数w，再加上一个偏置参数b（每一个特征图共享相同的w和b)，然后取sigmoid值（S函数：0-1区间），作为对应的该单元的值。每个特征图都共享相同的w和b两个参数，因此需要2×6=12个参数。每个特征图有14×14个神经元，每个池化单元连接数为2×2+1（1为偏置量），因此，该层的连接数为（2×2+1）×14×14×6 = 5880</p>
+<p><strong>3、C3层（卷积层）：16@10×10</strong></p>
+<p>C3层有16个卷积核，卷积核大小为5×5，故C3层的特征图大小为（14-5+1）×（14-5+1）= 10×10。C3与S2并不是全连接，而是按照下表部分连接。即本层每个特征图对应的卷积核，和上一层的多个特征图进行卷积。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1giex9om7fjj307o031jrj.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>计算过程为：用3个（或4个/5个）卷积模板分别与S2层的3个（或4个/5个）feature maps进行卷积，然后将卷积的结果相加求和，再加上一个偏置，再取sigmoid得出卷积后对应的feature map了。</p>
+<p>权值数： (5x5x3+1)x6 + (5x5x4+1)x9 + 5x5x6+1 = 456 + 909+151 = 1516，</p>
+<p>连接数： (5x5x3+1)x10x10x6+(5x5x4+1)x10x10x9+(5x5x6+1)x10x10 = 45600+90900+15100=151600</p>
+<p>进行部分连接的原因是为了打破对称性，提取深层特征。因为特征不是对称的，因此需要打破这种对称，以提取到更重要的特征。</p>
+<p><strong>4、S4（下采样层，池化层）：16@5×5</strong></p>
+<p>池化单元大小为2×2，与C3层一样，共有16个特征图，特征图大小为5x5。与S2类似，所需要参数个数为16×2 = 32。连接数为（2×2+1）×5×5×16 = 2000.</p>
+<p><strong>5、C5层（卷积层）：120</strong></p>
+<p>该层有120个卷积核，每个卷积核的大小仍为5×5，因此有120个特征图。由于S4层的大小为5×5，而该层的卷积核大小也是5×5，因此特征图大小为（5-5+1）×（5-5+1）= 1×1。这样该层就刚好变成了全连接，这只是巧合，如果原始输入的图像比较大，则该层就不是全连接了。参数数目为120×（5×5×16+1） = 48120. 由于该层的特征图大小刚好为1×1，因此连接数和参数数目相同，为48120×1×1=48120。</p>
+<p><strong>6、F6层（全连接层）：84</strong></p>
+<p>  F6层之所以选84个单元，是由于其对应于一个7×12的比特图。该层有84个特征图，特征图大小与C5一样都是1×1，与C5层全连接。参数数量为（120+1）×84=10164。连接数与参数数量一样，也是10164。</p>
+<p><strong>7、OUTPUT层（输出层）：10</strong></p>
+<p>  输出层也是全连接层，共有10个节点，分别代表数字0到9。参数个数为84×10=840。连接数与参数个数一样，也是840。该层采用径向基函数（RBF）的网络连接方式。假设x是上一层的输入，y是RBF的输出，则RBF输出的计算方式是：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1giex9jlkxsj30a4034aa2.jpg" srcset="/img/loading.gif" alt="img" style="zoom: 50%;" /></center>
+
+<p>上式wij 的值由i的比特图编码确定。i从0到9，j取值从0到7x12-1。RBF输出的值越接近于0，表示当前网络输入的识别结果与字符i越接近。</p>
+<h4 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a><strong>总结：</strong></h4><p>  LeNet-5 网络虽然很小，但是它包含了深度学习的基本模块：卷积层，池化层，全连接层。是其他深度学习模型的基础。</p>
+<h1 id="3-AlexNet"><a href="#3-AlexNet" class="headerlink" title="3.  AlexNet"></a>3.  AlexNet</h1><p>这篇文章在2012年发表，作者是多伦多大学的Alex等人。文章中的模型参加的竞赛是ImageNet LSVRC-2010，该ImageNet数据集有1.2 million幅高分辨率图像，总共有1000个类别。在测试集上取得了37.5％和17.0％的top-1和top-5的错误率，这样的结果在当时已经超过了之前的先进水平。AlexNet具有6000万个参数和650,000个神经元的神经网络，由五个卷积层，三层全连接网络，最终的输出层是1000通道的softmax。为了加快训练速度，作者使用非饱和神经元和能高效进行卷积运算的GPU实现。为了减少全连接层中的过拟合，采用了Dropout正则化方法，该方法证明是非常有效的。AlexNet利用了两块GPU进行计算，大大提高了运算效率，并且在ILSVRC-2012竞赛中获得了top-5测试的15.3%错误率，此前获得第二名的方法的错误率是 26.2%，这在当时给学术界和工业界带来很大冲击。</p>
+<p><strong>整体结构：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1giex9jzmxzj319a0em772.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>网络结构图包含上下两个部分，分别对应两个GPU（只在特定的网络层两块GPU才进行交互）。网络包含了八层权重;前五个是卷积层，其余三个为全连接层。最后的全连接层的输出被送到1000维的softmax函数，其产生1000个类分布的预测。第一个卷积层的输入为224×224×3的图像，对其使用96个大小为11×11×3、步长为4（步长表示内核映射中相邻神经元感受野中心之间的距离）的内核来处理输入图像。第二个卷积层将第一个卷积层的输出（已进行响应归一化以及池化）作为输入，并使用256个内核处理图像，每个内核大小为5×5×48。第三个、第四个和第五个卷积层彼此连接而中间没有任何池化或归一化层。第三个卷积层有384个内核，每个的大小为3×3×256，其输入为第二个卷积层的输出(已归一化和池化）。第四个卷积层有384个内核，每个内核大小为3×3×192。第五个卷积层有256个内核，每个内核大小为3×3×192。全连接层各有4096个神经元。</p>
+<p><strong>ReLU激活函数：</strong></p>
+<p>传统的神经网络普遍使用Sigmoid或者tanh等非线性函数作为激励函数，然而它们容易出现梯度弥散或梯度饱和的情况。当输入的值非常大或非常小的时候，Sigmoid函数的函数值趋于不变，导数趋于0，这样在进行反向传播时，多个很小的导数累积起来，将导致梯度越来越小，权重更新较慢，神经网络变的难以学习。</p>
+<p>在AlexNet中，作者使用了ReLU激活函数，函数式为f(x)=max(0,x)，当输入<0时，输出是0；当输入>0时，输出等于输入。由于ReLU是线性的，且导数始终为1，计算量大大减少，收敛速度会比Sigmoid/tanh快。</p>
+<p><strong>数据增强：</strong></p>
+<p> 神经网络由于训练的参数较多，需要比较多的训练数据，否则很容易过拟合。减小过拟合的最简单且最常用的方法就是，使用标签保留转换（label-preserving transformations）人为地放大数据集。</p>
+<p>AlexNet使用以下操作进行数据增强：</p>
+<ol>
+<li><p>随机裁剪，对256×256的图片进行随机裁剪到224×224，然后进行水平翻转。在测试时，提取5个224×224的图像块（四个角块和中心块）以及它们的水平映射（总共包括10个块）来进行预测，并通过十个块上的softmax层求预测结果的均值。</p>
+</li>
+<li><p>测试时，对左上、右上、左下、右下、中间分别做了5次裁剪,共10个裁剪，然后翻转，之后对结果求平均。</p>
+</li>
+<li><p>对RGB空间做PCA（主成分分析），然后对主成分做一个（0, 0.1）的高斯扰动，也就是对颜色、光照作变换，这使错误率又降低了1%。</p>
+</li>
+</ol>
+<p><strong>重叠池化：</strong></p>
+<p>  在传统池化方法中，相邻池化单元之间互不重叠，池化窗口的大小与步长相同。更准确地说，一个池化层可以被认为是由一些间隔为s个像素的池化单元组成的网格，每个都表示了一个以池化单元的位置为中心的大小为z×z的邻域。如果令s = z，就可以得到CNN中常用的传统的局部池化。如果令s&lt;z，我们得到重叠池化。AlexNet在整个网络中使s=2,z=3，即重叠池化。与非重叠方案s= 2，z = 2相比，重叠池化将top-1和top-5的错误率分别降低了0.4％和0.3％。同时作者发现，有重叠池化的模型很难过拟合。</p>
+<p><strong>局部响应归一化：</strong></p>
+<p>  此前使用sigmoid或tanh激活函数的值域都是有范围的，但是AlexNet使用ReLU函数作为激活函数，其值域可以非常大，没有一个固定的区间。所以需要对ReLU得到的结果进行归一化。归一化（normalization）的目的是“抑制”，使用局部归一化的方案有助于增加泛化能力。LRN的核心思想就是利用临近的数据做归一化，LRN将top-1和top-5的错误率分别降低了1.4％和1.2％。</p>
+<p><strong>DropOut：</strong></p>
+<p>  DropOut是AlexNet中一个很大的创新，是现在神经网络中的必备结构之一。引入Dropout主要是为了防止过拟合。DropOut会以50%的概率将隐含层的神经元输出置为0,被置0的神经元不参与网络的前馈和反向传播。因此，每次给网络提供了输入后，神经网络都会采用一个不同的结构，但是这些结构都共享权重。这种技术减少了神经元复杂的共同适应，因为神经元无法依赖于其他特定的神经元而存在。所以，它被迫学习更强大更鲁棒的功能，使得这些神经元可以与其他神经元的许多不同的随机子集结合使用。</p>
+<p><strong>多GPU训练：</strong></p>
+<p>  目前的GPU很适合于跨GPU并行化操作，因为它们能够直接读写对方的内存，而无需通过主机内存。AlexNet当时使用了GTX580的GPU进行训练，由于单个GTX 580 GPU只有3GB内存，这限制了在其上训练的网络的最大规模，因此他们在每个GPU中放置一半核（或神经元），将网络分布在两个GPU上进行并行计算，大大加快了AlexNet的训练速度，GPU只在某些特定层间才进行通信。</p>
+<h4 id="总结：-2"><a href="#总结：-2" class="headerlink" title="总结："></a><strong>总结：</strong></h4><p>创新点：</p>
+<ul>
+<li>使用了非线性激活函数ReLU、多个GPU训练，提高训练速度。</li>
+<li>采用DropOut方法、数据增强方法，防止过拟合。</li>
+<li>改进池化方法，使用重叠池化，提高精度防止过拟合。</li>
+</ul>
+<h1 id="4-VGGNet"><a href="#4-VGGNet" class="headerlink" title="4.  VGGNet"></a><strong>4.</strong>  <strong>VGGNet</strong></h1><p>VGGNet由牛津大学计算机视觉组（Visual Geometry Group）和Google DeepMind公司于2014年提出。VGGNet探索了卷积神经网络的深度与其性能之间的关系，成功地构筑了16~19层深的卷积神经网络，证明了增加网络的深度能够在一定程度上影响网络最终的性能，使错误率大幅下降，同时拓展性又很强，迁移到其它图片数据上的泛化性也非常好。VGGNet获得了ILSVRC 2014年比赛的亚军和定位项目的冠军，在top5上的错误率为7.5%。目前为止，VGGNet依然被用来提取图像的特征。</p>
+<p>VGGNet全部使用3<em>3的卷积核和2</em>2的池化核，通过不断加深网络结构来提升性能。网络层数的增长并不会带来参数量上的爆炸，因为参数量主要集中在最后三个全连接层中。同时，两个3<em>3卷积层的串联相当于1个5</em>5的卷积层，3个3<em>3的卷积层串联相当于1个7</em>7的卷积层，即3个3<em>3卷积层的感受野大小相当于1个7</em>7的卷积层。但是3个3<em>3的卷积层参数量只有7</em>7的一半左右，同时前者可以有3个非线性操作，而后者只有1个非线性操作，这样使得前者对于特征的学习能力更强。使用多个较小卷积核的卷积层代替一个卷积核较大的卷积层，一方面可以减少参数，另一方面相当于进行了更多的非线性映射，增加了网络的拟合表达能力。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1giex9ldsw6j30u00uqte0.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>VGGNET的网络结构如图所示，VGGNET包含多层网络，深度从11层到19层不等，较为常用的是VGG16和VGG19。VGGNet把网络分成了5段，每段都把多个3<em>3的卷积网络串联在一起，每段卷积后面接一个最大池化层，最后面是3个全连接层和一个softmax层。在这篇论文中分别使用了A、A-LRN、B、C、D、E这6种网络结构进行测试，这6种网络结构相似，都是由5层卷积层、3层全连接层组成，其中区别在于每个卷积层的子层数量不同，从A至E依次增加（子层数量从1到4），总的网络深度从11层到19层（添加的层以粗体显示），表格中的卷积层参数表示为“conv⟨感受野大小⟩-通道数⟩”。其中，网络结构D就是著名的VGG16，网络结构E就是著名的VGG19。在VGGNet中每层卷积层中包含2~4个卷积操作，卷积核的大小是3</em>3，卷积步长是1，池化核是2*2，步长为2。VGGNet最明显的改进就是降低了卷积核的尺寸，增加了卷积的层数。</p>
+<p>作者通过网络A-LRN发现，AlexNet曾经用到的LRN层（local response normalization，局部响应归一化）并没有带来性能的提升，因此在其它组的网络中均没再出现LRN层。VGGNet使用了Multi-Scale的方法做数据增强，将原始图像缩放到不同尺寸S，然后再随机裁切224′224的图片，这样能增加很多数据量，对于防止模型过拟合有很不错的效果。实践中，作者令S在[256,512]这个区间内取值，使用Multi-Scale获得多个版本的数据，并将多个版本的数据合在一起进行训练。</p>
+<h4 id="总结：-3"><a href="#总结：-3" class="headerlink" title="总结："></a><strong>总结：</strong></h4><p>  创新点：</p>
+<ul>
+<li>使用更小的3x3的卷积核和更深的网络。减少参数，增加非线性映射，提升对特征的学习能力。</li>
+<li>验证了几个小滤波器（3x3）卷积层的组合比一个大滤波器（5x5或7x7）更好。证明了分类任务可以通过使用小的卷积核、增加CNN的深度来提高精度。</li>
+<li>在VGGNet的卷积结构中，引入1*1的卷积核，在不影响输入输出维度的情况下，引入非线性变换，增加网络的表达能力，降低计算量。</li>
+<li>训练时，先训练级别简单（层数较浅）的VGGNet的A级网络，然后使用A网络的权重来初始化后面的复杂模型，加快训练的收敛速度。</li>
+<li>采用了Multi-Scale的方法来训练和预测。可以增加训练的数据量,防止模型过拟合,提升预测准确率。</li>
+</ul>
+<p>优点：</p>
+<ul>
+<li>通过增加网络深度有效提升性能。</li>
+<li>结构简洁，整个VGG16网络都使用了同样大小的卷积核尺寸（3x3）和最大池化尺寸（2x2）。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>耗费更多的计算资源，内存占用大</li>
+</ul>
+<h1 id="5-GoogLeNet（Inception-V1）"><a href="#5-GoogLeNet（Inception-V1）" class="headerlink" title="5.GoogLeNet（Inception V1）"></a>5.GoogLeNet（Inception V1）</h1><p>2014年的ImageNet挑战赛(ILSVRC14)，GoogLeNet获得了第一名、VGG获得了第二名，这两类模型结构的共同特点是层次更深了。VGG继承了LeNet以及AlexNet的一些框架结构，而GoogLeNet则做了更加大胆的网络结构尝试，虽然深度只有22层，但大小却比AlexNet和VGG小很多，GoogLeNet参数为500万个，AlexNet参数个数是GoogleNet的12倍，VGGNet参数又是AlexNet的3倍，因此在内存或计算资源有限时，GoogleNet是比较好的选择；从模型结果来看，GoogLeNet的性能却更加优越。</p>
+<p>之前的AlexNet、VGG等结构都是通过增大网络的深度（层数）来获得更好的训练效果，但层数的增加会带来很多负作用：当参数过多，训练数据有限时，很容易产生过拟合。此外还有计算复杂度大、梯度消失、梯度爆炸等。解决这些问题的方法当然就是在增加网络深度和宽度的同时减少参数，inception的提出从另一种角度来提升训练结果：更高效的利用计算资源，在相同的计算量下能提取到更多的特征，从而提升训练结果。Inception通过构造一种“基础神经元”结构，来搭建一个稀疏性、高计算性能的网络结构。其历经了V1、V2、V3、V4多个版本的发展，本次主要学习其V1版本。</p>
+<p><strong>Inception architecture：</strong></p>
+<p>此前的神经网络（AlexNet、VGG），都是只有一条主线，而IA是“分叉-汇聚”型网络，在一层网络中存在多个不同尺度的kernels，卷积完毕后再汇聚。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1giex9kxt7uj30pe0cg759.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>Inception模块的基本机构如图所示，整个inception结构就是由多个这样的inception模块串联起来的。该结构将CNN中常用的卷积（1x1，3x3，5x5）、池化操作（3x3）堆叠在一起（卷积、池化后的尺寸相同，将通道相加，之所以选1、3、5是为了方便对齐，只需将padding设为0，1，2，步长都为1即可获得相同尺寸的输出以叠加），这样一方面增加了网络的宽度，另一方面也增加了网络对尺度的适应性。网络卷积层能够提取输入的每一个细节信息，同时5x5的滤波器也能够覆盖大部分接受层的的输入。池化操作可以减少空间大小，降低过度拟合。在每一个卷积层后都要做一个ReLU操作，以增加网络的非线性特征。</p>
+<p>以上这个Inception原始版本，所有的卷积核都直接在上一层的所有输出上来做。这样5x5的卷积核所需的计算量太大，造成了特征图的厚度很大。为了避免这种情况，在3x3前、5x5前、max pooling后分别加上了1x1的卷积核，以起到降低特征图厚度、增加网络的非线性程度的作用，这也就形成了Inception v1的网络结构，如下图所示：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1giex9mbvohj30wc0gwtaj.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>inception结构的主要贡献有两个：1.使用1x1的卷积来进行降维。2.在多个尺寸上同时进行卷积再聚合。</p>
+<p><strong>辅助分类器：</strong></p>
+<p>在神经网络训练过程中，往往训练到最后，网络最开始的几层就“训不动了”，即出现了梯度消失问题。GoogLeNet加入了两个auxiliary classifiers（简称AC），用于辅助训练，加速网络卷积。这两个AC在训练的时候也跟着学习，同时把自己学习到的梯度反馈给网络。</p>
+<p>辅助分类器是将中间某一层的输出用作分类，并按一个较小的权重（0.3）加到最终分类结果中，这样相当于做了模型融合，同时给网络增加了反向传播的梯度信号，一定程度解决了更深网络带来的梯度消失问题。也提供了额外的正则化，有利于整个网络的训练。在实际测试的时候，这两个额外的AC会被去掉。</p>
+<p><strong>取消全连接层：</strong></p>
+<p>VGG网络之所以参数众多、占用资源大，主要是因为最后有两个4096的全连接层。为了压缩网络参数，GoogLeNet网络的最后采用了average pooling（平均池化层）来代替全连接层，可以将准确率提高0.6%。但是，在网络最后还是加了一个全连接层，主要是为了方便对输出进行灵活调整,方便他人进行迁移学习。虽然移除了全连接，但是网络中依然使用了Dropout。</p>
+<h4 id="总结：-4"><a href="#总结：-4" class="headerlink" title="总结："></a><strong>总结：</strong></h4><p>主要贡献：</p>
+<ul>
+<li>提出Inception architecture 并对其进行优化。</li>
+<li>取消全连接层，使用平均池化层替代。压缩网络参数。</li>
+<li>使用Auxiliary Classifiers加速网络卷积。</li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/GoogLeNet/">GoogLeNet</a>
+                    
+                      <a class="hover-with-bg" href="/tags/EfficientDet/">EfficientDet</a>
+                    
+                      <a class="hover-with-bg" href="/tags/LeNet/">LeNet</a>
+                    
+                      <a class="hover-with-bg" href="/tags/AlexNet/">AlexNet</a>
+                    
+                      <a class="hover-with-bg" href="/tags/VGGNet/">VGGNet</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/09/15/GoogLeNet-v2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">文献翻译——Batch Normalization(GoogLeNet-V2)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/09/02/newblog/">
+                        <span class="hidden-mobile">网站新域名htx1998.cn正式启用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "阅读笔记（9.4)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

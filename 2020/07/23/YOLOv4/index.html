@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>文献翻译——YOLOv4:Optimal Speed and Accuracy of Object Detection - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-07-23 13:51">
+      2020年7月23日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      81
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年11月13日 下午
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>目前有很多可以提高CNN准确性的算法。这些算法的组合在庞大数据集上进行测试、对实验结果进行理论验证都是非常必要的。有些算法只在特定的模型上有效果，并且只对特定的问题有效，或者只对小规模的数据集有效；然而有些算法，比如batch-normalization和residual-connections，对大多数的模型、任务和数据集都适用。我们认为这样通用的算法包括：Weighted-Residual-Connections（WRC), Cross-Stage-Partial-connections（CSP）, Cross mini-Batch Normalization（CmBN）, Self-adversarial-training（SAT）以及Mish-activation。我们使用了新的算法：WRC, CSP, CmBN, SAT, Mish activation, Mosaic data augmentation, CmBN, Dropblock regularization 和CIoU loss以及它们的组合，获得了最优的效果：在MS COCO数据集上的AP值为43.5%(65.7% AP50)，在Tesla V100上的实时推理速度为65FPS。源代码在<a href="https://github.com/AlexeyAB/darknet" target="_blank" rel="noopener">https://github.com/AlexeyAB/darknet</a>.</p>
+<h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h1><p>大部分基于CNN的目标检测器主要只适用于推荐系统。举例来说，通过城市相机寻找免费停车位置的系统使用着慢速但是高精度的模型，然而汽车碰撞警告却使用着快速但是低精度的模型。提高实时目标检测器的精度不仅能够应用在推荐系统上，而且还能用于独立的流程管理以及减少人员投入。在GPU上运行的实时目标检测操作允许在可接受的开销下进行大规模使用。目前大部分高精度的神经网络不仅不能实时运行，并且需要较大的mini-batch-size在多个GPUs上进行训练。我们构建了仅在一块GPU上就可以实时运行的CNN解决了这个问题，并且它只需要在一块GPU上进行训练。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh0w34l1nuj30r20lmjvs.jpg" srcset="/img/loading.gif" alt="image-20200723142824281" style="zoom:50%;" /></p>
+<blockquote>
+<p>图一：YOLOv4和其他先进检测器的对比。YOLOv4比EffcientDet快两倍并且性能相似。相对于YOLOv3，分别提高了10%的AP和12%的FPS。</p>
+</blockquote>
+<p>Yolo-V4的主要目的在于设计一个能够应用于实际工作环境中的快速目标检测系统，且能够被并行优化，并没有很刻意的去追求理论上的低计算量（BFLOP）。我们希望这个检测器能够轻松的训练和使用。具体来说就是任何一个人仅仅使用一个GPU进行训练和测试就可以得到<strong>实时的，高精度的以及令人信服</strong>的目标检测结果，正如在图1中所示的YOLOv4的结果。我们的贡献总结如下：</p>
+<ol>
+<li><strong>我们提出了一个高效且强大的目标检测模型</strong>。任何人可以使用一个1080Ti或者2080Ti的GPU就可以训练出一个快速并且高精度的目标检测器。</li>
+<li>我们在检测器训练的过程中，测试了目标检测中最高水准的 Bag-of-Freebies和Bat-of-Specials方法。</li>
+<li><strong>我们改进了最高水准的算法</strong>，使得它们更加高效并且适合于在一个GPU上进行训练，比如CBN, PAN, SAM等。</li>
+</ol>
+<h1 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2.相关工作"></a>2.相关工作</h1><h2 id="2-1-目标检测模型"><a href="#2-1-目标检测模型" class="headerlink" title="2.1 目标检测模型"></a>2.1 目标检测模型</h2><p><strong>检测器通常由两部分组成：</strong>backbone<strong>和</strong>head。前者在ImageNet上进行预训练，后者用来预测类别信息和目标物体的边界框。在GPU平台上运行的检测器，它们的backbone可能是VGG, ResNet, ResNetXt,或者是DenseNet。在CPU平台上运行的检测器，它们的backbone可能是SqueezeNet，MobileNet或者是ShuffleNet。对于head部分，通常分为两类：one-stage和two-stage的目标检测器。Two-stage的目标检测器的代表是R-CNN系列，包括：fast R-CNN, faster R-CNN,R-FCN和Libra R-CNN. 还有基于anchor-free的Two-stage的目标检测器，比如RepPoints。One-stage目标检测器的代表模型是YOLO, SSD和RetinaNet。在最近几年，出现了基于anchor-free的one-stage的算法，比如CenterNet, CornerNet, FCOS等等。在最近几年，目标检测器在backbone和head之间会插入一些网络层，这些网络层通常用来从不同的步骤中收集特征图。我们将其称之为目标检测器的neck。通常，一个neck由多个bottom-up路径和多个top-down路径组成。使用这种机制的网络包括Feature Pyramid Network（FPN）,Path Aggregation Network（PAN），BiFPN和NAS-FPN。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh0wtzqztoj30hp08kjrv.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>除了上面的这些模型，一些学者将重点放在为目标检测器构建新的backbone（DetNet, DetNASNet）或者是一整个新的模型（SpinNet, HitDetector）。</p>
+<p>综上所述，一个普通的目标检测器由下面四个部分组成：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh0wwndik4j30qq0wqtem.jpg" srcset="/img/loading.gif" alt="image-20200723145649089" style="zoom:33%;" /></center>
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh0x8gyowuj31jp0u0gta.jpg" srcset="/img/loading.gif" alt="image-20200723150810800"></p>
+<h2 id="2-2-Bag-of-freebies"><a href="#2-2-Bag-of-freebies" class="headerlink" title="2.2 Bag of freebies"></a>2.2 Bag of freebies</h2><p>通常来说，目标检测器都是进行离线训练的（训练的时候对GPU数量和规格不限制）。因此，研究者总是喜欢扬长避短，使用最好的训练手段，因此可以在不增加推理成本的情况下，获得最好的检测精度。<strong>我们将只改变训练策略或者只增加训练成本的方法称之为“bag of freebies”</strong>在目标检测中经常使用并且满足bag of freebies的定义的算法称是<strong>①数据增广</strong>。数据增广的目的是增加输入图片的可变性，因此目标检测模型对从不同场景下获取的图片有着更高的鲁棒性。举例来说，光度畸变（photometric distoitions）和几何畸变（geometric distortions）是用来数据增强方法的两个常用的手段，他们确实对目标检测任务有用。在处理光度畸变时，我们调整图像的亮度，对比度，色相，饱和度和噪点。对于几何畸变，我们会随机增加尺度变化，裁剪，翻转以及旋转。</p>
+<p>上面提及的数据增广的手段都是<strong>像素级别</strong>的调整，它保留了调整区域的所有原始像素信息。此外，一些研究者将数据增广的重点放在了<strong>②模拟目标物体遮挡问题上</strong>。具体来说，random erase和CutOut可以随机选择图像上的矩形区域，然后使用随机值或者使用零补值来进行填充。对于hide-and-seek和grid mask，他们随机地或者均匀地在一幅图像中选择多个矩形区域，并且使用零来代替矩形区域中的像素值。如果将相似的概念用到特征图中，出现了DropOut, DropConnect和DropBlock方法。此外，<strong>一些研究者提出一起使用多张图像进行数据增强的方法</strong>。举例来说，MixUp使用两张图片进行相乘并且使用不同的系数比进行叠加，然后使用它们的叠加比来调整标签。对于CutMix，它将裁剪的图片覆盖到其他图片的矩形区域，然后根据混合区域的大小调整标签。除了上面提及的方法，style transfer GAN也用来数据增广，CNN可以学习如何有效的减少纹理偏差。</p>
+<p>一些和上面所提及的不同的方法用来<strong>解决数据集中的语义分布可能存在偏差的问题</strong>。处理语义分布偏差的问题，一个非常重要的问题就是<strong>在不同类别之间存在数据不平衡</strong>，并且这个问题在two-stage目标检测器中，通常使用hard negative example mining或者online hard example mining来解决。但是example mining 方法并不适用于one-stage的目标检测器，因为这种类型的检测器属于dense prediction架构。因此focal loss算法用来解决不同类别之间数据不均衡的问题。<strong>③另外一个非常重要的问题就是使用one-hot</strong>很难描述不同类别之间关联度的关系。执行标记时经常使用这种表示方法。Label smothing提出在训练的时候，将hard label转换成soft label，这个方法可以使得模型更加的鲁棒性。为了得到一个最好的soft label, Islam引入了知识蒸馏的概念来设计标签细化网络。</p>
+<p>最后一个bag of freebies是<strong>④设计边界框回归的目标函数</strong>。传统的目标检测器通常使用均方根误差（MSE）在Bbox的中心坐标以及宽高上进行直接的回归预测，即{x<sub>center</sub>,y<sub>center</sub>,w,h}, 或者左上角和右下角的两个点，即{x<sub>top_left</sub>,y<sub>top_left</sub>,x<sub>bottom_right</sub>,y<sub>bottom_right</sub>}. 对于anchor-based方法，去预测相应的offset，{x<sub>centeroffset</sub>,y<sub>centeroffset</sub>,w<sub>offset</sub>,h<sub>offset</sub>}和{x<sub>topleftoffset</sub>,y<sub>topleftoffset</sub>,x<sub>bottomrightoffset</sub>,y<sub>bottomrightoffset</sub>}.<strong>但是，预测Bbox每个点的坐标值是将这些点作为独立的变量，但是实际上并没有将目标物体当成一个整体进行预测</strong>。为了更好的解决这个问题，一些研究者最近提出了<strong>IoU</strong>损失函数，它能够将Bbox区域和ground truth的BBox区域的作为整体进行考虑。IoU损失函数需要计算BBox四个坐标点以及ground truth的IoU，然后将生成的结果连接到整个代码中。因为IoU具有尺度不变性，它可以解决传统算法计算{x,y,w,h}的L1或L2范数时损失随着尺度增加而增大的问题。最近，一些研究者继续提高IoU损失函数的性能。举例来说，除了覆盖范围，GIoU还包括目标物体的形状和方向。他们提出寻找同时包括预测的BBox和ground truth的BBox的<strong>最小区域BBox</strong>，然后使用这个BBox作为分母去代替原来Iou损失函数中的分母。DIoU损失函数额外考虑了目标物体的中心距离，CIoU另一方面同时将重叠区域，中心点间的距离和长宽比考虑在内。CIoU在BBox回归问题上可以获得最好的收敛速度和准确率。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh10zqf7zjj30m70dgjsi.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="2-3-Bag-of-specials"><a href="#2-3-Bag-of-specials" class="headerlink" title="2.3 Bag of specials"></a>2.3 Bag of specials</h2><p>对于那些<strong>插件模块</strong>和<strong>后处理方法</strong>，它们仅仅稍微的增加了推理成本，但是可以极大地提高目标检测的准确度，我们将其称之为“bag of specials”。一般来说，这些插件模块用来提高一个模型中特定的属性，比如增加感受野，引入注意力机制或者提高特征整合的能力等等；后处理方法是用来抑制模型预测结果的一种方法。</p>
+<p>可以用来<strong>提升感受野</strong>的常规的方法是SPP, ASPP和RFB。SPP模型来源于空间金字塔匹配（SPM），而且SPMs原始的方法将特征图划分成很多d*d个相等的块，其中d可以是{1,2,3,…}，因此可以形成空间金字塔，然后提取bag-of-word的特征。SPP将SPM应用在CNN中，然后使用max-pooling代替bag-of-word运算。因为SPP输出的是一维的特征向量，因此它不能应用在全卷积网络（FCN）中。在YOLOv3中，Redmon和Farhadi改进了SPP模块，将max-pooling输出和内核尺寸k*k连接起来，其中k={1,5,8,13},stride=1。基于这个设计，一个相对较大的k*k的max-pooling有效地提高了backbone特征的感受野。在添加了改进后的SPP模型之后，YOLO-v3-608在COCO数据集上，虽然增加了0.5%的额外计算量，但是提高了2.7%的AP50。ASPP模块和改进的SPP模块的区别主要在：原始的k*k过滤器尺寸，从stride=1到3*3内核尺寸的max-pooling，在stride=1的碰撞卷积运算中膨胀比为k。RFB模块使用一些k*k的内核，膨胀比为k，步长为1的碰撞卷积，它比ASPP获得了更全面的空间覆盖率。RFB在MS COCO数据集上仅仅增加了7%的额外推理时间，但是得到了5.7%的AP50提升。</p>
+<p>目标检测上经常使用的注意力模块主要分成channel-wise注意力模块和point-wise注意力模块，这两个注意力模块主要的代表分别是Squeeze-and-Excitation(SE)和Spatial Attention Module(SAM)。尽管SE模块在ImageNet图像分类工作上仅仅增加了2%的计算量而提高了1%的top-1准确率，但是在GPU上提高了10%的推理时间，因此SE模块更适合在移动设备上使用。但是对于SAM模块来说，在ImageNet图像分类任务中，它仅仅需要0.1%的额外计算量却能够提升ResNet-SE 0.5%的top-1准确率。它在GPU上并没有有效地影响推理速度。</p>
+<p>关于特征融合，早期的是使用skip connection或者是hyper-column将低级的特征和高级的语义特征进行融合。因为多尺度预测方法比如FPN逐渐受到追捧，因此提出了很多将不同特征金字塔融合的轻量级模型。这类别的模型包括SFAM, ASFF和BiFPN。SFAM的主要思想是在多尺度连接特征图上使用channel-wise级别的调整。对于ASFF，它使用softmax作为point-wise级别的调整，然后将不同尺度的特征图加在一起。在BiFPN中，提出使用多输入权重残差连接去执行scale-wise级别的调整，然后将不同尺度的特征图加在一起。</p>
+<p>在深度学习的研究中，一些人重点关心去寻找一个优秀的激活函数。一个优秀的激活函数可以让梯度更有效的进行传播，与此同时它不会增加额外的计算量。在2010年，Nair和Hinton提出了ReLU激活函数充分地解决了梯度消失的问题，这个问题在传统的tanh和sigmoid激活函数中会经常遇到。随后，LReLU,PReLU,ReLU6,Scaled Exponential Linear Unit(SELU),Swish,hard-Swish和Mish等等相继提出，它们也用来解决梯度消失的问题。LReLU和PReLU主要用来解决当输出小于零的时候，ReLU的梯度为零的问题。ReLU6和hard-Swish主要为量化网络而设计。对于神经网络的自归一化，提出SELU激活函数去实现这个目的。需要注意的是Swish和Mish都是连续可导的激活函数。</p>
+<p>在基于深度学习的目标检测中使用的后处理方法是NMS,它可以用来过滤那些预测统一物体、但是效果不好的BBoxes，然后仅仅保留较好的BBoxes。优化NMS和优化目标方程的方法异曲同工。NMS提出的最初的方法并没有将上下文信息考虑在内，因此Girshick在R-CNN中添加了分类置信度作为参考，然后根据置信度得分的顺序，由高到低执行greedy NMS。对于soft NMS来说，它考虑了这样一个问题：在greedy NMS使用IoU的时候，目标遮挡可能会造成置信度得分的退化。在soft NMS基础上，DIoU NMS将重心坐标的距离信息添加到Bbox的筛选处理中了。值得一提的是，上面提到的后处理方法中都不直接引用捕获的图像特征，后续的anchor-free方法开发中不再需要后处理。<br><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gknj9u3585j30p20c9q3k.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h1 id="3-方法"><a href="#3-方法" class="headerlink" title="3.方法"></a>3.方法</h1><p>我们工作基本的目标就是在生产系统和优化并行预算中加快神经网络的速度，而非降低计算量理论指标（BFLOP）。我们提供了两个实时神经网络的选择： </p>
+<p>（1）GPU 在卷积层中，我们使用少量的组(1-8): CSPResNeXt50 / CSPDarknet53</p>
+<p>（2）VPU 我们使用分组卷积，但是我们不使用Squeeze-and-excitement(SE)模块，具体包括以下模型：EfficientNet-lite / MixNet / GhostNet / MobileNetV3</p>
+<h2 id="3-1网络架构的选择"><a href="#3-1网络架构的选择" class="headerlink" title="3.1网络架构的选择"></a>3.1网络架构的选择</h2><p>我们的目标是寻找<strong>输入网络的分辨率、卷积层的个数、参数的数量</strong> (filtersize<sup>2</sup><em> filters </em> channel / groups)以及<strong>输出层的个数</strong>（filters）之间的最优的平衡。举例来说，大量的研究表明：在ILSVRC2012（ImageNet）的目标检测上，CSPResNext50比CSPDarket53的效果更好，但是在MS COCO的目标检测中，两个的效果恰好相反。</p>
+<p>下一个目标就是选择额外的模块去<strong>增加感受野</strong>以及为不同检测器不同的backbone选择<strong>参数聚合</strong>的最佳方法。比如：FPN, PAN, ASFF, BiFPN。</p>
+<p>在分类任务上最优的模型在检测上未必就是最优的。和分类任务相比，检测器需要以下要求：</p>
+<p>（1）<strong>更高的输入尺寸</strong>（分辨率）- 为了检测多个小物体</p>
+<p>（2）<strong>更多网路层 -</strong> 为了获得更大的感受野去覆盖不断增大的输入尺寸</p>
+<p>（3）<strong>更多的参数</strong> - 提高模型的能力从而能够在一张图片上检测到不同尺寸的多个物体。</p>
+<p>假设来说，我们可以认为具有<strong>更大感受野</strong>（有大量的3*3的卷积层）和<strong>具有大量参数的模型</strong>应当作为检测器的backbone。表格1展示了CSPResNetXt50, CSPDarkent53以及EfficientNet B3的相关信息。CSPResNetXt50仅仅只有16个3*3的卷积层，一个425*425的感受野和20.6M个参数，然而CSPDarkent53有29个3<em>3的卷积层，725</em>725的感受野和27.6M个参数。从理论证明和大量的实验表明在这两个模型中，<strong>CSPDarkent53是作为检测器的backbone最优的选择</strong>。</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gknja3g27rj31z00dsdjr.jpg" srcset="/img/loading.gif" alt="image-20200727115116828"></p>
+<p>不同尺寸感受野的影响总结如下：</p>
+<ol>
+<li>等于目标物体尺寸时：能够看到整个目标物体。</li>
+<li>等于网络尺寸：能够看到目标物体周围的上下文信息。</li>
+<li>大于网络尺寸：增加图像点和最终激活之间连接的数量。</li>
+</ol>
+<p>我们将<strong>SPP模块</strong>添加到CSPDarknet53中，因为它极大<strong>提高了感受野</strong>，能够分离出最重要的上下文特征而且没有降低网络运行的速度。我们使用<strong>PANet作为</strong>不同检测器不同backbone训练阶段<strong>聚集参数</strong>的方法，而非YOLOv3的FPN模块。</p>
+<p>最后，我们选择CSPDarknet53作为backbone, SPP作为附加的模块，PANet 作为neck，使用YOLOv3作为YOLOv4架构的head。</p>
+<p>未来，我们计划扩展检测器的Bag of freebies，它们在理论上可以解决某些问题并且能够提高检测器的精度，后续会以实验的形式探究每个算法对检测器的影响。</p>
+<h2 id="3-2-BoF-和-BoS的选择"><a href="#3-2-BoF-和-BoS的选择" class="headerlink" title="3.2 BoF 和 BoS的选择"></a>3.2 BoF 和 BoS的选择</h2><p>为了提高目标检测的训练，CNN通常使用下面一些技巧：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh5gl0abr0j30tq0t644q.jpg" srcset="/img/loading.gif" alt="image-20200727131951927" style="zoom:33%;" /></center>
+
+<p>对于训练激活函数，因为PReLU和SELU难以训练，并且RELU6是专门为量化网络设计的，我们因此不考虑这这三个激活函数。在正则化方法中，提出DropBlok的学者将其算法和其他算法进行了比较，然后DropBolck效果更好。<strong>因此我们毫不犹豫的选择DropBlock作为我们的正则化方法</strong>。在归一化方法的选择中，因为我们关注在一块GPU上的训练策略，因此我们不考虑syncBN。</p>
+<h2 id="3-3-额外的改进"><a href="#3-3-额外的改进" class="headerlink" title="3.3 额外的改进"></a>3.3 额外的改进</h2><p>为了让检测器更适合在单个GPU上进行训练，我们做了以下额外的设计和改进：</p>
+<ol>
+<li>我们提出了新的数据増广方法：Mosaic和Self-Adversarial Training(SAT)</li>
+<li>在应用遗传算法时选用一个最优的超参数。</li>
+<li>我们改进了已有的算法，让我们的设计更适合高效的训练和检测——改进SAM，改进PAN，以及Cross mini-Batch Normalization(CmBN).</li>
+</ol>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh5gzc8j9yj30v00mmtxa.jpg" srcset="/img/loading.gif" alt="image-20200727133338788" style="zoom:50%;" /></center>
+
+<p>Mosaic是一种新型的数据增广的算法，它混合了四张训练图片。因此有四种不同的上下文进行融合，然而CutMix仅仅将两张图片进行融合。此外，batch normalization在每个网络层中计算四张不同图片的激活统计。这极大减少了一个大的mini-batch尺寸的需求。</p>
+<p>自适应对抗训练（SAT）也表示了一个新的数据增广的技巧，它在前后两阶段上进行操作。在第一阶段，神经网络代替原始的图片而非网络的权重。用这种方式，神经网络自己进行对抗训练，代替原始的图片去创建图片中此处没有期望物体的描述。在第二阶段，神经网络使用常规的方法进行训练，在修改之后的图片上进检测物体。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh5h89y07oj30uu0nan70.jpg" srcset="/img/loading.gif" alt="image-20200727134213874" style="zoom:50%;" /></center>
+
+<p>正如图4中显示，CmBN（Cross mini-Batch Normalization）代表CBN改进的版本。它只收集了一个批次中的mini-batches之间的统计数据。</p>
+<p>我们将SAM的spatial-wise注意力变成了point-wise注意力机制，然后将PAN中的shortcut连接变成了concatenation连接，正如图5和图6所表示的那样。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh5hbtckgwj30sy10m78x.jpg" srcset="/img/loading.gif" alt="image-20200727134538015" style="zoom: 33%;" /></center>
+
+<h2 id="3-4-YOLOv4"><a href="#3-4-YOLOv4" class="headerlink" title="3.4 YOLOv4"></a>3.4 YOLOv4</h2><p>在这个部分，我们会参数YOLOv4的细节：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>网络组成</th>
+<th style="text-align:center">Backbone</th>
+<th style="text-align:center">Neck</th>
+<th style="text-align:center">Head</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>采用模块</strong></td>
+<td style="text-align:center">CSPDarknet53</td>
+<td style="text-align:center">SPP,PAN</td>
+<td style="text-align:center">YOLOv3</td>
+</tr>
+<tr>
+<td>BoF</td>
+<td style="text-align:center">CutMix and Mosaic data augmentation <br />DropBlock regularization<br /> Class label smoothing</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">CIoU-loss<br/>CmBN<br/>DropBlock regularization<br/>Mosaic data augmentation<br/>Self-Adversarial Training<br/>Eliminate grid sensitivity<br/>Using multiple anchors for a single ground truth<br/>Cosine annealing scheduler<br/>Optimal hyperparameters<br/>Random training shapes<br/></td>
+</tr>
+<tr>
+<td>BoS</td>
+<td style="text-align:center">Mish activation<br />Cross-stage partial connections(CSP)<br />Multi-input weighted residual connections (MiWRC)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Mish activation<br />SPP-block<br />SAM-block<br />PAN path-aggregation block<br />DIoU-NMS</td>
+</tr>
+<tr>
+<td>模块作用</td>
+<td style="text-align:center">在ImageNet上进行预训练</td>
+<td style="text-align:center">融合不同位置上的特征图</td>
+<td style="text-align:center">进行预测</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="4-实验"><a href="#4-实验" class="headerlink" title="4 实验"></a>4 实验</h1><p>我们测试了不同训练提升技巧在ImageNet（ILSVRC2012 val）数据集上的精度影响，然后又验证了检测器在MS COCO（test-val 2017）数据集的准确率。</p>
+<h2 id="4-1-实验参数配置"><a href="#4-1-实验参数配置" class="headerlink" title="4.1 实验参数配置"></a>4.1 实验参数配置</h2><p>在ImageNet图像分类实验中，默认的超参数如下：训练步长为8,000,000；batch size和mini-batch size分别为128和32；polynominal decay learning rate scheduling strategy初始的学习率为0.1；warm-up步长为1000；momentum和weight decay分别设置为0.9和0.005。所有的BoS实验使用相同的、默认的超参数，在BoF实验中，我们增加了一半的训练步长。在BoF实验中，我们验证了MixUp, CutMix, Mosaic, Bluring数据增加一节label smoothing regularization方法。在BoS实验中，我们比较了LReLU，Swish和Mish激活函数的影响。所有的实验都在1080Ti或者2080Ti GPU上进行训练。</p>
+<p>在MS COCO目标检测实验中，默认的超参数如下：训练步长为500,500；the step decay learning rate scheduling strategy初始化学习率为0.01在步长为400,000和450,000的时候乘以0.1；momentum和weight decay分别设置为0.9和0.0005。所有的架构在一块GPU进行多尺度训练，它的batch size为64，然而它的mini-batch为8还是4取决于网络架构和GPU的内存限制。除了对寻找最优的超参数使用遗传算法之外，其他所有的实验都使用默认的设置。遗传算法和GIoU使用YOLOv3-SPP进行训练，并且为5k个min-val进行300个epochs。对我们采用搜索的学习率为0.00261，momentum为0.949，IoU阈值为设置为0.213，遗传算法实验的损失标准化为0.07。我们还验证了大量的BoF算法，包括grid sensitivity elimination， mosaic数据增广，IoU阈值化，遗传算法，class label smoothing， cross mini-batch normalization，self-adversarial training,cosine anneling scheduler, dynamic mini-batch size, DropBlock, Optimized Anchors, 不同的IoU损失函数。我们也在不同BoS算法上进行了实验，包括Mish，SPP，SAM,RFB,BiFBN以及Gaussiian YOLO。所有的实验我们仅仅使用一个GPU进行训练，因此比如syncBN的优化多个GPU的技巧我们并没有使用。</p>
+<h2 id="4-2-不同算法在分类器训练上的影响"><a href="#4-2-不同算法在分类器训练上的影响" class="headerlink" title="4.2 不同算法在分类器训练上的影响"></a>4.2 不同算法在分类器训练上的影响</h2><p>首先，我们研究了不同算法在分类器训练上的影响；具体来说，Class label smoothing的影响，不同数据增广技巧，bilateral blurring，MixUp, CutMix和Mosaic的印象在图7中显示，以及不同激活函数的影响，比如Leaky-ReLU（默认的），Swish和Mish。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh5l289v5jj30uo0m8ngb.jpg" srcset="/img/loading.gif" alt="image-20200727155449355" style="zoom:50%;" /></center>
+
+<p>在表2中所示，在我们的实验中，通过引入一些算法，分类器的准确率得到了提升，这些算法包括：CutMix和Mosaic数据增广，Class label smoothing和Mish激活函数。结果，我们的用于分类器训练的BoF-backbone(Bag of Freebies)包括：Cutmix 和Mosaic数据增广算法以及Class labelsmoothing。正如表2和表3所示，我们将Mish激活函数作为补充的选项。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh5i5dje4jj30u00uq436.jpg" srcset="/img/loading.gif" alt="image-20200727141402304" style="zoom:33%;" /></center>
+
+<h2 id="4-3-不同算法在检测器训练上的影响"><a href="#4-3-不同算法在检测器训练上的影响" class="headerlink" title="4.3 不同算法在检测器训练上的影响"></a>4.3 不同算法在检测器训练上的影响</h2><p>进一步的研究关注不同Bag-of-Freebies（BoF-detector）在检测器训练准确度的影响，正如表4所示。通过研究能够提高检测器准确度的算法，我们极大地扩展了BoF的算法选项，而且并没有影响FPS：</p>
+<p>S：消除栅格的敏感度   这个方程在YOLOv3中用于评估目标物体的坐标，自重cx和cy通常是整数，因此，当bx的值非常接近cx或者cx+1的时候，tx的绝对值会非常大。我们通过给sigmoid函数乘以一个大于1的因子来解决这个问题，因此，这样就消除了栅格对不可检测物体的影响。</p>
+<ul>
+<li>M：Mosaic数据增广 - 在训练过程中，使用四张图片而非一张进行增广处理</li>
+<li>IT：IoU阈值 - 为一个ground truth的IoU使用多个anchors，ground truth IoU(truth, anchor) &gt; IoU 阈值</li>
+<li>GA：遗传算法 - 在前10%的训练时间内使用遗传算法选择最优的超参数</li>
+<li>LS：Class label smoothing - 为sigmoid激活函数使用class label smoothing。</li>
+<li>CBN：CmBN - 在整个批次中通过使用Cross mini-Batch Normalization收集统计数据，而非在单独的mini-batch中收集统计数据。</li>
+<li>CA：Cosine annealing scheduler - 在sinusoid训练中改变学习率</li>
+<li>DM：动态的mini-batch尺寸 - 在低分辨率的训练过程中，通过随机训练形状自动的改提高mini-batch的尺寸。</li>
+<li>OA: 优化Anchors - 使用优化的anchors进行训练，网络的分辨率为512*512</li>
+<li>GIoU, CIoU, DIoU, MSE - 为边界框回归使用不同的损失函数。</li>
+</ul>
+<p>下一步的研究关心检测器训练准确度上，不同Bag-of-Specials（BoS-detector）的影响，包括PAN, RFB, SAM, Gaussian YOLO(G)，以及ASFF，正如表5所示。在我们的实验中，当使用SPP, PAN和SAM的时候，检测器得到了最好的性能。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh5jdc5qrhj30sm0h20w2.jpg" srcset="/img/loading.gif" alt="image-20200727145615305"></p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh5jdpq2c6j30n208sabu.jpg" srcset="/img/loading.gif" alt="image-20200727145639628" style="zoom:50%;" /></center>
+
+<h2 id="4-4-不同的backbones和预训练权重在检测器训练中的影响"><a href="#4-4-不同的backbones和预训练权重在检测器训练中的影响" class="headerlink" title="4.4 不同的backbones和预训练权重在检测器训练中的影响"></a>4.4 不同的backbones和预训练权重在检测器训练中的影响</h2><p>下一步我们研究不同backbones模型在检测器准确率上的影响，正如表6所示。我们注意到拥有最佳分类准确率的模型，检测器的准确度未必是最佳的。</p>
+<p>首先，尽管使用不同算法训练得到的CSPResNeXt-50模型的分类精度比CSPDarknet53模型的要高，但是CSPDarknet53模型的检测精度更高。</p>
+<p>再者，CSPResNeXt-50分类器训练使用BoF和Mish提高了它的分类准确率，但是检测器训练使用的预训练权重的进一步使用减少了检测器的精度。但是，CSPDarknet53分类器训练使用BoF和Mish提高了分类器和检测器的准确率，它使用分类器预训练权重。这表示CSPDarknet53比CSPResNeXt-50更适合作为检测器。</p>
+<p>我们观察到，由于各种改进，<strong>CSPDarknet53模型显示出了更大的提高的检测器精度的能力</strong>。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh5jlr796sj30qs0gudj8.jpg" srcset="/img/loading.gif" alt="image-20200727150422977" style="zoom:50%;" /></center>
+
+<h2 id="4-5-不同的mini-batch尺寸在检测器训练上的影响"><a href="#4-5-不同的mini-batch尺寸在检测器训练上的影响" class="headerlink" title="4.5 不同的mini-batch尺寸在检测器训练上的影响"></a>4.5 不同的mini-batch尺寸在检测器训练上的影响</h2><p>最后，我们分析了不同mini-batch尺寸的训练的模型的结果，并且结果在表7中显示出来。从表7中我们发现在添加了BoF和BoS训练策略之后，mini-batch尺寸几乎对检测器的性能没有影响。结果显示在引入了BoF和BoS之后，就不需要使用昂贵的GPUs进行训练。换句话说，任何人可以仅仅使用一个GPU去训练一个优秀的检测器。</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh5jr8a1qzj30qk0dm0vd.jpg" srcset="/img/loading.gif" alt="image-20200727150939061" style="zoom:50%;" /></center>
+
+<h1 id="5-结果"><a href="#5-结果" class="headerlink" title="5. 结果"></a>5. 结果</h1><p>图8中显示了与其他最新的物体检测器获得的结果的比较.YOLOv4位于帕累托最优曲线上，在速度和准确性方面均优于最快，最准确的检测器。</p>
+<p>由于不同的方法使用不同架构的GPU进行推理时间验证，因此我们在Maxwell，Pascal和Voltaarchitectures常用的GPU上运行YOLOv4，并将它们与其他最新方法进行比较。</p>
+<p>表8列出了使用Maxwell GPU的帧速率比较结果，可以是GTX Titan X（Maxwell）或Tesla M40 GPU。表9列出了使用Pascal GPU的帧率比较结果，可以是Titan X（Pascal），Titan Xp，GTX 1080 Ti或Tesla P100 GPU。表10，列出了使用VoltaGPU的帧率比较结果，可以是Titan Volta或Tesla V100 GPU。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh5jv11i85j310j0u0nfv.jpg" srcset="/img/loading.gif" alt="image-20200727151317192"></p>
+<h1 id="6-结论"><a href="#6-结论" class="headerlink" title="6. 结论"></a>6. 结论</h1><p>我们提出了一个最先进的目标检测器，它比所有检测器都要快而且更准确。这个检测器可以仅在一块8-16GB的GPU上进行训练，这使得它可以广泛的使用。One-stage的anchor-based的检测器的原始概念证明是可行的。我们已经验证了大量的特征，并且其用于提高分类器和检测器的精度。这些算法可以作为未来研究和发展的最佳实践。</p>
+<h1 id="7-致谢"><a href="#7-致谢" class="headerlink" title="7. 致谢"></a>7. 致谢</h1><p>作者要感谢Glenn Jocher进行Mosaic data augmentation的思想，使用遗传算法选择超参数并解决网格敏感性问题.</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gknjaujih4j30u012tgxr.jpg" srcset="/img/loading.gif" alt="image-20200727152219681"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh5k4omssoj30u0135h22.jpg" srcset="/img/loading.gif" alt="image-20200727152234763"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh5k4v6chzj30u00wdgzc.jpg" srcset="/img/loading.gif" alt="image-20200727152245313"></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/">文献翻译</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/YOLO/">YOLO</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/25/7-24/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">YOLO系列总结 （7.24 阅读笔记）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/19/YOLOv3/">
+                        <span class="hidden-mobile">文献翻译——YOLOv3:An Incremental Improvement</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "文献翻译——YOLOv4:Optimal Speed and Accuracy of Object Detection&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

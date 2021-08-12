@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>文献翻译——深度多任务多标签CNN对人脸属性进行有效分类 - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-06-26 19:00">
+      2020年6月26日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      94
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年7月12日 晚上
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>今天阅读了《Deep Multi-task Multi-label CNN for Effective Facial Attribute Classiﬁcation》做了一些读书笔记。</p>
+<p>原文：</p>
+
+
+	<div class="row">
+    <embed src="./1.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>​        最新的FAC方法独立的进行面部检测和属性分类，没有完全利用这两部分之间的依赖性。此外许多方法使用相同的CNN网络结构预测所有的面部属性，忽略了不同面部属性学习的复杂性。DMM-CNN联合优化了两个紧密相关的任务（面部位置检测和属性分类）。为更好的处理不同面部属性的学习复杂性，将面部属性分为两组：客观属性和主观属性。为这两组属性分别设计不同的网络结构提取其特征。提出了一种新颖的动态权重方案来为训练过程中的每一个面部属性自动分配损失权重。此外，提出了一种自适应阈值策略来缓解多标签学习分类不平衡的问题。实验采用CelebA和LFWA数据集进行，表明了所提出的DMM-CNN方法对比现有FAC方法的优越性。</p>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p>​         FAC的任务是给定一张面部图片，预测出多种面部属性，例如性别、吸引力、微笑。尽管FAC的任务仅仅是一个图片等级的分类任务，但它仍然非常重要，主要因为视角、光线造成的面部外观改变。</p>
+<p>最新的FAC方法使用CNN进行面部属性分类，这些方法可被粗略的分类为：</p>
+<p>（1）基于单标签学习的FAC方法。基于单标签学习的FAC方法通常提取面部图片的CNN特征，然后使用支持向量机（SVM）进行面部属性分类。然而这些方法独立的预测每个属性，并且忽略了属性之间的联系。</p>
+<p>（2）基于多标签学习的FAC方法。相反，基于多标签学习的FAC方法可以同时预测多个属性，从相对较低的CNN层中提取分享的特征，从相对高的CNN层中学习详细属性分类。</p>
+<p>​         以上这些方法首先进行面部位置检测，然后进行面部属性预测，也就是将这两个联系紧密的任务分开进行训练。因此，这两个任务之间自身的联系并没有被完全有效的利用。此外，一些基于FAC方法的多标签学习同时使用单独的CNN预测面部属性。这些方法平等的对待不同的属性（对所有属性使用相同的网络框架）。忽略了这些属性不同的学习复杂性。（例如学习预测是否戴眼镜比预测是否是尖鼻子相对更容易）。特别的，一些属性（例如大嘴、鹅蛋脸）非常主观，更难被识别，有时甚至人类也感到困惑。更糟的是，训练集经常遭受一些面部属性标注不平衡的问题。（例如秃头只有很少量的正样本）。重新平衡多标签数据是一个非常重要的任务。</p>
+<p>​         为了缓解以上问题，我们提出了一种新颖的深度多任务多标签CNN方法（DMM-CNN）。联合优化两个紧密相关的任务（面部位置检测和属性分类），以提高基于多任务学习的FAC的性能。为更好的处理不同面部属性的学习复杂性，将面部属性分为两组：客观属性和主观属性。为这两组属性分别设计两个不同的网络结构提取其判别特征。提出了一种新颖的动态权重方案来为训练过程中的每一个面部属性自动分配损失权重。此外，提出了一种自适应阈值策略来缓解多标签学习分类不平衡的问题。</p>
+<p>​         与我们之前提出的MCFA方法相似，DMM-CNN方法也采用多任务学习框架。然而，MCFA和DMM-CNN有一些重大的不同。首先，MCFA聚焦在使用多尺度CNN提取语义属性信息的问题，DMM-CNN针对于克服面部属性的不同学习复杂性问题（通过为主观属性和客观属性设计不同的网络结构，提出一个动态权重体系）。第二，MCFA使用一个固定的判定阈值策略来缓解类不平衡问题。第三，MCFA联合学习人脸检测、面部特征点检测FLD和面部属性分类，而DMM-CNN同时做了FLD和FAC。人脸检测没有包含在DMM-CNN中的原因是使用面部检测的辅助任务仅仅略微提高了FAC的性能，但增加了计算负担。此外，FLD明确扮演了人脸定位的角色。最后，MCFA中的FLD模块仅仅提供了5个可用的面部特征（左右眼、嘴角、鼻尖）。相反，DMM-CNN中的FLD模块输出72个面部特征，可以为FAC提供更多有益的辅助信息。</p>
+<p>本文的主要贡献总结如下：</p>
+<ul>
+<li><p>我们根据学习复杂度将不同的面部特征划分为主观属性和客观属性。其中有两个不同的SPP层被用来提取特征。据我们所知，这篇论文是第一篇考虑不同面部属性的学习复杂度，学习多深度神经网络来提高FAC性能的论文。</p>
+</li>
+<li><p>提出了一种新颖的动态权重体系，利用包含所有验证集的验证损失改变率，来自动的给面部属性分配权重。通过这种方式，训练过程集中于对较难的面部属性分类。</p>
+</li>
+<li><p>我们建立了一个自适应阈值策略来对多标签学习进行精确的面部属性分类。该策略考虑面部属性的不平衡数据分布。因此，一些FAC属性的不平衡分类问题也被从决策水平上有效缓解。</p>
+</li>
+</ul>
+<p>本文结构组织如下：</p>
+<p>第二部分回顾了相关工作，第三部分介绍了所提出方法的详细细节。第四部分在CelebA和LFWA数据集上对所提出方法与其他一些最新的方法的性能进行了评价。第五部分做了总结。</p>
+<h2 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2 相关工作"></a>2 相关工作</h2><p>​        在过去几十年中，FAC取得了巨大的进步。传统的FAC方法依赖于手工标注特征来进行属性分类。随着深度学习的发展，当前最新的FAC方法使用CNN模型来预测属性，并表现出了巨大的性能改善。我们提出的方法将基于CNN的多任务学习，多标签学习和属性分组紧密联系起来。在这一部分我们简要介绍基于CNN的相关工作。</p>
+<h3 id="2-1-多任务学习"><a href="#2-1-多任务学习" class="headerlink" title="2.1 多任务学习"></a>2.1 多任务学习</h3><p>​        多任务学习(MTL)是一个借助相关辅助任务，提高目标任务性能的有效学习范式。MTL已经被证明在多种CV任务中有效。CNN模型可以很自然的应用于MTL，其中所有任务在深层共享和学习共同的特征表示。例如zhang等将FLD与许多相关任务一起进行，例如性别分类和姿态估计。Tan等人通过MTL方式联合学习多种用于行人分析的注意机制（包括解析注意，标记注意和空间注意）。</p>
+<p>​        在多任务深度学习中，为不同的损失函数适当分配权重具有重要意义。Kendall等人提出基于每个任务的同方差不确定性权重损失函数，其中权重是自动从数据中获得的。Chen等人开发了一种梯度归一化(GradNorm)方法，通过动态调整梯度大小来执行多任务深度学习。根据不同任务的训练率分配损失权重。最近，Liu等人开发了一个用于MTL的多任务注意力网络，该网络以端到端的方式自动学习任务分享和任务特定的特征。他们建立了一个新颖的权重体系——动态权值平均（DWA）,基于每个任务的损失率变化来学习权重。</p>
+<h3 id="2-2-多标签学习"><a href="#2-2-多标签学习" class="headerlink" title="2.2 多标签学习"></a>2.2 多标签学习</h3><p>​         一方面，传统的基于CNN的FAC方法主要依赖单标签学习来预测面部属性。例如，Liu等人提出将两个定位网络（LNets）和一个属性网络（ANet）级联，分别对脸部区域定位和提取特征。他们利用从ANet中提取的特征训练40个支持向量机来对40个属性进行分类。基于单标签学习的FAC方法单独考虑每一个属性的分类方法，忽略了属性之间的相关性。此外，这些方法通常是耗时和成本高昂的。</p>
+<p>​        另一方面，基于多标签学习的FAC方法在一个端到端训练的网络中同时预测多种面部属性。由于每张人脸图像都与多个属性标签相关联，因此多标签学习非常适合于FAC。例如，Ehrlich等使用基于限制玻尔兹曼机(RBM)的模型进行属性分类。Rudd等人引入了混合目标优化网络(MOON)来解决多标签不平衡问题。Huang等提出了一种贪婪神经结构搜索方法来自动发现最优的树状网络结构，可以联合预测多个属性。</p>
+<p>​        现有的基于多标签学习的FAC方法对每个属性使用相同的网络架构，通常是在CNN的上层学习面部属性的特征。然而，不同的面部属性具有不同的学习复杂性。因此，开发一种新的CNN模型，考虑属性学习的多样性，而不是在训练阶段将属性平等对待，更有吸引力。</p>
+<h3 id="2-2-属性分类"><a href="#2-2-属性分类" class="headerlink" title="2.2 属性分类"></a>2.2 属性分类</h3><p>​         根据不同的标准，可以将面部属性分为若干组。例如Emily等根据属性位置将面部属性划分为9组，明确地学习人脸图像中相似位置的属性之间的关系。Han等将人脸属性按照数据类型和语义意义分为序数属性和名词性属性、整体属性和局部属性。相应地，定义了四种类型的子网络(具有相同的网络结构)，分别对应于整体标称、整体序数、局部标称和局部序数属性，其中每个子网络使用不同的损耗函数进行FAC。Cao等将人脸属性按照对应位置划分为上、中、下、全图像4个属性组，设计了4个任务专用子网络(对应4个属性组)和一个FAC共享子网络。</p>
+<p>​         在本文中，不同于以上属性分类方法，我们根据不同的学习复杂性将属性分为两组：主观属性和客观属性。对应的，我们设计了两种不同的网络结构，分别能提取出有利于对主观和客观属性进行分类的不同层次的特征。</p>
+<h2 id="3-方法"><a href="#3-方法" class="headerlink" title="3 方法"></a>3 方法</h2><p>​      在这一部分，我们详细介绍了所提出的DMM-CNN方法，该方法利用多任务学习和多标签学习实现有效的FAC。</p>
+<h3 id="3-1-概述"><a href="#3-1-概述" class="headerlink" title="3.1 概述"></a>3.1 概述</h3><p>​         我们所提出方法的概述如图二所示，在本文中为了提取共享特征，我们采用ResNet50并且移去最终的全局池化层。在共享特征的基础上，我们进一步进行多任务多标签学习，提取两个相关任务（FAC和FLD）的任务详细特征。</p>
+<p>​         具体来说，在FAC任务中，为了应对面部属性不同的学习复杂性，我们将面部属性分为两组(客观属性和主观属性)【3.2.1节】，并为这两组设计了两种不同的网络架构。特别是利用两个不同的空间金字塔池(SPP)层对网络中的客观属性和主观属性分别提取不同层次的语义信息【3.2.2节】。对于FLD任务，检测到72个面部特征点。因此，整个网络有三种输出（客观属性预测输出、主观属性预测输出、面部特征点回归）。</p>
+<p>​         在训练阶段【3.3节】整个框架将两个任务的损失合并为最终损失，最终开发出一种新颖的自适应加权方案，将损失权重自动的分配给每个面部属性，从而使训练集中在对更困难面部属性的分类。此外，为了缓解类不平衡的问题，开发了一种自适应阈值策略来准确预测每个属性的标签。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg75fbcytfj31mg0tedp8.jpg" srcset="/img/loading.gif" alt="image-20200627210436393"></p>
+<h3 id="3-2-CNN结构"><a href="#3-2-CNN结构" class="headerlink" title="3.2 CNN结构"></a>3.2 CNN结构</h3><p>​          在下面的小节中，我们分别详细介绍两组面部属性，SPP层和面部标志检测任务。</p>
+<h4 id="3-2-1-客观属性和主观属性"><a href="#3-2-1-客观属性和主观属性" class="headerlink" title="3.2.1 客观属性和主观属性"></a>3.2.1 客观属性和主观属性</h4><p>​        为了有效地利用面部属性的内在联系和异质性，可以将这些属性划分为不同的组。在本文中，我们建议将面部属性分为两类：主观属性（例如“有吸引力”，“大鼻子”）和客观属性（例如“秃头”，“男性”）。有关更多详细信息，请参见图3。 我们的设计基于以下观察：最先进的FAC方法通常在预测主观属性方面的准确性要比客观属性低得多。例如，与“微笑”和“年轻”属性相比，通常更容易对“戴帽子”和“戴眼镜”属性进行分类。这主要是因为主观属性通常以微妙的形式出现，这使得CNN模型更难以学习决策边界。换句话说，客观和主观属性显示出不同的学习复杂性。因此，最好为这两组属性设计不同的网络体系结构。</p>
+<p>​        在我们的实现中，用于学习对象属性的分支包括一个1级SPP层（请参见3.2.2节）和两个完全连接的层，其输出特征分别为1024和22维（客观属性的数量）。学习主观属性的分支包括一个三级SPP层和三个完全连接的层，其输出特征分别为2048、1024和18（主观属性的数量）维。以这种方式，为主观属性设计的网络比为客观属性设计的网络多编码了更高级别的语义信息（这有助于预测主观属性）。</p>
+<h4 id="3-2-2-SPP层"><a href="#3-2-2-SPP层" class="headerlink" title="3.2.2 SPP层"></a>3.2.2 SPP层</h4><p>​        由He等人提出的空间金字塔合并（SPP）层，被引入来解决CNN网络的固定图像大小要求的问题。SPP层池化最后一个卷积层的顶部特征，并且无论输入大小/比例如何，它都可以生成固定长度的输出。SPP聚合了来自网络较深层的信息，从而有效避免了裁剪或扭曲输入图像的约束。在本文中，我们使用1级SPP层提取目标属性的特征，并使用3级SPP层提取主观属性的特征（n级SPP层将特征图划分为n×n个块， 然后在每个块中执行最大池化操作）。1级SPP层和3级SPP层的输出要素图的大小分别为2、048×1和28、672×1。因此，我们可以利用SPP图层将任何大小的面部图像输入到网络。如前所述，高级语义特征用于预测主观属性，而低级外观特征用于对客观属性进行分类。特征的不同级别有利于对两组属性进行分类。</p>
+<h4 id="3-2-3-面部特征点检测"><a href="#3-2-3-面部特征点检测" class="headerlink" title="3.2.3  面部特征点检测"></a>3.2.3  面部特征点检测</h4><p>​         在本文中，通过利用多任务学习共同训练了两个不同但相关的任务（即FLD和FAC）。在此，FAC是目标任务，而FLD是辅助任务。在多任务学习的范式下，利用目标任务和辅助任务之间的内在依赖关系来有效地提高FAC的性能。面部图像的特征点信息有利于提高FAC的准确性。例如，嘴巴周围的特征点可以提供辅助信息，以帮助预测“微笑”属性。</p>
+<p>​         与我们以前的研究仅考虑5个面部标志不同，我们使用dlib库获取更多的面部特征点（总共72个面部标志），这些轮廓点概述了眼睛，眉毛，鼻子，嘴巴和面部边界。注意，不同的面部属性通常与不同的面部标志有关。因此，使用更多的面部标志有利于提高FAC的性能。FLD分支采用由1级SPP层获得的2,048维特征向量作为输入，并由两个完全连接的层组成，其输出特征分别为1,024和144维。</p>
+<h3 id="3-3-训练"><a href="#3-3-训练" class="headerlink" title="3.3 训练"></a>3.3 训练</h3><p>​        如前所述，不同的面部特征具有不同的学习复杂性。为了应对面部属性的各种学习复杂性，除了针对客观和主观属性采用不同的网络体系结构之外，我们还提出了一种新颖的动态加权方案，可以自动将损失权重分配给不同的属性。此外，为了缓解多标签训练类不平衡问题，开发了一种自适应阈值策略来预测每个属性的标签。</p>
+<p>​         在本文中，为了简化不同任务的处理，我们使用均方误差（MSE）损失函数。</p>
+<p>​        1) 面部特征点检测（FLD）：FLD的MSE损失为</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg75e61ffrj30uk04i3yn.jpg" srcset="/img/loading.gif" alt="image-20200627210325932" style="zoom: 33%;" /></p>
+<p>其中N是训练图像的数量。 yˆFLD∈R2T表示从网络获得的面部特征的输出（即坐标矢量）（T是面部界标的数量，在本文中我们使用72个面部界标）。 yF LD∈R2T表示地面真实坐标向量。</p>
+<p>​        2）面部属性分类：FAC的MSE损失为</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg75swh4ixj30u804sq3d.jpg" srcset="/img/loading.gif" alt="image-20200627211739787" style="zoom:33%;" /></p>
+<p>其中ˆyF AC和yF AC（∈{1，−1}）表示预测的输出和 分别对应于第i个训练图像的第j个属性的标签。      </p>
+<p>​        3）共同损失：共同损失包括FLD和FAC的损失，可以写为</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg75zsr149j30s604qmxh.jpg" srcset="/img/loading.gif" alt="image-20200627212417691" style="zoom:33%;" /></p>
+<p>​        其中，J是面部属性的总数。λt= [λ1t，λ2t，···，λJt] T  表示在第t次迭代期间对应于面部属性J</p>
+<p>的权重向量。 β是正则化参数（根据经验将β设置为0.5）。</p>
+<p>​        4）动态加权方案。 在本文中，我们提出了一种动态加权方案来自动为所有面部属性分配权重。 根据验证损失趋势动态分配损失权重。 具体而言，权重定义为</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg765fiyrcj30tu05iaam.jpg" srcset="/img/loading.gif" alt="image-20200627212942632" style="zoom:33%;" /></p>
+<p>​       其中Lj，V AL（t）是验证损失（根据FAC计算到等式 （2）验证集的每个属性）在训练的第t次迭代中。 以这种方式，如果验证损失没有减少，则将与面部属性相对应的权重分配为低值，而如果验证损失显着下降，将为这些权重分配较高的值。</p>
+<p>​        在初始训练过程中，为容易分类的属性分配了较大的权重，以便可以快速减少其相应的MSE损失。随着迭代的进行，难以分类的属性的MSE损失变得相对较大并缓慢下降，而易于分类的属性的MSE损失则变得较小。因此，在训练过程的后期，网络将重点放在对分类困难的属性进行分类的训练上（每个属性的损失由权重与其相应的MSE损失的乘积组成）</p>
+<p>​        注意，加权方案也在[30]和[38]中开发。 但是，所提出的动态加权方案与[30]，[38]中的方案之间存在显着差异。在[30]中，权重是根据训练损失变化率计算的。 在[38]中，根据验证损失和平均验证损失趋势来计算权重。注意，验证损失可能不适用于确定权重。相反，所提出的动态加权方案仅基于验证损失趋势来计算权重。而且，[30]中的权重是根据每个迭代中每个时期的平均训练损失（在训练集中）获得的。与[30]不同，[38]和我们提出的加权方案利用了验证集，这可能有益于提高学习模型的泛化能力（因为在反向传播过程中验证集不直接用于计算梯度）。在[38]中，验证损失是在每次迭代过程中对一小批（仅包含10个验证图像）进行计算的，而在我们的方法中，它是针对每P次迭代的整个验证集计算的。因此，所提出的动态加权方案能使损失更加稳定的减少。</p>
+<p>​        5）自适应阈值策略。 我们根据网络的最终输出预测第j个面部属性lj的标签：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg7q6i7cm6j30t40600t6.jpg" srcset="/img/loading.gif" alt="image-20200628090243455" style="zoom:33%;" /></p>
+<p>​        其中τj是阈值参数。 如果预测输出大于阈值τj，则分配正样本标签。</p>
+<p>现有的FAC方法通常将阈值τj设置为0。但是，由于类别不平衡的问题（即，一个类别的样本数量明显大于一个属性的另一类别的样本数量），使用固定阈值不是最佳解决方案，尤其是对于某些高度不平衡的面部属性。在本文中，我们介绍了一种自适应阈值策略，该策略可自适应地更新阈值，如下所示：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg7qdvulhij30ug04o74j.jpg" srcset="/img/loading.gif" alt="image-20200628090948892" style="zoom:33%;" /></p>
+<p>​     其中τt∈RJ是第t次迭代的阈值。 V是验证集中的样本数。  NF P∈RJ（NF N∈RJ）表示第t次迭代的验证集中的假阳性（假阴性）。假阳性的值越大（或者假阴性的值越小），阈值应该越大。因此，NFP和NFN之间的差异可以用于调整阈值。我们还在等式中考虑当前迭代。（6），因为随着训练时期的增加（阈值适应更大的值），应该更加重视错误的预测。γ是固定参数（我们在实验中将其设置为0.01）。</p>
+<p>算法1总结了所提出的DMM-CNN方法的训练步骤：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg7qw45e4pj30v50u0jxx.jpg" srcset="/img/loading.gif" alt="image-20200628092719860" style="zoom:50%;" /></p>
+<h2 id="4-实验"><a href="#4-实验" class="headerlink" title="4 实验"></a>4 实验</h2><p>​        在本节中，我们首先介绍两个用于评估的公共FAC数据集。 然后，我们进行消融研究，以讨论所提出的DMM-CNN方法的每个组件的影响。最后，我们将提出的DMM-CNN方法与几种最新的FAC方法进行了比较。</p>
+<h3 id="4-1-数据集和参数设定"><a href="#4-1-数据集和参数设定" class="headerlink" title="4.1  数据集和参数设定"></a>4.1  数据集和参数设定</h3><p>​        CelebA [39]是一个大规模的面部数据集，提供有标记的边界框以及5个特征点和40个面部属性的注释。它包含用于训练的162,770张图像，用于验证的19,867张图像和用于测试的19,962张图像。CelebA中的图像涵盖了较大的姿势变化和背景杂乱。LFWA [40]是另一个具有挑战性的人脸数据集，其中包含13,143张带有73个二值人脸属性注释的图像。我们从LFWA中选择与CelebA相同的40个属性。对于LFWA，我们对在CelebA上训练的模型进行微调，并使用LFWA的原始图像和深层漏斗图像作为训练集，以防止过度拟合。最终，使用了13144张图像进行训练，使用了6571张图像进行LFWA测试。 由于LFWA不提供验证集，因此我们直接更新动态权重，并在训练集上使用自适应阈值策略。</p>
+<p>​         所提出的方法是基于开源深度学习框架pytorch实施的，其中使用一个NVIDIA TITAN X GPU训练了15个时期的模型，块大小为64。基本学习率设置为0.001，当验证损失停止减少时，我们将学习率乘以0.1。模型大小大约为360M。</p>
+<h3 id="4-2-消融研究"><a href="#4-2-消融研究" class="headerlink" title="4.2 消融研究"></a>4.2 消融研究</h3><p>​        在本小节中，我们将进行消融研究，以评估CelebA和LFWA数据集上提出的DMM-CNN不同组件的有效性。</p>
+<p>​        <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg7roia6cyj30ys0ou41e.jpg" srcset="/img/loading.gif" alt="image-20200628095437584" style="zoom: 33%;" /></p>
+<p>​        我们对我们所提出的DMM-CNN方法的一些变体进行了评估。具体来说，Baseline表示我们仅使用ResNet50（具有40个输出单位）来提取特征并对属性进行分类。DMM-FAC表示我们仅执行FAC的单个任务，而不使用FLD的辅助任务。DMM-EQ-FIX表示我们对所有属性使用相等的损失权重（与1.0相同），而不必依赖于建议的动态加权方案，并且使用固定阈值（即0.0）来预测每个属性的标签，而不是使用自适应阈值。DMM-EQ-AT表示我们对所有属性和建议的自适应阈值策略使用相等的损失权重。DMM-DW-FIX表示我们使用动态加权方案和固定阈值。DMM-SPP表示我们使用3级SPP层和三个完全连接的层来预测所有属性（使用与主观属性分支相同的网络体系结构）而不进行属性分组。DMM-CNN is the proposed method. The details of all the competing variants are listed in Table 1.</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg7s87pvc9j31dx0u011n.jpg" srcset="/img/loading.gif" alt="image-20200628101333266"></p>
+<p>​        图3显示了通过不同变体获得的性能（即准确率）。我们有以下观察结果：</p>
+<ul>
+<li>与基准相比，其他所有变量均具有更好的性能（尤其是在“拱形的眉毛”，“大嘴唇”和“窄眼”属性上），这表明了使用特定任务特征进行FAC的重要性。</li>
+<li>通过将DMM-FAC与DMM-CNN进行比较，我们可以看到，多任务学习通过利用FAC与FLD之间的内在关系，有利于提高FAC的性能。</li>
+<li>与DMM-EQ-FIX相比，DMM-DW-FIX的平均分类率更高，这表明使用动态加权方案的优越性。</li>
+<li>DMM-EQ-AT获得的平均分类率高于DMM-EQ-FIX获得的平均分类率，这表明使用自适应阈值策略的有效性。</li>
+<li>与基线相比，LFWA上的DMM-DW-FIX和DMM-EQ-AT的改进比CelebA上的改进更为明显。具体而言，DMM- DW-FIX的准确性提高了5.52％（0.91％），而DMM-EQ-AT的LFWA（CelebA）的准确性提高了3.98％（0.95％）。在CelebA上的提升并不明显。在某些论文中也观察到了这种现象[33]，[41]，[42]。这可能是因为训练集的分布和CelebA的测试集存在很大差异，并且在CelebA标签中存在一些噪声，尤其是对于主观属性[43]，这导致CelebA的测试集难以显着改进。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg7teiog8bj314m0istbe.jpg" srcset="/img/loading.gif" alt="image-20200628105413581" style="zoom:33%;" /></p>
+<ul>
+<li><p>与DMM-SPP相比，DMM-CNN具有更好的准确性（即CelebA和LFWA分别提高了0.30％和1.81％）。因此，考虑到面部属性的不同学习复杂性，设计不同的网络体系结构将有助于提高FAC的性能。</p>
+</li>
+<li><p>在所有变体中，DMM-CNN达到了最佳准确性，这可以归因于利用面部属性的不同学习复杂性的多任务学习和多标签学习框架。</p>
+<p>​    损失加权方案在FAC的性能中起着至关重要的作用。我们比较了不同加权方案的性能。 具体来说，我们评估以下四个代表性的加权方案：1）统一加权（UW）方案，其中对应于不同属性的所有权重均设置为1.0；2）中提出的动态加权平均（DWA）方案，其中训练集中的损失变化率用于自动学习权重；3）文献[38]中提出的自适应加权（AW）方案，其中使用块中的验证损失和平均验证损失趋势来获得权重；4）提出的动态加权方案，该方案利用了整个验证集中验证损失的变化率。表2给出了CelebA和LFWA数据集上不同加权方案的实验结果。我们可以看到，与其他加权方案相比，采用提出的动态加权方案的方法可获得最佳性能，这可以验证所提出方案的有效性。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg7u01a8ydj30y70u0tfi.jpg" srcset="/img/loading.gif" alt="image-20200628111453942" style="zoom: 33%;" /></p>
+<p>在图5中，我们进一步可视化了训练阶段验证集上的平均验证损失和两个代表性属性损失（即，客观属性“ MouthOpen”和主观属性“ Young”）的变化。这里，分别采用了提出的动态加权方案和固定加权方案（即，将每个属性的权重设置为1.0）。我们可以看到，基于动态加权方案的平均验证损失比基于固定加权方案的平均验证损失下降得更快。客观属性（即“张开嘴”）的训练收敛速度快于主观属性（即“年轻”）的收敛速度。在初始训练阶段，“ MouthOpen”属性的损失在大约15,000次迭代后迅速下降并收敛。相反，“ Young”属性的损失在大约30,000次迭代后缓慢下降并收敛。随着训练的进行，网络将重点放在对那些困难的主观属性进行分类上。通常，使用动态加权方案的损失通常比使用固定加权方案的损失下降得更多和更快。这表明在优化具有不同学习复杂性的多标签学习任务时，动态权重至关重要。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg7u9kl3gxj30ya0ssaf3.jpg" srcset="/img/loading.gif" alt="image-20200628112403503" style="zoom:33%;" /></p>
+<p>我们分别在图6和图7的训练阶段中可视化动态权重和自适应阈值的变化。首先，在图6中，给出了在训练阶段对应于两个代表性面部属性（即，“张开嘴”和“年轻”）的两个动态权重的曲线。我们可以观察到对应于两个属性的动态权重的变化是不稳定的。这主要是因为所提出的加权方案根据属性损失变化的速率动态地为每个属性分配了权重（参见等式（4））。换句话说，当属性的损失显着下降时，将为该属性分配较大的权重（因为该属性的学习过程不会收敛）。因此，动态权重反映了不同属性的学习率，这些学习率可能会发生很大变化。但是，注意到这两个属性的损失不断减少并稳定收敛（请参见图5）。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg7unwfzizj30yb0u0dks.jpg" srcset="/img/loading.gif" alt="image-20200628113750271" style="zoom:33%;" /></p>
+</li>
+</ul>
+<p>其次，在图7中，给出了在训练阶段对应于十个随机选择的面部属性的自适应阈值的曲线。我们可以观察到阈值的变化是稳定的。 这主要是由于使用了假正样本和假负样本之间的不同来调整阈值。 随着迭代的进行，差异变得更加稳定。</p>
+<h3 id="4-3-与最新FAC方法的对比"><a href="#4-3-与最新FAC方法的对比" class="headerlink" title="4.3 与最新FAC方法的对比"></a>4.3 与最新FAC方法的对比</h3><p>在本小节中，我们将提出的DMM-CNN方法与几种最新的FAC方法的性能进行比较，包括（1）PANDA [11]，它使用部分模型来提取特征和SVM作为分类器；（2）LNets + ANet [31]，它级联两个定位网络和一个属性网络，并对每个属性使用一个SVM分类器；（3）MOON [19]，一种新颖的混合目标优化网络，解决了多标签不平衡问题。（4）NSA（采用中位数规则）[14]，它使用分步方法进行FAC；（5）MCNN-AUX [20]，根据属性位置将40个属性分为九组；（6）MCFA [18]，我们先前的工作，利用了FAC和辅助任务（面部检测和FLD）之间的固有依赖性。请注意，由于MOON没有报告LFWA的结果，因此没有在LFWA数据集上给出通过MOON获得的准确性。（7）GNAS [33]，提出了一种有效的贪婪神经体系结构搜索方法，可以自动学习多属性深度网络体系结构。（8）AW-CNN [36]，它开发了一种新颖的自适应加权多任务深度卷积神经网络来预测人的属性。 （9）PS-MCNN-LC [35]，它通过利用身份信息和属性关系引入了部分共享的多任务网络。</p>
+<p> 表3显示DMM-CNN优于这些竞争方法，在CelebA（LFWA）上的平均准确度达到91.70％（86.56％）。与使用按属性SVM分类器的PANDA和LNets + ANet相比，DMM-CNN通过利用多标签学习获得了卓越的性能。我们的DMM-CNN也比MCNN-AUX，NSA和MOON具有更好的性能。值得指出的是，我们的方法仅利用了两组属性（即客观属性和主观属性），而MCNN-AUX使用了9组属性。即使使用较少的属性组，DMM-CNN仍可以实现比MCNN-AUX更高的精度。 DMM- CNN在很大程度上优于MCFA，这证明了使用更多面部标志信息和属性分组机制的有效性。</p>
+<p>​        所提出的DMM-CNN方法与LFWA上的MCNN-AUX具有相似的精度。 DMM-CNN在所有40个属性中的20个属性上实现了最高的准确性，与竞争方法相比，主观属性（例如“尖鼻子”，“微笑”和“眉毛”）的性能得到了显着改善。就CelebA和LFWA数据集的平均识别率而言，提出的DMM-CNN方法比GNAS具有更好的性能。这可以归因于所提出的多任务多标签学习框架的有效性，在该框架中，分别设计了两种不同的网络体系结构以提取用于对客观和主观属性进行分类的特征。与手动设计网络体系结构的DMM-CNN不同，GNAS会自动发现树状的深度神经网络体系结构以进行多属性学习。因此，GNAS的培训过程比较耗时。 与AW-CNN相比，提出的DMM-CNN方法获得了相似的精度。与通过使用多任务学习框架（识别一个属性被视为一个任务）来预测多人属性的AW-CNN不同，该方法联合学习了两个紧密相关的任务（即FLD和FAC） 。注意，在CelebA和LFWA数据集上，提出的DMM-CNN方法都比PS-MCNN-LC实现了更差的性能。PS-MCNN-LC设计了一个共享网络（SNet），以学习不同属性组的共享特征，同时针对从低层到高层的每组属性采用任务专用网络（TSNet）。但是，PS-MCNN-LC利用了局部约束丢失（LCLoss），后者要求将人脸身份作为附加属性。此外，还需要谨慎选择SNet和TSNets中的通道数，以确保最终性能。总体而言，所有竞争方法之间的性能比较表明了该方法的有效性。<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gg7xkt5jh2j30x50u0qlp.jpg" srcset="/img/loading.gif" alt="image-20200628131839750"></p>
+<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5 总结"></a>5 总结</h2><p> 在本文中，我们提出了一种新颖的用于FAC的深度多任务多标签CNN方法（DMM-CNN）。 DMM-CNN通过共同执行FAC和FLD任务有效地提高了FAC的性能。基于主观和客观属性的划分，采用了不同的网络架构和新颖的动态加权方案来处理面部属性的各种学习复杂性。对于多标签学习，开发了自适应阈值策略来减轻分类不平衡的问题。在公开的CelebA和LFWA数据集上进行的实验表明，与几种最新的FAC方法相比，DMM-CNN具有更高的性能。</p>
+<h2 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h2><p>本文工作得到了国家重点研发计划（2017YFB1302400），国家自然科学基金（61571379，U1605252、61872307）以及中国福建省自然科学基金（2017J01127和2018J01576）的支持。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/">文献翻译</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/FAC/">FAC</a>
+                    
+                      <a class="hover-with-bg" href="/tags/CNN/">CNN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/DMM-CNN/">DMM-CNN</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/02/YOLO/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">文献翻译——You Only Look Once:Unified,Real-Time Object Detection</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/25/%E5%AD%A6%E4%B9%A0%E8%A7%84%E5%88%92-6-25/">
+                        <span class="hidden-mobile">学习规划(6.25)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "文献翻译——深度多任务多标签CNN对人脸属性进行有效分类&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

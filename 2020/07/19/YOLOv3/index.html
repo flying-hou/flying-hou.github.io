@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="htx">
+  <meta name="keywords" content="">
+  <title>文献翻译——YOLOv3:An Incremental Improvement - htx&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>htx's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://tva1.sinaimg.cn/large/007S8ZIlly1ggmw0hgql0j31400u0nev.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-07-19 20:11">
+      2020年7月19日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      37
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年11月13日 上午
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>我们给YOLO提供一些更新！ 我们做了一些小的设计更改以使其更好。 我们也训练了这个非常庞大的新网络。它比上次（YOLOv2）稍大一些，但更准确。它仍然很快，所以不用担心。在320×320的输入下，YOLOv3只需运行22.2ms，获得28.2的mAP，像SSD一样准确，但速度快三倍。当我们看看老的0.5 IOU mAP检测指标时，YOLOv3是相当不错的。在Titan X上，它在51 ms内实现了57.9的AP50，与RetinaNet在198 ms内实现的57.5 AP50对比，性能相似但速度快3.8倍。与往常一样，所有代码均在<a href="https://pjreddie.com/yolo/。" target="_blank" rel="noopener">https://pjreddie.com/yolo/。</a></p>
+<h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h1><p>有时候，一年你主要只是在打电话，你知道吗？今年我没有做很多研究。我在Twitter上花了很多时间。玩了一下GAN。去年我留下了一点点的动力[10] [1]；我设法对YOLO进行了一些改进。但是诚然，没有什么比这超级有趣的了，只是一小堆（bunch）改变使它变得更好。我也帮助了其他人的做一些研究。</p>
+<p>实际上，这就是今天把我们带到这里的原因。我们有一个付印截止日期，我们需要引用我对YOLO所做的一些随机更新，但我们没有源头。因此，为技术报告做准备！</p>
+<p>关于技术报告的好处是他们不需要介绍，你们都知道我们为什么来到这里。因此，介绍部分的结尾将为论文剩余部分进行导引。首先我们会告诉你YOLOv3做了什么。然后我们会告诉你我们是怎么做的。我们还会告诉你我们尝试过的一些没有奏效的事情。最后，我们将考虑这一切意味着什么。</p>
+<h1 id="2-详细内容"><a href="#2-详细内容" class="headerlink" title="2.详细内容"></a>2.详细内容</h1><p>这里是YOLOv3的详细内容：我们主要从其他人那里获得好点子。我们也训练了一个比其他人更好的新分类器网络。我们将带您从头开始学习整个系统，以便您完全理解所有内容。</p>
+<h2 id="2-1-边界框预测"><a href="#2-1-边界框预测" class="headerlink" title="2.1 边界框预测"></a>2.1 边界框预测</h2><p>遵循YOLO9000，我们的系统使用维度聚类（dimension clusters ）作为锚盒（anchor boxes）来预测边界框[13]。网络为每个边界框预测4个坐标，tx，ty，tw，th。 如果单元格从图像的左上角偏移了（cx，cy）并且先验边界框的宽度和高度为pw，ph，则预测对应于：</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggwltd4idbj30as08uwev.jpg" srcset="/img/loading.gif" alt="image-20200719213048979" style="zoom:50%;" /></center>
+
+<p> 在训练期间，我们使用平方误差损失的总和。如果一些坐标预测的真值是t<sup>^</sup><sub>*</sub>，则我们的梯度是用真值（由ground box计算得到）减去我们的预测：t<sup>^</sup><sub>*</sub>-t<sub>*</sub>。 通过反转上面的方程可以很容易地计算出这个真值。</p>
+<p>YOLOv3使用逻辑回归预测每个边界框的<strong>objectness score</strong>。如果某个边界框的先验与真值的重合率比其他先验边界框高，那么该边界框的<strong>objectness score</strong>分值为1。如果某个边界框的先验不是最好的，但是确实与真值重叠了一定的阈值以上，我们会和[17]R-CNN一样，忽略该预测。我们将这个阈值设为0.5。与[17]R-CNN不同，我们的系统为每个真值对象分配一个先验边界框。如果没有将边界框先验分配给真值对象，则不会对坐标或类预测造成任何损失，而只会引起<strong>objectness score</strong>损失。</p>
+<p><code>YOLO V3 模型里有个objectness标签，开始我也是一脸懵逼。查阅资料后总结如下： objectness可以具象化理解为“置信度”；objectness对应的是布尔值类型的二分类标签通常是1和0（也有-1），理解成对应True和false逻辑值。 由于每个真实框只对应一个objectness标签为正的预测框，如果有些预测框跟真实框之间的IoU很大，但并不是最大的那个，那么直接将其objectness标签设置为0当作负样本，可能并不妥当。为了避免这种情况，YOLO-V3算法设置了一个IoU阈值iou_thresh，当预测框的objectness不为1，但是其与某个真实框的IoU大于iou_thresh时，就将其objectness标签设置为-1，不参与损失函数的计算。</code></p>
+<h2 id="2-2-类别预测"><a href="#2-2-类别预测" class="headerlink" title="2.2 类别预测"></a>2.2 类别预测</h2><p>每个框使用多标签分类来预测边界框可能包含的类。我们不使用softmax，因为我们发现它对于高性能没有必要，相反，我们只是使用独立的逻辑分类器。 在训练过程中，我们使用<strong>二元交叉熵损失</strong>来进行类别预测。这个公式有助于我们转向更复杂的领域，如<a href="https://github.com/openimages" target="_blank" rel="noopener">Open Image Dataset</a>[5]。在这个数据集中有许多重叠的标签（如女性和人物）。使用softmax会强加了一个假设，即每个框中只有一个类别，但通常情况并非如此。多标签方法更好地对数据建模。</p>
+<h2 id="2-3-跨尺度预测"><a href="#2-3-跨尺度预测" class="headerlink" title="2.3 跨尺度预测"></a>2.3 跨尺度预测</h2><p>YOLOv3在3种不同尺度上预测边界框。我们的系统使用与特征金字塔网络相同的概念，来从这些尺度中提取特征。从我们的基本特征提取器中，我们添加了几个卷积层。其中最后一个卷积层预测了一个三维张量，编码了：边界框预测，objectness分值,和类别预测。在COCO上的实验中，在每个尺度上预测三个框，因此张量为NxNx[3x(4+1+80)]，4个边界框偏移量，1个<strong>objectness</strong> prediction，和80个类别预测。</p>
+<p>接下来，我们从先前的2层中获取特征图，并将其上采样2倍。再使用级联对原来网络的特征图和上采样后的特征图进行合并。这种方法使我们能够从上采样的特征中获得更有意义的语义信息，并从较早的特征图中获得<strong>更细粒度的信息</strong>。然后，我们再添加一些卷积层以处理这种组合的特征图，并最终预测相似的张量，尽管现在的大小是原来的两倍。</p>
+<p>我们再次执行相同的设计来预测最终尺度的方框。因此，我们对第三种尺度的预测将从所有先前的计算中获益，并从早期的网络中获得<strong>细粒度的特征</strong>。</p>
+<p>我们仍然使用k-means聚类来确定我们的先验边界框。我们只是随意选择了9个聚类和3个尺度，然后在各个比例上均匀地划分了聚类。在COCO数据集上，9个聚类是：（10×13）;（16×30）;（33×23）;（30×61）;（62×45）; （59×119）; （116×90）; （156×198）; （373×326）。</p>
+<h2 id="2-4-特征提取"><a href="#2-4-特征提取" class="headerlink" title="2.4 特征提取"></a>2.4 特征提取</h2><p>我们使用新的网络来实现特征提取。我们的新网络是YOLOv2，Darknet-19中使用的网络与新的残差网络内容之间的混合方法。我们的网络使用了连续的3×3和1×1卷积层，但现在也有了一些捷径（shortcut）连接，并且明显更大。它有53个卷积层，所以我们称之为Darknet-53！</p>
+<center><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggxgvej68zj30q211u7ac.jpg" srcset="/img/loading.gif" alt="image-20200720152518167" style="zoom:33%;" /></center>
+
+<p>这个新的网络比Darknet-19更强大，而且比ResNet-101、ResNet-152更有效。以下是在ImageNet上的结果。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh0onrtmdsj30vk07owg0.jpg" srcset="/img/loading.gif" alt="image-20200720152801106" style="zoom:50%;" /></p>
+<p>表2 骨干对比。精度，数十亿次操作，每秒十亿次浮点操作以及各种网络的FPS。</p>
+<p>每个网络都使用相同的设置进行训练，并以256×256的单精度测试进行测试。运行时间是在Titan X上以256×256进行测量的。因此Darknet-53可与最先进的分类器媲美，但浮点运算更少，速度更快。Darknet-53比ResNet-101更好，速度提高了1.5倍。Darknet-53具有与ResNet-152相似的性能，并且快2倍。</p>
+<p>Darknet-53还实现了每秒最高的测量浮点运算。这意味着网络结构可以更好地利用GPU，从而使其评估效率更高，速度更快。这主要是因为ResNets层太多了，效率不高。</p>
+<h2 id="2-5-训练"><a href="#2-5-训练" class="headerlink" title="2.5 训练"></a>2.5 训练</h2><p>我们仍然会训练完整的图像，没有使用难例挖掘(hard negative mining)和其他任何方法。我们使用多尺度训练，大量的数据增强方法，批量规范化，以及所有标准的东西。 使用Darknet神经网络框架进行训练和测试。</p>
+<h1 id="3-我们如何做"><a href="#3-我们如何做" class="headerlink" title="3. 我们如何做"></a>3. 我们如何做</h1><p>YOLOv3性能很好，见表3。在COCO数据集上，它的mAP与SSD及其变体相当，但比它快三倍。尽管如此，与其它模型如RetinaNet相比还是稍显落后。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggxhnxaglzj31dk0gyte7.jpg" srcset="/img/loading.gif" alt="image-20200720155245562"></p>
+<p>表3  认真地说，我是从[9]中偷走了所有这些表，他们花了很长时间才从头开始制作。好的，YOLOv3一切正常。请记住，RetinaNet的图像处理时间要长3.8倍。YOLOv3比SSD变体好得多，可与最先进的模型在AP<sub>50</sub>指标上相媲美。</p>
+<p>但是，当我们以IOU = 0.5（或图表中的AP50）查看mAP的“旧”检测指标时，YOLOv3非常强大。它几乎与RetinaNet相当，并且远远超过SSD变体。这表明YOLOv3是一个非常强大的检测器，擅长于为目标生成像样的边界框。但是，随着IOU阈值的增加，性能会显着下降，这表明YOLOv3难以使框与目标完美对齐。</p>
+<p>过去，YOLO在小目标检测上表现一直不好。但是，现在我们看到了这种趋势的逆转。通过新的多尺度预测，我们看到YOLOv3具有相对较高的APS性能。但是，它在中型和大型目标上的性能相对较差。要深入了解这一点，还需要进行更多调查。</p>
+<p>当我们在AP50指标上绘制精度与速度的关系图（参见图3）时，我们看到YOLOv3比其他检测系统具有明显优势。即更快，更好。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggxkujacpgj317k0s07a9.jpg" srcset="/img/loading.gif" alt="image-20200720174254282"></p>
+<p>图3.再次根据[9]进行改编，这显示了在mAP上以0.5 IOU指标的速度/精度折衷。您可以说YOLOv3很好，因为它很高而且非常靠左。你可以引用自己的论文吗？猜猜谁要尝试，这个人→[16]。哦，我忘了，我们还修复了YOLOv2中的数据加载错误，该错误通过2 mAP的帮助而得以解决。只是潜入这里不放弃布局。</p>
+<h1 id="4-我们尝试了但无效的事情"><a href="#4-我们尝试了但无效的事情" class="headerlink" title="4. 我们尝试了但无效的事情"></a>4. 我们尝试了但无效的事情</h1><p>在研究YOLOv3时，我们尝试了很多东西。很多都行不通。这是我们能记住的东西。</p>
+<p><strong>锚框x,y偏移量预测。</strong>我们尝试使用标准锚框预测机制，在该机制中，您可以使用线性激活将x，y偏移量预测为框宽度或高度的倍数。我们发现此公式降低了模型的稳定性，并且效果不佳。</p>
+<p><strong>线性x,y预测而不是逻辑预测。</strong>我们尝试使用线性激活直接预测x，y偏移，而不是逻辑激活。这导致mAP下降了两点。</p>
+<p><strong>Focal Loss</strong> 我们尝试使用焦点损失(focal loss)。它使我们的AP下降了约2点。YOLOv3可能已经对解决焦点损失正在尝试解决的问题具有鲁棒性，因为YOLOv3具有objectness预测和条件类预测。因此，对于大多数示例而言，分类预测不会带来损失吗？或者其他的东西？我们不确定。</p>
+<p><strong>双IOU阈值和真值分配。</strong>Faster R-CNN在训练期间使用两个IOU阈值。如果预测值与真值的重叠率为0.7，则它是一个正例；如果在0.3-0.7之间则被忽略，小于0.3为负例。我们尝试了类似的策略，但收效不佳。</p>
+<p>我们非常喜欢我们当前的公式，似乎至少是局部最优。这些技术中的某些可能最终会产生良好的结果，也许它们只需要进行一些调整即可稳定训练。</p>
+<h1 id="5-这一切意味着什么"><a href="#5-这一切意味着什么" class="headerlink" title="5. 这一切意味着什么"></a>5. 这一切意味着什么</h1><p>YOLOv3是一个好的检测器，它又快又准。在COCO数据集上，使用IOU在0.5到0.95上的AP作为度量时，它并不是太好。但采用旧的0.5IOU的度量时，它的性能非常好。</p>
+<p>为什么我们无论如何要转换指标？原始的COCO论文只是含糊不清的句子：”评估服务器完成后，将添加对评估指标的完整讨论”。Russakovsky等人说，人类很难区分.3和.5的IOU！令人惊讶的是，训练人员以视觉方式检查IOU为0.3的边界框并将其与IOU为0.5的边界框区分开来是非常困难的。人类很难分辨出差异，这有多重要？</p>
+<p>但是也许更好的问题是：“既然有了探测器，我们将如何处理这些探测器？从事这项研究的许多人都在Google和Facebook。我想至少我们知道这项技术掌握得很好，而且绝对不会被用来收集您的个人信息并将其出售给…。等等，您是说这就是它的用途？</p>
+<p>好吧，那些为视觉研究投入大量资金的人是军队，他们从来没有做过任何可怕的事情，例如用新技术杀死许多人，等等。</p>
+<p>我非常希望大多数使用计算机视觉的人都在用它来做快乐，好事，例如统计国家公园中斑马的数量[13]，或者当猫徘徊在屋子里时追踪它们的踪迹。但是计算机视觉已经被质疑使用，并且作为研究人员，我们有责任至少考虑到我们的工作可能造成的危害，并想出减轻它的方法。我们非常感激这个世界。</p>
+<p>最后，不要@我。（因为我终于退出了Twitter）。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/">文献翻译</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/YOLO/">YOLO</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/23/YOLOv4/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">文献翻译——YOLOv4:Optimal Speed and Accuracy of Object Detection</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/17/YOLOv2/">
+                        <span class="hidden-mobile">文献翻译——YOLO9000:Better,Faster,Stronger(YOLOv2)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "bnCEF7PLYkERuDi9gYGIAK1q-gzGzoHsz",
+          app_key: "ohFc9mmlCQxYi22T4AMQA2JY",
+          placeholder: "说点什么吧~（请在上方填写您的昵称，昵称将显示在你的评论上）",
+          path: window.location.pathname,
+          avatar: "identicon",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: true,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+
+    <div>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var grt= new Date("06/22/2020 00:00:00");
+              now.setTime(now.getTime()+250);
+              days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+              hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+              if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+              mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+              seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+              snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+              document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+              document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+          }
+          setInterval("createtime()",250);
+      </script>
+    </div>
+
+    <div>
+        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+    </div>
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">豫ICP备2020026254号</a>
+    
+  </div>
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "文献翻译——YOLOv3:An Incremental Improvement&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript">
+      //定义获取词语下标
+      var a_idx = 0;
+      jQuery(document).ready(function ($) {
+        //点击body时触发事件
+        $("body").click(function (e) {
+          //需要显示的词语
+          var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+          //设置词语给span标签
+          var $i = $("<span/>").text(a[a_idx]);
+          //下标等于原来下标+1  余 词语总数
+          a_idx = (a_idx + 1) % a.length;
+          //获取鼠标指针的位置，分别相对于文档的左和右边缘。
+          //获取x和y的指针坐标
+          var x = e.pageX, y = e.pageY;
+          //在鼠标的指针的位置给$i定义的span标签添加css样式
+          $i.css({
+            "z-index": 999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": rand_color()
+          });
+          // 随机颜色
+          function rand_color() {
+            return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+          }
+          //在body添加这个标签
+          $("body").append($i);
+          //animate() 方法执行 CSS 属性集的自定义动画。
+          //该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。
+          //详情请看http://www.w3school.com.cn/jquery/effect_animate.asp
+          $i.animate({
+            //将原来的位置向上移动180
+            "top": y - 180,
+            "opacity": 0
+            //1500动画的速度
+          }, 1500, function () {
+            //时间到了自动删除
+            $i.remove();
+          });
+        });
+      })
+      ;
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2f3f98d16f957573ec883289e3293112";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>
