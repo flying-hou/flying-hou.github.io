@@ -702,9 +702,23 @@ z.cpu().data.numpy() <span class="hljs-comment">#numpy都是在CPU上操作，�
       </script>
     </div>
 
+
     <div>
-        <span>Copyright © 2021 htx's Blog, All rights reserved.</span></a>
+      <span id="Copyright">载入版权...</span>
+      <script>
+          var now = new Date();
+          function createtime() {
+              var year = now.getFullYear();
+              document.getElementById("Copyright").innerHTML = "Copyright © "+year+" htx's Blog, All rights reserved.";
+          }
+          setInterval("createtime()",250);
+      </script>
     </div>
+
+
+    // <div>
+    //     <span>Copyright © 2022 htx's Blog, All rights reserved.</span></a>
+    // </div>
 
     
   <!-- 备案信息 -->
